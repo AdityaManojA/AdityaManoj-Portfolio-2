@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional font import for Material Icons Outlined */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
+/* Apply the custom font family globally */
+body {
+  font-family: 'Inter', sans-serif;
+}
