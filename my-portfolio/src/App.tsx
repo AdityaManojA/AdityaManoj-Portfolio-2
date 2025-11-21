@@ -61,6 +61,59 @@ const mockProjects: Project[] = [
   },
 ];
 
+const skillsData = [
+  {
+    title: "Programming Languages",
+    skills: [
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+      { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+      { name: "Dart", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+      { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+      { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
+    ]
+  },
+  {
+    title: "Frontend & Web",
+    skills: [
+      { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
+    ]
+  },
+  {
+    title: "Mobile & Frameworks",
+    skills: [
+      { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" }
+    ]
+  },
+  {
+    title: "Design & Creative",
+    skills: [
+      { name: "Blender 3D", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
+      { name: "Adobe Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
+      { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+      { name: "After Effects", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" },
+      { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" },
+      { name: "SketchUp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketchup/sketchup-original.svg" }
+    ]
+  },
+  {
+    title: "Tools & Engines",
+    skills: [
+      { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+      { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" }
+    ]
+  }
+];
+
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -139,6 +192,9 @@ const ProjectCard = ({ project }: { project: Project }) => {
           alt={project.title}
           className="project-image"
         />
+        <div className="project-overlay">
+           <span className="view-project-btn">View Project</span>
+        </div>
       </div>
       <div className="project-content">
         <div className="project-meta">
@@ -204,33 +260,23 @@ const SkillsSection = () => (
     <span className="section-sub-header">My Arsenal</span>
     <h2 className="section-title">Skills & Tools.</h2>
 
-    <div className="space-y-12">
-      <div className="skills-group">
-        <h3 className="skills-title">Programming Languages</h3>
-        <div className="skills-list">
-          {["Java", "JavaScript", "HTML", "CSS", "React.js", "React Native", "Python", "C", "C++", "C#", "Dart", "SQL", "PHP"].map(skill => (
-             <span key={skill} className="skill-pill">{skill}</span>
-          ))}
+    <div className="skills-bento">
+      {skillsData.map((category, index) => (
+        <div key={index} className="skill-card">
+          <div className="skill-card-header">
+            <h3 className="skill-card-title">{category.title}</h3>
+            <div className="skill-card-line"></div>
+          </div>
+          <div className="skill-tags-container">
+            {category.skills.map((skill, i) => (
+              <span key={i} className="skill-tag">
+                <img src={skill.icon} alt={skill.name} className="skill-icon" />
+                {skill.name}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="skills-group">
-        <h3 className="skills-title">Frameworks & Libraries</h3>
-        <div className="skills-list">
-          {["Flutter", "Node.js", "Tailwind CSS"].map(skill => (
-             <span key={skill} className="skill-pill">{skill}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="skills-group">
-        <h3 className="skills-title">Design & Dev Tools</h3>
-        <div className="skills-list">
-          {["VS Code", "Blender 3D", "Unity", "Adobe Premiere", "Illustrator", "After Effects", "Photoshop", "SketchUp"].map(skill => (
-             <span key={skill} className="skill-pill">{skill}</span>
-          ))}
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 );
@@ -240,22 +286,61 @@ const AboutSection = () => (
     <span className="section-sub-header">About Me</span>
     <h2 className="section-title">Converting pure ideas into designs.</h2>
     
-    <div className="section-text">
-      <p>Hi there, I'm Aditya Manoj 👋. I'm a CS student studying Engineering (B.Tech), passionate about coding, design, and creative projects.</p>
-      <br />
-      <p>I am a coder, Webflow designer, 3D artist, video editor, and a quick learner with a knack for bringing ideas to life.</p>
-    </div>
+    <div className="about-grid">
+      {/* Bio */}
+      <div className="about-card bio-card">
+        <h3 className="skill-card-title" style={{ marginBottom: '1rem' }}>Who am I?</h3>
+        <div className="section-text" style={{ marginBottom: 0 }}>
+          <p>
+            Hi there, I'm <strong>Aditya Manoj</strong>. I'm a CS student studying Engineering (B.Tech), passionate about coding, design, and creative projects.
+          </p>
+          <br/>
+          <p>
+            I blend technical expertise with artistic vision. Whether it's building decentralized apps or sculpting 3D models, I am a quick learner with a knack for bringing abstract ideas to life.
+          </p>
+        </div>
+      </div>
 
-    <div>
-      <h3 className="skills-title">Hobbies & Interests</h3>
-      <ul className="hobbies-list">
-        {["Coding", "Gaming", "3D Artistry", "Abstract Renders", "Filming", "Making Websites", "Working with Clients"].map(hobby => (
-          <li key={hobby} className="hobby-item">
-            <span className="hobby-dot"></span>
-            {hobby}
-          </li>
-        ))}
-      </ul>
+      {/* Stats */}
+      <div className="about-card stats-card">
+        <div className="stat-row">
+          <div className="stat-item">
+            <div className="stat-number">46</div>
+            <div className="stat-label">Repositories</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">1+</div>
+            <div className="stat-label">Year Experience</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">∞</div>
+            <div className="stat-label">Passion</div>
+          </div>
+        </div>
+      </div>
+
+      {/* What I Do */}
+      <div className="about-card what-i-do-card">
+        <h3 className="skill-card-title">What I Do</h3>
+        <div className="do-grid">
+          <div className="do-item">
+            <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+            <div className="do-title">Coding</div>
+          </div>
+          <div className="do-item">
+            <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+            <div className="do-title">3D Artistry</div>
+          </div>
+          <div className="do-item">
+            <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            <div className="do-title">Video Editing</div>
+          </div>
+          <div className="do-item">
+            <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+            <div className="do-title">Webflow</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -368,8 +453,6 @@ export default function App() {
                 </a>
               ))}
             </div>
-
-            {/* About Peek removed as requested */}
           </>
         );
     }
