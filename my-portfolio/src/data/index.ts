@@ -59,7 +59,7 @@ export const TIMELINE_DATA = [
     location: "Remote" 
   },
   { 
-    year: "2024", 
+    year: "2025", 
     title: "Product Intern", 
     description: "Started working with international clients on web development, AI development, and a 3D modeling Product Intern.", 
     location: "Kerala Startup Mission, EKM, India" 

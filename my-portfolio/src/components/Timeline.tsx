@@ -4,22 +4,12 @@ import ScrollReveal from './ScrollReveal';
 
 const Timeline = () => {
   return (
-    // 1. OUTER WRAPPER: Spans the full width of the browser
-    <section className="relative w-full py-20 overflow-hidden">
+    <div className="section-container relative" style={{ overflow: 'hidden' }}>
       
-      {/* 2. BACKGROUND: Positioned absolutely within the full-width wrapper */}
-      <div className="ambient-bg-container">
-        <div className="ambient-blob blob-1"></div>
-        <div className="ambient-blob blob-2"></div>
-      </div>
-
-      {/* 3. INNER CONTAINER: Centered and constrained width for content */}
-      <div className="section-container relative z-10 mx-auto max-w-6xl px-4">
-        
-        {/* Header */}
-        <div className="timeline-header-center mb-16 text-center">
+      <div className="relative z-10">
+        <div className="timeline-header-center">
           <ScrollReveal>
-            <span className="section-sub-header block">Journey</span>
+            <span className="section-sub-header center-text">Journey</span>
             <h2 className="section-title">My Path So Far.</h2>
           </ScrollReveal>
         </div>
@@ -27,17 +17,20 @@ const Timeline = () => {
         <div className="timeline-container">
           {TIMELINE_DATA.map((item, index) => (
             <div key={index} className="timeline-item-wrapper">
-              <div className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-                
-                {/* Dot */}
-                <ScrollReveal delay={0.2} threshold={0.5}>
-                  <div className="timeline-dot-wrapper">
-                    <div className="timeline-dot"></div>
-                    <div className="timeline-dot-pulse"></div>
-                  </div>
-                </ScrollReveal>
+              
+              {/* --- FIXED: DOT MOVED HERE --- */}
+              {/* It is now a direct child of the wrapper, centered on the spine */}
+              <div className="timeline-spine-marker">
+                 <ScrollReveal delay={0.2} threshold={0.5}>
+                    <div className="timeline-dot-wrapper">
+                      <div className="timeline-dot"></div>
+                      <div className="timeline-dot-pulse"></div>
+                    </div>
+                 </ScrollReveal>
+              </div>
 
-                {/* Card */}
+              {/* --- CARD CONTENT --- */}
+              <div className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <ScrollReveal 
                   className="timeline-content-card" 
                   delay={index * 0.1}
@@ -55,13 +48,13 @@ const Timeline = () => {
                     <span className="timeline-loc">{item.location}</span>
                   </div>
                 </ScrollReveal>
-
               </div>
+
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

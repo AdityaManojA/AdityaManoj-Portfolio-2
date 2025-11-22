@@ -78,54 +78,6 @@ body {
   margin-right: -50vw;
   overflow: hidden; /* Prevents horizontal scrollbar */
 }
-
-.ambient-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px); /* Increased blur for smoother edges */
-  opacity: 0.5;
-  mix-blend-mode: screen; /* Helps colors blend beautifully */
-  will-change: transform; /* Performance optimization */
-}
-
-.dark .ambient-blob {
-  opacity: 0.25; /* Lower opacity in dark mode to avoid looking "solid" */
-  filter: blur(120px); /* Even softer in dark mode */
-}
-
-
-.blob-1 {
-  width: 600px;
-  height: 600px;
-  background: var(--primary-orange);
-  top: -200px; 
-  left: -100px;
-  animation: floatBlob1 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.blob-2 {
-  width: 700px;
-  height: 700px;
-  background: #8B5CF6; 
-  bottom: -200px; 
-  right: -100px;
-  animation: floatBlob2 30s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-
-@keyframes floatBlob1 {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(100px, 50px) scale(1.1); }
-  66% { transform: translate(-50px, 100px) scale(0.9); }
-  100% { transform: translate(20px, -20px) scale(1); }
-}
-
-@keyframes floatBlob2 {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  33% { transform: translate(-100px, -50px) scale(1.1) rotate(10deg); }
-  66% { transform: translate(50px, -100px) scale(0.9) rotate(-10deg); }
-  100% { transform: translate(-20px, 20px) scale(1) rotate(0deg); }
-}
 .app-header {
   width: 100%;
   max-width: 90rem;
@@ -1627,16 +1579,22 @@ body {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-color: var(--primary-orange);
 }
-
-.timeline-dot-wrapper {
+.timeline-spine-marker {
   position: absolute;
-  top: 2rem;
+  top: 0; /* Aligns with the top of the card area */
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
+  height: 100%; /* Ensures it stays in the row */
+  pointer-events: none; /* Prevents it from blocking clicks */
+}
+
+.timeline-dot-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  margin-top: 2rem; 
 }
 
 .timeline-dot {
@@ -1744,6 +1702,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  .timeline-spine-marker {
+    left: 2rem;
+    transform: translateX(-50%);
+  }
   .timeline-container::after {
     left: 2rem;
   }
