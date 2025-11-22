@@ -1,4 +1,5 @@
 import { SERVICES_DATA } from '../data';
+import ScrollReveal from './ScrollReveal';
 
 const Services = () => {
   
@@ -15,12 +16,14 @@ const Services = () => {
 
   return (
     <div className="section-container">
-      <span className="section-sub-header">Services</span>
-      <h2 className="section-title">What I can do for you.</h2>
+      <ScrollReveal>
+        <span className="section-sub-header">Services</span>
+        <h2 className="section-title">What I can do for you.</h2>
+      </ScrollReveal>
       
       <div className="services-grid">
         {SERVICES_DATA.map((service, index) => (
-          <div key={index} className="service-card">
+          <ScrollReveal key={index} className="service-card" delay={index * 0.1}>
             <div className="service-icon-box">
               <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {renderIcon(service.icon)}
@@ -30,7 +33,7 @@ const Services = () => {
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               {service.description}
             </p>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
     </div>

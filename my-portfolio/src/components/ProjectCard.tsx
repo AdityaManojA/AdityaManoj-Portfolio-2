@@ -1,25 +1,12 @@
 import type { Project } from '../data';
-import { SKILLS_DATA } from '../data';
-
 const ProjectCard = ({ project }: { project: Project }) => {
   
-  // Helper function to find icon for a specific tag
-  const getSkillIcon = (tagName: string) => {
-    const allSkills = SKILLS_DATA.flatMap(category => category.skills);
-    const skill = allSkills.find(s => 
-      s.name.toLowerCase() === tagName.toLowerCase() || 
-      s.name.toLowerCase().startsWith(tagName.toLowerCase()) ||
-      (tagName.toLowerCase() === 'react' && s.name === 'React.js')
-    );
-    return skill ? skill.icon : null;
-  };
-
   return (
     <a 
       href={project.link} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="project-card group" // Removed 'block text-left' as CSS handles it
+      className="project-card group" 
     >
       <div className="project-image-wrapper">
         <img
@@ -35,29 +22,31 @@ const ProjectCard = ({ project }: { project: Project }) => {
            </div>
         </div>
       </div>
+      
       <div className="project-content">
         <div className="project-header">
           <span className="project-cat">{project.category}</span>
           <h3 className="project-title">{project.title}</h3>
         </div>
+        
         <p className="project-desc">{project.description}</p>
+        
         <div className="project-tags">
-          {project.tags.map((tag, index) => {
-            const iconUrl = getSkillIcon(tag);
-            return (
-              <span key={index} className="tag">
-                {iconUrl && (
-                  <img 
-                    src={iconUrl} 
-                    alt="" 
-                    className="w-3 h-3 object-contain" 
-                    style={{ minWidth: '12px' }} 
-                  />
-                )}
-                {tag}
-              </span>
-            );
-          })}
+          {project.tags.map((tag, index) => (
+            <span 
+              key={index} 
+              className="tag" 
+              style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <img 
+                src={tag.icon} 
+                alt={tag.name} 
+                className="tag-icon" 
+                style={{ width: '14px', height: '14px', objectFit: 'contain' }}
+              />
+              {tag.name}
+            </span>
+          ))}
         </div>
       </div>
     </a>
