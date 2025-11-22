@@ -1,4 +1,3 @@
-import React from 'react';
 import { TIMELINE_DATA } from '../data';
 import ScrollReveal from './ScrollReveal';
 

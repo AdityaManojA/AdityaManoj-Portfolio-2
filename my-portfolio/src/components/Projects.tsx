@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PROJECTS_DATA } from '../data';
 import ScrollReveal from './ScrollReveal';
 
