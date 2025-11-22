@@ -1,9 +1,26 @@
-// CHANGE THIS LINE: Add 'type'
-import type { Project } from '../data'; 
+import type { Project } from '../data';
+import { SKILLS_DATA } from '../data';
 
 const ProjectCard = ({ project }: { project: Project }) => {
+  
+  // Helper function to find icon for a specific tag
+  const getSkillIcon = (tagName: string) => {
+    const allSkills = SKILLS_DATA.flatMap(category => category.skills);
+    const skill = allSkills.find(s => 
+      s.name.toLowerCase() === tagName.toLowerCase() || 
+      s.name.toLowerCase().startsWith(tagName.toLowerCase()) ||
+      (tagName.toLowerCase() === 'react' && s.name === 'React.js')
+    );
+    return skill ? skill.icon : null;
+  };
+
   return (
-    <div className="project-card group">
+    <a 
+      href={project.link} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="project-card group" // Removed 'block text-left' as CSS handles it
+    >
       <div className="project-image-wrapper">
         <img
           src={project.image}
@@ -25,14 +42,25 @@ const ProjectCard = ({ project }: { project: Project }) => {
         </div>
         <p className="project-desc">{project.description}</p>
         <div className="project-tags">
-          {project.tags.map((tag, index) => (
-            <span key={index} className="tag">
-              {tag}
-            </span>
-          ))}
+          {project.tags.map((tag, index) => {
+            const iconUrl = getSkillIcon(tag);
+            return (
+              <span key={index} className="tag">
+                {iconUrl && (
+                  <img 
+                    src={iconUrl} 
+                    alt="" 
+                    className="w-3 h-3 object-contain" 
+                    style={{ minWidth: '12px' }} 
+                  />
+                )}
+                {tag}
+              </span>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
