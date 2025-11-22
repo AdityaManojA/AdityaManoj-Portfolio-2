@@ -4,20 +4,22 @@ import ScrollReveal from './ScrollReveal';
 
 const Timeline = () => {
   return (
-    <div className="section-container relative" style={{ overflow: 'hidden' }}>
+    // 1. OUTER WRAPPER: Spans the full width of the browser
+    <section className="relative w-full py-20 overflow-hidden">
       
-      {/* Ambient Background (Keep your existing blobs) */}
+      {/* 2. BACKGROUND: Positioned absolutely within the full-width wrapper */}
       <div className="ambient-bg-container">
         <div className="ambient-blob blob-1"></div>
         <div className="ambient-blob blob-2"></div>
       </div>
 
-      <div className="relative z-10">
+      {/* 3. INNER CONTAINER: Centered and constrained width for content */}
+      <div className="section-container relative z-10 mx-auto max-w-6xl px-4">
         
-        {/* FIX: Centered Header Wrapper */}
-        <div className="timeline-header-center">
+        {/* Header */}
+        <div className="timeline-header-center mb-16 text-center">
           <ScrollReveal>
-            <span className="section-sub-header center-text">Journey</span>
+            <span className="section-sub-header block">Journey</span>
             <h2 className="section-title">My Path So Far.</h2>
           </ScrollReveal>
         </div>
@@ -41,9 +43,7 @@ const Timeline = () => {
                   delay={index * 0.1}
                   threshold={0.2}
                 >
-                  {/* The Year is now a background watermark style */}
                   <span className="timeline-year">{item.year}</span>
-                  
                   <h3 className="timeline-title">{item.title}</h3>
                   <p className="timeline-desc">{item.description}</p>
                   
@@ -61,7 +61,7 @@ const Timeline = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -60,46 +60,72 @@ body {
 }
 
 .ambient-bg-container {
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Keeps it behind content */
   pointer-events: none;
   overflow: hidden;
+}
+.full-width-breakout {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden; /* Prevents horizontal scrollbar */
 }
 
 .ambient-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+  filter: blur(100px); /* Increased blur for smoother edges */
+  opacity: 0.5;
+  mix-blend-mode: screen; /* Helps colors blend beautifully */
+  will-change: transform; /* Performance optimization */
 }
 
 .dark .ambient-blob {
-  opacity: 0.15;
+  opacity: 0.25; /* Lower opacity in dark mode to avoid looking "solid" */
+  filter: blur(120px); /* Even softer in dark mode */
 }
 
+
 .blob-1 {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   background: var(--primary-orange);
-  top: -10%;
-  left: -10%;
-  animation-delay: 0s;
+  top: -200px; 
+  left: -100px;
+  animation: floatBlob1 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .blob-2 {
-  width: 400px;
-  height: 400px;
-  background: #8B5CF6;
-  bottom: 10%;
-  right: -10%;
-  animation-delay: -10s;
+  width: 700px;
+  height: 700px;
+  background: #8B5CF6; 
+  bottom: -200px; 
+  right: -100px;
+  animation: floatBlob2 30s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+
+@keyframes floatBlob1 {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, 50px) scale(1.1); }
+  66% { transform: translate(-50px, 100px) scale(0.9); }
+  100% { transform: translate(20px, -20px) scale(1); }
+}
+
+@keyframes floatBlob2 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(-100px, -50px) scale(1.1) rotate(10deg); }
+  66% { transform: translate(50px, -100px) scale(0.9) rotate(-10deg); }
+  100% { transform: translate(-20px, 20px) scale(1) rotate(0deg); }
+}
 .app-header {
   width: 100%;
   max-width: 90rem;
