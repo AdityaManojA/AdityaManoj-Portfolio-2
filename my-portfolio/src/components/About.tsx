@@ -14,11 +14,11 @@ const About = () => {
           <h3 className="skill-card-title" style={{ marginBottom: '1rem' }}>Who am I?</h3>
           <div className="section-text" style={{ marginBottom: 0 }}>
             <p>
-              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a CS student studying Engineering (B.Tech), passionate about coding, design, and creative projects.
+              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a CS Grad (B.Tech), passionate about coding, design, and creative projects.
             </p>
             <br/>
             <p>
-              I blend technical expertise with artistic vision. Whether it's building decentralized apps or sculpting 3D models, I am a quick learner with a knack for bringing abstract ideas to life.
+              I blend technical expertise with artistic vision. Whether it's building functional apps or developing Services, I am a quick learner with a knack for bringing abstract ideas to life.
             </p>
           </div>
         </ScrollReveal>
@@ -27,11 +27,11 @@ const About = () => {
         <ScrollReveal className="about-card stats-card" delay={0.1}>
           <div className="stat-row">
             <div className="stat-item">
-              <div className="stat-number">46</div>
+              <div className="stat-number">47</div>
               <div className="stat-label">Repositories</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">1+</div>
+              <div className="stat-number">1.5+</div>
               <div className="stat-label">Year Experience</div>
             </div>
             <div className="stat-item">
