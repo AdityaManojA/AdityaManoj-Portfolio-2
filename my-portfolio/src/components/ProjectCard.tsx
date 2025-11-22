@@ -1,4 +1,5 @@
-import { Project } from '../data';
+// CHANGE THIS LINE: Add 'type'
+import type { Project } from '../data'; 
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
