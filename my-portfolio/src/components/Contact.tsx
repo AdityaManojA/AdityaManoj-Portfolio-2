@@ -1,4 +1,4 @@
-import { SOCIAL_LINKS } from '../data';
+import { IMAGES, SOCIAL_LINKS } from '../data';
 import ScrollReveal from './ScrollReveal';
 
 const Contact = () => {
@@ -13,6 +13,8 @@ const Contact = () => {
           <div className="email-content">
             <h3>Let's Talk.</h3>
             <p>Have an idea? I'm open to freelance work and collaborations.</p>
+            <br/>
+            <img alt="Illustration" className="contact-img" src={IMAGES.footer} />
           </div>
           <button 
             className="copy-btn"

@@ -1221,16 +1221,42 @@ body {
   width: 160px;
   height: 160px;
   object-fit: cover;
+  
   border-radius: 2rem;
   transform: rotate(-3deg);
   box-shadow: 0 15px 30px rgba(0,0,0,0.3);
   transition: transform 0.3s;
   border: 4px solid rgba(255,255,255,0.1);
+  
 }
 
 .footer-img:hover {
   transform: rotate(0deg) scale(1.05);
 }
+
+.contact-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 2rem;
+  transform: rotate(-3deg);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+  border: 4px solid rgba(255,255,255,0.1);
+  display: block;      
+  margin: 0 auto;
+}
+
+.contact-img:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+@media (min-width: 768px) {
+  .contact-img{
+    margin: 0;       
+    display: inline-block
+  }
+}
+
 
 .footer-title {
   font-size: 2.5rem;
