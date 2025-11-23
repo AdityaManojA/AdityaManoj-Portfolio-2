@@ -20,7 +20,7 @@ const Hero = () => {
       </div>
 
       <p className="hero-desc">
-        I'm passionate about my work because I believe that good design can make a real difference in the world — it can help businesses attract new customers, build stronger relationships, and create a more positive brand image.
+        I make stuff because I can have my creative freedom to create client based product with my personal expertise and design.
       </p>
 
       <div className="social-pills">

@@ -11,7 +11,7 @@ export const DetailedFooter = () => {
               <div>
                 <h2 className="footer-title">Say hello!</h2>
                 <p className="footer-text">
-                  I'd love to hear from you and always welcome any feedback — please don't hesitate to get in touch!
+                I love working with clients that are open to creative and functional works, So dont hesitate to start a conversation!
                 </p>
               </div>
             </div>
