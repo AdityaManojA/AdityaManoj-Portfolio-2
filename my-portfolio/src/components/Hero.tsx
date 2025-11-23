@@ -58,7 +58,7 @@ const Hero = () => {
 
       <ScrollReveal delay={0.1}>
         <p className="hero-desc">
-          I make stuff because I can have my creative freedom to create client based product with my personal expertise and design.
+          I develop because I can have my creative freedom to create client required product with my personal expertise and design.
         </p>
       </ScrollReveal>
 

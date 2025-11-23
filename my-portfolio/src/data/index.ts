@@ -1,9 +1,9 @@
 import profilePic from './Images/Aditya.jpeg';
 
 export const IMAGES = {
-  profile: profilePic, 
+  profile: profilePic,
   footer: "./ProjectImages/pfpchibi.jpg",
-  placeholder: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800https&q=80"
+  placeholder: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
 };
 
 export const SOCIAL_LINKS = {
@@ -11,6 +11,80 @@ export const SOCIAL_LINKS = {
   github: "https://github.com/AdityaManoja",
   email: "mailto:adityamanoja@gmail.com"
 };
+
+export interface Project {
+  id: number;
+  title: string;
+  category: string;
+  year: string;
+  description: string;
+  tags: string[];
+  image: string;
+  link: string;
+}
+
+export const PROJECTS_DATA: Project[] = [
+  {
+    id: 1,
+    title: "IAN-2025 Event Management System",
+    category: "Projects",
+    year: "2025",
+    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences. Features real-time scheduling, digital QR food coupons, and live logistics for global delegates from MIT, Cambridge, and Riken.",
+    tags: ["React", "Firebase", "PWA", "Google Maps API"],
+    image: "./ProjectImages/GLIA.png",
+    link: "https://ian2025.in/"
+  },
+  {
+    id: 2,
+    title: "Retro QR Crafter",
+    category: "CS Projects",
+    year: "2025",
+    description: "A fun, 8-bit themed web utility for bulk generating and scanning QR codes. Features Excel file processing and dual-mode camera/file scanning.",
+    tags: ["JavaScript", "Tailwind CSS", "HTML5", "Netlify"],
+    image: "./ProjectImages/Qrgen.png",
+    link: "https://text-based-qr.netlify.app/"
+  },
+  {
+    id: 5,
+    title: "CSV to JSON Converter",
+    category: "CS Projects",
+    year: "2025",
+    description: "A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.",
+    tags: ["JavaScript", "HTML", "Tailwind CSS", "Netlify"],
+    image: "./ProjectImages/CsvtoJson.png",
+    link: "https://csv-to-jsonconv.netlify.app/"
+  },
+  {
+    id: 3,
+    title: "Meat Spoilage Detection",
+    category: "CS Projects",
+    year: "2024",
+    description: "A hardware-based, no-contact meat spoilage detection system that uses IoT sensors to assess whether meat has spoiled.",
+    tags: ["IoT", "Hardware", "C++", "Sensors"],
+    image: "./ProjectImages/Meat.jpeg",
+    link: "https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT"
+  },
+  {
+    id: 4,
+    title: "Flashcard Learning Pal",
+    category: "Website Designs",
+    year: "2023",
+    description: "A web-based interactive learning tool designed to help students memorize concepts effectively.",
+    tags: ["JavaScript", "HTML", "CSS"],
+    image: "./ProjectImages/Flashcard.png",
+    link: "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
+  },
+  {
+    id: 6,
+    title: "8-Bit-O-Matic",
+    category: "CS Projects",
+    year: "2024",
+    description: "A pixel art creator that transforms uploaded images into retro 8-bit style masterpieces. Supports both 16-color and black & white pixelation modes. Built with Python (Flask) and Pillow for image processing.",
+    tags: ["Python", "Flask", "HTML5", "CSS"],
+    image: "./ProjectImages/8bit.png",
+    link: "https://eight-bit-o-matic.onrender.com/"
+  }
+];
 
 export const GALLERY_DATA = [
   { 
@@ -101,114 +175,11 @@ export const SERVICES_DATA = [
   },
 ];
 
-export interface Project {
-  id: number;
-  title: string;
-  category: string;
-  year: string;
-  description: string;
-  tags: { name: string; icon: string }[]; // Updated Interface
-  image: string;
-  link: string;
-}
-
-export const PROJECTS_DATA: Project[] = [
-  {
-    id: 1,
-    title: "IAN-2025 Event Management System",
-    category: "Projects",
-    year: "2025",
-    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences. Features real-time scheduling, digital QR food coupons, and live logistics for global delegates from MIT, Cambridge, and Riken.",
-    tags: [
-      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-      { name: "PWA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" },
-      { name: "Maps API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" }
-    ],
-    image: "./ProjectImages/GLIA.png",
-    link: "https://ian2025.in/"
-  },
-  {
-    id: 2,
-    title: "Retro QR Crafter",
-    category: "CS Projects",
-    year: "2025",
-    description: "A fun, 8-bit themed web utility for bulk generating and scanning QR codes. Features Excel file processing for bulk generation, dual-mode camera/file scanning, and zip file exports—all processed securely client-side.",
-    tags: [
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
-    ],
-    image: "./ProjectImages/Qrgen.png",
-    link: "https://text-based-qr.netlify.app/"
-  },
-  {
-    id: 5,
-    title: "CSV to JSON Converter",
-    category: "CS Projects",
-    year: "2025",
-    description: "A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.",
-    tags: [
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
-    ],
-    image: "./ProjectImages/CsvtoJson.png",
-    link: "https://csv-to-jsonconv.netlify.app/"
-  },
-  {
-    id: 3,
-    title: "Meat Spoilage Detection",
-    category: "CS Projects",
-    year: "2024",
-    description: "A hardware-based, no-contact meat spoilage detection system that uses IoT sensors to assess whether meat has spoiled.",
-    tags: [
-      { name: "IoT/Arduino", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
-      { name: "Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
-      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-      { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" }
-    ],
-    image: "./ProjectImages/Meat.jpeg",
-    link: "https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT"
-  },
-  {
-    id: 4,
-    title: "Flashcard Learning Pal",
-    category: "Website Designs",
-    year: "2023",
-    description: "A web-based interactive learning tool designed to help students memorize concepts effectively.",
-    tags: [
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
-    ],
-    image: "./ProjectImages/Flashcard.png",
-    link: "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
-  },
-  
-  {
-    id: 6, 
-    title: "8-Bit-O-Matic",
-    category: "CS Projects", 
-    year: "2024",
-    description: "A pixel art creator that transforms uploaded images into retro 8-bit style masterpieces. Supports both 16-color and black & white pixelation modes. Built with Python (Flask) and Pillow for image processing.",
-    tags: [
-      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-      { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
-      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
-    ],
-    image: "./ProjectImages/8bit.png", 
-    link: "https://eight-bit-o-matic.onrender.com/"
-  },
-];
-
 export const SKILLS_DATA = [
   {
     title: "Programming Languages",
     skills: [
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
       { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
       { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
@@ -223,11 +194,28 @@ export const SKILLS_DATA = [
   {
     title: "Frontend & Web",
     skills: [
-      { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
       { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
+    ]
+  },
+  {
+    title: "Backend & Databases",
+    skills: [
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
+    ]
+  },
+  {
+    title: "Deployment & Hosting",
+    skills: [
+      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
+      { name: "Firebase Hosting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "GoDaddy", icon: "https://www.vectorlogo.zone/logos/godaddy/godaddy-icon.svg" }
     ]
   },
   {
@@ -235,8 +223,6 @@ export const SKILLS_DATA = [
     skills: [
       { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
-      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
     ]
   },
   {
@@ -246,14 +232,20 @@ export const SKILLS_DATA = [
       { name: "Adobe Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
       { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
       { name: "After Effects", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" },
-      { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" },    ]
+      { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" },
+     
+    ]
   },
   {
     title: "Tools & Engines",
     skills: [
       { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+      { name: "GitHub Desktop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
       { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
-      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" }
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { name: "IoT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
+      { name: "Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
+      { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" }
     ]
   }
 ];

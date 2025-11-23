@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --primary-orange: #FF9F68;
   --bg-light: #FFF0E3;
@@ -5,7 +7,7 @@
   --card-light: #ffffff;
   --card-dark: #1c1c1c;
   --text-light: #1C1C1E;
-  --text-dark: #E5E5E7;
+  --text-dark: #e7dac6;
   --text-muted-light: #4B5563;
   --text-muted-dark: #9CA3AF;
   --border-light: #E5E7EB;
@@ -13,7 +15,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   transition: background-color 0.3s, color 0.3s;
 }
