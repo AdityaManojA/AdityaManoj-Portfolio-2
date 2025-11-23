@@ -89,40 +89,35 @@ export const PROJECTS_DATA: Project[] = [
 export const GALLERY_DATA = [
   { 
     id: 1, 
-    title: "Neon Cyberpunk City", 
+    title: "NFT Gen", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g2.jpg" 
   },
   { 
     id: 2, 
-    title: "Abstract Fluid Simulation", 
+    title: "Architecture Design", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" 
-  },
+    image: "./ProjectImages/g3.jpg"   },
   { 
     id: 3, 
-    title: "Minimalist Architecture", 
+    title: "World Gen with motion", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80" 
-  },
+    image: "./ProjectImages/g4.jpg"   },
   { 
     id: 4, 
-    title: "Cinematic Event Reel", 
-    type: "Video Edit", 
-    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" 
-  },
+    title: "Asset", 
+    type: "3D Render", 
+    image: "./ProjectImages/g5.jpg"   },
   { 
     id: 5, 
-    title: "Product Visualization", 
+    title: "World generation", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80" 
-  },
+    image: "./ProjectImages/g6.jpg"   },
   { 
     id: 6, 
     title: "Gaming Assets", 
     type: "3D Modeling", 
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" 
-  },
+    image: "./ProjectImages/g7.jpg"   },
 ];
 
 export const TIMELINE_DATA = [
