@@ -18,7 +18,7 @@ export interface Project {
   category: string;
   year: string;
   description: string;
-  tags: string[];
+  tags: string[]; // Simplified to string array
   image: string;
   link: string;
 }
@@ -29,7 +29,7 @@ export const PROJECTS_DATA: Project[] = [
     title: "IAN-2025 Event Management System",
     category: "Projects",
     year: "2025",
-    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences. Features real-time scheduling, digital QR food coupons, and live logistics for global delegates from MIT, Cambridge, and Riken.",
+    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences.",
     tags: ["React", "Firebase", "PWA", "Google Maps API"],
     image: "./ProjectImages/GLIA.png",
     link: "https://ian2025.in/"
@@ -50,7 +50,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "CS Projects",
     year: "2025",
     description: "A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.",
-    tags: ["JavaScript", "HTML", "Tailwind CSS", "Netlify"],
+    tags: ["JavaScript", "HTML5", "Tailwind CSS", "Netlify"],
     image: "./ProjectImages/CsvtoJson.png",
     link: "https://csv-to-jsonconv.netlify.app/"
   },
@@ -70,7 +70,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "Website Designs",
     year: "2023",
     description: "A web-based interactive learning tool designed to help students memorize concepts effectively.",
-    tags: ["JavaScript", "HTML", "CSS"],
+    tags: ["JavaScript", "HTML5", "CSS"],
     image: "./ProjectImages/Flashcard.png",
     link: "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
   },
@@ -79,7 +79,7 @@ export const PROJECTS_DATA: Project[] = [
     title: "8-Bit-O-Matic",
     category: "CS Projects",
     year: "2024",
-    description: "A pixel art creator that transforms uploaded images into retro 8-bit style masterpieces. Supports both 16-color and black & white pixelation modes. Built with Python (Flask) and Pillow for image processing.",
+    description: "A pixel art creator that transforms uploaded images into retro 8-bit style masterpieces. Supports both 16-color and black & white pixelation modes.",
     tags: ["Python", "Flask", "HTML5", "CSS"],
     image: "./ProjectImages/8bit.png",
     link: "https://eight-bit-o-matic.onrender.com/"
@@ -89,35 +89,40 @@ export const PROJECTS_DATA: Project[] = [
 export const GALLERY_DATA = [
   { 
     id: 1, 
-    title: "NFT Gen", 
+    title: "Neon Cyberpunk City", 
     type: "3D Render", 
-    image: "./ProjectImages/g2.jpg" 
+    image: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?auto=format&fit=crop&w=800&q=80" 
   },
   { 
     id: 2, 
-    title: "Architecture Design", 
+    title: "Abstract Fluid Simulation", 
     type: "3D Render", 
-    image: "./ProjectImages/g3.jpg"   },
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" 
+  },
   { 
     id: 3, 
-    title: "World Gen with motion", 
+    title: "Minimalist Architecture", 
     type: "3D Render", 
-    image: "./ProjectImages/g4.jpg"   },
+    image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80" 
+  },
   { 
     id: 4, 
-    title: "Asset", 
-    type: "3D Render", 
-    image: "./ProjectImages/g5.jpg"   },
+    title: "Cinematic Event Reel", 
+    type: "Video Edit", 
+    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" 
+  },
   { 
     id: 5, 
-    title: "World generation", 
+    title: "Product Visualization", 
     type: "3D Render", 
-    image: "./ProjectImages/g6.jpg"   },
+    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80" 
+  },
   { 
     id: 6, 
     title: "Gaming Assets", 
     type: "3D Modeling", 
-    image: "./ProjectImages/g7.jpg"   },
+    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" 
+  },
 ];
 
 export const TIMELINE_DATA = [
@@ -154,9 +159,9 @@ export const SERVICES_DATA = [
     icon: "code" 
   },
   { 
-    title: "3D Modeling & Art", 
-    description: "Creating high-fidelity 3D assets, abstract renders, and visualizers for games or brands.", 
-    icon: "cube" 
+    title: "App Development", 
+    description: "Professional app for tech showcases,high end functionalities , and promotional content.", 
+    icon: "code" 
   },
   { 
     title: "Event Tech Solutions", 
@@ -164,10 +169,11 @@ export const SERVICES_DATA = [
     icon: "server" 
   },
   { 
-    title: "Video Editing", 
-    description: "Professional editing for tech showcases, reels, and promotional content.", 
-    icon: "video" 
+    title: "3D Modeling & Art", 
+    description: "Creating high-fidelity 3D assets, abstract renders, and visualizers for games or brands.", 
+    icon: "cube" 
   },
+  
 ];
 
 export const SKILLS_DATA = [
@@ -190,7 +196,7 @@ export const SKILLS_DATA = [
     title: "Frontend & Web",
     skills: [
       { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
       { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
       { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
     ]
@@ -218,6 +224,8 @@ export const SKILLS_DATA = [
     skills: [
       { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+      { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
+      { name: "PWA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" }
     ]
   },
   {
@@ -228,7 +236,7 @@ export const SKILLS_DATA = [
       { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
       { name: "After Effects", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" },
       { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" },
-     
+      { name: "SketchUp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketchup/sketchup-original.svg" }
     ]
   },
   {
@@ -240,7 +248,8 @@ export const SKILLS_DATA = [
       { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
       { name: "IoT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
       { name: "Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
-      { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" }
+      { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
+      { name: "Google Maps API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" }
     ]
   }
 ];
