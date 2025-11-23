@@ -375,7 +375,13 @@ body {
 }
 
 .pill-link {
-  padding: 0.5rem 1.5rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 9rem; /* Fixed width keeps buttons uniform during animation */
+  height: 3rem;
+  padding: 0;
   border: 1px solid var(--border-light);
   border-radius: 9999px;
   color: var(--text-muted-light);
@@ -384,7 +390,9 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 0.3s;
+  background-color: transparent;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .dark .pill-link {
@@ -394,12 +402,54 @@ body {
 
 .pill-link:hover {
   background-color: #111827;
-  color: white;
+  border-color: #111827;
 }
 
 .dark .pill-link:hover {
   background-color: white;
-  color: black;
+  border-color: white;
+}
+
+/* Inner Text (Initially Visible) */
+.pill-text {
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Inner Icon (Initially Hidden below) */
+.pill-icon {
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Icon becomes white on hover in light mode */
+}
+
+.dark .pill-icon {
+  color: black; /* Icon becomes black on hover in dark mode */
+}
+
+/* Hover State: Move Text Up & Fade Out */
+.pill-link:hover .pill-text {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+/* Hover State: Move Icon Up & Fade In */
+.pill-link:hover .pill-icon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* SVG Icon Sizing */
+.pill-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .toggle-btn {
