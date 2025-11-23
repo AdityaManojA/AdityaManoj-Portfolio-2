@@ -144,6 +144,21 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://text-based-qr.netlify.app/"
   },
   {
+    id: 5,
+    title: "CSV to JSON Converter",
+    category: "CS Projects",
+    year: "2025",
+    description: "A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.",
+    tags: [
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
+    ],
+    image: "./ProjectImages/CsvtoJson.png",
+    link: "https://csv-to-jsonconv.netlify.app/"
+  },
+  {
     id: 3,
     title: "Meat Spoilage Detection",
     category: "CS Projects",
@@ -172,21 +187,7 @@ export const PROJECTS_DATA: Project[] = [
     image: "./ProjectImages/Flashcard.png",
     link: "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
   },
-  {
-    id: 5,
-    title: "CSV to JSON Converter",
-    category: "CS Projects",
-    year: "2025",
-    description: "A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.",
-    tags: [
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
-    ],
-    image: "./ProjectImages/CsvtoJson.png",
-    link: "https://csv-to-jsonconv.netlify.app/"
-  },
+  
   {
     id: 6, 
     title: "8-Bit-O-Matic",
