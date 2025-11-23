@@ -18,7 +18,7 @@ export interface Project {
   category: string;
   year: string;
   description: string;
-  tags: string[]; // Simplified to string array
+  tags: string[];
   image: string;
   link: string;
 }
@@ -29,7 +29,7 @@ export const PROJECTS_DATA: Project[] = [
     title: "IAN-2025 Event Management System",
     category: "Projects",
     year: "2025",
-    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences.",
+    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences. Features real-time scheduling, digital QR food coupons, and live logistics for global delegates from MIT, Cambridge, and Riken.",
     tags: ["React", "Firebase", "PWA", "Google Maps API"],
     image: "./ProjectImages/GLIA.png",
     link: "https://ian2025.in/"
@@ -50,7 +50,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "CS Projects",
     year: "2025",
     description: "A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.",
-    tags: ["JavaScript", "HTML5", "Tailwind CSS", "Netlify"],
+    tags: ["JavaScript", "HTML", "Tailwind CSS", "Netlify"],
     image: "./ProjectImages/CsvtoJson.png",
     link: "https://csv-to-jsonconv.netlify.app/"
   },
@@ -70,7 +70,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "Website Designs",
     year: "2023",
     description: "A web-based interactive learning tool designed to help students memorize concepts effectively.",
-    tags: ["JavaScript", "HTML5", "CSS"],
+    tags: ["JavaScript", "HTML", "CSS"],
     image: "./ProjectImages/Flashcard.png",
     link: "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
   },
@@ -91,37 +91,37 @@ export const GALLERY_DATA = [
     id: 1, 
     title: "Neon Cyberpunk City", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g2.jpg" 
   },
   { 
     id: 2, 
     title: "Abstract Fluid Simulation", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g3.jpg" 
   },
   { 
     id: 3, 
     title: "Minimalist Architecture", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g4.jpg" 
   },
   { 
     id: 4, 
     title: "Cinematic Event Reel", 
     type: "Video Edit", 
-    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g5.jpg" 
   },
   { 
     id: 5, 
     title: "Product Visualization", 
     type: "3D Render", 
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g6.jpg" 
   },
   { 
     id: 6, 
     title: "Gaming Assets", 
     type: "3D Modeling", 
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" 
+    image: "./ProjectImages/g7.jpg" 
   },
 ];
 
@@ -173,7 +173,6 @@ export const SERVICES_DATA = [
     description: "Creating high-fidelity 3D assets, abstract renders, and visualizers for games or brands.", 
     icon: "cube" 
   },
-  
 ];
 
 export const SKILLS_DATA = [
@@ -196,9 +195,11 @@ export const SKILLS_DATA = [
     title: "Frontend & Web",
     skills: [
       { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
       { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
     ]
   },
   {

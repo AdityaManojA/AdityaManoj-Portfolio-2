@@ -7,7 +7,7 @@
   --card-light: #ffffff;
   --card-dark: #1c1c1c;
   --text-light: #1C1C1E;
-  --text-dark: #e7dac6;
+  --text-dark: #f5f0e9;
   --text-muted-light: #4B5563;
   --text-muted-dark: #9CA3AF;
   --border-light: #E5E7EB;
@@ -779,7 +779,8 @@ body {
   line-height: 1.6;
   margin-bottom: 1.5rem;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 4; 
+  line-clamp: 4; 
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1314,6 +1315,7 @@ body {
   margin-bottom: 1rem;
   background: linear-gradient(to right, #fff, #9ca3af);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
