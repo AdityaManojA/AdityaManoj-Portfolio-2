@@ -108,10 +108,13 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`mobile-nav-link ${activeTab === item.id ? 'active' : ''} flex items-center justify-center gap-2`}
+              className={`mobile-nav-link ${activeTab === item.id ? 'active' : ''} flex items-center justify-start gap-4 w-48 mx-auto`} // Align start, fixed width to center content
             >
-              {/* Always render the icon, slightly larger for mobile touch targets */}
-              <span style={{ transform: 'scale(1.2)' }}>{item.content}</span>
+              {/* Icon */}
+              <span style={{ transform: 'scale(1.2)', flexShrink: 0 }}>{item.content}</span>
+              
+              {/* Label (Text) */}
+              <span className="text-xl font-bold tracking-wide">{item.label}</span>
             </button>
           ))}
         </div>

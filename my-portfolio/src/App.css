@@ -60,12 +60,12 @@ body {
 }
 
 .ambient-bg-container {
-  position: fixed; /* Changed from absolute to fixed */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0; /* Keeps it behind content */
+  z-index: 0; 
   pointer-events: none;
   overflow: hidden;
 }
@@ -76,7 +76,7 @@ body {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  overflow: hidden; /* Prevents horizontal scrollbar */
+  overflow: hidden; 
 }
 .app-header {
   width: 100%;
@@ -379,7 +379,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 9rem; /* Fixed width keeps buttons uniform during animation */
+  width: 9rem; 
   height: 3rem;
   padding: 0;
   border: 1px solid var(--border-light);
@@ -410,7 +410,7 @@ body {
   border-color: white;
 }
 
-/* Inner Text (Initially Visible) */
+
 .pill-text {
   position: absolute;
   transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
@@ -418,7 +418,6 @@ body {
   transform: translateY(0);
 }
 
-/* Inner Icon (Initially Hidden below) */
 .pill-icon {
   position: absolute;
   transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
@@ -427,26 +426,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white; /* Icon becomes white on hover in light mode */
+  color: white; 
 }
 
 .dark .pill-icon {
-  color: black; /* Icon becomes black on hover in dark mode */
+  color: black; 
 }
 
-/* Hover State: Move Text Up & Fade Out */
+
 .pill-link:hover .pill-text {
   transform: translateY(-20px);
   opacity: 0;
 }
 
-/* Hover State: Move Icon Up & Fade In */
+
 .pill-link:hover .pill-icon {
   transform: translateY(0);
   opacity: 1;
 }
 
-/* SVG Icon Sizing */
 .pill-icon svg {
   width: 1.5rem;
   height: 1.5rem;
@@ -1205,7 +1203,7 @@ body {
 @media (min-width: 640px) { .footer { padding: 2rem; } }
 
 .footer-card {
-  background-color: #111827; /* Always dark for contrast */
+  background-color: #111827; 
   background-image: radial-gradient(circle at top right, #1f2937 0%, transparent 40%);
   border-radius: 2rem;
   padding: 3rem 2rem;
@@ -1216,7 +1214,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Decorative light glow behind the image */
+
 .footer-card::before {
   content: '';
   position: absolute;
@@ -1343,7 +1341,7 @@ body {
 }
 
 .footer-icon {
-  width: 2rem; /* Larger icons */
+  width: 2rem; 
   height: 2rem;
   color: #9ca3af;
   transition: all 0.3s;
@@ -1621,12 +1619,12 @@ body {
 }
 .timeline-spine-marker {
   position: absolute;
-  top: 0; /* Aligns with the top of the card area */
+  top: 0; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
-  height: 100%; /* Ensures it stays in the row */
-  pointer-events: none; /* Prevents it from blocking clicks */
+  height: 100%; 
+  pointer-events: none; 
 }
 
 .timeline-dot-wrapper {
