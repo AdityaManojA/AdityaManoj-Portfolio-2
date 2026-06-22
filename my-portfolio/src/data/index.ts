@@ -35,6 +35,26 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://ian2025.in/"
   },
   {
+    id: 7,
+    title: "Kofe Cafe",
+    category: "Website Designs",
+    year: "2025",
+    description: "A retro-themed cafe landing page with bold typography and warm aesthetics. Features an animated menu showcase, smooth scroll interactions, and a hand-crafted visual identity inspired by vintage coffee culture.",
+    tags: ["React", "JavaScript", "CSS", "Vercel"],
+    image: "./ProjectImages/KofeCafe.png",
+    link: "https://project-i79fi.vercel.app/"
+  },
+  {
+    id: 8,
+    title: "ThreadPath Collective",
+    category: "Projects",
+    year: "2025",
+    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
+    image: "./ProjectImages/Threadpath.png",
+    link: "https://threadpathcollective.ca/"
+  },
+  {
     id: 2,
     title: "Retro QR Crafter",
     category: "CS Projects",
