@@ -25,6 +25,16 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 8,
+    title: "ThreadPath Collective",
+    category: "Projects",
+    year: "2025",
+    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
+    image: "./ProjectImages/Threadpath.png",
+    link: "https://threadpathcollective.ca/"
+  },
+  {
     id: 1,
     title: "IAN-2025 Event Management System",
     category: "Projects",
@@ -43,16 +53,6 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "JavaScript", "CSS", "Vercel"],
     image: "./ProjectImages/KofeCafe.png",
     link: "https://project-i79fi.vercel.app/"
-  },
-  {
-    id: 8,
-    title: "ThreadPath Collective",
-    category: "Projects",
-    year: "2025",
-    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
-    image: "./ProjectImages/Threadpath.png",
-    link: "https://threadpathcollective.ca/"
   },
   {
     id: 2,
