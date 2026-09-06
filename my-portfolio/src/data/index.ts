@@ -25,14 +25,34 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 9,
+    title: "Travel Animator",
+    category: "Projects",
+    year: "2025",
+    description: "Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.",
+    tags: ["Android", "iOS", "React Native", "Google Maps API"],
+    image: "./ProjectImages/Travel.png",
+    link: "https://travelanimator.com/"
+  },
+  {
     id: 8,
     title: "ThreadPath Collective",
     category: "Projects",
     year: "2025",
     description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
     image: "./ProjectImages/Threadpath.png",
     link: "https://threadpathcollective.ca/"
+  },
+  {
+    id: 11,
+    title: "The Whiskey Business",
+    category: "Projects",
+    year: "2025",
+    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Whisky.png",
+    link: "https://thewhiskeybusiness-3e639.web.app/"
   },
   {
     id: 1,
@@ -43,6 +63,16 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "Firebase", "PWA", "Google Maps API"],
     image: "./ProjectImages/GLIA.png",
     link: "https://ian2025.in/"
+  },
+  {
+    id: 10,
+    title: "ethKochi",
+    category: "Website Designs",
+    year: "2025",
+    description: "Official portal for ethKochi — an Ethereum hackathon in God's Own Country. Designed with a quirky meme-inspired cyber aesthetic, dynamic countdown timer, background audio/video loops, and live conference registration.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Ethereum"],
+    image: "./ProjectImages/ethkochi.png",
+    link: "https://ethkochi.in/"
   },
   {
     id: 7,
@@ -147,6 +177,12 @@ export const GALLERY_DATA = [
 
 export const TIMELINE_DATA = [
   { 
+    year: "Jan 2025 - Aug 2025", 
+    title: "Product Development Engineer", 
+    description: "Engineered consumer mobile applications across Android and iOS, software design, and full-stack systems at Lascade—developing the 'Travel Animator' 3D route animation platform (1M+ users).", 
+    location: "Lascade · Kochi, Kerala, India (On-site)" 
+  },
+  { 
     year: "2025", 
     title: "Full Stack Engineer", 
     description: "Architected the IAN-2025 Event OS, handling 1.2 million database reads and zero downtime for global delegates.", 
@@ -219,6 +255,7 @@ export const SKILLS_DATA = [
       { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
       { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
       { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
     ]
   },
@@ -234,6 +271,8 @@ export const SKILLS_DATA = [
   {
     title: "Deployment & Hosting",
     skills: [
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "GCP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
       { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
       { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
       { name: "Firebase Hosting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
@@ -243,6 +282,8 @@ export const SKILLS_DATA = [
   {
     title: "Mobile & Frameworks",
     skills: [
+      { name: "Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" },
+      { name: "iOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" },
       { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
       { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
@@ -257,7 +298,8 @@ export const SKILLS_DATA = [
       { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
       { name: "After Effects", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" },
       { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" },
-      { name: "SketchUp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketchup/sketchup-original.svg" }
+      { name: "SketchUp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketchup/sketchup-original.svg" },
+      { name: "Framer", icon: "https://www.vectorlogo.zone/logos/framer/framer-icon.svg" }
     ]
   },
   {
@@ -270,7 +312,9 @@ export const SKILLS_DATA = [
       { name: "IoT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
       { name: "Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
       { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
-      { name: "Google Maps API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" }
+      { name: "Google Maps API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" },
+      { name: "Ethereum", icon: "https://www.vectorlogo.zone/logos/ethereum/ethereum-icon.svg" },
+      { name: "Web3", icon: "https://www.vectorlogo.zone/logos/ethereum/ethereum-icon.svg" }
     ]
   }
 ];
