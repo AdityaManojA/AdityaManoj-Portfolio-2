@@ -45,16 +45,6 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://threadpathcollective.ca/"
   },
   {
-    id: 11,
-    title: "The Whiskey Business",
-    category: "Projects",
-    year: "2025",
-    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Whisky.png",
-    link: "https://thewhiskeybusiness-3e639.web.app/"
-  },
-  {
     id: 1,
     title: "IAN-2025 Event Management System",
     category: "Projects",
@@ -63,6 +53,16 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "Firebase", "PWA", "Google Maps API"],
     image: "./ProjectImages/GLIA.png",
     link: "https://ian2025.in/"
+  },
+  {
+    id: 11,
+    title: "The Whiskey Business",
+    category: "Projects",
+    year: "2025",
+    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Whisky.png",
+    link: "https://thewhiskeybusiness-3e639.web.app/"
   },
   {
     id: 10,
@@ -177,57 +177,69 @@ export const GALLERY_DATA = [
 
 export const TIMELINE_DATA = [
   { 
-    year: "Jan 2025 - Aug 2025", 
+    year: "Mar 2025 – Present", 
+    title: "Software Development Engineer (SDE 1 & 2)", 
+    description: "Progressed from Intern to SDE 1 to SDE 2 at Cisco within large-scale networking and cloud infrastructure. Built and maintained backend services and automation tooling using AWS (EC2, Lambda, CloudWatch) and Apache web infrastructure. Enhanced containerized CI/CD deployment workflows and mentored incoming interns.", 
+    location: "Cisco Systems India · Bengaluru" 
+  },
+  { 
+    year: "Apr 2026 – Jun 2026", 
+    title: "Frontend & DevOps Engineer (Contract)", 
+    description: "Engineered responsive inventory tracking interface using React and Framer Motion with dynamic coordinate layouts. Managed production deployments using AWS Cloud Functions and Amazon CloudFront (CDN) for low-latency global delivery.", 
+    location: "Threadpath Collective · Remote" 
+  },
+  { 
+    year: "Jan 2025 – Aug 2025", 
     title: "Product Development Engineer", 
     description: "Engineered consumer mobile applications across Android and iOS, software design, and full-stack systems at Lascade—developing the 'Travel Animator' 3D route animation platform (1M+ users).", 
     location: "Lascade · Kochi, Kerala, India (On-site)" 
   },
   { 
-    year: "2025", 
-    title: "Full Stack Engineer", 
-    description: "Architected the IAN-2025 Event OS, handling 1.2 million database reads and zero downtime for global delegates.", 
-    location: "Remote" 
+    year: "Aug 2024 – Jan 2025", 
+    title: "Lead Developer (Technical Trainee)", 
+    description: "Built and deployed a high-performance Progressive Web App (PWA) managing on-ground logistics for international neuroscience conference. Automated workflows handling 1.2M Firestore reads and 2,275+ authenticated coupon scans with zero manual errors at 100% uptime.", 
+    location: "Rajiv Gandhi Centre for Biotechnology · Thiruvananthapuram" 
   },
   { 
-    year: "2025", 
-    title: "Product Intern", 
-    description: "Started working with international clients on web development, AI development, and a 3D modeling Product Intern.", 
-    location: "Kerala Startup Mission, EKM, India" 
+    year: "Mar 2024 – Sep 2024", 
+    title: "Software Engineering Intern", 
+    description: "Earned 6-month internship through a hackathon placement. Contributed to full-stack features on the Flipkart consumer app across frontend and backend layers. Deployed and managed services on Microsoft Azure and Google Cloud Platform (GCP).", 
+    location: "Flipkart · Bengaluru" 
   },
   { 
-    year: "2024", 
-    title: "Tech Lead - College Projects", 
-    description: "Led development for 'Meat Spoilage Detection' systems using Python and IoT which represented my college at IIT Pallakad.", 
-    location: "IIT Pallakad, Kerala, India" 
+    year: "Sep 2023 – Mar 2024", 
+    title: "Cloud Operations Intern", 
+    description: "Hands-on cloud operations managing AWS core services (EC2, RDS, S3, CloudWatch) for provisioning and monitoring workloads. Wrote Bash and Python scripts for operational automation across Unix-based environments and supported MERN-stack apps.", 
+    location: "Codelattice Digital Solutions · Calicut" 
   },
   { 
-    year: "2021", 
-    title: "Started my Journey as a Btech Student", 
-    description: "Began engineering journey, focusing on coding and simple developments :)", 
-    location: "Kerala, India" 
+    year: "2020 – 2024", 
+    title: "B.Tech, Computer Science & Engineering", 
+    description: "Graduated with strong foundations in full-stack software development, cloud infrastructure, DevOps pipelines, and applied AI systems.", 
+    location: "Jyothi Engineering College · Thrissur, Kerala" 
   },
 ];
 
 export const SERVICES_DATA = [
   { 
-    title: "Web Development", 
-    description: "Custom, high-performance websites and web apps using React, Tailwind, and Firebase.", 
+    title: "Full-Stack Engineering", 
+    description: "Custom, high-performance web & mobile applications using React, React Native, TypeScript, Node.js, Python, FastAPI, and Django.", 
     icon: "code" 
   },
   { 
-    title: "App Development", 
-    description: "Professional app for tech showcases,high end functionalities , and promotional content.", 
-    icon: "code" 
-  },
-  { 
-    title: "Event Tech Solutions", 
-    description: "End-to-end digital infrastructure for conferences: registration, QR scanning, and analytics.", 
+    title: "Cloud Stacks & DevOps", 
+    description: "Multi-cloud stacks across AWS (EC2, S3, RDS, CloudWatch, Lambda), Azure, GCP, and Firebase. Docker containerization, automated CI/CD pipelines, and CloudFront CDN delivery.", 
     icon: "server" 
   },
   { 
-    title: "3D Modeling & Art", 
-    description: "Creating high-fidelity 3D assets, abstract renders, and visualizers for games or brands.", 
+    title: "Applied AI & ML Pipelines", 
+    description: "End-to-end machine learning and computer vision pipelines using Python, TensorFlow, and OpenCV for facial recognition, preprocessing, and automation.", 
     icon: "cube" 
+  },
+  { 
+    title: "PWAs & High-Scale Event Tech", 
+    description: "High-reliability Progressive Web Apps handling millions of real-time database reads, digital QR verification, and zero-downtime event logistics.", 
+    icon: "server" 
   },
 ];
 
@@ -235,10 +247,10 @@ export const SKILLS_DATA = [
   {
     title: "Programming Languages",
     skills: [
-      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
       { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
       { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
       { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
@@ -248,67 +260,82 @@ export const SKILLS_DATA = [
     ]
   },
   {
+    title: "Cloud & DevOps",
+    skills: [
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+      { name: "GCP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+      { name: "Bash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
+      { name: "Apache", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" },
+      { name: "Firebase Hosting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
+    ]
+  },
+  {
     title: "Frontend & Web",
     skills: [
       { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
-      { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
+      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
     ]
   },
   {
     title: "Backend & Databases",
     skills: [
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+      { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
       { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
     ]
   },
   {
-    title: "Deployment & Hosting",
+    title: "Data & Applied AI",
     skills: [
-      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "GCP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
-      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
-      { name: "Firebase Hosting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-      { name: "GoDaddy", icon: "https://www.vectorlogo.zone/logos/godaddy/godaddy-icon.svg" }
+      { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+      { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "Firestore", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
     ]
   },
   {
     title: "Mobile & Frameworks",
     skills: [
-      { name: "Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" },
-      { name: "iOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" },
       { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
-      { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
-      { name: "PWA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" }
+      { name: "Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" },
+      { name: "iOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" },
+      { name: "PWA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" },
+      { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" }
     ]
   },
   {
     title: "Design & Creative",
     skills: [
+      { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+      { name: "Framer", icon: "https://www.vectorlogo.zone/logos/framer/framer-icon.svg" },
       { name: "Blender 3D", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
-      { name: "Adobe Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
       { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+      { name: "Adobe Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
       { name: "After Effects", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" },
       { name: "Premiere Pro", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" },
-      { name: "SketchUp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketchup/sketchup-original.svg" },
-      { name: "Framer", icon: "https://www.vectorlogo.zone/logos/framer/framer-icon.svg" }
+      { name: "SketchUp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketchup/sketchup-original.svg" }
     ]
   },
   {
-    title: "Tools & Engines",
+    title: "Tools & Infrastructure",
     skills: [
-      { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
-      { name: "GitHub Desktop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-      { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
       { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+      { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
       { name: "IoT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
       { name: "Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
       { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
