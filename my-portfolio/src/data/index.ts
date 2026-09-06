@@ -9,7 +9,8 @@ export const IMAGES = {
 export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/aditya-manoj-a-0a930b256/",
   github: "https://github.com/AdityaManoja",
-  email: "mailto:adityamanoja@gmail.com"
+  email: "mailto:adityamanoja@gmail.com",
+  cv: "/cv.pdf"
 };
 
 export interface Project {
