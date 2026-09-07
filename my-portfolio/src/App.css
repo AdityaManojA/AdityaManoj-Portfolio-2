@@ -1700,3 +1700,1129 @@ body {
 .dark .service-title {
   color: var(--text-dark);
 }
+
+/* =========================================================================
+   SKILLS FILTERS & ENHANCEMENTS
+   ========================================================================= */
+.skills-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.skills-filter-btn {
+  background: var(--card-light);
+  border: 1px solid var(--border-light);
+  color: var(--text-muted-light);
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.dark .skills-filter-btn {
+  background: var(--card-dark);
+  border-color: var(--border-dark);
+  color: var(--text-muted-dark);
+}
+
+.skills-filter-btn:hover {
+  border-color: var(--primary-orange);
+  color: var(--text-light);
+  transform: translateY(-1px);
+}
+
+.dark .skills-filter-btn:hover {
+  color: var(--text-dark);
+}
+
+.skills-filter-btn.active {
+  background: var(--primary-orange);
+  border-color: var(--primary-orange);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 159, 104, 0.3);
+}
+
+.skills-filter-count {
+  font-size: 0.7rem;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+}
+
+.skills-filter-btn.active .skills-filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.skill-card-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  background: rgba(255, 159, 104, 0.12);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+/* =========================================================================
+   HERO ACTIONS & HANDBOOK CALLOUT
+   ========================================================================= */
+.hero-actions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.hero-handbook-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, rgba(20, 55, 90, 0.95), rgba(0, 130, 130, 0.95));
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 130, 130, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-handbook-banner-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 130, 130, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero-handbook-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+
+.nav-handbook-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #14375a, #008282);
+  color: #ffffff;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.nav-handbook-pill:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* =========================================================================
+   PROJECT CARD HANDBOOK HIGHLIGHT
+   ========================================================================= */
+.handbook-card-highlight {
+  border: 2px solid rgba(0, 130, 130, 0.4) !important;
+  background: linear-gradient(180deg, var(--card-light) 0%, rgba(0, 130, 130, 0.03) 100%) !important;
+}
+
+.dark .handbook-card-highlight {
+  border-color: rgba(0, 130, 130, 0.5) !important;
+  background: linear-gradient(180deg, var(--card-dark) 0%, rgba(0, 130, 130, 0.08) 100%) !important;
+}
+
+.handbook-pill-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(20, 55, 90, 0.88);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================================================
+   HANDBOOK MODAL
+   ========================================================================= */
+.handbook-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: modal-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.handbook-modal-container {
+  background: var(--card-light);
+  color: var(--text-light);
+  width: 100%;
+  max-width: 78rem;
+  height: 90vh;
+  max-height: 56rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  animation: modal-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .handbook-modal-container {
+  background: #141416;
+  border-color: #2e2e33;
+  color: var(--text-dark);
+}
+
+@keyframes modal-slide-up {
+  from {
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header */
+.handbook-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.dark .handbook-modal-header {
+  border-bottom-color: #27272a;
+  background: rgba(20, 20, 22, 0.6);
+}
+
+.handbook-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.handbook-badge {
+  background: linear-gradient(135deg, #14375a, #008282);
+  color: #ffffff;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.handbook-author {
+  font-size: 0.8rem;
+  color: var(--text-muted-light);
+  font-weight: 600;
+}
+
+.dark .handbook-author {
+  color: var(--text-muted-dark);
+}
+
+.handbook-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem 0;
+  color: var(--text-light);
+}
+
+.dark .handbook-title {
+  color: #ffffff;
+}
+
+.handbook-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted-light);
+  margin: 0;
+}
+
+.dark .handbook-subtitle {
+  color: var(--text-muted-dark);
+}
+
+.handbook-close-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-light);
+  color: var(--text-light);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dark .handbook-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #27272a;
+  color: #ffffff;
+}
+
+.handbook-close-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+
+/* Tabs */
+.handbook-tabs-nav {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 2rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.dark .handbook-tabs-nav {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom-color: #27272a;
+}
+
+.handbook-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted-light);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dark .handbook-tab-btn {
+  color: var(--text-muted-dark);
+}
+
+.handbook-tab-btn:hover {
+  color: var(--text-light);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dark .handbook-tab-btn:hover {
+  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.handbook-tab-btn.active {
+  background: var(--card-light);
+  color: var(--primary-orange);
+  border-color: var(--border-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.dark .handbook-tab-btn.active {
+  background: #1c1c1f;
+  color: #38bdf8;
+  border-color: #2e2e33;
+}
+
+/* Modal Body */
+.handbook-modal-body {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+/* =========================================================================
+   PART I: FOUNDATIONS LAYOUT
+   ========================================================================= */
+.handbook-foundations-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.handbook-sidebar {
+  width: 20rem;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-light);
+  overflow-y: auto;
+  padding: 1.25rem 1rem;
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.dark .handbook-sidebar {
+  border-right-color: #27272a;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.handbook-sidebar-heading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted-light);
+  padding: 0 0.5rem 0.75rem;
+}
+
+.dark .handbook-sidebar-heading {
+  color: var(--text-muted-dark);
+}
+
+.handbook-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.handbook-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.65rem;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.handbook-sidebar-num {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted-light);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+.dark .handbook-sidebar-num {
+  color: var(--text-muted-dark);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.handbook-sidebar-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-light);
+  line-height: 1.3;
+}
+
+.dark .handbook-sidebar-title {
+  color: var(--text-dark);
+}
+
+.handbook-sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.dark .handbook-sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.handbook-sidebar-item.active {
+  background: rgba(20, 55, 90, 0.08);
+  border-color: rgba(20, 55, 90, 0.2);
+}
+
+.dark .handbook-sidebar-item.active {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.handbook-sidebar-item.active .handbook-sidebar-num {
+  background: #14375a;
+  color: #ffffff;
+}
+
+.dark .handbook-sidebar-item.active .handbook-sidebar-num {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.handbook-sidebar-item.active .handbook-sidebar-title {
+  color: #14375a;
+  font-weight: 700;
+}
+
+.dark .handbook-sidebar-item.active .handbook-sidebar-title {
+  color: #38bdf8;
+}
+
+/* Content Pane */
+.handbook-content-pane {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 2rem 2.5rem;
+  text-align: left;
+}
+
+.handbook-module-header {
+  margin-bottom: 1.5rem;
+}
+
+.handbook-section-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #008282;
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+.dark .handbook-section-tag {
+  color: #38bdf8;
+}
+
+.handbook-module-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.dark .handbook-module-title {
+  color: #ffffff;
+}
+
+.handbook-paragraph {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted-light);
+  margin-bottom: 1rem;
+}
+
+.dark .handbook-paragraph {
+  color: #cbd5e1;
+}
+
+/* Alert Boxes */
+.handbook-alert-box {
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+}
+
+.alert-architecture {
+  background: rgba(20, 55, 90, 0.06);
+  border-left-color: #14375a;
+}
+
+.dark .alert-architecture {
+  background: rgba(56, 189, 248, 0.08);
+  border-left-color: #38bdf8;
+}
+
+.alert-tip {
+  background: rgba(16, 185, 129, 0.08);
+  border-left-color: #10b981;
+}
+
+.dark .alert-tip {
+  background: rgba(16, 185, 129, 0.12);
+  border-left-color: #34d399;
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: #f59e0b;
+}
+
+.dark .alert-warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-left-color: #fbbf24;
+}
+
+.handbook-alert-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+  color: var(--text-light);
+}
+
+.dark .handbook-alert-title {
+  color: #ffffff;
+}
+
+.handbook-alert-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+}
+
+.dark .handbook-alert-text {
+  color: #cbd5e1;
+}
+
+/* Diagrams */
+.handbook-diagram-wrapper {
+  background: #0f172a;
+  border-radius: 1rem;
+  border: 1px solid #1e293b;
+  overflow: hidden;
+  margin: 1.75rem 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.handbook-diagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: #1e293b;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.handbook-copy-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.handbook-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.handbook-diagram-code {
+  margin: 0;
+  padding: 1.25rem;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #38bdf8;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Subsections */
+.handbook-subsections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.handbook-subsection-card {
+  background: var(--card-light);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.dark .handbook-subsection-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: #27272a;
+}
+
+.handbook-subsection-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0 0 0.85rem 0;
+}
+
+.dark .handbook-subsection-title {
+  color: #ffffff;
+}
+
+.handbook-points-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.handbook-point-item {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+}
+
+.dark .handbook-point-item {
+  color: #cbd5e1;
+}
+
+.handbook-code-block {
+  background: #0f172a;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid #1e293b;
+}
+
+.handbook-code-block pre {
+  margin: 0;
+  font-family: monospace;
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  overflow-x: auto;
+}
+
+/* =========================================================================
+   PART II: 20 DEEP DIVES LAYOUT
+   ========================================================================= */
+.handbook-deepdives-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.handbook-filter-container {
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border-light);
+  background: rgba(0, 0, 0, 0.015);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+.dark .handbook-filter-container {
+  border-bottom-color: #27272a;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.handbook-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--card-light);
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  color: var(--text-muted-light);
+}
+
+.dark .handbook-search-box {
+  background: #1c1c1f;
+  border-color: #2e2e33;
+  color: var(--text-muted-dark);
+}
+
+.handbook-search-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-family: inherit;
+}
+
+.dark .handbook-search-input {
+  color: var(--text-dark);
+}
+
+.handbook-clear-search {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-muted-light);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.handbook-category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.handbook-pill-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-muted-light);
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dark .handbook-pill-btn {
+  border-color: #27272a;
+  color: var(--text-muted-dark);
+}
+
+.handbook-pill-btn:hover {
+  border-color: #008282;
+  color: var(--text-light);
+}
+
+.dark .handbook-pill-btn:hover {
+  color: var(--text-dark);
+  border-color: #38bdf8;
+}
+
+.handbook-pill-btn.active {
+  background: #14375a;
+  border-color: #14375a;
+  color: #ffffff;
+}
+
+.dark .handbook-pill-btn.active {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  color: #0f172a;
+}
+
+/* Questions List */
+.handbook-questions-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.handbook-empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--text-muted-light);
+}
+
+.handbook-reset-btn {
+  margin-top: 1rem;
+  background: var(--primary-orange);
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.handbook-q-card {
+  background: var(--card-light);
+  border: 1px solid var(--border-light);
+  border-radius: 1.15rem;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.dark .handbook-q-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: #27272a;
+}
+
+.handbook-q-card:hover {
+  border-color: rgba(20, 55, 90, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.dark .handbook-q-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.handbook-q-card.expanded {
+  border-color: #008282;
+  box-shadow: 0 8px 30px rgba(0, 130, 130, 0.15);
+}
+
+.dark .handbook-q-card.expanded {
+  border-color: #38bdf8;
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.12);
+}
+
+.handbook-q-header {
+  padding: 1.35rem 1.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.handbook-q-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.handbook-q-num {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: #14375a;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
+}
+
+.dark .handbook-q-num {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.handbook-q-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted-light);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+}
+
+.dark .handbook-q-category {
+  color: var(--text-muted-dark);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.handbook-q-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.dark .handbook-q-title {
+  color: #ffffff;
+}
+
+.handbook-q-summary {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+  margin: 0 0 0.75rem 0;
+}
+
+.dark .handbook-q-summary {
+  color: #94a3b8;
+}
+
+.handbook-expand-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #008282;
+}
+
+.dark .handbook-expand-cue {
+  color: #38bdf8;
+}
+
+/* Expanded Content */
+.handbook-q-content {
+  padding: 0 1.75rem 1.75rem;
+  border-top: 1px solid var(--border-light);
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.dark .handbook-q-content {
+  border-top-color: #27272a;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.handbook-steps-container {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.handbook-steps-header {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted-light);
+  margin: 0 0 0.5rem 0;
+}
+
+.dark .handbook-steps-header {
+  color: var(--text-muted-dark);
+}
+
+.handbook-step-card {
+  background: var(--card-light);
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+
+.dark .handbook-step-card {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+.handbook-step-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #14375a;
+  margin-bottom: 0.35rem;
+}
+
+.dark .handbook-step-title {
+  color: #38bdf8;
+}
+
+.handbook-step-details {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+}
+
+.dark .handbook-step-details {
+  color: #cbd5e1;
+}
+
+.handbook-protip-box {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 0.85rem;
+  padding: 1rem 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.dark .handbook-protip-box {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.handbook-protip-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  margin-bottom: 0.35rem;
+}
+
+.dark .handbook-protip-badge {
+  color: #34d399;
+}
+
+.handbook-protip-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-muted-light);
+  margin: 0;
+}
+
+.dark .handbook-protip-text {
+  color: #cbd5e1;
+}
+
+/* =========================================================================
+   RESPONSIVE STYLING
+   ========================================================================= */
+@media (max-width: 900px) {
+  .handbook-foundations-layout {
+    flex-direction: column;
+  }
+
+  .handbook-sidebar {
+    width: 100%;
+    max-height: 12rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .dark .handbook-sidebar {
+    border-bottom-color: #27272a;
+  }
+
+  .handbook-content-pane {
+    padding: 1.5rem;
+  }
+
+  .handbook-modal-container {
+    height: 95vh;
+    border-radius: 1rem;
+  }
+
+  .handbook-modal-header {
+    padding: 1.25rem;
+  }
+
+  .handbook-questions-list {
+    padding: 1.25rem;
+  }
+}

@@ -3,7 +3,11 @@ import { PROJECTS_DATA } from '../data';
 import ProjectCard from './ProjectCard';
 import ScrollReveal from './ScrollReveal';
 
-const Projects = () => {
+interface ProjectsProps {
+  onOpenHandbook?: () => void;
+}
+
+const Projects = ({ onOpenHandbook }: ProjectsProps) => {
   const [activeFilter, setActiveFilter] = useState('All');
   
   // Dynamically generate categories from the data
@@ -37,7 +41,7 @@ const Projects = () => {
       <div className="projects-grid">
         {filteredProjects.map((project, index) => (
           <ScrollReveal key={project.id} delay={index * 0.1}>
-            <ProjectCard project={project} />
+            <ProjectCard project={project} onOpenHandbook={onOpenHandbook} />
           </ScrollReveal>
         ))}
       </div>

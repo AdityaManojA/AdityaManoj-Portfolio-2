@@ -11,14 +11,24 @@ import Timeline from './components/Timeline';
 import Services from './components/Services';
 import { DetailedFooter, SimpleFooter } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import { HandbookModal } from './components/HandbookModal';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('Home'); 
+  const [activeTab, setActiveTab] = useState('Home');
+  const [isHandbookOpen, setIsHandbookOpen] = useState(false);
+  const [handbookTab, setHandbookTab] = useState<'foundations' | 'deepdives'>('foundations');
+  const [handbookQId, setHandbookQId] = useState<number | undefined>(undefined);
+
+  const handleOpenHandbook = (tab: 'foundations' | 'deepdives' = 'foundations', qId?: number) => {
+    setHandbookTab(tab);
+    setHandbookQId(qId);
+    setIsHandbookOpen(true);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case 'Projects':
-        return <Projects />;
+        return <Projects onOpenHandbook={() => handleOpenHandbook('foundations')} />;
       case 'Gallery':
         return <Gallery />;
       case 'Timeline':
@@ -33,13 +43,17 @@ export default function App() {
         return <Contact />;
       case 'Home':
       default:
-        return <Hero />;
+        return <Hero onOpenHandbook={() => handleOpenHandbook('foundations')} />;
     }
   };
 
   return (
     <div className="app-container">
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Header
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onOpenHandbook={() => handleOpenHandbook('foundations')}
+      />
 
       <main className="main-content">
         {renderContent()}
@@ -48,6 +62,13 @@ export default function App() {
       {activeTab === 'Home' ? <DetailedFooter /> : <SimpleFooter />}
       
       <ScrollToTop />
+
+      <HandbookModal
+        isOpen={isHandbookOpen}
+        onClose={() => setIsHandbookOpen(false)}
+        initialTab={handbookTab}
+        initialQuestionId={handbookQId}
+      />
     </div>
   );
 }

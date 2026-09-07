@@ -22,9 +22,21 @@ export interface Project {
   tags: string[];
   image: string;
   link: string;
+  isHandbook?: boolean;
 }
 
 export const PROJECTS_DATA: Project[] = [
+  {
+    id: 100,
+    title: "The DevOps, SRE & Cloud Infrastructure Handbook",
+    category: "Projects",
+    year: "2026",
+    description: "An exhaustive technical engineering reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS/C-states), Cisco networking (VLANs, LACP), and Linux kernel internals (clone, namespaces, cgroups, OverlayFS) with Kubernetes control plane orchestration, Prometheus-Loki-Grafana observability, and 20 low-level interview deep-dives.",
+    tags: ["Kubernetes", "SRE", "Linux Kernel", "Terraform", "Prometheus", "Cisco"],
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    link: "#handbook",
+    isHandbook: true
+  },
   {
     id: 9,
     title: "Travel Animator",
@@ -180,7 +192,7 @@ export const TIMELINE_DATA = [
   { 
     year: "Mar 2025 – Present", 
     title: "Software Development Engineer (SDE 1 & 2)", 
-    description: "Progressed from Intern to SDE 1 to SDE 2 at Cisco within large-scale networking and cloud infrastructure. Built and maintained backend services and automation tooling using AWS (EC2, Lambda, CloudWatch) and Apache web infrastructure. Enhanced containerized CI/CD deployment workflows and mentored incoming interns.", 
+    description: "Progressed from Intern to SDE 1 to SDE 2 at Cisco within large-scale enterprise networking and cloud infrastructure. Engineered backend services and operational automation on AWS (EC2, Lambda, CloudWatch, S3) and Apache/NGINX systems. Spearheaded containerized CI/CD pipelines, high-availability service deployments, Cisco L2/L3 networking configurations, and mentored incoming engineering cohorts.", 
     location: "Cisco Systems India · Bengaluru" 
   },
   { 
@@ -223,56 +235,134 @@ export const TIMELINE_DATA = [
 
 export const SERVICES_DATA = [
   { 
+    title: "Cloud Native & Kubernetes Orchestration", 
+    description: "End-to-end Kubernetes cluster architecture, microservices containerization, Helm charts, and GitOps deployments via ArgoCD. Zero-downtime rolling, canary, and blue-green delivery with HPA/VPA autoscaling.", 
+    icon: "kubernetes" 
+  },
+  { 
+    title: "SRE & Observability Architecture", 
+    description: "Production telemetry stacks with Prometheus, Loki, and Grafana. SLI/SLO design, error budget governance, distributed tracing with OpenTelemetry, and incident response frameworks using USE and RED methodologies.", 
+    icon: "chart" 
+  },
+  { 
+    title: "Infrastructure as Code & CI/CD", 
+    description: "Deterministic infrastructure automation with Terraform/OpenTofu and Ansible. DAG-based CI/CD workflows, state locking with DynamoDB, supply chain security, and container image signing with Cosign.", 
+    icon: "terminal" 
+  },
+  { 
+    title: "Bare-Metal, Linux & High Availability", 
+    description: "3-node quorum clusters with Raft consensus, split-brain mitigation, Keepalived VRRP floating VIPs, Out-of-Band IPMI/iDRAC management, RAID/ZFS topologies, and low-latency Linux kernel C-state tuning.", 
+    icon: "server" 
+  },
+  { 
+    title: "Enterprise Networking & Edge Delivery", 
+    description: "Cisco Catalyst switching, L2/L3 routing, 802.1Q VLAN segmentation, LACP EtherChannel bonding, AWS ALB (L7) and NLB (L4) traffic routing, and CloudFront global CDN edge caching.", 
+    icon: "network" 
+  },
+  { 
+    title: "GPU Infrastructure & AI Acceleration", 
+    description: "NVIDIA driver integration, CUDA toolkit configuration, NVIDIA Container Toolkit (nvidia-ctk), and GPU Operator deployment for accelerated AI model serving with PyTorch, vLLM, and Triton.", 
+    icon: "cpu" 
+  },
+  { 
     title: "Full-Stack Engineering", 
-    description: "Custom, high-performance web & mobile applications using React, React Native, TypeScript, Node.js, Python, FastAPI, and Django.", 
+    description: "Custom, high-performance web & mobile applications using React, React Native, TypeScript, Node.js, Python, FastAPI, and Django with responsive UI/UX.", 
     icon: "code" 
   },
   { 
-    title: "Cloud Stacks & DevOps", 
-    description: "Multi-cloud stacks across AWS (EC2, S3, RDS, CloudWatch, Lambda), Azure, GCP, and Firebase. Docker containerization, automated CI/CD pipelines, and CloudFront CDN delivery.", 
-    icon: "server" 
-  },
-  { 
-    title: "Applied AI & ML Pipelines", 
-    description: "End-to-end machine learning and computer vision pipelines using Python, TensorFlow, and OpenCV for facial recognition, preprocessing, and automation.", 
-    icon: "cube" 
-  },
-  { 
     title: "PWAs & High-Scale Event Tech", 
-    description: "High-reliability Progressive Web Apps handling millions of real-time database reads, digital QR verification, and zero-downtime event logistics.", 
-    icon: "server" 
-  },
+    description: "High-reliability Progressive Web Apps handling millions of real-time database reads, digital QR verification, and 100% uptime event logistics.", 
+    icon: "zap" 
+  }
 ];
 
 export const SKILLS_DATA = [
+  {
+    title: "Cloud Native & Orchestration",
+    skills: [
+      { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "containerd", icon: "https://raw.githubusercontent.com/cncf/artwork/master/projects/containerd/icon/color/containerd-icon-color.svg" },
+      { name: "Helm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/helm/helm-original.svg" },
+      { name: "ArgoCD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-plain.svg" },
+      { name: "Cilium / eBPF", icon: "https://raw.githubusercontent.com/cilium/cilium/main/Documentation/images/logo-solo.svg" }
+    ]
+  },
+  {
+    title: "SRE & Observability",
+    skills: [
+      { name: "Prometheus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" },
+      { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
+      { name: "Grafana Loki", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
+      { name: "OpenTelemetry", icon: "https://raw.githubusercontent.com/cncf/artwork/master/projects/opentelemetry/icon/color/opentelemetry-icon-color.svg" },
+      { name: "SLIs / SLOs", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/networkx/networkx-original.svg" }
+    ]
+  },
+  {
+    title: "Infrastructure as Code & CI/CD",
+    skills: [
+      { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
+      { name: "Ansible", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" },
+      { name: "Bash Scripting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
+      { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Apache", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" },
+      { name: "NGINX", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" }
+    ]
+  },
+  {
+    title: "Systems, Linux & Hardware",
+    skills: [
+      { name: "Linux Kernel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+      { name: "Ubuntu Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" },
+      { name: "SUSE SLES / MicroOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/suse/suse-original.svg" },
+      { name: "IPMI / iDRAC / iLO", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
+      { name: "RAID & ZFS Storage", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/networkx/networkx-original.svg" },
+      { name: "VRRP Quorum HA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/networkx/networkx-original.svg" }
+    ]
+  },
+  {
+    title: "Enterprise Networking & Edge",
+    skills: [
+      { name: "Cisco Networking", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cisco.svg" },
+      { name: "802.1Q VLANs", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/networkx/networkx-original.svg" },
+      { name: "LACP EtherChannel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/networkx/networkx-original.svg" },
+      { name: "AWS ALB / NLB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "CloudFront CDN", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "CoreDNS", icon: "https://raw.githubusercontent.com/cncf/artwork/master/projects/coredns/icon/color/coredns-icon-color.svg" }
+    ]
+  },
+  {
+    title: "Cloud Hyperscalers",
+    skills: [
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+      { name: "Google Cloud (GCP)", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
+      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" }
+    ]
+  },
+  {
+    title: "GPU Acceleration & AI Stacks",
+    skills: [
+      { name: "NVIDIA Container Toolkit", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" },
+      { name: "CUDA", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nvidia.svg" },
+      { name: "PyTorch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+      { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+      { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" }
+    ]
+  },
   {
     title: "Programming Languages",
     skills: [
       { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
       { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
       { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
       { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-      { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
       { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
-      { name: "Dart", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
-      { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
       { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
-    ]
-  },
-  {
-    title: "Cloud & DevOps",
-    skills: [
-      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
-      { name: "GCP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
-      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-      { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
-      { name: "Bash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
-      { name: "Apache", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" },
-      { name: "Firebase Hosting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-      { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
-      { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" }
     ]
   },
   {
@@ -289,20 +379,11 @@ export const SKILLS_DATA = [
     title: "Backend & Databases",
     skills: [
       { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
       { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
       { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
+      { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
-    ]
-  },
-  {
-    title: "Data & Applied AI",
-    skills: [
-      { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
-      { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" },
-      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "Firestore", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
     ]
   },
@@ -331,18 +412,14 @@ export const SKILLS_DATA = [
     ]
   },
   {
-    title: "Tools & Infrastructure",
+    title: "Tools & Ecosystem",
     skills: [
       { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
       { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
       { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
       { name: "Unity", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" },
-      { name: "IoT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
-      { name: "Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" },
-      { name: "Sensors", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
-      { name: "Google Maps API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" },
-      { name: "Ethereum", icon: "https://www.vectorlogo.zone/logos/ethereum/ethereum-icon.svg" },
-      { name: "Web3", icon: "https://www.vectorlogo.zone/logos/ethereum/ethereum-icon.svg" }
+      { name: "IoT & Hardware", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
+      { name: "Google Maps API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" }
     ]
   }
 ];

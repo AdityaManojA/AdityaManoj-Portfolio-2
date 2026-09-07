@@ -3,7 +3,11 @@ import { SOCIAL_LINKS, PROJECTS_DATA } from '../data';
 import ProjectCard from './ProjectCard';
 import ScrollReveal from './ScrollReveal';
 
-const Hero = () => {
+interface HeroProps {
+  onOpenHandbook?: () => void;
+}
+
+const Hero = ({ onOpenHandbook }: HeroProps) => {
   // Get the first 3 projects for the featured section
   const featuredProjects = PROJECTS_DATA.slice(0, 3);
 
@@ -60,31 +64,46 @@ const Hero = () => {
           </div>
           <div className="hero-row">
             <h1 className="hero-text">develop</h1>
-            <h1 className="hero-text">stuff</h1>
+            <h1 className="hero-text">systems</h1>
           </div>
         </div>
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>
         <p className="hero-desc">
-          I develop because I can have my creative freedom to create client required product with my personal expertise and design.
+          Software Development Engineer at <strong>Cisco Systems</strong>. Architecting cloud-native infrastructure, Kubernetes clusters, resilient SRE telemetry stacks, bare-metal hardware solutions, and production web applications.
         </p>
       </ScrollReveal>
 
       <ScrollReveal delay={0.2}>
-        <div className="social-pills">
-          {socialLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.url}
-              target={link.name === 'Email' ? undefined : "_blank"}
-              rel={link.name === 'Email' ? undefined : "noreferrer"}
-              className="pill-link"
+        <div className="hero-actions-container">
+          <div className="social-pills">
+            {socialLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.url}
+                target={link.name === 'Email' ? undefined : "_blank"}
+                rel={link.name === 'Email' ? undefined : "noreferrer"}
+                className="pill-link"
+              >
+                <span className="pill-text">{link.name}</span>
+                <span className="pill-icon">{link.icon}</span>
+              </a>
+            ))}
+          </div>
+
+          {onOpenHandbook && (
+            <button 
+              onClick={onOpenHandbook}
+              className="hero-handbook-banner-btn"
             >
-              <span className="pill-text">{link.name}</span>
-              <span className="pill-icon">{link.icon}</span>
-            </a>
-          ))}
+              <span className="hero-handbook-pulse"></span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span>Explore DevOps & SRE Handbook (20 Deep-Dives)</span>
+            </button>
+          )}
         </div>
       </ScrollReveal>
 
@@ -99,7 +118,7 @@ const Hero = () => {
         <div className="projects-grid">
           {featuredProjects.map((project, index) => (
             <ScrollReveal key={project.id} delay={0.4 + (index * 0.1)}>
-              <ProjectCard project={project} />
+              <ProjectCard project={project} onOpenHandbook={onOpenHandbook} />
             </ScrollReveal>
           ))}
         </div>

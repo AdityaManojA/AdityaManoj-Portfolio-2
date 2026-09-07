@@ -4,9 +4,10 @@ import { SOCIAL_LINKS } from '../data';
 interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  onOpenHandbook?: () => void;
 }
 
-const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
+const Header = ({ activeTab, setActiveTab, onOpenHandbook }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavClick = (tab: string) => {
@@ -117,6 +118,23 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
               <span className="text-xl font-bold tracking-wide">{item.label}</span>
             </button>
           ))}
+          {onOpenHandbook && (
+            <button
+              onClick={() => {
+                setIsMenuOpen(false);
+                onOpenHandbook();
+              }}
+              className="mobile-nav-link flex items-center justify-start gap-4 w-48 mx-auto"
+              style={{ color: '#06b6d4' }}
+            >
+              <span style={{ transform: 'scale(1.2)', flexShrink: 0 }}>
+                <svg style={{ width: '1.4rem', height: '1.4rem' }} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </span>
+              <span className="text-xl font-bold tracking-wide">Handbook</span>
+            </button>
+          )}
           <a
             href={SOCIAL_LINKS.cv}
             target="_blank"
@@ -154,6 +172,19 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
                  {item.content}
                </button>
              ))}
+
+             {onOpenHandbook && (
+               <button
+                 onClick={onOpenHandbook}
+                 className="nav-handbook-pill"
+                 title="Open DevOps & SRE Handbook (20 Deep-Dives)"
+               >
+                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                 </svg>
+                 <span>Handbook</span>
+               </button>
+             )}
            </div>
 
            <div className="social-links-header">
