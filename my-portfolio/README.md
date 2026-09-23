@@ -9,8 +9,8 @@
 | Field | Value |
 | :--- | :--- |
 | **Full Name** | Aditya Manoj A |
-| **Current Title** | Software Development Engineer (SDE 1 & 2) at Cisco Systems India |
-| **Specializations** | Cloud-Native Infrastructure, Kubernetes, SRE Observability, Bare-Metal / Linux Kernel, High-Throughput PWAs, Daily AI Model Training |
+| **Current Title** | Full-Stack Developer & Systems Engineer |
+| **Specializations** | Full-Stack Web Development, High-Throughput PWAs, React / Next.js / TypeScript, Cloud Infrastructure, AI Model Integration |
 | **Location** | Bengaluru / Kerala, India |
 | **Email** | [adityamanoja@gmail.com](mailto:adityamanoja@gmail.com) |
 | **LinkedIn** | [linkedin.com/in/aditya-manoj-a-0a930b256](https://www.linkedin.com/in/aditya-manoj-a-0a930b256/) |
@@ -21,21 +21,21 @@
 ### Key Metrics
 - **Repositories**: 47+
 - **Years of Experience**: 5+
-- **SRE Mindset / Uptime**: 99.99%
+- **Production Delivery**: 100%
 
 ---
 
 ## 2. Bio & Narrative
 
 ### Hero Tagline
-> *"Software Development Engineer at **Cisco Systems**. Training AI models daily and making them easy to access, while architecting cloud-native infrastructure, Kubernetes clusters, resilient SRE telemetry stacks, and high-throughput PWAs."*
+> *"**Full-Stack Developer** & Systems Engineer. Building high-throughput progressive web apps, dynamic full-stack architectures, interactive 3D web experiences, and accessible trained AI models."*
 
 ### About Me (Long Bio)
-> *"Hi there, I'm Aditya Manoj. I'm a Software Development Engineer (SDE 1 & 2) at Cisco Systems India, specializing in cloud-native infrastructure, distributed systems, high availability, and enterprise networking.*
+> *"Hi there, I'm Aditya Manoj. I'm a **Full-Stack Developer & Systems Engineer** specializing in modern web applications, high-throughput Progressive Web Apps (PWAs), interactive frontend architectures, and robust backend services.*
 > 
-> *I train and fine-tune AI models on a daily basis, engineering production-grade datasets and making trained models easy to access and deploy across modern workflows.*
+> *I build scalable, responsive web experiences using React, Next.js, TypeScript, and HTML5 Canvas, backed by resilient cloud APIs (Node.js, Python, Firebase, AWS, GCP). I also train AI models, making them easy to access and integrate into real-world web applications.*
 > 
-> *I bridge physical silicon, bare-metal server engineering, and Linux kernel internals with modern multi-cloud automation (AWS/Azure/GCP), Kubernetes orchestration, SRE observability (Prometheus/Loki/Grafana), and resilient full-stack systems."*
+> *With strong foundations across both frontend finesse and backend systems engineering, I turn pure ideas into intuitive, production-grade digital platforms with sub-second performance."*
 
 ---
 
@@ -170,12 +170,6 @@
 ## 4. Career History & Timeline
 
 ```yaml
-- role: "Software Development Engineer (SDE 1 & 2)"
-  company: "Cisco Systems India"
-  location: "Bengaluru, India"
-  period: "Mar 2025 – Present"
-  description: "Progressed from Intern to SDE 1 to SDE 2 at Cisco within large-scale enterprise networking and cloud infrastructure. Engineered backend services and operational automation on AWS (EC2, Lambda, CloudWatch, S3) and Apache/NGINX systems. Spearheaded containerized CI/CD pipelines, high-availability service deployments, Cisco L2/L3 networking configurations, and mentored incoming engineering cohorts."
-
 - role: "Full-Stack PWA & Security Systems Engineer"
   company: "SBAFA Financial Enclave"
   location: "Remote"

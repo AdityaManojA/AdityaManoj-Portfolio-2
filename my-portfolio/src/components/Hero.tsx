@@ -71,7 +71,7 @@ const Hero = ({ onOpenHandbook }: HeroProps) => {
 
       <ScrollReveal delay={0.1}>
         <p className="hero-desc">
-          Software Development Engineer at <strong>Cisco Systems</strong>. Training AI models daily and <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">making them easy to access</a>, while architecting cloud-native infrastructure, Kubernetes clusters, resilient SRE telemetry stacks, and high-throughput PWAs.
+          <strong>Full-Stack Developer</strong> & Systems Engineer. Building high-throughput progressive web apps, dynamic full-stack architectures, interactive 3D web experiences, and <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">accessible trained AI models</a>.
         </p>
       </ScrollReveal>
 

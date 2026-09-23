@@ -14,15 +14,15 @@ const About = () => {
           <h3 className="skill-card-title" style={{ marginBottom: '1rem' }}>Who am I?</h3>
           <div className="section-text" style={{ marginBottom: 0 }}>
             <p>
-              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a Software Development Engineer (SDE 1 & 2) at <strong>Cisco Systems India</strong>, specializing in cloud-native infrastructure, distributed systems, high availability, and enterprise networking.
+              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a <strong>Full-Stack Developer & Systems Engineer</strong> specializing in modern web applications, high-throughput Progressive Web Apps (PWAs), interactive frontend architectures, and robust backend services.
             </p>
             <br/>
             <p>
-              I train and fine-tune AI models on a daily basis, engineering production-grade datasets and <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">making trained models easy to access</a> and deploy across modern workflows.
+              I build scalable, responsive web experiences using React, Next.js, TypeScript, and HTML5 Canvas, backed by resilient cloud APIs (Node.js, Python, Firebase, AWS, GCP). I also train AI models, <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">making them easy to access</a> and integrate into real-world web applications.
             </p>
             <br/>
             <p>
-              I bridge physical silicon, bare-metal server engineering, and Linux kernel internals with modern multi-cloud automation (AWS/Azure/GCP), Kubernetes orchestration, SRE observability (Prometheus/Loki/Grafana), and resilient full-stack systems.
+              With strong foundations across both frontend finesse and backend systems engineering, I turn pure ideas into intuitive, production-grade digital platforms with sub-second performance.
             </p>
           </div>
         </ScrollReveal>
@@ -39,8 +39,8 @@ const About = () => {
               <div className="stat-label">Years Experience</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">99.99%</div>
-              <div className="stat-label">SRE Mindset</div>
+              <div className="stat-number">100%</div>
+              <div className="stat-label">Production Delivery</div>
             </div>
           </div>
         </ScrollReveal>
@@ -50,20 +50,20 @@ const About = () => {
           <h3 className="skill-card-title">What I Do</h3>
           <div className="do-grid">
             <div className="do-item">
-              <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
-              <div className="do-title">Cloud Native & K8s</div>
+              <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+              <div className="do-title">Full-Stack Web & PWAs</div>
             </div>
             <div className="do-item">
-              <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-              <div className="do-title">SRE & Observability</div>
+              <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <div className="do-title">Frontend & 3D UI</div>
             </div>
             <div className="do-item">
               <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
-              <div className="do-title">Bare-Metal & Networks</div>
+              <div className="do-title">Backend & Cloud APIs</div>
             </div>
             <div className="do-item">
-              <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-              <div className="do-title">AI Training & Full-Stack</div>
+              <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              <div className="do-title">AI & Systems Tuning</div>
             </div>
           </div>
         </ScrollReveal>
