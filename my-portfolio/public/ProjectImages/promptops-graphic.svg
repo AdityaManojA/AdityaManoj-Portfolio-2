@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Dark Gradient -->
+    <linearGradient id="aiBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090F" />
+      <stop offset="50%" stop-color="#120E1F" />
+      <stop offset="100%" stop-color="#0A0814" />
+    </linearGradient>
+
+    <!-- Warm Amber to Electric Violet Gradient -->
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#FF9F68" />
+      <stop offset="45%" stop-color="#FF6B6B" />
+      <stop offset="100%" stop-color="#C084FC" />
+    </linearGradient>
+
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+
+    <!-- Radial Glows -->
+    <radialGradient id="aiGlowRight" cx="80%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#FF9F68" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#FF9F68" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="aiGlowLeft" cx="20%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.20" />
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Neural Matrix Dot Pattern -->
+    <pattern id="aiPattern" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="1" fill="#4C1D95" fill-opacity="0.6" />
+      <circle cx="36" cy="36" r="0.7" fill="#FF9F68" fill-opacity="0.3" />
+    </pattern>
+  </defs>
+
+  <!-- Background Layer -->
+  <rect width="960" height="600" fill="url(#aiBgGrad)" />
+  <rect width="960" height="600" fill="url(#aiGlowRight)" />
+  <rect width="960" height="600" fill="url(#aiGlowLeft)" />
+  <rect width="960" height="600" fill="url(#aiPattern)" />
+
+  <!-- Outer Frame -->
+  <rect x="24" y="24" width="912" height="552" rx="16" fill="none" stroke="#261E38" stroke-width="1.5" />
+  <rect x="24" y="24" width="912" height="552" rx="16" fill="none" stroke="#FF9F68" stroke-width="1" stroke-opacity="0.25" />
+
+  <!-- Tech Geometric Accents -->
+  <path d="M 24 50 L 50 24" stroke="#FF9F68" stroke-width="2" stroke-opacity="0.8" />
+  <path d="M 936 50 L 910 24" stroke="#C084FC" stroke-width="2" stroke-opacity="0.8" />
+  <path d="M 24 550 L 50 576" stroke="#C084FC" stroke-width="2" stroke-opacity="0.8" />
+  <path d="M 936 550 L 910 576" stroke="#FF9F68" stroke-width="2" stroke-opacity="0.8" />
+
+  <!-- Background Neural Network Visualization (Subtle Abstract Nodes) -->
+  <g opacity="0.35" transform="translate(560, 90)">
+    <!-- Layer 1 -->
+    <circle cx="80" cy="50" r="5" fill="#FF9F68" />
+    <circle cx="80" cy="130" r="5" fill="#FF9F68" />
+    <circle cx="80" cy="210" r="5" fill="#FF9F68" />
+    <circle cx="80" cy="290" r="5" fill="#FF9F68" />
+
+    <!-- Layer 2 -->
+    <circle cx="180" cy="80" r="6" fill="#C084FC" />
+    <circle cx="180" cy="170" r="6" fill="#C084FC" />
+    <circle cx="180" cy="260" r="6" fill="#C084FC" />
+
+    <!-- Layer 3 -->
+    <circle cx="280" cy="120" r="7" fill="#FF6B6B" />
+    <circle cx="280" cy="220" r="7" fill="#FF6B6B" />
+
+    <!-- Synapse Lines -->
+    <line x1="80" y1="50" x2="180" y2="80" stroke="#FF9F68" stroke-width="1" />
+    <line x1="80" y1="50" x2="180" y2="170" stroke="#8B5CF6" stroke-width="0.8" />
+    <line x1="80" y1="130" x2="180" y2="80" stroke="#8B5CF6" stroke-width="0.8" />
+    <line x1="80" y1="130" x2="180" y2="170" stroke="#FF9F68" stroke-width="1" />
+    <line x1="80" y1="210" x2="180" y2="170" stroke="#8B5CF6" stroke-width="0.8" />
+    <line x1="80" y1="210" x2="180" y2="260" stroke="#FF9F68" stroke-width="1" />
+    <line x1="80" y1="290" x2="180" y2="260" stroke="#8B5CF6" stroke-width="0.8" />
+
+    <line x1="180" y1="80" x2="280" y2="120" stroke="#C084FC" stroke-width="1.2" />
+    <line x1="180" y1="170" x2="280" y2="120" stroke="#FF6B6B" stroke-width="1" />
+    <line x1="180" y1="170" x2="280" y2="220" stroke="#C084FC" stroke-width="1.2" />
+    <line x1="180" y1="260" x2="280" y2="220" stroke="#FF6B6B" stroke-width="1" />
+  </g>
+
+  <!-- Top Metadata Bar -->
+  <g transform="translate(56, 68)">
+    <!-- Active Pipeline Badge -->
+    <rect x="0" y="0" width="310" height="34" rx="17" fill="#201335" stroke="#8B5CF6" stroke-width="1" stroke-opacity="0.5" />
+    <circle cx="20" cy="17" r="4" fill="#FF9F68">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="34" y="22" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="700" fill="#FF9F68" letter-spacing="1.5">DAILY AUTO-TRAINED // REPO</text>
+
+    <!-- PyTorch acceleration pill -->
+    <rect x="620" y="0" width="228" height="34" rx="17" fill="#181324" stroke="#4C1D95" stroke-width="1" />
+    <text x="734" y="22" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="600" fill="#D8B4FE" letter-spacing="1">PYTORCH · TOKEN OPTIMIZED</text>
+  </g>
+
+  <!-- Central Graphic Text Section -->
+  <g transform="translate(56, 140)">
+    <!-- Category Overline -->
+    <text x="2" y="32" font-family="'Inter', -apple-system, sans-serif" font-size="15" font-weight="800" fill="#FF9F68" letter-spacing="4">APPLIED AI &amp; FOUNDATION MODELS</text>
+
+    <!-- Main Title Line 1 -->
+    <text x="0" y="100" font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" font-size="58" font-weight="900" fill="#FFFFFF" letter-spacing="-1">PROMPT-OPS</text>
+
+    <!-- Main Title Line 2 (Glowing Amber-Purple Gradient) -->
+    <text x="0" y="168" font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" font-size="58" font-weight="900" fill="url(#aiGradient)" letter-spacing="-1">BLUEPRINTS</text>
+
+    <!-- Subtitle Line 3 -->
+    <text x="2" y="226" font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" font-size="32" font-weight="800" fill="#E2E8F0" letter-spacing="3">&amp; AI DATASET ENGINE</text>
+
+    <!-- Brief description -->
+    <text x="2" y="270" font-family="'Inter', -apple-system, sans-serif" font-size="15" font-weight="500" fill="#A78BFA" letter-spacing="0.5">Automated Fine-Tuning Blueprints · Zero-Shot Pipelines · Daily Training CI/CD</text>
+  </g>
+
+  <!-- Pipeline Badges Bar -->
+  <g transform="translate(56, 442)">
+    <rect x="0" y="0" width="848" height="42" rx="10" fill="#151024" stroke="#2D1F47" stroke-width="1" />
+    
+    <!-- Token Engine Feature 1 -->
+    <text x="24" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#FF9F68">● DAILY DATASETS</text>
+    <text x="175" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6B21A8">→</text>
+
+    <!-- Feature 2 -->
+    <text x="210" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#C084FC">● TOKEN OPTIMIZATION</text>
+    <text x="390" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6B21A8">→</text>
+
+    <!-- Feature 3 -->
+    <text x="425" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#FF9F68">● GITHUB ACTIONS CI/CD</text>
+    <text x="635" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6B21A8">→</text>
+
+    <!-- Feature 4 -->
+    <text x="668" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#34D399">● ZERO-SHOT INFERENCE</text>
+  </g>
+
+  <!-- Bottom Metadata & Author Bar -->
+  <g transform="translate(56, 524)">
+    <text x="0" y="16" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#7C3AED" letter-spacing="1">MAINTAINED BY </text>
+    <text x="115" y="16" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">ADITYA MANOJ</text>
+    <text x="235" y="16" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6B7280">// OPEN-SOURCE AI ENGINE</text>
+
+    <!-- Interactive Pill -->
+    <rect x="670" y="-4" width="178" height="28" rx="14" fill="#FF9F68" fill-opacity="0.12" stroke="#FF9F68" stroke-width="1" />
+    <text x="759" y="14" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#FF9F68" letter-spacing="1">GITHUB REPOSITORY →</text>
+  </g>
+</svg>

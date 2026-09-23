@@ -1,15 +1,19 @@
+import { useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
 import { SOCIAL_LINKS, PROJECTS_DATA } from '../data';
 import ProjectCard from './ProjectCard';
 import ScrollReveal from './ScrollReveal';
+import ExploreModal from './ExploreModal';
 
 interface HeroProps {
   onOpenHandbook?: () => void;
+  onNavigateTab?: (tab: string) => void;
 }
 
-const Hero = ({ onOpenHandbook }: HeroProps) => {
-  // Get the first 3 projects for the featured section
-  const featuredProjects = PROJECTS_DATA.slice(0, 3);
+const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
+  // Show up to 6 featured projects on the home screen
+  const featuredProjects = PROJECTS_DATA.slice(0, 6);
+  const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
 
   const socialLinks = [
     { 
@@ -54,7 +58,7 @@ const Hero = ({ onOpenHandbook }: HeroProps) => {
     <>
       <ScrollReveal>
         <div className="hero-container">
-            <div className="hero-row">
+          <div className="hero-row">
             <h1 className="hero-text">Hello</h1>
             <DarkModeToggle />
             <h1 className="hero-text">I'm Aditya.</h1>
@@ -104,12 +108,38 @@ const Hero = ({ onOpenHandbook }: HeroProps) => {
         
         <div className="projects-grid">
           {featuredProjects.map((project, index) => (
-            <ScrollReveal key={project.id} delay={0.4 + (index * 0.1)}>
+            <ScrollReveal key={project.id} delay={0.2 + (index * 0.08)}>
               <ProjectCard project={project} onOpenHandbook={onOpenHandbook} />
             </ScrollReveal>
           ))}
         </div>
+
+        {/* Explore More CTA */}
+        <ScrollReveal delay={0.4}>
+          <div className="explore-more-section">
+            <button
+              onClick={() => setIsExploreModalOpen(true)}
+              className="explore-more-btn group"
+              aria-label="Explore more projects and services"
+            >
+              <span>Explore more</span>
+              <span className="explore-arrow">→</span>
+            </button>
+          </div>
+        </ScrollReveal>
       </section>
+
+      {/* Explore More Popup Modal */}
+      <ExploreModal
+        isOpen={isExploreModalOpen}
+        onClose={() => setIsExploreModalOpen(false)}
+        onSelectOption={(tab) => {
+          setIsExploreModalOpen(false);
+          if (onNavigateTab) {
+            onNavigateTab(tab);
+          }
+        }}
+      />
     </>
   );
 };

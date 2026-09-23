@@ -27,14 +27,14 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: 1,
-    title: "GLIA — High-Throughput Event OS & PWA",
+    id: 14,
+    title: "SBAFA Financial Enclave",
     category: "Projects",
-    year: "2025",
-    description: "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
-    tags: ["React", "Firebase", "PWA", "Google Maps API"],
-    image: "./ProjectImages/GLIA.png",
-    link: "https://ian2025.in/"
+    year: "2026",
+    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
+    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
+    image: "./ProjectImages/SBAFA.png",
+    link: "https://sbafa-ft.web.app/landing"
   },
   {
     id: 8,
@@ -57,14 +57,14 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://indzita-biotech-007.web.app/#overview"
   },
   {
-    id: 14,
-    title: "SBAFA Financial Enclave",
+    id: 1,
+    title: "GLIA — High-Throughput Event OS & PWA",
     category: "Projects",
-    year: "2026",
-    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
-    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
-    image: "./ProjectImages/SBAFA.png",
-    link: "https://sbafa-ft.web.app/landing"
+    year: "2025",
+    description: "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
+    tags: ["React", "Firebase", "PWA", "Google Maps API"],
+    image: "./ProjectImages/GLIA.png",
+    link: "https://ian2025.in/"
   },
   {
     id: 11,
@@ -93,7 +93,7 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     description: "An exhaustive technical engineering reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS/C-states), Cisco networking (VLANs, LACP), and Linux kernel internals (clone, namespaces, cgroups, OverlayFS) with Kubernetes control plane orchestration, Prometheus-Loki-Grafana observability, and 20 low-level interview deep-dives.",
     tags: ["Kubernetes", "SRE", "Linux Kernel", "Terraform", "Prometheus", "Cisco"],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    image: "./ProjectImages/handbook-graphic.svg",
     link: "#handbook",
     isHandbook: true
   },
@@ -114,7 +114,7 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     description: "Comprehensive repository of daily-trained AI datasets, fine-tuning blueprints, and token-optimized pipelines ready for immediate zero-shot, few-shot, and fine-tuning workloads across open-source and proprietary foundation models.",
     tags: ["Python", "PyTorch", "AI Acceleration", "GitHub Actions"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    image: "./ProjectImages/promptops-graphic.svg",
     link: "https://github.com/AdityaManojA/prompt-ops-blueprints"
   },
   {

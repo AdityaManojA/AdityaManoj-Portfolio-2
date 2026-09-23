@@ -25,6 +25,11 @@ export default function App() {
     setIsHandbookOpen(true);
   };
 
+  const handleNavigateTab = (tab: string) => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'Projects':
@@ -43,7 +48,12 @@ export default function App() {
         return <Contact />;
       case 'Home':
       default:
-        return <Hero onOpenHandbook={() => handleOpenHandbook('foundations')} />;
+        return (
+          <Hero 
+            onOpenHandbook={() => handleOpenHandbook('foundations')} 
+            onNavigateTab={handleNavigateTab}
+          />
+        );
     }
   };
 

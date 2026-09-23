@@ -1,0 +1,296 @@
+{
+  "communities": {
+    "0": [
+      "eslint_config",
+      "package",
+      "package_dependencies",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_name",
+      "package_private",
+      "package_type",
+      "package_version",
+      "ref_autoprefixer",
+      "ref_baseline_browser_mapping",
+      "ref_eslint",
+      "ref_eslint_js",
+      "ref_eslint_plugin_react_hooks",
+      "ref_eslint_plugin_react_refresh",
+      "ref_globals",
+      "ref_postcss",
+      "ref_react_dom",
+      "ref_tailwindcss",
+      "ref_types_node",
+      "ref_types_react",
+      "ref_types_react_dom",
+      "ref_typescript",
+      "ref_typescript_eslint",
+      "ref_vite",
+      "ref_vitejs_plugin_react",
+      "vite_config"
+    ],
+    "1": [
+      "ref_react",
+      "src_app",
+      "src_app_app",
+      "src_components_about",
+      "src_components_about_about",
+      "src_components_gallery",
+      "src_components_gallery_gallery",
+      "src_components_header",
+      "src_components_header_header",
+      "src_components_header_headerprops",
+      "src_components_scrollreveal",
+      "src_components_scrollreveal_scrollreveal",
+      "src_components_scrollreveal_scrollrevealprops",
+      "src_components_scrolltotop",
+      "src_components_scrolltotop_scrolltotop",
+      "src_components_services",
+      "src_components_services_services",
+      "src_components_skills",
+      "src_components_skills_skills",
+      "src_components_timeline",
+      "src_components_timeline_timeline",
+      "src_data_index_gallery_data",
+      "src_data_index_services_data",
+      "src_data_index_skills_data",
+      "src_data_index_timeline_data",
+      "src_index",
+      "src_main"
+    ],
+    "2": [
+      "src_components_contact",
+      "src_components_contact_contact",
+      "src_components_darkmodetoggle",
+      "src_components_darkmodetoggle_darkmodetoggle",
+      "src_components_footer",
+      "src_components_footer_detailedfooter",
+      "src_components_footer_simplefooter",
+      "src_components_hero",
+      "src_components_hero_hero",
+      "src_components_hero_heroprops",
+      "src_components_projectcard",
+      "src_components_projectcard_projectcard",
+      "src_components_projectcard_projectcardprops",
+      "src_components_projects",
+      "src_components_projects_projects",
+      "src_components_projects_projectsprops",
+      "src_data_images_aditya",
+      "src_data_index",
+      "src_data_index_images",
+      "src_data_index_project",
+      "src_data_index_projects_data",
+      "src_data_index_social_links"
+    ],
+    "3": [
+      "tsconfig_app",
+      "tsconfig_app_compileroptions",
+      "tsconfig_app_compileroptions_allowimportingtsextensions",
+      "tsconfig_app_compileroptions_erasablesyntaxonly",
+      "tsconfig_app_compileroptions_jsx",
+      "tsconfig_app_compileroptions_lib",
+      "tsconfig_app_compileroptions_module",
+      "tsconfig_app_compileroptions_moduledetection",
+      "tsconfig_app_compileroptions_moduleresolution",
+      "tsconfig_app_compileroptions_noemit",
+      "tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_app_compileroptions_nouncheckedsideeffectimports",
+      "tsconfig_app_compileroptions_nounusedlocals",
+      "tsconfig_app_compileroptions_nounusedparameters",
+      "tsconfig_app_compileroptions_skiplibcheck",
+      "tsconfig_app_compileroptions_strict",
+      "tsconfig_app_compileroptions_target",
+      "tsconfig_app_compileroptions_tsbuildinfofile",
+      "tsconfig_app_compileroptions_types",
+      "tsconfig_app_compileroptions_usedefineforclassfields",
+      "tsconfig_app_compileroptions_verbatimmodulesyntax",
+      "tsconfig_app_include"
+    ],
+    "4": [
+      "tsconfig_node",
+      "tsconfig_node_compileroptions",
+      "tsconfig_node_compileroptions_allowimportingtsextensions",
+      "tsconfig_node_compileroptions_erasablesyntaxonly",
+      "tsconfig_node_compileroptions_lib",
+      "tsconfig_node_compileroptions_module",
+      "tsconfig_node_compileroptions_moduledetection",
+      "tsconfig_node_compileroptions_moduleresolution",
+      "tsconfig_node_compileroptions_noemit",
+      "tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_node_compileroptions_nouncheckedsideeffectimports",
+      "tsconfig_node_compileroptions_nounusedlocals",
+      "tsconfig_node_compileroptions_nounusedparameters",
+      "tsconfig_node_compileroptions_skiplibcheck",
+      "tsconfig_node_compileroptions_strict",
+      "tsconfig_node_compileroptions_target",
+      "tsconfig_node_compileroptions_tsbuildinfofile",
+      "tsconfig_node_compileroptions_types",
+      "tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "tsconfig_node_include"
+    ],
+    "5": [
+      "package_devdependencies",
+      "package_devdependencies_autoprefixer",
+      "package_devdependencies_baseline_browser_mapping",
+      "package_devdependencies_eslint",
+      "package_devdependencies_eslint_js",
+      "package_devdependencies_eslint_plugin_react_hooks",
+      "package_devdependencies_eslint_plugin_react_refresh",
+      "package_devdependencies_globals",
+      "package_devdependencies_postcss",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "package_devdependencies_typescript_eslint",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitejs_plugin_react"
+    ],
+    "6": [
+      "src_components_handbookmodal",
+      "src_components_handbookmodal_handbookmodal",
+      "src_components_handbookmodal_handbookmodalprops",
+      "src_data_handbookdata",
+      "src_data_handbookdata_handbook_foundations",
+      "src_data_handbookdata_handbook_meta",
+      "src_data_handbookdata_handbook_questions",
+      "src_data_handbookdata_handbookquestion",
+      "src_data_handbookdata_handbooksection"
+    ],
+    "7": [
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_preview"
+    ],
+    "8": [
+      "tsconfig",
+      "tsconfig_files",
+      "tsconfig_references"
+    ],
+    "9": [
+      "tailwind_config",
+      "tailwindcss"
+    ],
+    "10": [
+      "postcss_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09116809116809117,
+    "1": 0.13675213675213677,
+    "2": 0.16017316017316016,
+    "3": 0.09090909090909091,
+    "4": 0.1,
+    "5": 0.11764705882352941,
+    "6": 0.3333333333333333,
+    "7": 0.4,
+    "8": 0.6666666666666666,
+    "9": 1.0,
+    "10": 1.0
+  },
+  "gods": [
+    {
+      "id": "tsconfig_app_compileroptions",
+      "label": "compilerOptions",
+      "degree": 20
+    },
+    {
+      "id": "tsconfig_node_compileroptions",
+      "label": "compilerOptions",
+      "degree": 18
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "degree": 10
+    },
+    {
+      "id": "src_components_scrollreveal_scrollreveal",
+      "label": "ScrollReveal()",
+      "degree": 9
+    },
+    {
+      "id": "src_data_index_social_links",
+      "label": "SOCIAL_LINKS",
+      "degree": 5
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 5
+    },
+    {
+      "id": "src_data_index_images",
+      "label": "IMAGES",
+      "degree": 4
+    },
+    {
+      "id": "src_data_index_project",
+      "label": "Project",
+      "degree": 3
+    },
+    {
+      "id": "src_components_projectcard_projectcard",
+      "label": "ProjectCard()",
+      "degree": 3
+    },
+    {
+      "id": "src_data_index_skills_data",
+      "label": "SKILLS_DATA",
+      "degree": 3
+    }
+  ],
+  "surprises": [
+    {
+      "source": "ProjectCardProps",
+      "target": "Project",
+      "source_files": [
+        "src/components/ProjectCard.tsx",
+        "src/data/index.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `react` connect `App.tsx` to `package.json`, `index.ts`, `HandbookModal.tsx`?",
+      "why": "High betweenness centrality (0.240) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `devDependencies` connect `devDependencies` to `package.json`?",
+      "why": "High betweenness centrality (0.132) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `scripts` connect `scripts` to `package.json`?",
+      "why": "High betweenness centrality (0.035) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `HeaderProps`, `ScrollRevealProps`, `HeroProps` to the rest of the system?",
+      "why": "80 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `package.json` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09116809116809117 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `App.tsx` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13675213675213677 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `compilerOptions` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

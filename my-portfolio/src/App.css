@@ -2825,4 +2825,303 @@ body {
   .handbook-questions-list {
     padding: 1.25rem;
   }
-}
+}
+
+/* =========================================================================
+   EXPLORE MORE SECTION & MODAL
+   ========================================================================= */
+.explore-more-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.explore-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.85rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--primary-orange);
+  background: rgba(255, 159, 104, 0.08);
+  border: 1.5px solid rgba(255, 159, 104, 0.35);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(255, 159, 104, 0.08);
+}
+
+.explore-more-btn:hover {
+  background: var(--primary-orange);
+  color: #ffffff;
+  border-color: var(--primary-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 159, 104, 0.25);
+}
+
+.explore-arrow {
+  display: inline-block;
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.explore-more-btn:hover .explore-arrow {
+  transform: translateX(4px);
+}
+
+/* Explore Modal Backdrop */
+.explore-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  animation: modal-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Explore Modal Container */
+.explore-modal-container {
+  background: #ffffff;
+  color: var(--text-light);
+  width: 100%;
+  max-width: 46rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border-light);
+  padding: 2.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  animation: modal-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.dark .explore-modal-container {
+  background: #141418;
+  border-color: #272832;
+  color: var(--text-dark);
+}
+
+/* Header */
+.explore-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.explore-modal-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-orange);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.explore-modal-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.explore-modal-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted-light);
+  margin: 0.35rem 0 0 0;
+}
+
+.dark .explore-modal-subtitle {
+  color: #94a3b8;
+}
+
+.explore-close-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.dark .explore-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #2e2f38;
+}
+
+.explore-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
+}
+
+.dark .explore-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Cards Grid */
+.explore-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Explore Card */
+.explore-card {
+  border-radius: 1.25rem;
+  border: 1.5px solid var(--border-light);
+  background: #fcfcfd;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  outline: none;
+}
+
+.dark .explore-card {
+  background: #1a1b22;
+  border-color: #272834;
+}
+
+.explore-card:hover,
+.explore-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--primary-orange);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
+}
+
+.dark .explore-card:hover,
+.dark .explore-card:focus-visible {
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+  border-color: var(--primary-orange);
+}
+
+/* Icon Wrappers */
+.explore-card-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.explore-card:hover .explore-card-icon-wrapper {
+  transform: scale(1.08);
+}
+
+.explore-card-icon-wrapper.projects-theme {
+  background: rgba(255, 159, 104, 0.15);
+  color: var(--primary-orange);
+  border: 1px solid rgba(255, 159, 104, 0.3);
+}
+
+.explore-card-icon-wrapper.services-theme {
+  background: rgba(56, 189, 248, 0.15);
+  color: #0284c7;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.dark .explore-card-icon-wrapper.services-theme {
+  color: #38bdf8;
+}
+
+/* Card Content */
+.explore-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.explore-card-top {
+  margin-bottom: 0.5rem;
+}
+
+.explore-card-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-muted-light);
+  display: inline-block;
+}
+
+.dark .explore-card-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+.explore-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0.5rem 0 0 0;
+  letter-spacing: -0.01em;
+}
+
+.explore-card-desc {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-muted-light);
+  margin: 0.65rem 0 1.5rem 0;
+  flex-grow: 1;
+}
+
+.dark .explore-card-desc {
+  color: #94a3b8;
+}
+
+/* Card Bottom Action */
+.explore-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  transition: gap 0.2s ease;
+}
+
+.explore-card-arrow {
+  transition: transform 0.25s ease;
+}
+
+.explore-card:hover .explore-card-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 680px) {
+  .explore-modal-container {
+    padding: 1.5rem;
+  }
+
+  .explore-modal-title {
+    font-size: 1.4rem;
+  }
+
+  .explore-modal-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
