@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HANDBOOK_META, HANDBOOK_FOUNDATIONS, HANDBOOK_QUESTIONS, HandbookQuestion } from '../data/handbookData';
+import { HANDBOOK_META, HANDBOOK_FOUNDATIONS, HANDBOOK_QUESTIONS, type HandbookQuestion } from '../data/handbookData';
 
 interface HandbookModalProps {
   isOpen: boolean;

@@ -118,7 +118,7 @@ const Header = ({ activeTab, setActiveTab, onOpenHandbook }: HeaderProps) => {
               <span className="text-xl font-bold tracking-wide">{item.label}</span>
             </button>
           ))}
-          {onOpenHandbook && (
+          {activeTab === 'Projects' && onOpenHandbook && (
             <button
               onClick={() => {
                 setIsMenuOpen(false);
@@ -173,7 +173,7 @@ const Header = ({ activeTab, setActiveTab, onOpenHandbook }: HeaderProps) => {
                </button>
              ))}
 
-             {onOpenHandbook && (
+             {activeTab === 'Projects' && onOpenHandbook && (
                <button
                  onClick={onOpenHandbook}
                  className="nav-handbook-pill"

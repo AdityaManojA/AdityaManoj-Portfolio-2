@@ -10,7 +10,6 @@ interface ProjectsProps {
 const Projects = ({ onOpenHandbook }: ProjectsProps) => {
   const [activeFilter, setActiveFilter] = useState('All');
   
-  // Dynamically generate categories from the data
   const categories = ['All', ...Array.from(new Set(PROJECTS_DATA.map(project => project.category)))];
 
   const filteredProjects = useMemo(() => {

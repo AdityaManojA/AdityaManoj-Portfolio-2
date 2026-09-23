@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SKILLS_DATA } from '../data';
 import ScrollReveal from './ScrollReveal';
 
@@ -37,7 +37,7 @@ const Skills = () => {
       </div>
 
       <div className="skills-bento">
-        {filteredData.map((category, index) => (
+        {filteredData.map((category) => (
           <div key={category.title} className="skill-card">
             <div className="skill-card-header">
               <div className="flex items-center justify-between">

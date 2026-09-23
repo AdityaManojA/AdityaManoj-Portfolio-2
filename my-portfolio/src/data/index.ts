@@ -27,6 +27,66 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 1,
+    title: "GLIA — High-Throughput Event OS & PWA",
+    category: "Projects",
+    year: "2025",
+    description: "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
+    tags: ["React", "Firebase", "PWA", "Google Maps API"],
+    image: "./ProjectImages/GLIA.png",
+    link: "https://ian2025.in/"
+  },
+  {
+    id: 8,
+    title: "ThreadPath Collective",
+    category: "Projects",
+    year: "2025",
+    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Threadpath.png",
+    link: "https://threadpathcollective.ca/"
+  },
+  {
+    id: 13,
+    title: "IndZita Biotech",
+    category: "Projects",
+    year: "2026",
+    description: "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
+    tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
+    image: "./ProjectImages/Indzita.png",
+    link: "https://indzita-biotech-007.web.app/#overview"
+  },
+  {
+    id: 14,
+    title: "SBAFA Financial Enclave",
+    category: "Projects",
+    year: "2026",
+    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
+    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
+    image: "./ProjectImages/SBAFA.png",
+    link: "https://sbafa-ft.web.app/landing"
+  },
+  {
+    id: 11,
+    title: "The Whiskey Business",
+    category: "Projects",
+    year: "2025",
+    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Whisky.png",
+    link: "https://thewhiskeybusiness-3e639.web.app/"
+  },
+  {
+    id: 15,
+    title: "Rochas Cafe",
+    category: "Website Designs",
+    year: "2025",
+    description: "Artisanal specialty coffee & patisserie web showcase. Engineered with responsive layout architecture, dynamic product carousels, smooth interactive navigation, fluid aesthetic styling, and high-performance CDN deployment.",
+    tags: ["React", "JavaScript", "CSS3", "HTML5"],
+    image: "./ProjectImages/Rochas.png",
+    link: "https://rochascafe.netlify.app/#"
+  },
+  {
     id: 100,
     title: "The DevOps, SRE & Cloud Infrastructure Handbook",
     category: "Projects",
@@ -48,54 +108,14 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://travelanimator.com/"
   },
   {
-    id: 8,
-    title: "ThreadPath Collective",
-    category: "Projects",
-    year: "2025",
-    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Threadpath.png",
-    link: "https://threadpathcollective.ca/"
-  },
-  {
-    id: 1,
-    title: "IAN-2025 Event Management System",
-    category: "Projects",
-    year: "2025",
-    description: "1.2 Million Database Reads. 2,275 Meals. Zero Downtime. A full-scale Event Operating System (PWA) built for the XLIII Annual Meeting of the Indian Academy of Neurosciences. Features real-time scheduling, digital QR food coupons, and live logistics for global delegates from MIT, Cambridge, and Riken.",
-    tags: ["React", "Firebase", "PWA", "Google Maps API"],
-    image: "./ProjectImages/GLIA.png",
-    link: "https://ian2025.in/"
-  },
-  {
-    id: 11,
-    title: "The Whiskey Business",
-    category: "Projects",
-    year: "2025",
-    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Whisky.png",
-    link: "https://thewhiskeybusiness-3e639.web.app/"
-  },
-  {
-    id: 10,
-    title: "ethKochi",
-    category: "Website Designs",
-    year: "2025",
-    description: "Official portal for ethKochi — an Ethereum hackathon in God's Own Country. Designed with a quirky meme-inspired cyber aesthetic, dynamic countdown timer, background audio/video loops, and live conference registration.",
-    tags: ["Next.js", "React", "Tailwind CSS", "Ethereum"],
-    image: "./ProjectImages/ethkochi.png",
-    link: "https://ethkochi.in/"
-  },
-  {
-    id: 7,
-    title: "Kofe Cafe",
-    category: "Website Designs",
-    year: "2025",
-    description: "A retro-themed cafe landing page with bold typography and warm aesthetics. Features an animated menu showcase, smooth scroll interactions, and a hand-crafted visual identity inspired by vintage coffee culture.",
-    tags: ["React", "JavaScript", "CSS", "Vercel"],
-    image: "./ProjectImages/KofeCafe.png",
-    link: "https://project-i79fi.vercel.app/"
+    id: 12,
+    title: "Prompt-Ops Blueprints & AI Dataset Engine",
+    category: "CS Projects",
+    year: "2026",
+    description: "Comprehensive repository of daily-trained AI datasets, fine-tuning blueprints, and token-optimized pipelines ready for immediate zero-shot, few-shot, and fine-tuning workloads across open-source and proprietary foundation models.",
+    tags: ["Python", "PyTorch", "AI Acceleration", "GitHub Actions"],
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    link: "https://github.com/AdityaManojA/prompt-ops-blueprints"
   },
   {
     id: 2,
@@ -196,6 +216,18 @@ export const TIMELINE_DATA = [
     location: "Cisco Systems India · Bengaluru" 
   },
   { 
+    year: "Jan 2026 – Present", 
+    title: "Full-Stack PWA & Security Systems Engineer", 
+    description: "Architected a zero-knowledge, offline-first PWA for SBAFA Financial Enclave utilizing Dexie.js (IndexedDB) and Firebase Firestore, orchestrating bi-directional reactive synchronization and conflict-free cross-device data reconciliation for 1,000+ ledger records. Engineered an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI) and automated weekly OAuth2 Gmail pipeline with WebAuthn biometric passkeys.", 
+    location: "SBAFA Financial Enclave · Remote" 
+  },
+  { 
+    year: "Jul 2026 – Sep 2026", 
+    title: "Lead Frontend & Graphics Engineer", 
+    description: "Architected a dual-engine 3D molecular visualization suite implementing Catmull-Rom spline interpolation & spherical Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes. Synthesized a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS and engineered a real-time thermal PCR Virtual Lab simulator, deployed via Vite and Firebase Hosting.", 
+    location: "IndZita Biotech · Remote" 
+  },
+  { 
     year: "Apr 2026 – Jun 2026", 
     title: "Frontend & DevOps Engineer (Contract)", 
     description: "Engineered responsive inventory tracking interface using React and Framer Motion with dynamic coordinate layouts. Managed production deployments using AWS Cloud Functions and Amazon CloudFront (CDN) for low-latency global delivery.", 
@@ -260,8 +292,8 @@ export const SERVICES_DATA = [
     icon: "network" 
   },
   { 
-    title: "GPU Infrastructure & AI Acceleration", 
-    description: "NVIDIA driver integration, CUDA toolkit configuration, NVIDIA Container Toolkit (nvidia-ctk), and GPU Operator deployment for accelerated AI model serving with PyTorch, vLLM, and Triton.", 
+    title: "GPU Infrastructure & AI Model Engineering", 
+    description: "Daily AI model training, fine-tuning, and making models and datasets easy to access. NVIDIA driver integration, CUDA toolkit configuration, NVIDIA Container Toolkit (nvidia-ctk), and GPU Operator deployment for accelerated AI model serving with PyTorch, vLLM, and Triton.", 
     icon: "cpu" 
   },
   { 
@@ -370,6 +402,7 @@ export const SKILLS_DATA = [
     skills: [
       { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "Vite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" },
       { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
       { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
       { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
@@ -382,6 +415,8 @@ export const SKILLS_DATA = [
       { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
       { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
       { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "IndexedDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "Dexie.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
       { name: "Firestore", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }

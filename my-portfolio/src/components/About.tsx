@@ -18,6 +18,10 @@ const About = () => {
             </p>
             <br/>
             <p>
+              I train and fine-tune AI models on a daily basis, engineering production-grade datasets and <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">making trained models easy to access</a> and deploy across modern workflows.
+            </p>
+            <br/>
+            <p>
               I bridge physical silicon, bare-metal server engineering, and Linux kernel internals with modern multi-cloud automation (AWS/Azure/GCP), Kubernetes orchestration, SRE observability (Prometheus/Loki/Grafana), and resilient full-stack systems.
             </p>
           </div>
@@ -59,7 +63,7 @@ const About = () => {
             </div>
             <div className="do-item">
               <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-              <div className="do-title">Full-Stack & Applied AI</div>
+              <div className="do-title">AI Training & Full-Stack</div>
             </div>
           </div>
         </ScrollReveal>
