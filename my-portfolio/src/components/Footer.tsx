@@ -41,6 +41,6 @@ export const DetailedFooter = () => {
 
 export const SimpleFooter = () => (
   <footer className="simple-footer">
-     <p className="simple-footer-text">© 2025 Portfolio. All rights reserved.</p>
+     <p className="simple-footer-text">© 2026 Aditya Manoj. All rights reserved.</p>
   </footer>
 );

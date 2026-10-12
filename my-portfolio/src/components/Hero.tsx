@@ -5,22 +5,27 @@ import ProjectCard from './ProjectCard';
 import ScrollReveal from './ScrollReveal';
 import ExploreModal from './ExploreModal';
 
+import FlagshipShowcase from './FlagshipShowcase';
+
 interface HeroProps {
   onOpenHandbook?: () => void;
   onNavigateTab?: (tab: string) => void;
 }
 
 const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
-  // Show up to 6 featured projects on the home screen
-  const featuredProjects = PROJECTS_DATA.slice(0, 6);
   const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
+
+  // Curated systems for the Uniform Folder Drawer (ALFRED, The Whiskey Business, ThreadPath Collective)
+  const selectedSystems = [16, 11, 8]
+    .map(id => PROJECTS_DATA.find(p => p.id === id))
+    .filter(Boolean) as typeof PROJECTS_DATA;
 
   const socialLinks = [
     { 
       name: 'LinkedIn', 
       url: SOCIAL_LINKS.linkedin,
       icon: (
-        <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+        <svg fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
         </svg>
       )
@@ -29,7 +34,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
       name: 'GitHub', 
       url: SOCIAL_LINKS.github,
       icon: (
-        <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+        <svg fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
         </svg>
       )
@@ -38,7 +43,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
       name: 'Email', 
       url: SOCIAL_LINKS.email,
       icon: (
-        <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+        <svg fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
           <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
         </svg>
       )
@@ -47,7 +52,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
       name: 'Resume', 
       url: SOCIAL_LINKS.cv,
       icon: (
-        <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+        <svg fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
           <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
         </svg>
       )
@@ -55,76 +60,243 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
   ];
 
   return (
-    <>
-      <ScrollReveal>
-        <div className="hero-container">
-          <div className="hero-row">
-            <h1 className="hero-text">Hello</h1>
-            <DarkModeToggle />
-            <h1 className="hero-text">I'm Aditya.</h1>
+    <div className="anti-slop-landing">
+      {/* 1. Executive Editorial Hero */}
+      <section className="hero-editorial-section">
+        <ScrollReveal delay={0.08}>
+          <div className="hero-container">
+            <div className="hero-row">
+              <h1 className="hero-text">Hello</h1>
+              <DarkModeToggle />
+              <h1 className="hero-text">I'm Aditya.</h1>
+            </div>
+            <div className="hero-row">
+              <h1 className="hero-text">I design &</h1>
+            </div>
+            <div className="hero-row">
+              <h1 className="hero-text">develop</h1>
+              <h1 className="hero-text">systems</h1>
+            </div>
           </div>
-          <div className="hero-row">
-            <h1 className="hero-text">I design &</h1>
-          </div>
-          <div className="hero-row">
-            <h1 className="hero-text">develop</h1>
-            <h1 className="hero-text">systems</h1>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal delay={0.1}>
-        <p className="hero-desc">
-          <strong>Full-Stack Developer</strong> & Systems Engineer. Building high-throughput progressive web apps, dynamic full-stack architectures, interactive 3D web experiences, and <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">accessible trained AI models</a>.
-        </p>
-      </ScrollReveal>
-
-      <ScrollReveal delay={0.2}>
-        <div className="hero-actions-container">
-          <div className="social-pills">
-            {socialLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.url}
-                target={link.name === 'Email' ? undefined : "_blank"}
-                rel={link.name === 'Email' ? undefined : "noreferrer"}
-                className="pill-link"
-              >
-                <span className="pill-text">{link.name}</span>
-                <span className="pill-icon">{link.icon}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </ScrollReveal>
-
-      {/* Featured Projects Section */}
-      <section className="section-container" style={{ marginTop: '4rem' }}>
-        <ScrollReveal delay={0.3}>
-          <h2 className="section-title" style={{ fontSize: '2.5rem', textAlign: 'center', marginBottom: '3rem' }}>
-            Featured Work
-          </h2>
         </ScrollReveal>
-        
+
+        <ScrollReveal delay={0.16}>
+          <p className="hero-desc-editorial">
+            Full-Stack & Systems Engineer. Architect of{' '}
+            <a
+              href="https://github.com/AdityaManojA/ALFRED-MK"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#FF9F68] hover:underline font-semibold"
+            >
+              ALFRED
+            </a>
+            . Building high-throughput web applications, interactive 3D runtimes, and{' '}
+            <a
+              href="https://github.com/AdityaManojA/prompt-ops-blueprints"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#FF9F68] hover:underline font-semibold"
+            >
+              sovereign AI models
+            </a>
+            .
+          </p>
+        </ScrollReveal>
+
+        {/* Action Pills */}
+        <ScrollReveal delay={0.24}>
+          <div className="hero-actions-container">
+            <div className="social-pills">
+              {socialLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.url}
+                  target={link.name === 'Email' ? undefined : "_blank"}
+                  rel={link.name === 'Email' ? undefined : "noreferrer"}
+                  className="pill-link"
+                >
+                  <span className="pill-text">{link.name}</span>
+                  <span className="pill-icon">{link.icon}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Verifiable Proof Telemetry Strip */}
+        <ScrollReveal delay={0.32}>
+          <div className="proof-telemetry-strip">
+            <div className="proof-stat-item">
+              <span className="proof-stat-value">48+</span>
+              <span className="proof-stat-label">Public Repositories</span>
+            </div>
+            <div className="proof-stat-divider" />
+            <div className="proof-stat-item">
+              <span className="proof-stat-value">1.2M+</span>
+              <span className="proof-stat-label">Firestore Reads (GLIA)</span>
+            </div>
+            <div className="proof-stat-divider" />
+            <div className="proof-stat-item">
+              <span className="proof-stat-value">&lt;150ms</span>
+              <span className="proof-stat-label">RapidOCR & Audio Latency</span>
+            </div>
+            <div className="proof-stat-divider" />
+            <div className="proof-stat-item">
+              <span className="proof-stat-value">600+</span>
+              <span className="proof-stat-label">E2E Tests (Clardentity)</span>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* 2. Flagship Systems Dossier (Interactive Pinned Sticky Stage) */}
+      <section className="section-container" style={{ marginTop: '3.5rem' }}>
+        <FlagshipShowcase />
+      </section>
+
+      {/* 3. Selected Systems Drawer (Curated Case Files) */}
+      <section className="section-container" style={{ marginTop: '2.5rem' }}>
+        <ScrollReveal delay={0.1}>
+          <div className="section-kicker-header">
+            <span className="section-index-tag">02 · SELECTED SYSTEMS DRAWER</span>
+            <h2 className="editorial-section-title">Specialized Engineering Case Files</h2>
+            <p className="editorial-section-subtitle">
+              Sovereign multimodal desktop agents, computational biology suites, and mission-critical event PWAs.
+            </p>
+          </div>
+        </ScrollReveal>
+
         <div className="projects-grid">
-          {featuredProjects.map((project, index) => (
-            <ScrollReveal key={project.id} delay={0.2 + (index * 0.08)}>
+          {selectedSystems.map((project, index) => (
+            <ScrollReveal key={project.id} delay={0.15 + (index * 0.08)}>
               <ProjectCard project={project} onOpenHandbook={onOpenHandbook} />
             </ScrollReveal>
           ))}
         </div>
+      </section>
 
-        {/* Explore More CTA */}
-        <ScrollReveal delay={0.4}>
-          <div className="explore-more-section">
-            <button
-              onClick={() => setIsExploreModalOpen(true)}
-              className="explore-more-btn group"
-              aria-label="Explore more projects and services"
-            >
-              <span>Explore more</span>
-              <span className="explore-arrow">→</span>
-            </button>
+      {/* 4. Core Systems Architecture Matrix (Anti-SLOP Engineering Depth) */}
+      <section className="section-container" style={{ marginTop: '5.5rem' }}>
+        <ScrollReveal delay={0.1}>
+          <div className="section-kicker-header">
+            <span className="section-index-tag">03 · TECHNICAL CAPABILITY MATRIX</span>
+            <h2 className="editorial-section-title">Engineering Competencies & Stack Depth</h2>
+            <p className="editorial-section-subtitle">
+              End-to-end technical scope: from interactive canvas runtimes to low-level Linux internals and sovereign AI pipelines.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="systems-matrix-grid">
+          <ScrollReveal delay={0.15}>
+            <div className="matrix-card">
+              <div className="matrix-header">
+                <span className="matrix-index">01</span>
+                <h3 className="matrix-title">Frontend Architecture & Graphics</h3>
+              </div>
+              <p className="matrix-desc">
+                Production web applications with rich graphics, responsive mobile safe-areas, and deterministic sub-second state hydration.
+              </p>
+              <ul className="matrix-list">
+                <li><strong>Runtimes:</strong> React 19, Next.js 16 (App Router), Vite, TypeScript</li>
+                <li><strong>Graphics:</strong> HTML5 Canvas 2D, Catmull-Rom Splines, Euler kinematics, Spline 3D</li>
+                <li><strong>Styling & PWA:</strong> Tailwind CSS v4, Vanilla CSS design tokens, Service Workers, Offline-first</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.22}>
+            <div className="matrix-card">
+              <div className="matrix-header">
+                <span className="matrix-index">02</span>
+                <h3 className="matrix-title">Autonomous AI & Multimodal Terminals</h3>
+              </div>
+              <p className="matrix-desc">
+                Sovereign agentic desktop assistants, low-latency live audio streaming, and on-device visual grounding systems.
+              </p>
+              <ul className="matrix-list">
+                <li><strong>LLMs & Agents:</strong> Gemini 3.1 Flash Live, Claude, Local Ollama / LM Studio</li>
+                <li><strong>Speech & Vision:</strong> OpenWakeWord ONNX acoustic models, RapidOCR (&lt;150ms), Whisper</li>
+                <li><strong>GUI Systems:</strong> PyQt6 tactical HUD, 30+ auto-discovered OS automation tools</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.29}>
+            <div className="matrix-card">
+              <div className="matrix-header">
+                <span className="matrix-index">03</span>
+                <h3 className="matrix-title">Backend, Distributed Queues & Data</h3>
+              </div>
+              <p className="matrix-desc">
+                High-concurrency API microservices, distributed asynchronous task pipelines, and vector-embedded search engines.
+              </p>
+              <ul className="matrix-list">
+                <li><strong>Services:</strong> Python (FastAPI), Node.js, async SQLAlchemy, Celery jobs</li>
+                <li><strong>Storage & Vector:</strong> PostgreSQL + pgvector (Supabase), Redis (Upstash), S3</li>
+                <li><strong>Realtime & Auth:</strong> Firebase Firestore (1.2M+ reads), WebAuthn passkeys, Dexie.js</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.36}>
+            <div className="matrix-card">
+              <div className="matrix-header">
+                <span className="matrix-index">04</span>
+                <h3 className="matrix-title">SRE, Linux Internals & Infrastructure</h3>
+              </div>
+              <p className="matrix-desc">
+                Author of <em>The DevOps & SRE Handbook</em>. Deep-dive mastery from bare-metal silicon up to Kubernetes orchestration.
+              </p>
+              <ul className="matrix-list">
+                <li><strong>Linux Internals:</strong> clone, namespaces, cgroups, OverlayFS, sysfs</li>
+                <li><strong>Observability & Cloud:</strong> Prometheus, Loki, Grafana, AWS, GCP, Firebase</li>
+                <li><strong>Networking:</strong> Cisco VLANs, LACP bonding, TCP/IP low-level optimization</li>
+              </ul>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 5. Author Spotlight & Direct Action Station */}
+      <section className="section-container" style={{ marginTop: '5.5rem', marginBottom: '2rem' }}>
+        <ScrollReveal delay={0.1}>
+          <div className="handbook-spotlight-card">
+            <div className="handbook-spotlight-content">
+              <div className="handbook-spotlight-kicker">04 · TECHNICAL PUBLICATION</div>
+              <h3 className="handbook-spotlight-title">The DevOps, SRE & Cloud Infrastructure Handbook</h3>
+              <p className="handbook-spotlight-desc">
+                An exhaustive technical reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS C-states), Cisco networking, and Linux kernel internals with production Kubernetes orchestration, Prometheus observability, and 20 architectural interview deep-dives.
+              </p>
+              <div className="handbook-actions">
+                <button
+                  onClick={onOpenHandbook}
+                  className="editorial-action-btn primary"
+                  aria-label="Open The DevOps, SRE & Cloud Infrastructure Handbook"
+                >
+                  <span>Read The Handbook</span>
+                  <span className="btn-arrow">→</span>
+                </button>
+                {onNavigateTab && (
+                  <button
+                    onClick={() => onNavigateTab('Projects')}
+                    className="editorial-action-btn secondary"
+                    aria-label="View all selected works"
+                  >
+                    <span>View All 16+ Projects</span>
+                    <span className="btn-arrow">↗</span>
+                  </button>
+                )}
+                <button
+                  onClick={() => setIsExploreModalOpen(true)}
+                  className="editorial-action-btn ghost"
+                  aria-label="Open exploration modal"
+                >
+                  <span>Quick Navigation Directory</span>
+                </button>
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </section>
@@ -140,7 +312,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
           }
         }}
       />
-    </>
+    </div>
   );
 };
 

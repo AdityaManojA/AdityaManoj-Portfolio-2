@@ -4,6 +4,18 @@
 
 ---
 
+## 🚀 Local Development Quick Start
+
+```powershell
+# 1. Install dependencies (if not already installed)
+npm install
+
+# 2. Launch Vite development server
+npm run dev
+```
+
+---
+
 ## 1. Quick Info & Contact
 
 | Field | Value |
@@ -41,21 +53,41 @@
 
 ## 3. Projects Catalog (Ordered for Showcase)
 
-### 1. GLIA — High-Throughput Event OS & PWA (IAN-2025)
-- **Category**: `Projects`
-- **Year**: `2025`
-- **Live URL**: [https://ian2025.in/](https://ian2025.in/)
-- **Image Filename**: `GLIA.png`
-- **Tags**: `React`, `Firebase`, `PWA`, `Google Maps API`, `Service Workers`
-- **Description**: Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.
+### 1. Clardentity — AI Thinking Companion
+> **AI Thinking Companion & Claim-Level Fact-Checking Platform** | **Frontend & Mobile Lead:** **ADITYA MANOJ**
 
-### 2. ThreadPath Collective
 - **Category**: `Projects`
-- **Year**: `2025`
-- **Live URL**: [https://threadpathcollective.ca/](https://threadpathcollective.ca/)
-- **Image Filename**: `Threadpath.png`
-- **Tags**: `React`, `Tailwind CSS`, `AWS`, `GCP`, `Framer`
-- **Description**: Full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.
+- **Year**: `2026`
+- **Live URL**: [https://clardentity.ai/](https://clardentity.ai/)
+- **Image Filename**: `Clardentity Learning and Development International.png`
+- **Tags**: `Next.js`, `TypeScript`, `FastAPI`, `Tailwind CSS`, `PWA`
+- **Portfolio Summary**: An AI thinking companion and multi-mode reasoning engine that fact-checks its own answers across eight thinking modes (Finder, Decision-making, Thought coach, Learning, Co-Creative, Mentoring, Reflect & Relieve, Legal). Live streaming answers are split into individual claims and cross-checked against uploaded documents and the web with confidence scoring.
+- **Tech Stack & Architecture**:
+  - **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS v4, PWA mobile installability.
+  - **Backend**: Python, FastAPI, async SQLAlchemy, Celery background jobs.
+  - **Data & AI**: PostgreSQL + pgvector (Supabase), Redis (Upstash), S3-compatible storage, Anthropic Claude with OpenAI automatic fallback, OpenAI embeddings/voice, and Tavily search.
+- **Key Contributions**:
+  - Engineered the full responsive phone and tablet experience: touch-optimized hit areas, swipe menus, notch/keyboard safe-area management, offline and cold-start state handling, and scroll memory.
+  - Designed and built themeable homepage card marks in four palettes and an animated curtain banner.
+  - Authored a comprehensive 600+ test Playwright suite covering 17 screens across 13 viewport profiles on Chromium and WebKit.
+
+### 2. Pixel Spaces — 3D Visualisation & Interior Design Studio
+> **Bespoke Editorial Architecture & 3D Visualisation Web Platform** | **Full-Stack Frontend & UI/UX:** **ADITYA MANOJ**
+
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://pixelspaces.web.app/](https://pixelspaces.web.app/)
+- **Image Filename**: `Pixel Spaces.png`
+- **Tags**: `React`, `Vite`, `Tailwind CSS`, `Firebase`, `Canvas`
+- **Portfolio Summary**: Bespoke high-performance web platform for an international architectural visualisation and interior design studio operating across Kerala and Muscat. Features cinematic scroll-driven storytelling, automated asset optimization pipelines, and server-side pre-rendering for optimal SEO and instant load performance.
+- **Tech Stack & Architecture**:
+  - **Frontend**: React 19, Vite, Tailwind CSS v4, Newsreader editorial serif & Montserrat typography.
+  - **Graphics & Pipeline**: Interactive HTML5 Canvas "Pixel-Resolve" hero stage, Node.js + Sharp automated multi-resolution WebP (960w & 1920w) pipeline.
+  - **Backend & Moderation**: Firebase Firestore for verified reviews/ratings and Firebase Auth for an admin moderation dashboard.
+  - **SEO & SSG**: Custom static-site generator producing pre-rendered HTML, Open Graph tags, sitemap.xml, robots.txt, and Google Schema.org ProfessionalService JSON-LD.
+- **Key Contributions**:
+  - Implemented interactive HTML5 canvas pixel-dissolve effect resolving architectural renders smoothly across carousel slides.
+  - Engineered CSS sticky stacking card decks for architectural disciplines, sticky milestone metrics sidebar, and full-screen modal project viewer lightbox.
 
 ### 3. IndZita Biotech
 - **Category**: `Projects`
@@ -71,7 +103,47 @@
   - Engineered an interactive Virtual Diagnostics Lab simulator modeling real-time thermal PCR amplifications ($C_t$ threshold kinetics), integrating dynamic multi-parameter telemetry pipelines with client-side blob generation for automated clinical assay synthesis.
   - Orchestrated enterprise deployment pipelines and edge delivery using Vite and Firebase Hosting, provisioning aggressive multi-tier immutable caching headers and SPA rewrite rules to ensure instantaneous sub-second global content delivery.
 
-### 4. SBAFA Financial Enclave
+### 4. ThreadPath Collective
+- **Category**: `Projects`
+- **Year**: `2025`
+- **Live URL**: [https://threadpathcollective.ca/](https://threadpathcollective.ca/)
+- **Image Filename**: `Threadpath.png`
+- **Tags**: `React`, `Tailwind CSS`, `AWS`, `GCP`, `Framer`
+- **Description**: Full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.
+
+### 5. ALFRED — MARK-VIII (Wayne Protocol Edition)
+> **Autonomous Multimodal AI Desktop Assistant & Tactical Terminal** | **Architect & Lead Creator:** **ADITYA MANOJ**
+
+[![Version 8 (Stable Build · Windows)](https://img.shields.io/badge/Build-Version%208%20(Stable%20Build%20%7C%20Windows)-00f0ff.svg?logo=windows&logoColor=white)](#)
+[![Python 3.12 (Recommended)](https://img.shields.io/badge/Python-3.12%20(Recommended)-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![AI Backend](https://img.shields.io/badge/AI-Gemini%203.1%20Flash%20Live%20%7C%20Local%20Ollama-8E75B2.svg?logo=google&logoColor=white)](https://ai.google.dev/)
+[![Local LLMs](https://img.shields.io/badge/Local%20LLM-Ollama%20%7C%20LM%20Studio%20%7C%20vLLM-orange.svg)](https://ollama.com)
+[![PyQt6](https://img.shields.io/badge/GUI-PyQt6%20Software%20Renderer-41CD52.svg?logo=qt&logoColor=white)](https://riverbankcomputing.com/software/pyqt/)
+[![AES-256 Remote](https://img.shields.io/badge/Mobile-Quantum%20Dashboard%20(iOS%2FAndroid)-00f0ff.svg)](https://github.com/AdityaManojA/ALFRED-MK)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://github.com/AdityaManojA/ALFRED-MK](https://github.com/AdityaManojA/ALFRED-MK)
+- **Image Filename**: `Alfred.png`
+- **Tags**: `Python`, `PyQt6`, `Gemini Live`, `Local LLMs`, `PyTorch`
+- **Portfolio Summary**: Autonomous, real-time multimodal voice, vision, and system-control executive desktop assistant built for complete digital sovereignty and tactical computing. Native bidirectional audio streaming (Google Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time visual grounding (RapidOCR + ONNX <150ms), 30+ auto-discovered OS automation tools, high-performance long-term memory ($O(N \log N)$ pruning), Sentry Mode v2 dual-mode surveillance with structural privacy ledger, and AES-256 encrypted mobile remote telemetry on a high-framerate hardware-accelerated PyQt6 tactical HUD.
+
+### 6. GLIA — High-Throughput Event OS & PWA (IAN-2025)
+- **Category**: `Projects`
+- **Year**: `2025`
+- **Live URL**: [https://ian2025.in/](https://ian2025.in/)
+- **Image Filename**: `GLIA.png`
+- **Tags**: `React`, `Firebase`, `PWA`, `Google Maps API`, `Service Workers`
+- **Description**: Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.
+- **Portfolio Summary**: Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.
+- **Deep Technical Specifications (LaTeX Resume)**:
+  - Architected a dual-engine 3D molecular visualization suite implementing mathematical Catmull-Rom spline interpolation, spherical Euler rotation kinematics, and perspective projection matrices on HTML5 Canvas alongside lazy-loaded Spline 3D cloud runtimes.
+  - Synthesized a reactive, physics-driven generative genomic ASCII canvas utilizing Hooke's law spring-damping displacement vectors, throttling computation cycles via an `IntersectionObserver` lifecycle to eliminate thermal throttling and lock 60 FPS mobile rendering.
+  - Engineered an interactive Virtual Diagnostics Lab simulator modeling real-time thermal PCR amplifications ($C_t$ threshold kinetics), integrating dynamic multi-parameter telemetry pipelines with client-side blob generation for automated clinical assay synthesis.
+  - Orchestrated enterprise deployment pipelines and edge delivery using Vite and Firebase Hosting, provisioning aggressive multi-tier immutable caching headers and SPA rewrite rules to ensure instantaneous sub-second global content delivery.
+
+### 5. SBAFA Financial Enclave
 - **Category**: `Projects`
 - **Year**: `2026`
 - **Live URL**: [https://sbafa-ft.web.app/landing](https://sbafa-ft.web.app/landing)
@@ -85,7 +157,7 @@
   - Developed an adaptive mobile-first design system featuring native-grade iOS segmented bank toggles, dynamic CSS Grid micro-layouts, and hardware-accelerated glassmorphism dashboards optimized for touch viewports ($\le$375px).
   - Hardened client security and session durability via WebAuthn biometric passkeys, SHA-256 PIN hashing, and multi-tier Service Worker caching strategies (`Stale-While-Revalidate`) to sustain uninterrupted offline financial tracking.
 
-### 5. The Whiskey Business
+### 6. The Whiskey Business
 - **Category**: `Projects`
 - **Year**: `2025`
 - **Live URL**: [https://thewhiskeybusiness-3e639.web.app/](https://thewhiskeybusiness-3e639.web.app/)
@@ -93,7 +165,7 @@
 - **Tags**: `React`, `Tailwind CSS`, `AWS`, `GCP`, `Framer`
 - **Description**: Artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.
 
-### 6. Rochas Cafe
+### 7. Rochas Cafe
 - **Category**: `Website Designs`
 - **Year**: `2025`
 - **Live URL**: [https://rochascafe.netlify.app/#](https://rochascafe.netlify.app/#)
@@ -101,7 +173,7 @@
 - **Tags**: `React`, `JavaScript`, `CSS3`, `HTML5`
 - **Description**: Artisanal specialty coffee & patisserie web showcase. Engineered with responsive layout architecture, dynamic product carousels, smooth interactive navigation, fluid aesthetic styling, and high-performance CDN deployment.
 
-### 7. The DevOps, SRE & Cloud Infrastructure Handbook
+### 8. The DevOps, SRE & Cloud Infrastructure Handbook
 - **Category**: `Projects` (Interactive Handbook)
 - **Year**: `2026`
 - **Live URL**: `#handbook` (Interactive Modal with 20 Deep-Dives)
@@ -109,7 +181,7 @@
 - **Tags**: `Kubernetes`, `SRE`, `Linux Kernel`, `Terraform`, `Prometheus`, `Cisco`
 - **Description**: An exhaustive technical engineering reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS/C-states), Cisco networking (VLANs, LACP), and Linux kernel internals (clone, namespaces, cgroups, OverlayFS) with Kubernetes control plane orchestration, Prometheus-Loki-Grafana observability, and 20 low-level interview deep-dives.
 
-### 8. Travel Animator (Lascade)
+### 9. Travel Animator (Lascade)
 - **Category**: `Projects`
 - **Year**: `2025`
 - **Live URL**: [https://travelanimator.com/](https://travelanimator.com/)
@@ -117,7 +189,7 @@
 - **Tags**: `Android`, `iOS`, `React Native`, `Google Maps API`
 - **Description**: Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.
 
-### 9. Prompt-Ops Blueprints & AI Dataset Engine
+### 10. Prompt-Ops Blueprints & AI Dataset Engine
 - **Category**: `CS Projects`
 - **Year**: `2026`
 - **Live URL**: [https://github.com/AdityaManojA/prompt-ops-blueprints](https://github.com/AdityaManojA/prompt-ops-blueprints)
@@ -125,7 +197,7 @@
 - **Tags**: `Python`, `PyTorch`, `AI Acceleration`, `GitHub Actions`
 - **Description**: Comprehensive repository of daily-trained AI datasets, fine-tuning blueprints, and token-optimized pipelines ready for immediate zero-shot, few-shot, and fine-tuning workloads across open-source and proprietary foundation models.
 
-### 10. Retro QR Crafter
+### 11. Retro QR Crafter
 - **Category**: `CS Projects`
 - **Year**: `2025`
 - **Live URL**: [https://text-based-qr.netlify.app/](https://text-based-qr.netlify.app/)
@@ -133,7 +205,7 @@
 - **Tags**: `JavaScript`, `Tailwind CSS`, `HTML5`, `Netlify`
 - **Description**: A fun, 8-bit themed web utility for bulk generating and scanning QR codes. Features Excel file processing and dual-mode camera/file scanning.
 
-### 11. CSV to JSON Converter
+### 12. CSV to JSON Converter
 - **Category**: `CS Projects`
 - **Year**: `2025`
 - **Live URL**: [https://csv-to-jsonconv.netlify.app/](https://csv-to-jsonconv.netlify.app/)
@@ -141,7 +213,7 @@
 - **Tags**: `JavaScript`, `HTML`, `Tailwind CSS`, `Netlify`
 - **Description**: A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.
 
-### 12. Meat Spoilage Detection
+### 13. Meat Spoilage Detection
 - **Category**: `CS Projects`
 - **Year**: `2024`
 - **Live URL**: [https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT](https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT)
@@ -149,7 +221,7 @@
 - **Tags**: `IoT`, `Hardware`, `C++`, `Sensors`
 - **Description**: A hardware-based, no-contact meat spoilage detection system that uses IoT sensors to assess whether meat has spoiled.
 
-### 13. Flashcard Learning Pal
+### 14. Flashcard Learning Pal
 - **Category**: `Website Designs`
 - **Year**: `2023`
 - **Live URL**: [https://github.com/AdityaManojA/Flashcard-Learning-Pal](https://github.com/AdityaManojA/Flashcard-Learning-Pal)
@@ -157,7 +229,7 @@
 - **Tags**: `JavaScript`, `HTML`, `CSS`
 - **Description**: A web-based interactive learning tool designed to help students memorize concepts effectively.
 
-### 14. 8-Bit-O-Matic
+### 15. 8-Bit-O-Matic
 - **Category**: `CS Projects`
 - **Year**: `2024`
 - **Live URL**: [https://eight-bit-o-matic.onrender.com/](https://eight-bit-o-matic.onrender.com/)
@@ -289,6 +361,16 @@ export interface Project {
 }
 
 export const PROJECTS_DATA: Project[] = [
+  {
+    id: 16,
+    title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
+    category: "Projects",
+    year: "2026",
+    description: "Autonomous multimodal AI desktop assistant & tactical terminal built for complete digital sovereignty. Features native bidirectional audio streaming (Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time RapidOCR visual grounding (<150ms), 30+ auto-discovered OS automation tools, encrypted AES-256 mobile remote telemetry, and tactical PyQt6 HUD.",
+    tags: ["Python", "PyQt6", "Gemini Live", "Local LLMs", "PyTorch"],
+    image: "./ProjectImages/Alfred.png",
+    link: "https://github.com/AdityaManojA/ALFRED-MK"
+  },
   {
     id: 1,
     title: "GLIA — High-Throughput Event OS & PWA",

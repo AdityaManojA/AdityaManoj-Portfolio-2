@@ -1,89 +1,81 @@
 import { TIMELINE_DATA } from '../data';
 import ScrollReveal from './ScrollReveal';
 
-const Timeline = () => {
+export default function Timeline() {
   return (
-    <div className="section-container relative z-10">
+    <div className="section-container relative z-10" style={{ maxWidth: '72rem', margin: '0 auto', paddingBottom: '4rem' }}>
       <ScrollReveal>
-        <div className="text-center mb-16 md:mb-24">
-          <span className="text-[#FF9F68] font-bold tracking-widest uppercase text-sm">Journey</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mt-2">My Path So Far.</h2>
+        <div className="section-kicker-header" style={{ marginBottom: '3rem' }}>
+          <span className="section-index-tag">05 · CAREER TRAJECTORY & EXPERIENCE</span>
+          <h2 className="editorial-section-title">My Journey & Systems Impact</h2>
+          <p className="editorial-section-subtitle">
+            Production software engineering, cloud infrastructure orchestration, interactive graphics runtimes, and autonomous AI agents.
+          </p>
         </div>
       </ScrollReveal>
-      
-      {/* Main Container */}
-      <div className="relative max-w-5xl mx-auto">
-        
-        {/* Glowing Central Spine */}
-        {/* Light Mode: Gray-300 | Dark Mode: Gray-800 */}
-        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-800 to-transparent md:-translate-x-1/2"></div>
 
-        {TIMELINE_DATA.map((item, index) => (
-          <div key={index} className={`relative flex flex-col md:flex-row items-center justify-between mb-16 w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-            
-            {/* Empty space for alternating layout */}
-            <div className="hidden md:block w-[45%]"></div>
+      {/* Main Timeline Spine Container */}
+      <div className="timeline-track-container">
+        {/* Continuous Central/Left Spine Line */}
+        <div className="timeline-central-spine" aria-hidden="true" />
 
-            {/* Spine Marker (The Dot) */}
-            <ScrollReveal 
-              className="absolute left-8 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-20"
-              delay={index * 0.1}
-            >
-              <div className="relative flex items-center justify-center">
-                {/* Dot Background matches App Background (#FFF0E3 for light, #111 for dark) */}
-                <div className="w-4 h-4 bg-[#FFF0E3] dark:bg-[#111] border-2 border-[#FF9F68] rounded-full z-10"></div>
-                <div className="absolute w-8 h-8 bg-[#FF9F68]/20 rounded-full animate-pulse"></div>
-              </div>
-            </ScrollReveal>
-
-            {/* Connecting Beam (Horizontal Line) - Desktop Only */}
-            <div className={`hidden md:block absolute top-1/2 w-[5%] h-[2px] bg-[#FF9F68]/30 z-0 
-                ${index % 2 === 0 ? 'left-[50%]' : 'right-[50%]'}
-            `}></div>
-
-            {/* Content Card */}
-            <ScrollReveal 
-              className="w-full md:w-[45%] pl-20 md:pl-0" 
-              delay={index * 0.1 + 0.1}
-            >
-              <div className="group relative bg-white dark:bg-[#1c1c1c] border border-gray-200 dark:border-white/5 hover:border-[#FF9F68]/50 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(255,159,104,0.15)] shadow-sm">
-                
-                {/* Top Gradient Highlight */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FF9F68] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                {/* Year Badge */}
-                <div className="inline-block px-4 py-1 rounded-full bg-[#FF9F68]/10 border border-[#FF9F68]/20 text-[#FF9F68] font-bold text-sm mb-4">
-                  {item.year}
-                </div>
-
-                {/* Title: Dark text in light mode, White in dark mode */}
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-[#FF9F68] transition-colors">
-                  {item.title}
-                </h3>
-                
-                {/* Description: Gray text for both, adjusted shades */}
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                  {item.description}
-                </p>
-                
-                {/* Footer Location */}
-                <div className="flex items-center gap-2 pt-4 border-t border-gray-100 dark:border-white/5">
-                  <svg className="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-500">
-                    {item.location}
-                  </span>
+        <div className="timeline-entries-list">
+          {TIMELINE_DATA.map((item, index) => (
+            <div key={index} className="timeline-entry-row">
+              {/* Timeline Marker Node */}
+              <div className="timeline-marker-wrapper">
+                <div className="timeline-marker-dot">
+                  <div className="timeline-marker-core" />
                 </div>
               </div>
-            </ScrollReveal>
 
-          </div>
-        ))}
+              {/* Timeline Card */}
+              <ScrollReveal delay={0.08 * (index % 3)} className="timeline-card-wrapper">
+                <div className="timeline-card">
+                  {/* Meta Bar: Company + Year */}
+                  <div className="timeline-card-meta">
+                    <div className="timeline-company-badge">
+                      <span className="company-icon-svg" aria-hidden="true">
+                        {item.type === 'education' ? (
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                          </svg>
+                        ) : (
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                            <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+                          </svg>
+                        )}
+                      </span>
+                      <span className="company-name">{item.company}</span>
+                    </div>
+                    <span className="timeline-year-pill">{item.year}</span>
+                  </div>
+
+                  {/* Role Title */}
+                  <h3 className="timeline-role-title">{item.title}</h3>
+
+                  {/* Impact Description */}
+                  <p className="timeline-desc">{item.description}</p>
+
+                  {/* Location & Context */}
+                  <div className="timeline-card-footer">
+                    <span className="timeline-location">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {item.location}
+                    </span>
+                    <span className="timeline-type-pill">{item.type === 'education' ? 'Academic Program' : 'Production Systems'}</span>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
-};
-
-export default Timeline;
+}

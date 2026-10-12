@@ -14,11 +14,11 @@ const About = () => {
           <h3 className="skill-card-title" style={{ marginBottom: '1rem' }}>Who am I?</h3>
           <div className="section-text" style={{ marginBottom: 0 }}>
             <p>
-              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a <strong>Full-Stack Developer & Systems Engineer</strong> specializing in modern web applications, high-throughput Progressive Web Apps (PWAs), interactive frontend architectures, and robust backend services.
+              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a <strong>Full-Stack Developer & Systems Engineer</strong> specializing in modern web applications, autonomous multimodal AI desktop assistants (<a href="https://github.com/AdityaManojA/ALFRED-MK" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">ALFRED Mark-VIII</a>), high-throughput Progressive Web Apps (PWAs), interactive frontend architectures, and robust backend services.
             </p>
             <br/>
             <p>
-              I build scalable, responsive web experiences using React, Next.js, TypeScript, and HTML5 Canvas, backed by resilient cloud APIs (Node.js, Python, Firebase, AWS, GCP). I also train AI models, <a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">making them easy to access</a> and integrate into real-world web applications.
+              I build scalable, responsive web experiences using React, Next.js, TypeScript, and HTML5 Canvas, backed by resilient cloud APIs (Node.js, Python, Firebase, AWS, GCP). I also design and train autonomous AI systems and datasets (<a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">Prompt-Ops Blueprints</a>), making intelligent agents accessible and native to real-world workflows.
             </p>
             <br/>
             <p>
@@ -31,7 +31,7 @@ const About = () => {
         <ScrollReveal className="about-card stats-card" delay={0.1}>
           <div className="stat-row">
             <div className="stat-item">
-              <div className="stat-number">47+</div>
+              <div className="stat-number">48+</div>
               <div className="stat-label">Repositories</div>
             </div>
             <div className="stat-item">
@@ -63,7 +63,7 @@ const About = () => {
             </div>
             <div className="do-item">
               <svg className="do-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-              <div className="do-title">AI & Systems Tuning</div>
+              <div className="do-title">Autonomous AI & Systems</div>
             </div>
           </div>
         </ScrollReveal>

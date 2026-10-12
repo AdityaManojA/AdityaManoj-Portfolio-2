@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -19,6 +19,13 @@ export default function App() {
   const [handbookTab, setHandbookTab] = useState<'foundations' | 'deepdives'>('foundations');
   const [handbookQId, setHandbookQId] = useState<number | undefined>(undefined);
 
+  // Reset scroll to top on every tab navigation
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [activeTab]);
+
   const handleOpenHandbook = (tab: 'foundations' | 'deepdives' = 'foundations', qId?: number) => {
     setHandbookTab(tab);
     setHandbookQId(qId);
@@ -27,7 +34,9 @@ export default function App() {
 
   const handleNavigateTab = (tab: string) => {
     setActiveTab(tab);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   };
 
   const renderContent = () => {
@@ -61,7 +70,7 @@ export default function App() {
     <div className="app-container">
       <Header
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleNavigateTab}
         onOpenHandbook={() => handleOpenHandbook('foundations')}
       />
 

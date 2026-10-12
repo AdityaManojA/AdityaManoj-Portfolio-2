@@ -76,11 +76,11 @@ export const ExploreModal: React.FC<ExploreModalProps> = ({
             
             <div className="explore-card-content">
               <div className="explore-card-top">
-                <span className="explore-card-pill">13+ Production Builds</span>
+                <span className="explore-card-pill">15+ Production Builds</span>
                 <h3 className="explore-card-title">View Projects</h3>
               </div>
               <p className="explore-card-desc">
-                Explore the complete catalog of interactive PWAs, molecular 3D visualizers, zero-knowledge financial enclaves, and open-source tools.
+                Explore the complete catalog of autonomous tactical AI assistants, interactive PWAs, molecular 3D visualizers, zero-knowledge financial enclaves, and open-source tools.
               </p>
               
               <div className="explore-card-action">
@@ -113,11 +113,11 @@ export const ExploreModal: React.FC<ExploreModalProps> = ({
             
             <div className="explore-card-content">
               <div className="explore-card-top">
-                <span className="explore-card-pill">8 Core Capabilities</span>
+                <span className="explore-card-pill">9 Core Capabilities</span>
                 <h3 className="explore-card-title">View Services</h3>
               </div>
               <p className="explore-card-desc">
-                Discover systems capabilities in Full-Stack Web & Apps, High-Throughput PWAs, Interactive 3D Web, Cloud Infrastructure, and Applied AI.
+                Discover systems capabilities in Autonomous AI Agents, Full-Stack Web & Apps, High-Throughput PWAs, Interactive 3D Web, Cloud Infrastructure, and SRE.
               </p>
               
               <div className="explore-card-action">

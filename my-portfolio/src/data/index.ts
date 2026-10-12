@@ -27,14 +27,34 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: 14,
-    title: "SBAFA Financial Enclave",
+    id: 17,
+    title: "Clardentity — AI Thinking Companion",
     category: "Projects",
     year: "2026",
-    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
-    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
-    image: "./ProjectImages/SBAFA.png",
-    link: "https://sbafa-ft.web.app/landing"
+    description: "An AI thinking companion and multi-mode reasoning engine that fact-checks its own answers across 8 thinking modes. Features live answer streaming with claim-level verification and confidence scoring, document search over uploaded files, voice calls, Next.js 16 PWA responsive architecture, and FastAPI/Celery backend pipelines.",
+    tags: ["Next.js", "TypeScript", "FastAPI", "Tailwind CSS", "PWA"],
+    image: "./ProjectImages/Clardentity Learning and Development International.png",
+    link: "https://clardentity.ai/"
+  },
+  {
+    id: 18,
+    title: "Pixel Spaces — 3D Visualisation Studio",
+    category: "Projects",
+    year: "2026",
+    description: "Bespoke high-performance web platform for an architectural visualisation and interior design studio operating across Kerala and Muscat. Engineered with an interactive HTML5 canvas pixel-resolve hero stage, CSS sticky stacking service decks, Sharp automated image optimization pipelines, and Firebase Firestore/Auth review moderation.",
+    tags: ["React", "Vite", "Tailwind CSS", "Firebase", "Canvas"],
+    image: "./ProjectImages/Pixel Spaces.png",
+    link: "https://pixelspaces.web.app/"
+  },
+  {
+    id: 13,
+    title: "IndZita Biotech",
+    category: "Projects",
+    year: "2026",
+    description: "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
+    tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
+    image: "./ProjectImages/Indzita.png",
+    link: "https://indzita-biotech-007.web.app/#overview"
   },
   {
     id: 8,
@@ -47,14 +67,14 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://threadpathcollective.ca/"
   },
   {
-    id: 13,
-    title: "IndZita Biotech",
+    id: 16,
+    title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
     category: "Projects",
     year: "2026",
-    description: "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
-    tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
-    image: "./ProjectImages/Indzita.png",
-    link: "https://indzita-biotech-007.web.app/#overview"
+    description: "Autonomous multimodal AI desktop assistant & tactical terminal built for complete digital sovereignty. Features native bidirectional audio streaming (Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time RapidOCR visual grounding (<150ms), 30+ auto-discovered OS automation tools, encrypted AES-256 mobile remote telemetry, and tactical PyQt6 HUD.",
+    tags: ["Python", "PyQt6", "Gemini Live", "Local LLMs", "PyTorch"],
+    image: "./ProjectImages/Alfred.png",
+    link: "https://github.com/AdityaManojA/ALFRED-MK"
   },
   {
     id: 1,
@@ -85,6 +105,16 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "JavaScript", "CSS3", "HTML5"],
     image: "./ProjectImages/Rochas.png",
     link: "https://rochascafe.netlify.app/#"
+  },
+  {
+    id: 14,
+    title: "SBAFA Financial Enclave",
+    category: "Projects",
+    year: "2026",
+    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
+    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
+    image: "./ProjectImages/SBAFA.png",
+    link: "https://sbafa-ft.web.app/landing"
   },
   {
     id: 100,
@@ -210,52 +240,76 @@ export const GALLERY_DATA = [
 
 export const TIMELINE_DATA = [
   { 
+    year: "2025 – 2026", 
+    title: "Lead Architect & AI Systems Engineer", 
+    company: "ALFRED Tactical Terminal",
+    description: "Architected ALFRED Mark-VIII, an autonomous multimodal voice, vision, and system-control desktop executive assistant operating on dual-backend sovereignty (Google Gemini 3.1 Flash Live & local Ollama/LM Studio/vLLM). Engineered high-framerate PyQt6 tactical HUD (22ms frame locked), Sentry Mode v2 dual-mode surveillance engine with numeric privacy ledger, custom OpenWakeWord ONNX acoustic model training, and 30+ auto-discovered OS automation tools.", 
+    location: "Open Source / Autonomous Systems",
+    type: "work" as const
+  },
+  { 
     year: "Jan 2026 – Present", 
     title: "Full-Stack PWA & Security Systems Engineer", 
+    company: "SBAFA Financial Enclave",
     description: "Architected a zero-knowledge, offline-first PWA for SBAFA Financial Enclave utilizing Dexie.js (IndexedDB) and Firebase Firestore, orchestrating bi-directional reactive synchronization and conflict-free cross-device data reconciliation for 1,000+ ledger records. Engineered an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI) and automated weekly OAuth2 Gmail pipeline with WebAuthn biometric passkeys.", 
-    location: "SBAFA Financial Enclave · Remote" 
+    location: "Remote",
+    type: "work" as const
   },
   { 
     year: "Jul 2026 – Sep 2026", 
     title: "Lead Frontend & Graphics Engineer", 
+    company: "IndZita Biotech",
     description: "Architected a dual-engine 3D molecular visualization suite implementing Catmull-Rom spline interpolation & spherical Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes. Synthesized a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS and engineered a real-time thermal PCR Virtual Lab simulator, deployed via Vite and Firebase Hosting.", 
-    location: "IndZita Biotech · Remote" 
+    location: "Remote",
+    type: "work" as const
   },
   { 
     year: "Apr 2026 – Jun 2026", 
     title: "Frontend & DevOps Engineer (Contract)", 
+    company: "Threadpath Collective",
     description: "Engineered responsive inventory tracking interface using React and Framer Motion with dynamic coordinate layouts. Managed production deployments using AWS Cloud Functions and Amazon CloudFront (CDN) for low-latency global delivery.", 
-    location: "Threadpath Collective · Remote" 
+    location: "Remote",
+    type: "work" as const
   },
   { 
     year: "Jan 2025 – Aug 2025", 
     title: "Product Development Engineer", 
+    company: "Lascade",
     description: "Engineered consumer mobile applications across Android and iOS, software design, and full-stack systems at Lascade—developing the 'Travel Animator' 3D route animation platform (1M+ users).", 
-    location: "Lascade · Kochi, Kerala, India (On-site)" 
+    location: "Kochi, Kerala, India (On-site)",
+    type: "work" as const
   },
   { 
     year: "Aug 2024 – Jan 2025", 
     title: "Lead Developer (Technical Trainee)", 
+    company: "Rajiv Gandhi Centre for Biotechnology",
     description: "Built and deployed a high-performance Progressive Web App (PWA) managing on-ground logistics for international neuroscience conference. Automated workflows handling 1.2M Firestore reads and 2,275+ authenticated coupon scans with zero manual errors at 100% uptime.", 
-    location: "Rajiv Gandhi Centre for Biotechnology · Thiruvananthapuram" 
+    location: "Thiruvananthapuram, India",
+    type: "work" as const
   },
   { 
     year: "Mar 2024 – Sep 2024", 
     title: "Software Engineering Intern", 
+    company: "Flipkart",
     description: "Earned 6-month internship through a hackathon placement. Contributed to full-stack features on the Flipkart consumer app across frontend and backend layers. Deployed and managed services on Microsoft Azure and Google Cloud Platform (GCP).", 
-    location: "Flipkart · Bengaluru" 
+    location: "Bengaluru, India",
+    type: "work" as const
   },
   { 
     year: "Sep 2023 – Mar 2024", 
     title: "Cloud Operations Intern", 
+    company: "Codelattice Digital Solutions",
     description: "Hands-on cloud operations managing AWS core services (EC2, RDS, S3, CloudWatch) for provisioning and monitoring workloads. Wrote Bash and Python scripts for operational automation across Unix-based environments and supported MERN-stack apps.", 
-    location: "Codelattice Digital Solutions · Calicut" 
+    location: "Calicut, India",
+    type: "work" as const
   },
   { 
     year: "2020 – 2024", 
     title: "B.Tech, Computer Science & Engineering", 
+    company: "Jyothi Engineering College",
     description: "Graduated with strong foundations in full-stack software development, cloud infrastructure, DevOps pipelines, and applied AI systems.", 
-    location: "Jyothi Engineering College · Thrissur, Kerala" 
+    location: "Thrissur, Kerala",
+    type: "education" as const
   },
 ];
 
@@ -299,10 +353,26 @@ export const SERVICES_DATA = [
     title: "Networking & Edge Delivery", 
     description: "Enterprise L2/L3 routing, 802.1Q VLAN segmentation, network security, reverse proxies (NGINX/Apache), and CloudFront edge caching for sub-second global asset delivery.", 
     icon: "network" 
+  },
+  { 
+    title: "Autonomous AI Agents & Tactical Systems", 
+    description: "Architecting autonomous multimodal desktop agents with bidirectional streaming audio/vision (Gemini Flash Live), offline open-weight LLMs (Ollama, LM Studio, vLLM), OpenWakeWord ONNX transfer training, deep OS automation, and encrypted AES-256 mobile remote telemetry.", 
+    icon: "terminal" 
   }
 ];
 
 export const SKILLS_DATA = [
+  {
+    title: "Autonomous AI & Multimodal Agents",
+    skills: [
+      { name: "PyQt6", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/qt/qt-original.svg" },
+      { name: "Gemini Live", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" },
+      { name: "Local LLMs", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/ollama.svg" },
+      { name: "ONNX Runtime", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/onnx.svg" },
+      { name: "OpenWakeWord", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "RapidOCR", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" }
+    ]
+  },
   {
     title: "Frontend & Web",
     skills: [
@@ -311,7 +381,8 @@ export const SKILLS_DATA = [
       { name: "Vite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" },
       { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
       { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Canvas", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" }
     ]
   },
   {

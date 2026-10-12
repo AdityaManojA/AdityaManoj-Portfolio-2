@@ -12,6 +12,9 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
 
   const handleNavClick = (tab: string) => {
     setActiveTab(tab);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     setIsMenuOpen(false);
   };
 
@@ -148,7 +151,7 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
              {navItems.map((item) => (
                <button 
                  key={item.id}
-                 onClick={() => setActiveTab(item.id)}
+                 onClick={() => handleNavClick(item.id)}
                  className={`nav-link ${activeTab === item.id ? 'active' : ''}`}
                  title={item.label}
                  style={{ display: 'flex', alignItems: 'center' }}

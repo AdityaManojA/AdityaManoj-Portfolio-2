@@ -41,11 +41,18 @@ const ProjectCard = ({ project, onOpenHandbook }: ProjectCardProps) => {
       className="project-card group"
     >
       <div className="project-image-wrapper">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="project-image"
-        />
+        <div className="folder-tab">
+          <span className="folder-tab-badge">CASE FILE</span>
+          <span className="folder-tab-id">#{String(project.id).padStart(2, '0')}</span>
+        </div>
+        <div className="folder-file-container">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="project-image"
+          />
+        </div>
+        <div className="folder-pocket-lip" />
         <div className="project-actions">
            <div className="view-btn-icon">
              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
