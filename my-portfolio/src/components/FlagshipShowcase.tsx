@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import SwipeDots from './SwipeDots';
 
 interface FlagshipProject {
   id: number;
@@ -62,6 +63,7 @@ export default function FlagshipShowcase() {
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const snapRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
 
   // Scroll position inside the pinned track drives which panel is open.
@@ -160,7 +162,7 @@ export default function FlagshipShowcase() {
         <span className="flagship-hint" aria-hidden="true">Scroll to explore ↓</span>
       </div>
 
-      <div className="flagship-gallery">
+      <div className="flagship-gallery swipe-track" ref={galleryRef}>
         {FLAGSHIP_ITEMS.map((item, idx) => {
           const isActive = idx === activeIndex;
           return (
@@ -255,6 +257,8 @@ export default function FlagshipShowcase() {
           );
         })}
       </div>
+
+      <SwipeDots targetRef={galleryRef} count={FLAGSHIP_ITEMS.length} label="flagship project" />
 
       <div className="flagship-progress" aria-hidden="true">
         {FLAGSHIP_ITEMS.map((item, idx) => (

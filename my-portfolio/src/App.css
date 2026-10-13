@@ -5078,3 +5078,214 @@ html {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Mobile: swipe carousels, touch behaviour, tap targets
+   ========================================================================== */
+
+/* Swipe tracks: on phones the long stacked sections (flagship, case files, capabilities)
+   become native scroll-snap carousels, so swiping gets real momentum and snapping with no
+   gesture code. Tracks bleed to the screen edges (content sits 2rem in: 1rem page padding +
+   1rem section padding); cards are sized from the viewport so the next one peeks in as a cue. */
+.swipe-dots {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .swipe-track {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.875rem;
+    height: auto;
+    margin-inline: -2rem;
+    padding: 0.25rem 2.25rem 0.75rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 2.25rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .swipe-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .swipe-track > *,
+  .swipe-track > .flagship-panel,
+  .swipe-track > .flagship-panel.is-active {
+    flex: 0 0 calc(100vw - 4.5rem);
+    max-width: calc(100vw - 4.5rem);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* Cards off to the side would otherwise wait for their vertical reveal; show them as-is. */
+  .swipe-track > .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .swipe-track > .scroll-reveal > * {
+    height: 100%;
+  }
+
+  .swipe-dots {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .swipe-dots-row {
+    display: flex;
+    align-items: center;
+    margin-left: -0.75rem;
+  }
+
+  /* 44px tap area around a small visual dot */
+  .swipe-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -16px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .swipe-dot span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--border-light);
+    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease;
+  }
+
+  .dark .swipe-dot span {
+    background: var(--border-dark);
+  }
+
+  .swipe-dot.is-active span {
+    width: 22px;
+    background: var(--primary-orange);
+  }
+
+  .swipe-dots-count {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-muted-light);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dark .swipe-dots-count {
+    color: var(--text-muted-dark);
+  }
+
+  /* The flagship's open-panel layout is a desktop idea; on phones every card shows its content. */
+  .swipe-track > .flagship-panel .flagship-panel-body {
+    height: 100%;
+    align-content: start;
+  }
+
+  /* Tap targets: at least 44px */
+  .menu-toggle-btn {
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-icon {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .capability-more-link {
+    padding: 0.75rem 0;
+  }
+
+  /* Swipe-to-close sheets: a grab handle signals the gesture */
+  .explore-modal-container::before,
+  .handbook-modal-container::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 4px;
+    margin: 0 auto 0.75rem;
+    border-radius: 9999px;
+    background: var(--border-light);
+  }
+
+  .dark .explore-modal-container::before,
+  .dark .handbook-modal-container::before {
+    background: var(--border-dark);
+  }
+}
+
+.mobile-menu-hint {
+  position: absolute;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted-light);
+}
+
+.dark .mobile-menu-hint {
+  color: var(--text-muted-dark);
+}
+
+@media (hover: hover) {
+  .mobile-menu-hint {
+    display: none;
+  }
+}
+
+/* Touch screens: hover-only effects would stick after a tap, so swap them for press feedback. */
+@media (hover: none) {
+  .capability-card:hover,
+  .browser-mockup-frame:hover,
+  .project-card:hover {
+    transform: none;
+  }
+
+  .browser-viewport-link:hover .browser-screen-img {
+    transform: none;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .pill-link:active,
+  .editorial-action-btn:active,
+  .capability-more-link:active,
+  .flagship-strip:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-dot span {
+    transition: none;
+  }
+}

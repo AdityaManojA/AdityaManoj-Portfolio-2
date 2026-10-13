@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useSwipeToClose } from '../hooks/useSwipeToClose';
 import { HANDBOOK_META, HANDBOOK_FOUNDATIONS, HANDBOOK_QUESTIONS, type HandbookQuestion } from '../data/handbookData';
 
 interface HandbookModalProps {
@@ -20,6 +21,10 @@ export const HandbookModal: React.FC<HandbookModalProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [expandedQuestionId, setExpandedQuestionId] = useState<number | null>(initialQuestionId || null);
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
+
+  // Swipe down on the sheet to dismiss (touch screens)
+  const sheetRef = useRef<HTMLDivElement>(null);
+  useSwipeToClose(sheetRef, onClose, isOpen);
 
   useEffect(() => {
     if (initialTab) setActiveTab(initialTab);
@@ -70,7 +75,7 @@ export const HandbookModal: React.FC<HandbookModalProps> = ({
 
   return (
     <div className="handbook-modal-backdrop" onClick={onClose}>
-      <div className="handbook-modal-container" onClick={(e) => e.stopPropagation()}>
+      <div className="handbook-modal-container" ref={sheetRef} onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
         <div className="handbook-modal-header">
           <div className="handbook-modal-title-area">

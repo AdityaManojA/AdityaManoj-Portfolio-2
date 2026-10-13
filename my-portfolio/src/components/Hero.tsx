@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
 import { SOCIAL_LINKS, PROJECTS_DATA } from '../data';
 import ProjectCard from './ProjectCard';
@@ -8,6 +8,7 @@ import ExploreModal from './ExploreModal';
 import FlagshipShowcase from './FlagshipShowcase';
 import HeroBackdrop from './HeroBackdrop';
 import LandingGuide from './LandingGuide';
+import SwipeDots from './SwipeDots';
 import { RotatingWord, CountUp } from './HeroMotion';
 
 
@@ -51,6 +52,8 @@ interface HeroProps {
 
 const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
   const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
+  const caseFilesRef = useRef<HTMLDivElement>(null);
+  const capabilitiesRef = useRef<HTMLDivElement>(null);
 
   // Curated systems for the Uniform Folder Drawer (ALFRED, The Whiskey Business, ThreadPath Collective)
   const selectedSystems = [16, 11, 8]
@@ -209,13 +212,14 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
           </div>
         </ScrollReveal>
 
-        <div className="projects-grid">
+        <div className="projects-grid swipe-track" ref={caseFilesRef}>
           {selectedSystems.map((project, index) => (
             <ScrollReveal key={project.id} delay={0.15 + (index * 0.08)}>
               <ProjectCard project={project} onOpenHandbook={onOpenHandbook} />
             </ScrollReveal>
           ))}
         </div>
+        <SwipeDots targetRef={caseFilesRef} count={selectedSystems.length} label="case file" />
       </section>
 
       {/* 4. Capability Overview: four areas, one line each, core tools as chips */}
@@ -237,7 +241,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
           </div>
         </ScrollReveal>
 
-        <div className="capability-grid">
+        <div className="capability-grid swipe-track" ref={capabilitiesRef}>
           {CAPABILITIES.map((cap, idx) => (
             <ScrollReveal key={cap.title} delay={0.12 + idx * 0.07}>
               <article className="capability-card">
@@ -253,6 +257,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
             </ScrollReveal>
           ))}
         </div>
+        <SwipeDots targetRef={capabilitiesRef} count={CAPABILITIES.length} label="capability" />
       </section>
 
       {/* 5. Author Spotlight & Direct Action Station */}

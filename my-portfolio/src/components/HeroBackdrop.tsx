@@ -82,6 +82,10 @@ export default function HeroBackdrop() {
     const onPointerLeave = () => {
       pointer.target = 0;
     };
+    // Touch has no hover: light the dots under the finger, then fade once it lifts.
+    const onPointerUp = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') pointer.target = 0;
+    };
 
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -95,6 +99,9 @@ export default function HeroBackdrop() {
     document.addEventListener('visibilitychange', start);
     if (!reducedMotion) {
       window.addEventListener('pointermove', onPointerMove, { passive: true });
+      window.addEventListener('pointerdown', onPointerMove, { passive: true });
+      window.addEventListener('pointerup', onPointerUp, { passive: true });
+      window.addEventListener('pointercancel', onPointerUp, { passive: true });
       document.documentElement.addEventListener('pointerleave', onPointerLeave);
     }
     start();
@@ -105,6 +112,9 @@ export default function HeroBackdrop() {
       resizeObserver.disconnect();
       document.removeEventListener('visibilitychange', start);
       window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerdown', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
       document.documentElement.removeEventListener('pointerleave', onPointerLeave);
     };
   }, []);

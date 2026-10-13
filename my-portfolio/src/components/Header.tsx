@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, type TouchEvent } from 'react';
 import { SOCIAL_LINKS } from '../data';
 
 interface HeaderProps {
@@ -11,6 +11,37 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Transparent over the hero; the full-width frosted bar fades in once the page scrolls.
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 8);
+
+  // Mobile menu: lock the page behind it and close on Escape.
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [isMenuOpen]);
+
+  // Swipe right or up on the open menu to close it.
+  const menuTouch = useRef<{ x: number; y: number } | null>(null);
+  const onMenuTouchStart = (e: TouchEvent) => {
+    menuTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onMenuTouchEnd = (e: TouchEvent) => {
+    const start = menuTouch.current;
+    menuTouch.current = null;
+    if (!start) return;
+    const dx = e.changedTouches[0].clientX - start.x;
+    const dy = e.changedTouches[0].clientY - start.y;
+    if ((dx > 70 && Math.abs(dx) > Math.abs(dy)) || (dy < -70 && Math.abs(dy) > Math.abs(dx))) {
+      setIsMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -112,8 +143,16 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
     <>
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="mobile-menu-overlay">
-          <button onClick={() => setIsMenuOpen(false)} className="close-menu-btn">
+        <div
+          className="mobile-menu-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          onTouchStart={onMenuTouchStart}
+          onTouchEnd={onMenuTouchEnd}
+        >
+          <span className="mobile-menu-hint" aria-hidden="true">Swipe to close</span>
+          <button onClick={() => setIsMenuOpen(false)} className="close-menu-btn" aria-label="Close menu">
              <svg style={{ width: '2rem', height: '2rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
           {navItems.map((item) => (
@@ -184,7 +223,7 @@ const Header = ({ activeTab, setActiveTab }: HeaderProps) => {
               </a>
            </div>
 
-          <button onClick={() => setIsMenuOpen(true)} className="menu-toggle-btn">
+          <button onClick={() => setIsMenuOpen(true)} className="menu-toggle-btn" aria-label="Open menu" aria-expanded={isMenuOpen}>
             <div className="hamburger-line"></div>
             <div className="hamburger-line"></div>
             <div className="hamburger-line"></div>

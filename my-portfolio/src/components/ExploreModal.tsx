@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useSwipeToClose } from '../hooks/useSwipeToClose';
 
 interface ExploreModalProps {
   isOpen: boolean;
@@ -12,6 +13,10 @@ export const ExploreModal: React.FC<ExploreModalProps> = ({
   onSelectOption,
 }) => {
   // Lock body scroll when modal is open
+  // Swipe down on the sheet to dismiss (touch screens)
+  const sheetRef = useRef<HTMLDivElement>(null);
+  useSwipeToClose(sheetRef, onClose, isOpen);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -36,7 +41,7 @@ export const ExploreModal: React.FC<ExploreModalProps> = ({
 
   return (
     <div className="explore-modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="explore-modal-title">
-      <div className="explore-modal-container" onClick={(e) => e.stopPropagation()}>
+      <div className="explore-modal-container" ref={sheetRef} onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
         <div className="explore-modal-header">
           <div>
