@@ -60,154 +60,133 @@ const FLAGSHIP_ITEMS: FlagshipProject[] = [
 export default function FlagshipShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
-  const snapTimeoutRef = useRef<number | null>(null);
-  const isSnappingRef = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const snapRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const activeRef = useRef(0);
+
+  // Scroll position inside the pinned track drives which panel is open.
+  // The stage is only sticky on large screens (see CSS); elsewhere every card is stacked open.
+  const getPinGeometry = () => {
+    const track = trackRef.current;
+    const stage = stageRef.current;
+    if (!track || !stage) return null;
+    const style = getComputedStyle(stage);
+    if (style.position !== 'sticky') return null;
+    const scrollable = track.offsetHeight - stage.offsetHeight;
+    if (scrollable <= 0) return null;
+    return { track, scrollable, pinTop: parseFloat(style.top) || 0 };
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const track = trackRef.current;
-      if (!track) return;
+    const update = () => {
+      const geo = getPinGeometry();
+      if (!geo) return;
+      const { track, scrollable, pinTop } = geo;
+      const p = Math.max(0, Math.min(1, (pinTop - track.getBoundingClientRect().top) / scrollable));
+      const steps = p * FLAGSHIP_ITEMS.length;
+      FLAGSHIP_ITEMS.forEach((_, i) => {
+        track.style.setProperty(`--fill-${i}`, String(Math.max(0, Math.min(1, steps - i))));
+      });
 
-      const rect = track.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const scrollableDistance = rect.height - windowHeight;
-      if (scrollableDistance <= 0) return;
-
-      const stagePinnedTop = Math.max(76, windowHeight * 0.5 - 280);
-      const scrolledPastPin = stagePinnedTop - rect.top;
-
-      // Track whether user is actively browsing within the pinned sticky track
-      const isInsideTrack = scrolledPastPin >= -40 && scrolledPastPin <= scrollableDistance + 40;
-
-      // Track progress 0 to 1
-      const p = Math.max(0, Math.min(1, scrolledPastPin / scrollableDistance));
-
-      // Discrete step threshold switching
-      let nextIndex = 0;
-      if (p >= 0.78) {
-        nextIndex = 2;
-      } else if (p >= 0.40) {
-        nextIndex = 1;
-      } else {
-        nextIndex = 0;
+      // Hysteresis: only switch once the scroll is clearly past a boundary, so small
+      // movements around the edge don't flip panels back and forth.
+      const current = activeRef.current;
+      const SLACK = 0.12;
+      let next = current;
+      if (steps >= current + 1 + SLACK || steps < current - SLACK) {
+        next = Math.max(0, Math.min(FLAGSHIP_ITEMS.length - 1, Math.floor(steps)));
       }
-
-      setActiveIndex(nextIndex);
-
-      // Snap scroll to target card position once user stops scrolling
-      if (snapTimeoutRef.current) {
-        window.clearTimeout(snapTimeoutRef.current);
-      }
-
-      // DO NOT snap if user is on the 3rd card moving forward, or 1st card moving upward:
-      // This allows free, zero-delay exit directly into the next section!
-      if (nextIndex === 2 && p >= 0.80) {
-        return;
-      }
-      if (nextIndex === 0 && p <= 0.12) {
-        return;
-      }
-
-      if (isInsideTrack && !isSnappingRef.current) {
-        snapTimeoutRef.current = window.setTimeout(() => {
-          const trackAbsoluteTop = track.getBoundingClientRect().top + window.scrollY;
-          const snapTargets = [0.05, 0.55, 0.95];
-          const targetScroll = trackAbsoluteTop - stagePinnedTop + snapTargets[nextIndex] * scrollableDistance;
-
-          // Only snap if user stopped away from the snap center
-          if (Math.abs(window.scrollY - targetScroll) > 35) {
-            isSnappingRef.current = true;
-            window.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
-            setTimeout(() => {
-              isSnappingRef.current = false;
-            }, 450);
-          }
-        }, 120);
+      if (next !== current) {
+        activeRef.current = next;
+        setActiveIndex(next);
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    // Native scroll-snap anchors at the centre of each project's scroll segment.
+    // CSS gives them scroll-margin-top equal to the stage's pin offset, so snapping to
+    // an anchor lands the pinned stage exactly on that project.
+    const placeSnaps = () => {
+      const geo = getPinGeometry();
+      snapRefs.current.forEach((el, i) => {
+        if (!el) return;
+        el.style.top = geo ? `${((i + 0.5) / FLAGSHIP_ITEMS.length) * geo.scrollable}px` : '0px';
+      });
+      update();
+    };
 
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', placeSnaps);
+    placeSnaps();
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (snapTimeoutRef.current) window.clearTimeout(snapTimeoutRef.current);
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', placeSnaps);
     };
   }, []);
 
-  const handleTabClick = (index: number) => {
-    setActiveIndex(index);
-    const track = trackRef.current;
-    if (!track) return;
-
-    const windowHeight = window.innerHeight;
-    const scrollableDistance = track.offsetHeight - windowHeight;
-    const trackAbsoluteTop = track.getBoundingClientRect().top + window.scrollY;
-    const stagePinnedTop = Math.max(76, windowHeight * 0.5 - 280);
-
-    const snapTargets = [0.05, 0.55, 0.95];
-    const targetP = snapTargets[index] ?? 0;
-    const targetScroll = trackAbsoluteTop - stagePinnedTop + targetP * scrollableDistance;
-
-    isSnappingRef.current = true;
-    window.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
-    setTimeout(() => {
-      isSnappingRef.current = false;
-    }, 450);
+  const goTo = (idx: number) => {
+    const geo = getPinGeometry();
+    if (!geo) {
+      activeRef.current = idx;
+      setActiveIndex(idx);
+      return;
+    }
+    const { track, scrollable, pinTop } = geo;
+    const trackTop = track.getBoundingClientRect().top + window.scrollY;
+    const p = (idx + 0.5) / FLAGSHIP_ITEMS.length;
+    window.scrollTo({ top: trackTop - pinTop + p * scrollable, behavior: 'smooth' });
   };
 
   return (
-    <div className="flagship-sticky-track" ref={trackRef}>
-      <div className="flagship-sticky-stage">
-        {/* Pinned Showcase Header Bar & Tab Pills */}
-        <div className="flagship-stage-header">
-          <div className="flagship-header-row">
-            <div>
-              <span className="section-index-tag">01 · FLAGSHIP PRODUCTION DEPLOYMENTS</span>
-              <h2 className="editorial-section-title">Architectural Showcases</h2>
-              <p className="editorial-section-subtitle">
-                Engineered with production-grade verification, sub-second edge performance, and multi-mode autonomy.
-              </p>
-            </div>
-
-            <div className="flagship-stage-nav" role="tablist" aria-label="Flagship projects navigation">
-              {FLAGSHIP_ITEMS.map((item, idx) => (
-                <button
-                  key={item.id}
-                  role="tab"
-                  aria-selected={idx === activeIndex}
-                  onClick={() => handleTabClick(idx)}
-                  className={`flagship-stage-tab ${idx === activeIndex ? 'active' : ''}`}
-                >
-                  <span className="stage-tab-index">0{idx + 1}</span>
-                  <span className="stage-tab-title">{item.title}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+    <div className="flagship-track" ref={trackRef}>
+      {FLAGSHIP_ITEMS.map((item, idx) => (
+        <span
+          key={item.id}
+          className="flagship-snap"
+          aria-hidden="true"
+          ref={(el) => {
+            snapRefs.current[idx] = el;
+          }}
+        />
+      ))}
+    <div className="flagship-showcase" ref={stageRef}>
+      <div className="flagship-header-row">
+        <div>
+          <span className="section-index-tag">01 · FLAGSHIP PRODUCTION DEPLOYMENTS</span>
+          <h2 className="editorial-section-title">Architectural Showcases</h2>
+          <p className="editorial-section-subtitle">
+            Engineered with production-grade verification, sub-second edge performance, and multi-mode autonomy.
+          </p>
         </div>
+        <span className="flagship-hint" aria-hidden="true">Scroll to explore ↓</span>
+      </div>
 
-        {/* 3D Physical Card Deck Viewport */}
-        <div className="flagship-deck-viewport">
-          {FLAGSHIP_ITEMS.map((item, idx) => {
-            const isCurrent = idx === activeIndex;
-            const isPrevious = idx < activeIndex;
-            const isNext = idx > activeIndex;
-
-            let cardStatusClass = "flagship-deck-card";
-            if (isCurrent) cardStatusClass += " current";
-            else if (isPrevious) cardStatusClass += " shuffled-back";
-            else if (isNext) cardStatusClass += " waiting-in-deck";
-
-            return (
-              <div 
-                key={item.id} 
-                className={cardStatusClass}
-                aria-hidden={!isCurrent}
+      <div className="flagship-gallery">
+        {FLAGSHIP_ITEMS.map((item, idx) => {
+          const isActive = idx === activeIndex;
+          return (
+            <article
+              key={item.id}
+              className={`flagship-panel ${isActive ? 'is-active' : ''}`}
+            >
+              {/* Collapsed strip: visible only while another panel is open */}
+              <button
+                type="button"
+                className="flagship-strip"
+                onClick={() => goTo(idx)}
+                aria-expanded={isActive}
+                aria-label={`Show ${item.title}`}
+                tabIndex={isActive ? -1 : 0}
               >
-                {/* Left Column: Technical Dossier */}
+                <img src={item.image} alt="" className="flagship-strip-bg" />
+                <span className="flagship-strip-index">0{idx + 1}</span>
+                <span className="flagship-strip-title">{item.title}</span>
+              </button>
+
+              {/* Expanded case study */}
+              <div className="flagship-panel-body" aria-hidden={!isActive}>
                 <div className="flagship-stage-content">
                   <div className="flagship-stage-meta">
+                    <span className="flagship-panel-index">0{idx + 1}</span>
                     <span className="flagship-tag">{item.caseTag}</span>
                   </div>
 
@@ -217,16 +196,14 @@ export default function FlagshipShowcase() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flagship-title-link"
-                      tabIndex={isCurrent ? 0 : -1}
+                      tabIndex={isActive ? 0 : -1}
                     >
                       {item.title}
                       <span className="flagship-title-arrow">↗</span>
                     </a>
                   </h3>
 
-                  <p className="flagship-desc">
-                    {item.desc}
-                  </p>
+                  <p className="flagship-desc">{item.desc}</p>
 
                   <div className="flagship-metrics-callout">
                     {item.metrics.map((m, mIdx) => (
@@ -244,10 +221,8 @@ export default function FlagshipShowcase() {
                   </div>
                 </div>
 
-                {/* Right Column: High-Fidelity Browser Window Stage */}
                 <div className="flagship-stage-visual">
                   <div className="browser-mockup-frame">
-                    {/* Browser Header Bar */}
                     <div className="browser-header-bar">
                       <div className="browser-controls">
                         <span className="browser-dot close" />
@@ -263,28 +238,41 @@ export default function FlagshipShowcase() {
                       </div>
                     </div>
 
-                    {/* Viewport Image Link */}
                     <a
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="browser-viewport-link"
-                      tabIndex={isCurrent ? 0 : -1}
+                      tabIndex={isActive ? 0 : -1}
                     >
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="browser-screen-img"
-                      />
+                      <img src={item.image} alt={item.title} className="browser-screen-img" />
                       <div className="browser-screen-glare" />
                     </a>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </article>
+          );
+        })}
       </div>
+
+      <div className="flagship-progress" aria-hidden="true">
+        {FLAGSHIP_ITEMS.map((item, idx) => (
+          <button
+            key={item.id}
+            type="button"
+            tabIndex={-1}
+            className={`flagship-progress-step ${idx === activeIndex ? 'is-active' : ''}`}
+            onClick={() => goTo(idx)}
+          >
+            <span className="flagship-progress-label">0{idx + 1} · {item.title}</span>
+            <span className="flagship-progress-bar">
+              <span className="flagship-progress-fill" style={{ transform: `scaleX(var(--fill-${idx}, 0))` }} />
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
     </div>
   );
 }

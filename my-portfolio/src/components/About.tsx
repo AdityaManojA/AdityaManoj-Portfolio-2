@@ -14,11 +14,11 @@ const About = () => {
           <h3 className="skill-card-title" style={{ marginBottom: '1rem' }}>Who am I?</h3>
           <div className="section-text" style={{ marginBottom: 0 }}>
             <p>
-              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a <strong>Full-Stack Developer & Systems Engineer</strong> specializing in modern web applications, autonomous multimodal AI desktop assistants (<a href="https://github.com/AdityaManojA/ALFRED-MK" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">ALFRED Mark-VIII</a>), high-throughput Progressive Web Apps (PWAs), interactive frontend architectures, and robust backend services.
+              Hi there, I'm <strong>Aditya Manoj</strong>. I'm a <strong>Full-Stack Developer & Systems Engineer</strong> specializing in modern web applications, autonomous multimodal AI desktop assistants (<a href="https://github.com/AdityaManojA/ALFRED-MK" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline font-semibold">ALFRED Mark-VIII</a>), high-throughput Progressive Web Apps (PWAs), interactive frontend architectures, and robust backend services.
             </p>
             <br/>
             <p>
-              I build scalable, responsive web experiences using React, Next.js, TypeScript, and HTML5 Canvas, backed by resilient cloud APIs (Node.js, Python, Firebase, AWS, GCP). I also design and train autonomous AI systems and datasets (<a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[#FF9F68] hover:underline font-semibold">Prompt-Ops Blueprints</a>), making intelligent agents accessible and native to real-world workflows.
+              I build scalable, responsive web experiences using React, Next.js, TypeScript, and HTML5 Canvas, backed by resilient cloud APIs (Node.js, Python, Firebase, AWS, GCP). I also design and train autonomous AI systems and datasets (<a href="https://github.com/AdityaManojA/prompt-ops-blueprints" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline font-semibold">Prompt-Ops Blueprints</a>), making intelligent agents accessible and native to real-world workflows.
             </p>
             <br/>
             <p>

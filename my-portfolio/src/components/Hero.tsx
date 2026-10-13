@@ -6,6 +6,43 @@ import ScrollReveal from './ScrollReveal';
 import ExploreModal from './ExploreModal';
 
 import FlagshipShowcase from './FlagshipShowcase';
+import HeroBackdrop from './HeroBackdrop';
+import LandingGuide from './LandingGuide';
+import { RotatingWord, CountUp } from './HeroMotion';
+
+
+const PROOF_STATS = [
+  { to: 48, suffix: '+', label: 'Public Repositories' },
+  { to: 1.2, decimals: 1, suffix: 'M+', label: 'Firestore Reads (GLIA)' },
+  // Latency stays static: counting it upward would read as getting slower.
+  { to: 150, prefix: '<', suffix: 'ms', label: 'RapidOCR & Audio Latency', still: true },
+  { to: 600, suffix: '+', label: 'E2E Tests (Clardentity)' },
+];
+
+// Kept deliberately short: one line of context and the core tools per area.
+// The full breakdown lives on the Skills tab.
+const CAPABILITIES = [
+  {
+    title: 'Frontend & Graphics',
+    summary: 'Production web apps with canvas and 3D graphics.',
+    stack: ['React 19', 'Next.js 16', 'TypeScript', 'Canvas 2D', 'Spline 3D', 'PWA'],
+  },
+  {
+    title: 'AI Agents & Multimodal',
+    summary: 'Desktop agents with live voice and on-device vision.',
+    stack: ['Gemini Live', 'Claude', 'Ollama', 'Whisper', 'ONNX', 'PyQt6'],
+  },
+  {
+    title: 'Backend & Data',
+    summary: 'Async APIs, task queues and vector search.',
+    stack: ['FastAPI', 'Node.js', 'Celery', 'PostgreSQL', 'pgvector', 'Redis'],
+  },
+  {
+    title: 'SRE & Infrastructure',
+    summary: 'Linux internals up to Kubernetes. Author of the SRE Handbook.',
+    stack: ['Linux', 'cgroups', 'Kubernetes', 'Prometheus', 'Grafana', 'AWS'],
+  },
+];
 
 interface HeroProps {
   onOpenHandbook?: () => void;
@@ -61,8 +98,10 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
 
   return (
     <div className="anti-slop-landing">
+      <LandingGuide />
       {/* 1. Executive Editorial Hero */}
       <section className="hero-editorial-section">
+        <HeroBackdrop />
         <ScrollReveal delay={0.08}>
           <div className="hero-container">
             <div className="hero-row">
@@ -75,7 +114,9 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
             </div>
             <div className="hero-row">
               <h1 className="hero-text">develop</h1>
-              <h1 className="hero-text">systems</h1>
+              <h1 className="hero-text hero-text-accent">
+                <RotatingWord words={['systems', 'products', 'agents', 'runtimes']} />
+              </h1>
             </div>
           </div>
         </ScrollReveal>
@@ -87,7 +128,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
               href="https://github.com/AdityaManojA/ALFRED-MK"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF9F68] hover:underline font-semibold"
+              className="text-[var(--accent)] hover:underline font-semibold"
             >
               ALFRED
             </a>
@@ -96,7 +137,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
               href="https://github.com/AdityaManojA/prompt-ops-blueprints"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF9F68] hover:underline font-semibold"
+              className="text-[var(--accent)] hover:underline font-semibold"
             >
               sovereign AI models
             </a>
@@ -127,30 +168,31 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
         {/* Verifiable Proof Telemetry Strip */}
         <ScrollReveal delay={0.32}>
           <div className="proof-telemetry-strip">
-            <div className="proof-stat-item">
-              <span className="proof-stat-value">48+</span>
-              <span className="proof-stat-label">Public Repositories</span>
-            </div>
-            <div className="proof-stat-divider" />
-            <div className="proof-stat-item">
-              <span className="proof-stat-value">1.2M+</span>
-              <span className="proof-stat-label">Firestore Reads (GLIA)</span>
-            </div>
-            <div className="proof-stat-divider" />
-            <div className="proof-stat-item">
-              <span className="proof-stat-value">&lt;150ms</span>
-              <span className="proof-stat-label">RapidOCR & Audio Latency</span>
-            </div>
-            <div className="proof-stat-divider" />
-            <div className="proof-stat-item">
-              <span className="proof-stat-value">600+</span>
-              <span className="proof-stat-label">E2E Tests (Clardentity)</span>
-            </div>
+            {PROOF_STATS.map((stat, i) => (
+              <div key={stat.label} className="proof-stat-group">
+                {i > 0 && <div className="proof-stat-divider" />}
+                <div className="proof-stat-item">
+                  <span className="proof-stat-value">
+                    {stat.still ? (
+                      `${stat.prefix}${stat.to}${stat.suffix}`
+                    ) : (
+                      <CountUp to={stat.to} decimals={stat.decimals} prefix={stat.prefix} suffix={stat.suffix} />
+                    )}
+                  </span>
+                  <span className="proof-stat-label">{stat.label}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </ScrollReveal>
+
+        <div className="hero-scroll-cue" aria-hidden="true">
+          <span className="hero-scroll-cue-line" />
+          <span className="hero-scroll-cue-text">Scroll</span>
+        </div>
       </section>
 
-      {/* 2. Flagship Systems Dossier (Interactive Pinned Sticky Stage) */}
+      {/* 2. Flagship Systems Dossier (Expanding Panel Gallery) */}
       <section className="section-container" style={{ marginTop: '3.5rem' }}>
         <FlagshipShowcase />
       </section>
@@ -176,86 +218,40 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
         </div>
       </section>
 
-      {/* 4. Core Systems Architecture Matrix (Anti-SLOP Engineering Depth) */}
+      {/* 4. Capability Overview: four areas, one line each, core tools as chips */}
       <section className="section-container" style={{ marginTop: '5.5rem' }}>
         <ScrollReveal delay={0.1}>
-          <div className="section-kicker-header">
-            <span className="section-index-tag">03 · TECHNICAL CAPABILITY MATRIX</span>
-            <h2 className="editorial-section-title">Engineering Competencies & Stack Depth</h2>
-            <p className="editorial-section-subtitle">
-              End-to-end technical scope: from interactive canvas runtimes to low-level Linux internals and sovereign AI pipelines.
-            </p>
+          <div className="section-kicker-header capability-header">
+            <div>
+              <span className="section-index-tag">03 · TECHNICAL CAPABILITY MATRIX</span>
+              <h2 className="editorial-section-title">Engineering Competencies & Stack Depth</h2>
+              <p className="editorial-section-subtitle">
+                Four areas I work across, from canvas runtimes to Linux internals.
+              </p>
+            </div>
+            {onNavigateTab && (
+              <button type="button" className="capability-more-link" onClick={() => onNavigateTab('Skills')}>
+                Full skills breakdown <span aria-hidden="true">→</span>
+              </button>
+            )}
           </div>
         </ScrollReveal>
 
-        <div className="systems-matrix-grid">
-          <ScrollReveal delay={0.15}>
-            <div className="matrix-card">
-              <div className="matrix-header">
-                <span className="matrix-index">01</span>
-                <h3 className="matrix-title">Frontend Architecture & Graphics</h3>
-              </div>
-              <p className="matrix-desc">
-                Production web applications with rich graphics, responsive mobile safe-areas, and deterministic sub-second state hydration.
-              </p>
-              <ul className="matrix-list">
-                <li><strong>Runtimes:</strong> React 19, Next.js 16 (App Router), Vite, TypeScript</li>
-                <li><strong>Graphics:</strong> HTML5 Canvas 2D, Catmull-Rom Splines, Euler kinematics, Spline 3D</li>
-                <li><strong>Styling & PWA:</strong> Tailwind CSS v4, Vanilla CSS design tokens, Service Workers, Offline-first</li>
-              </ul>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.22}>
-            <div className="matrix-card">
-              <div className="matrix-header">
-                <span className="matrix-index">02</span>
-                <h3 className="matrix-title">Autonomous AI & Multimodal Terminals</h3>
-              </div>
-              <p className="matrix-desc">
-                Sovereign agentic desktop assistants, low-latency live audio streaming, and on-device visual grounding systems.
-              </p>
-              <ul className="matrix-list">
-                <li><strong>LLMs & Agents:</strong> Gemini 3.1 Flash Live, Claude, Local Ollama / LM Studio</li>
-                <li><strong>Speech & Vision:</strong> OpenWakeWord ONNX acoustic models, RapidOCR (&lt;150ms), Whisper</li>
-                <li><strong>GUI Systems:</strong> PyQt6 tactical HUD, 30+ auto-discovered OS automation tools</li>
-              </ul>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.29}>
-            <div className="matrix-card">
-              <div className="matrix-header">
-                <span className="matrix-index">03</span>
-                <h3 className="matrix-title">Backend, Distributed Queues & Data</h3>
-              </div>
-              <p className="matrix-desc">
-                High-concurrency API microservices, distributed asynchronous task pipelines, and vector-embedded search engines.
-              </p>
-              <ul className="matrix-list">
-                <li><strong>Services:</strong> Python (FastAPI), Node.js, async SQLAlchemy, Celery jobs</li>
-                <li><strong>Storage & Vector:</strong> PostgreSQL + pgvector (Supabase), Redis (Upstash), S3</li>
-                <li><strong>Realtime & Auth:</strong> Firebase Firestore (1.2M+ reads), WebAuthn passkeys, Dexie.js</li>
-              </ul>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.36}>
-            <div className="matrix-card">
-              <div className="matrix-header">
-                <span className="matrix-index">04</span>
-                <h3 className="matrix-title">SRE, Linux Internals & Infrastructure</h3>
-              </div>
-              <p className="matrix-desc">
-                Author of <em>The DevOps & SRE Handbook</em>. Deep-dive mastery from bare-metal silicon up to Kubernetes orchestration.
-              </p>
-              <ul className="matrix-list">
-                <li><strong>Linux Internals:</strong> clone, namespaces, cgroups, OverlayFS, sysfs</li>
-                <li><strong>Observability & Cloud:</strong> Prometheus, Loki, Grafana, AWS, GCP, Firebase</li>
-                <li><strong>Networking:</strong> Cisco VLANs, LACP bonding, TCP/IP low-level optimization</li>
-              </ul>
-            </div>
-          </ScrollReveal>
+        <div className="capability-grid">
+          {CAPABILITIES.map((cap, idx) => (
+            <ScrollReveal key={cap.title} delay={0.12 + idx * 0.07}>
+              <article className="capability-card">
+                <span className="capability-index">0{idx + 1}</span>
+                <h3 className="capability-title">{cap.title}</h3>
+                <p className="capability-summary">{cap.summary}</p>
+                <ul className="capability-stack" aria-label={`${cap.title} tools`}>
+                  {cap.stack.map((tool) => (
+                    <li key={tool}>{tool}</li>
+                  ))}
+                </ul>
+              </article>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 

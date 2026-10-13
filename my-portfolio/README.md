@@ -514,3 +514,101 @@ export const PROJECTS_DATA: Project[] = [
   }
 ];
 ```
+
+---
+
+## 9. Site Implementation & Release Handoff
+
+### What the site is
+
+A single-page React 19 + Vite + TypeScript portfolio (tab-based navigation, no router), styled with hand-written CSS tokens in `src/App.css` plus Tailwind utilities. Deployed to Firebase Hosting (`firebase.json` → site `xo-aditya`, project `adityamanojportfolio`, SPA rewrite to `index.html`).
+
+### Commands
+
+| Command | Status |
+| :--- | :--- |
+| `npm install` | Standard; not re-run during the October 2026 redesign |
+| `npm run dev` | Verified (Vite dev server on port 5173) |
+| `npm run build` | Verified 2026-10-13 (`tsc -b && vite build`, passes) |
+| `npx eslint <changed files>` | Verified clean for the landing-page components listed below |
+| Tests | None configured in this project |
+
+### Landing page redesign (October 2026)
+
+Home tab (`src/components/Hero.tsx`), changed in this pass:
+
+- **Hero backdrop** (`HeroBackdrop.tsx`): a canvas dot grid with a slow diagonal wave and a soft orange highlight around the pointer, plus one drifting radial glow (CSS). It pauses when offscreen or in a background tab, draws a single static frame under `prefers-reduced-motion`, and is masked so it never sits behind the text at full strength.
+- **Kinetic headline** (`HeroMotion.tsx` → `RotatingWord`): the last word cycles *systems / products / agents / runtimes*. Screen readers get "systems" only. Rotation is off under reduced motion.
+- **Proof strip**: count totals animate up once when scrolled into view (`CountUp`). The final values are rendered first, so nothing is lost if JS or animation fails. Latency (`<150ms`) is deliberately static.
+- **Flagship showcase** (`FlagshipShowcase.tsx`): the top 3 projects sit in an expanding-panel gallery that pins while scrolling. Each third of the scroll opens the next project, a progress bar shows position, and strips/labels jump to a project. At ≤991px wide or ≤760px tall nothing pins: phones and tablets show all three as stacked cards; wide but short screens show one open panel and switch on strip click.
+- **Capability section**: reduced from four dense prose cards (~30 lines) to four compact cards with a one-line summary and six tool chips each, plus a link to the Skills tab for the full breakdown.
+- **Small touches**: rows of the headline rise in sequence, section tags draw a short rule on reveal, a scroll cue sits under the hero, and capability cards have a cursor-following spotlight.
+
+**Libraries:** none added. The anti-slop skill's optional toolkit (GSAP, Lenis, Vanta, ShaderGradient, React Three Fiber, liquid glass) was considered and not used: CSS plus one 2D canvas covers this design, with no extra bundle weight.
+
+**Assets:** no new assets. Project screenshots are existing files in `public/ProjectImages/`.
+
+### Verification evidence
+
+- Checked in the in-app browser at 1440×900 and 375×812: hero, flagship showcase, capability section. No horizontal overflow at 375px (`scrollWidth` = viewport width). No console errors.
+- Sticky showcase: pinning and the panel switching at 10% / 40% / 70% / 98% of the track were confirmed by script. Real wheel-scrolling and keyboard scrolling were **not** exercised by hand.
+- Reduced-motion fallbacks are implemented in CSS/JS but were **not** checked with the OS setting turned on.
+- No Lighthouse, Core Web Vitals or screen-reader pass has been run.
+
+### Release checklist
+
+#### Build and handoff
+
+- [x] DONE — Setup, run and build commands documented above (build verified 2026-10-13).
+- [x] DONE — Landing-page components and interactions described above.
+- [x] DONE — Dependencies added for this work: none.
+- [x] DONE — Assets: no new assets. Unsplash images referenced in `src/data` keep their original URLs.
+- [ ] PENDING — Hand-check every primary link (social pills, project links, handbook modal, tab navigation) on the deployed site.
+- [x] DONE — Responsive check at 1440×900 and 375×812 for the redesigned sections. Tablet (768–1199px) **not** checked visually.
+- [ ] PENDING — Keyboard and reduced-motion review: focus states exist on strips, links and buttons, but there has been no full keyboard walkthrough and no run with reduced motion enabled.
+- [x] DONE — Build and lint results reported only for what was run (see above). No test suite exists.
+- [ ] PENDING — Known limitations: `RotatingWord` reserves the width of its longest word, so shorter words leave a little space on narrow screens. The pointer highlight is desktop-only by design.
+
+#### SEO and search readiness
+
+- [x] DONE — `index.html` has a distinct title and meta description.
+- [ ] PENDING — Single-page app with tab state and no URLs per section, so only the home view is indexable. The multiple `<h1>` elements in the hero headline should be reviewed.
+- [ ] PENDING — Alt text: decorative strip images use `alt=""`, and project screenshots use the project title. The dark-mode toggle image uses `alt="Toggle Theme"`, which should become a proper button label.
+- [ ] PENDING — No Open Graph / Twitter metadata yet.
+- [ ] PENDING — Canonical URL not set. The production domain needs owner confirmation (Firebase site `xo-aditya`; custom domain unknown).
+- [ ] PENDING — No `robots.txt` or `sitemap.xml` in `public/`.
+- [ ] PENDING — Sitemap entries: N/A until a sitemap exists.
+- [ ] PENDING — Structured data (e.g. `Person` JSON-LD) not added. Add it only with accurate, visible information.
+- [ ] PENDING — Broken links / 404 behaviour not checked. The SPA rewrite sends every path to `index.html`.
+- [ ] PENDING — Core Web Vitals not measured on the deployment.
+- [x] DONE — No ranking or indexing outcome is promised.
+
+#### Google Search Console
+
+- [ ] PENDING (owner action) — Confirm the production domain and property type (Domain vs URL-prefix).
+- [ ] PENDING (owner action) — Verify ownership in Search Console.
+- [ ] PENDING (owner action) — Submit a sitemap once one exists.
+- [ ] PENDING (owner action) — Inspect the home URL for indexing after launch.
+- [ ] PENDING (owner action) — Schedule periodic review of indexing and security reports.
+- [x] DONE — No Search Console step is claimed as complete.
+
+#### Privacy, cookies, consent, and legal readiness
+
+- [ ] PENDING (owner) — Confirm the jurisdictions and audience (India-based; visitors worldwide).
+- [x] DONE — Data practices reviewed in code: no analytics, ads, forms or third-party trackers. Google Fonts (Montserrat) is loaded from `fonts.googleapis.com`, which sends visitor IPs to Google, and Unsplash images are hotlinked.
+- [ ] PENDING (owner) — No privacy notice. Decide whether one is needed given the Google Fonts / Unsplash requests, or self-host the font and images to avoid them.
+- [x] DONE — Cookies and storage: no cookies set by the site. `localStorage` key `theme` stores the light/dark preference (functional).
+- [x] N/A — Consent banner: no non-essential tracking exists to gate.
+- [x] N/A — Consent interface: none present.
+- [x] N/A — Forms: the site has no forms (contact is via `mailto:` and external links).
+- [x] N/A — Optional consent vs necessary processing: no optional processing.
+- [ ] PENDING — No privacy or cookie documents exist yet. Any that are drafted need owner review.
+- [x] N/A — Terms, refunds, ecommerce and age safeguards: personal portfolio with no transactions.
+- [ ] PENDING (owner) — Remaining decisions: production domain, privacy notice, Google Fonts self-hosting.
+
+### Owner actions before launch
+
+1. Confirm the production domain, then add canonical, Open Graph, `robots.txt` and `sitemap.xml`.
+2. Verify the domain in Google Search Console and submit the sitemap.
+3. Decide on a privacy notice, or self-host Montserrat and the two Unsplash images.
+4. Do a quick manual pass on the deployed site: wheel- and keyboard-scroll the flagship showcase, tab through the page, and enable OS reduced motion once.
