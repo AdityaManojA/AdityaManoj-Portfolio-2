@@ -21,20 +21,20 @@ export interface Project {
   description: string;
   tags: string[];
   image: string;
-  link: string;
+  link?: string;
   isHandbook?: boolean;
 }
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: 17,
-    title: "Clardentity — AI Thinking Companion",
+    id: 8,
+    title: "ThreadPath Collective",
     category: "Projects",
-    year: "2026",
-    description: "An AI thinking companion and multi-mode reasoning engine that fact-checks its own answers across 8 thinking modes. Features live answer streaming with claim-level verification and confidence scoring, document search over uploaded files, voice calls, Next.js 16 PWA responsive architecture, and FastAPI/Celery backend pipelines.",
-    tags: ["Next.js", "TypeScript", "FastAPI", "Tailwind CSS", "PWA"],
-    image: "./ProjectImages/Clardentity Learning and Development International.png",
-    link: "https://clardentity.ai/"
+    year: "2025",
+    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Threadpath.png",
+    link: "https://threadpathcollective.ca/"
   },
   {
     id: 18,
@@ -55,16 +55,6 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
     image: "./ProjectImages/Indzita.png",
     link: "https://indzita-biotech-007.web.app/#overview"
-  },
-  {
-    id: 8,
-    title: "ThreadPath Collective",
-    category: "Projects",
-    year: "2025",
-    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Threadpath.png",
-    link: "https://threadpathcollective.ca/"
   },
   {
     id: 16,

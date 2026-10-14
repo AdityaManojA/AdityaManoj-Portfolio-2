@@ -53,23 +53,15 @@ npm run dev
 
 ## 3. Projects Catalog (Ordered for Showcase)
 
-### 1. Clardentity — AI Thinking Companion
-> **AI Thinking Companion & Claim-Level Fact-Checking Platform** | **Frontend & Mobile Lead:** **ADITYA MANOJ**
+### 1. ThreadPath Collective
+> **Sustainable Cultural Streetwear & E-Commerce Web Platform** | **Frontend & DevOps:** **ADITYA MANOJ**
 
 - **Category**: `Projects`
-- **Year**: `2026`
-- **Live URL**: [https://clardentity.ai/](https://clardentity.ai/)
-- **Image Filename**: `Clardentity Learning and Development International.png`
-- **Tags**: `Next.js`, `TypeScript`, `FastAPI`, `Tailwind CSS`, `PWA`
-- **Portfolio Summary**: An AI thinking companion and multi-mode reasoning engine that fact-checks its own answers across eight thinking modes (Finder, Decision-making, Thought coach, Learning, Co-Creative, Mentoring, Reflect & Relieve, Legal). Live streaming answers are split into individual claims and cross-checked against uploaded documents and the web with confidence scoring.
-- **Tech Stack & Architecture**:
-  - **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS v4, PWA mobile installability.
-  - **Backend**: Python, FastAPI, async SQLAlchemy, Celery background jobs.
-  - **Data & AI**: PostgreSQL + pgvector (Supabase), Redis (Upstash), S3-compatible storage, Anthropic Claude with OpenAI automatic fallback, OpenAI embeddings/voice, and Tavily search.
-- **Key Contributions**:
-  - Engineered the full responsive phone and tablet experience: touch-optimized hit areas, swipe menus, notch/keyboard safe-area management, offline and cold-start state handling, and scroll memory.
-  - Designed and built themeable homepage card marks in four palettes and an animated curtain banner.
-  - Authored a comprehensive 600+ test Playwright suite covering 17 screens across 13 viewport profiles on Chromium and WebKit.
+- **Year**: `2025`
+- **Live URL**: [https://threadpathcollective.ca/](https://threadpathcollective.ca/)
+- **Image Filename**: `Threadpath.png`
+- **Tags**: `React`, `Tailwind CSS`, `AWS`, `CloudFront`, `Framer Motion`, `TypeScript`
+- **Portfolio Summary**: Full-featured e-commerce platform and inventory tracking system for a sustainable streetwear brand based in Canada. Built with dynamic coordinate layouts, responsive catalog filtering, Framer Motion transitions, and edge delivery via AWS Cloud Functions and Amazon CloudFront for low-latency global distribution.
 
 ### 2. Pixel Spaces — 3D Visualisation & Interior Design Studio
 > **Bespoke Editorial Architecture & 3D Visualisation Web Platform** | **Full-Stack Frontend & UI/UX:** **ADITYA MANOJ**
@@ -102,14 +94,6 @@ npm run dev
   - Synthesized a reactive, physics-driven generative genomic ASCII canvas utilizing Hooke's law spring-damping displacement vectors, throttling computation cycles via an `IntersectionObserver` lifecycle to eliminate thermal throttling and lock 60 FPS mobile rendering.
   - Engineered an interactive Virtual Diagnostics Lab simulator modeling real-time thermal PCR amplifications ($C_t$ threshold kinetics), integrating dynamic multi-parameter telemetry pipelines with client-side blob generation for automated clinical assay synthesis.
   - Orchestrated enterprise deployment pipelines and edge delivery using Vite and Firebase Hosting, provisioning aggressive multi-tier immutable caching headers and SPA rewrite rules to ensure instantaneous sub-second global content delivery.
-
-### 4. ThreadPath Collective
-- **Category**: `Projects`
-- **Year**: `2025`
-- **Live URL**: [https://threadpathcollective.ca/](https://threadpathcollective.ca/)
-- **Image Filename**: `Threadpath.png`
-- **Tags**: `React`, `Tailwind CSS`, `AWS`, `GCP`, `Framer`
-- **Description**: Full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.
 
 ### 5. ALFRED — MARK-VIII (Wayne Protocol Edition)
 > **Autonomous Multimodal AI Desktop Assistant & Tactical Terminal** | **Architect & Lead Creator:** **ADITYA MANOJ**

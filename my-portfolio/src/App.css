@@ -848,6 +848,10 @@ body {
   border-color: var(--border-dark);
 }
 
+.project-card.is-static {
+  cursor: default;
+}
+
 .project-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -3926,6 +3930,12 @@ html {
   color: var(--primary-orange);
 }
 
+.flagship-title-static {
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+
 .flagship-title-arrow {
   font-size: 1.15rem;
   font-weight: 600;
@@ -4092,6 +4102,10 @@ html {
   aspect-ratio: 16 / 10;
   max-height: 290px;
   background: #090a0f;
+}
+
+.browser-viewport-static {
+  cursor: default;
 }
 
 .browser-screen-img {
@@ -5286,6 +5300,85 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .swipe-dot span {
+    transition: none;
+  }
+}
+
+/* Mobile sticky stacks (case files, capabilities): each card pins below the header and the
+   next slides up over it. Pure position: sticky, so it scrolls at native speed with no JS.
+   Each card pins a step lower (--i set inline) so the edges of the cards beneath stay
+   visible as a stack. Cards unpin together when the section ends. Desktop is untouched. */
+@media (max-width: 767px) {
+  .app-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .sticky-stack {
+    --stack-top: calc(4.75rem + 0.5rem);
+    --stack-step: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* Room after the last card so the completed stack holds for a beat before leaving.
+     A spacer, not padding: sticky children are confined to the content box, and padding
+     sits outside it. */
+  .sticky-stack::after {
+    content: "";
+    flex: none;
+    height: 6rem;
+  }
+
+  .sticky-stack > * {
+    position: sticky;
+    top: calc(var(--stack-top) + var(--i, 0) * var(--stack-step));
+  }
+
+  /* Cards beneath stay put while the next one arrives, so reveal them as-is */
+  .sticky-stack > .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* A soft top shadow separates each card from the one it covers */
+  .sticky-stack > * > .project-card,
+  .sticky-stack > * > .capability-card {
+    box-shadow: 0 -10px 28px -14px rgba(0, 0, 0, 0.28);
+  }
+
+  .dark .sticky-stack > * > .project-card,
+  .dark .sticky-stack > * > .capability-card {
+    box-shadow: 0 -12px 30px -12px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Case files on touch screens / phones: the file sheet pops up out of the folder as the card
+   nears the centre of the screen, and drops back in as it leaves near the top (ProjectCard
+   toggles .is-in-focus). Mirrors the desktop hover state; desktop mice keep using hover. */
+@media (hover: none), (max-width: 767px) {
+  .project-card.is-in-focus .folder-file-container {
+    transform: translateY(-22px) scale(1.03);
+    box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.28), 0 10px 20px -4px rgba(0, 0, 0, 0.18);
+  }
+
+  .dark .project-card.is-in-focus .folder-file-container {
+    box-shadow: 0 24px 50px -8px rgba(0, 0, 0, 0.75), 0 12px 24px -4px rgba(0, 0, 0, 0.6);
+  }
+
+  .project-card.is-in-focus .project-actions {
+    transform: translateY(0);
+  }
+
+  /* A touch slower than hover, so the scroll-driven pop reads as deliberate rather than twitchy */
+  .project-card .folder-file-container {
+    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card .folder-file-container,
+  .project-card .project-actions {
     transition: none;
   }
 }

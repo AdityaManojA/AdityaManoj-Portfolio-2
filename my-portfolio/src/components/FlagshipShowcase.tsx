@@ -5,8 +5,8 @@ interface FlagshipProject {
   id: number;
   caseTag: string;
   title: string;
-  link: string;
-  domain: string;
+  link?: string;
+  domain?: string;
   image: string;
   desc: string;
   metrics: { label: string; val: string }[];
@@ -15,18 +15,18 @@ interface FlagshipProject {
 
 const FLAGSHIP_ITEMS: FlagshipProject[] = [
   {
-    id: 17,
-    caseTag: 'CASE 01 · NEXT.JS 16 & FASTAPI',
-    title: 'Clardentity',
-    link: 'https://clardentity.ai/',
-    domain: 'clardentity.ai',
-    image: './ProjectImages/Clardentity Learning and Development International.png',
-    desc: 'An AI thinking companion and multi-mode reasoning engine that fact-checks its own answers across eight thinking modes. Splits answers into individual claims and cross-checks against uploaded documents and the live web with claim-level confidence scoring.',
+    id: 8,
+    caseTag: 'CASE 01 · E-COMMERCE & CLOUD ARCHITECTURE',
+    title: 'ThreadPath Collective',
+    link: 'https://threadpathcollective.ca/',
+    domain: 'threadpathcollective.ca',
+    image: './ProjectImages/Threadpath.png',
+    desc: 'Bespoke full-featured e-commerce platform and inventory tracking system for a sustainable Canadian cultural streetwear label. Built with dynamic coordinate layouts, responsive catalog filtering, Framer Motion transitions, and low-latency global delivery orchestrated via AWS Cloud Functions and Amazon CloudFront CDN.',
     metrics: [
-      { label: 'PWA Installable', val: 'iOS & Android' },
-      { label: 'E2E Suite', val: '600+ Playwright Tests' }
+      { label: 'Global Edge CDN', val: 'Amazon CloudFront & S3' },
+      { label: 'Motion Engine', val: 'Framer Motion + React' }
     ],
-    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Python', 'FastAPI', 'Celery', 'PostgreSQL', 'Supabase', 'Redis']
+    tags: ['React', 'Tailwind CSS', 'AWS', 'CloudFront', 'Framer Motion', 'TypeScript']
   },
   {
     id: 18,
@@ -193,16 +193,22 @@ export default function FlagshipShowcase() {
                   </div>
 
                   <h3 className="flagship-title">
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flagship-title-link"
-                      tabIndex={isActive ? 0 : -1}
-                    >
-                      {item.title}
-                      <span className="flagship-title-arrow">↗</span>
-                    </a>
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flagship-title-link"
+                        tabIndex={isActive ? 0 : -1}
+                      >
+                        {item.title}
+                        <span className="flagship-title-arrow">↗</span>
+                      </a>
+                    ) : (
+                      <span className="flagship-title-static">
+                        {item.title}
+                      </span>
+                    )}
                   </h3>
 
                   <p className="flagship-desc">{item.desc}</p>
@@ -231,25 +237,34 @@ export default function FlagshipShowcase() {
                         <span className="browser-dot min" />
                         <span className="browser-dot max" />
                       </div>
-                      <div className="browser-url-pill">
-                        <svg className="browser-lock-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                        </svg>
-                        <span className="browser-url-text">{item.domain}</span>
-                      </div>
+                      {item.domain && (
+                        <div className="browser-url-pill">
+                          <svg className="browser-lock-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                          </svg>
+                          <span className="browser-url-text">{item.domain}</span>
+                        </div>
+                      )}
                     </div>
 
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="browser-viewport-link"
-                      tabIndex={isActive ? 0 : -1}
-                    >
-                      <img src={item.image} alt={item.title} className="browser-screen-img" />
-                      <div className="browser-screen-glare" />
-                    </a>
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="browser-viewport-link"
+                        tabIndex={isActive ? 0 : -1}
+                      >
+                        <img src={item.image} alt={item.title} className="browser-screen-img" />
+                        <div className="browser-screen-glare" />
+                      </a>
+                    ) : (
+                      <div className="browser-viewport-link browser-viewport-static">
+                        <img src={item.image} alt={item.title} className="browser-screen-img" />
+                        <div className="browser-screen-glare" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
