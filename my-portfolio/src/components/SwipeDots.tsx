@@ -4,6 +4,10 @@ interface SwipeDotsProps {
   targetRef: RefObject<HTMLElement | null>;
   count: number;
   label: string;
+  /** Controlled position, for tracks that are moved by something other than their own scroll */
+  active?: number;
+  /** Replaces the default jump-to-card behaviour when a dot is tapped */
+  onSelect?: (index: number) => void;
 }
 
 /**
@@ -11,8 +15,9 @@ interface SwipeDotsProps {
  * The swiping itself is native CSS scroll-snap; this only follows the track's scroll
  * position and lets a tap on a dot jump to that card. Hidden where the track isn't a carousel.
  */
-export default function SwipeDots({ targetRef, count, label }: SwipeDotsProps) {
-  const [active, setActive] = useState(0);
+export default function SwipeDots({ targetRef, count, label, active: controlled, onSelect }: SwipeDotsProps) {
+  const [scrolled, setActive] = useState(0);
+  const active = controlled ?? scrolled;
 
   useEffect(() => {
     const track = targetRef.current;
@@ -38,6 +43,10 @@ export default function SwipeDots({ targetRef, count, label }: SwipeDotsProps) {
   }, [targetRef]);
 
   const goTo = (i: number) => {
+    if (onSelect) {
+      onSelect(i);
+      return;
+    }
     const track = targetRef.current;
     const child = track?.children[i] as HTMLElement | undefined;
     if (!track || !child) return;

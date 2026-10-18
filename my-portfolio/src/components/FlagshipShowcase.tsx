@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type TouchEvent } from 'react';
 import SwipeDots from './SwipeDots';
 
 interface FlagshipProject {
@@ -58,6 +58,20 @@ const FLAGSHIP_ITEMS: FlagshipProject[] = [
   }
 ];
 
+// Phones tall enough to fit a pinned card: the stage pins and vertical scroll pans the cards
+// sideways (see CSS). Shorter phones keep the plain swipe carousel.
+const MOBILE_PIN = '(max-width: 767px) and (min-height: 640px)';
+
+// Maps scroll progress to a card position that rests on each card and eases between them:
+// card i is centred over the middle of its scroll segment, matching the snap anchors.
+const panPosition = (p: number, count: number) => {
+  const q = Math.max(0, Math.min(count - 1, p * count - 0.5));
+  const i = Math.floor(q);
+  const t = Math.max(0, Math.min(1, (q - i - 0.2) / 0.6));
+  const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+  return Math.min(count - 1, i + eased);
+};
+
 export default function FlagshipShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -65,6 +79,14 @@ export default function FlagshipShowcase() {
   const snapRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const galleryRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
+  const [pinnedMobile, setPinnedMobile] = useState(() => window.matchMedia(MOBILE_PIN).matches);
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_PIN);
+    const onChange = () => setPinnedMobile(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
   // Scroll position inside the pinned track drives which panel is open.
   // The stage is only sticky on large screens (see CSS); elsewhere every card is stacked open.
@@ -81,14 +103,33 @@ export default function FlagshipShowcase() {
 
   useEffect(() => {
     const update = () => {
+      const gallery = galleryRef.current;
       const geo = getPinGeometry();
-      if (!geo) return;
+      if (!geo) {
+        if (gallery) gallery.style.transform = '';
+        return;
+      }
       const { track, scrollable, pinTop } = geo;
       const p = Math.max(0, Math.min(1, (pinTop - track.getBoundingClientRect().top) / scrollable));
       const steps = p * FLAGSHIP_ITEMS.length;
       FLAGSHIP_ITEMS.forEach((_, i) => {
         track.style.setProperty(`--fill-${i}`, String(Math.max(0, Math.min(1, steps - i))));
       });
+
+      // Phones: pan the cards sideways with the vertical scroll instead of opening panels.
+      if (gallery && window.matchMedia(MOBILE_PIN).matches) {
+        const cards = gallery.children as HTMLCollectionOf<HTMLElement>;
+        const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 0;
+        const pos = panPosition(p, FLAGSHIP_ITEMS.length);
+        gallery.style.transform = `translate3d(${-pos * step}px, 0, 0)`;
+        const next = Math.round(pos);
+        if (next !== activeRef.current) {
+          activeRef.current = next;
+          setActiveIndex(next);
+        }
+        return;
+      }
+      if (gallery) gallery.style.transform = '';
 
       // Hysteresis: only switch once the scroll is clearly past a boundary, so small
       // movements around the edge don't flip panels back and forth.
@@ -124,6 +165,22 @@ export default function FlagshipShowcase() {
       window.removeEventListener('resize', placeSnaps);
     };
   }, []);
+
+  // Phones: a sideways swipe on the pinned cards jumps to the next / previous card.
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const onGalleryTouchStart = (e: TouchEvent) => {
+    swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onGalleryTouchEnd = (e: TouchEvent) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    if (!start || !pinnedMobile) return;
+    const dx = e.changedTouches[0].clientX - start.x;
+    const dy = e.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    const next = Math.max(0, Math.min(FLAGSHIP_ITEMS.length - 1, activeRef.current + (dx < 0 ? 1 : -1)));
+    if (next !== activeRef.current) goTo(next);
+  };
 
   const goTo = (idx: number) => {
     const geo = getPinGeometry();
@@ -162,7 +219,12 @@ export default function FlagshipShowcase() {
         <span className="flagship-hint" aria-hidden="true">Scroll to explore ↓</span>
       </div>
 
-      <div className="flagship-gallery swipe-track" ref={galleryRef}>
+      <div
+        className="flagship-gallery swipe-track"
+        ref={galleryRef}
+        onTouchStart={onGalleryTouchStart}
+        onTouchEnd={onGalleryTouchEnd}
+      >
         {FLAGSHIP_ITEMS.map((item, idx) => {
           const isActive = idx === activeIndex;
           return (
@@ -273,7 +335,13 @@ export default function FlagshipShowcase() {
         })}
       </div>
 
-      <SwipeDots targetRef={galleryRef} count={FLAGSHIP_ITEMS.length} label="flagship project" />
+      <SwipeDots
+        targetRef={galleryRef}
+        count={FLAGSHIP_ITEMS.length}
+        label="flagship project"
+        active={pinnedMobile ? activeIndex : undefined}
+        onSelect={pinnedMobile ? goTo : undefined}
+      />
 
       <div className="flagship-progress" aria-hidden="true">
         {FLAGSHIP_ITEMS.map((item, idx) => (
