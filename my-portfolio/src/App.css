@@ -5481,3 +5481,18 @@ html {
     flex: none;
   }
 }
+
+/* Selected Systems Drawer - Footer Call-to-Action */
+.projects-footer-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.projects-footer-cta .editorial-action-btn {
+  padding: 0.85rem 1.85rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+}

@@ -141,7 +141,25 @@ npm run dev
   - Developed an adaptive mobile-first design system featuring native-grade iOS segmented bank toggles, dynamic CSS Grid micro-layouts, and hardware-accelerated glassmorphism dashboards optimized for touch viewports ($\le$375px).
   - Hardened client security and session durability via WebAuthn biometric passkeys, SHA-256 PIN hashing, and multi-tier Service Worker caching strategies (`Stale-While-Revalidate`) to sustain uninterrupted offline financial tracking.
 
-### 6. The Whiskey Business
+### 6. SoloDesk — Freelancer Business Operations Suite
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://taskflow-solodesk.web.app/](https://taskflow-solodesk.web.app/)
+- **GitHub**: [https://github.com/AdityaManojA/SoloDesk](https://github.com/AdityaManojA/SoloDesk)
+- **Image Filename**: `SoloDesk.png`
+- **Tags**: `React`, `Vite`, `Firebase`, `TypeScript`, `Tailwind CSS`
+- **Portfolio Summary**: Full-scale business operations suite for independent contractors and freelancers. Engineered with real-time client & project management, automated milestone invoice generation, conflict-aware daily scheduling, interactive focus tracking, client activity audit timelines, and calendar ecosystem sync.
+
+### 7. TaskFlow — Gamified Habit & Quest Tracker PWA
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://taskflow-dailytracker.web.app/](https://taskflow-dailytracker.web.app/)
+- **GitHub**: [https://github.com/AdityaManojA/TaskFlow](https://github.com/AdityaManojA/TaskFlow)
+- **Image Filename**: `Taskflow.png`
+- **Tags**: `PWA`, `JavaScript`, `Firebase`, `HTML5`, `CSS3`
+- **Portfolio Summary**: A calm, gamified task and daily habit management Progressive Web Application (PWA) built with zero runtime dependencies. Features natural language quick-entry, 6-tier quest priority workflows, streak & EXP mechanics, integrated focus timers, Google Calendar & ICS synchronization, and an interactive companion (Mochi).
+
+### 8. The Whisky Business
 - **Category**: `Projects`
 - **Year**: `2025`
 - **Live URL**: [https://thewhiskeybusiness-3e639.web.app/](https://thewhiskeybusiness-3e639.web.app/)
@@ -340,11 +358,34 @@ export interface Project {
   description: string;
   tags: string[];
   image: string;
-  link: string;
+  link?: string;
+  github?: string;
   isHandbook?: boolean;
 }
 
 export const PROJECTS_DATA: Project[] = [
+  {
+    id: 20,
+    title: "SoloDesk — Freelancer Business Operations Suite",
+    category: "Projects",
+    year: "2026",
+    description: "Full-scale business operations suite for independent contractors and freelancers. Engineered with real-time client & project management, automated milestone invoice generation, conflict-aware daily scheduling, interactive focus tracking, client activity audit timelines, and calendar ecosystem sync.",
+    tags: ["React", "Vite", "Firebase", "TypeScript", "Tailwind CSS"],
+    image: "./ProjectImages/SoloDesk.png",
+    link: "https://taskflow-solodesk.web.app/",
+    github: "https://github.com/AdityaManojA/SoloDesk"
+  },
+  {
+    id: 19,
+    title: "TaskFlow — Gamified Habit & Quest Tracker PWA",
+    category: "Projects",
+    year: "2026",
+    description: "A calm, gamified task and daily habit management Progressive Web Application (PWA) built with zero runtime dependencies. Features natural language quick-entry, 6-tier quest priority workflows, streak & EXP mechanics, integrated focus timers, Google Calendar & ICS synchronization, and an interactive companion (Mochi).",
+    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
+    image: "./ProjectImages/Taskflow.png",
+    link: "https://taskflow-dailytracker.web.app/",
+    github: "https://github.com/AdityaManojA/TaskFlow"
+  },
   {
     id: 16,
     title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
@@ -397,7 +438,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 11,
-    title: "The Whiskey Business",
+    title: "The Whisky Business",
     category: "Projects",
     year: "2025",
     description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",

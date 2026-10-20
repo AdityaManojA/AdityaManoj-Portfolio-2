@@ -52,8 +52,8 @@ interface HeroProps {
 const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
   const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
 
-  // Curated systems for the Uniform Folder Drawer (ALFRED, The Whiskey Business, ThreadPath Collective)
-  const selectedSystems = [16, 11, 8]
+  // Curated systems for the Uniform Folder Drawer (ALFRED, The Whisky Business, TaskFlow)
+  const selectedSystems = [16, 11, 19]
     .map(id => PROJECTS_DATA.find(p => p.id === id))
     .filter(Boolean) as typeof PROJECTS_DATA;
 
@@ -200,12 +200,19 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
       {/* 3. Selected Systems Drawer (Curated Case Files) */}
       <section className="section-container" style={{ marginTop: '2.5rem' }}>
         <ScrollReveal delay={0.1}>
-          <div className="section-kicker-header">
-            <span className="section-index-tag">02 · SELECTED SYSTEMS DRAWER</span>
-            <h2 className="editorial-section-title">Specialized Engineering Case Files</h2>
-            <p className="editorial-section-subtitle">
-              Sovereign multimodal desktop agents, computational biology suites, and mission-critical event PWAs.
-            </p>
+          <div className="section-kicker-header capability-header">
+            <div>
+              <span className="section-index-tag">02 · SELECTED SYSTEMS DRAWER</span>
+              <h2 className="editorial-section-title">Specialized Engineering Case Files</h2>
+              <p className="editorial-section-subtitle">
+                Sovereign multimodal desktop agents, computational biology suites, and mission-critical event PWAs.
+              </p>
+            </div>
+            {onNavigateTab && (
+              <button type="button" className="capability-more-link" onClick={() => onNavigateTab('Projects')}>
+                View all projects <span aria-hidden="true">→</span>
+              </button>
+            )}
           </div>
         </ScrollReveal>
 
@@ -216,6 +223,22 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
             </ScrollReveal>
           ))}
         </div>
+
+        {onNavigateTab && (
+          <ScrollReveal delay={0.25}>
+            <div className="projects-footer-cta">
+              <button
+                type="button"
+                onClick={() => onNavigateTab('Projects')}
+                className="editorial-action-btn secondary"
+                aria-label="View all projects"
+              >
+                <span>View All Projects</span>
+                <span className="btn-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+          </ScrollReveal>
+        )}
       </section>
 
       {/* 4. Capability Overview: four areas, one line each, core tools as chips */}
@@ -280,7 +303,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
                     className="editorial-action-btn secondary"
                     aria-label="View all selected works"
                   >
-                    <span>View All 16+ Projects</span>
+                    <span>View All {PROJECTS_DATA.length}+ Projects</span>
                     <span className="btn-arrow">↗</span>
                   </button>
                 )}
