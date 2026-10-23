@@ -43,9 +43,10 @@ const title = () => document.querySelector('.fe-title')?.textContent;
 async function bootToMainMenu() {
   render(<App />);
   expect(document.querySelector('.intro')).not.toBeNull();
-  // The skip listener arms a moment after mount, so an earlier key can't skip instantly.
+  // The listener arms a moment after mount, so an earlier key can't act instantly.
   await act(async () => { await new Promise(r => setTimeout(r, 200)); });
-  await press(' ');
+  await press(' '); // "Click to begin": starts the intro with sound
+  await press(' '); // skips it
   await waitFor(() => expect(title()).toBe('main menu'));
 }
 
@@ -57,38 +58,36 @@ beforeEach(() => {
 describe('intro', () => {
   const wait = (ms: number) => act(async () => { await new Promise(r => setTimeout(r, ms)); });
 
-  it('plays the looping video straight away, with no loader and no click', async () => {
+  it('opens on the lamps with "Click to begin"; the click plays the looping video with sound', async () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play');
     render(<App />);
     const video = document.querySelector('video')!;
     expect(video.loop).toBe(true);
+    expect(screen.getByText('Click to begin')).toBeTruthy();
+    expect(play).not.toHaveBeenCalled(); // nothing plays before the visitor interacts
+    await wait(200);
+    await act(async () => { fireEvent.pointerDown(window); });
     expect(play).toHaveBeenCalledTimes(1);
     expect(video.muted).toBe(false);
-    expect(screen.queryByRole('status', { name: 'Loading' })).toBeNull();
+    expect(screen.queryByText('Click to begin')).toBeNull();
     fireEvent.playing(video);
+    expect(screen.queryByRole('status')).toBeNull(); // lamps gone once the video is on screen
     expect(screen.getByText('press any key to skip')).toBeTruthy();
     fireEvent.ended(video); // looping: reaching the end never leaves the intro
     expect(document.querySelector('.intro')).not.toBeNull();
-    await wait(200);
     await press('x');
     await waitFor(() => expect(title()).toBe('main menu'));
     play.mockRestore();
   });
 
-  it('when the browser blocks sound, still plays (muted) and the first key goes to the menu', async () => {
+  it('stays on "Click to begin" if the browser still refuses sound for that key', async () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
-      .mockRejectedValueOnce(new DOMException('needs a gesture', 'NotAllowedError'))
-      .mockResolvedValue(undefined);
+      .mockRejectedValueOnce(new DOMException('needs a gesture', 'NotAllowedError'));
     render(<App />);
-    const video = document.querySelector('video')!;
     await wait(200);
-    expect(play).toHaveBeenCalledTimes(2);
-    expect(video.muted).toBe(true);
-    fireEvent.playing(video);
-    expect(screen.getByText('press any key to skip')).toBeTruthy();
-    expect(screen.queryByText(/for sound/)).toBeNull();
-    await press('x');
-    await waitFor(() => expect(title()).toBe('main menu'));
+    await press('Escape');
+    await waitFor(() => expect(screen.getByText('Click to begin')).toBeTruthy());
+    expect(document.querySelector('.intro')).not.toBeNull();
     play.mockRestore();
   });
 });
