@@ -26,7 +26,7 @@ vi.mock('../src/game/audio', () => {
 
 import App from '../src/game/App';
 import { EXPERIENCE, PROJECTS, SKILLS } from '../src/game/content';
-import { selection } from '../src/game/util';
+import { LOADER_MS, selection } from '../src/game/util';
 
 const TOOLS = SKILLS.reduce((n, g) => n + g.items.length, 0);
 
@@ -55,25 +55,40 @@ beforeEach(() => {
 });
 
 describe('intro', () => {
-  it('shows the skip prompt and any key skips to the main menu', async () => {
+  const wait = (ms: number) => act(async () => { await new Promise(r => setTimeout(r, ms)); });
+
+  it('shows the lamps first, then plays the looping video without a click', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play');
     render(<App />);
+    const video = document.querySelector('video')!;
+    expect(video.loop).toBe(true);
+    expect(screen.getByRole('status', { name: 'Loading' })).toBeTruthy();
+    fireEvent.canPlay(video);
+    await wait(200);
+    expect(play).not.toHaveBeenCalled(); // the lamps stay up for their moment
+    await wait(LOADER_MS);
+    expect(play).toHaveBeenCalledTimes(1);
+    expect(video.muted).toBe(false);
+    fireEvent.playing(video);
+    expect(screen.queryByRole('status', { name: 'Loading' })).toBeNull();
     expect(screen.getByText('press any key to skip')).toBeTruthy();
-    await act(async () => { await new Promise(r => setTimeout(r, 200)); });
+    fireEvent.ended(video); // looping: reaching the end never leaves the intro
+    expect(document.querySelector('.intro')).not.toBeNull();
     await press('x');
     await waitFor(() => expect(title()).toBe('main menu'));
+    play.mockRestore();
   });
 
-  it('when sound autoplay is blocked, the first key starts the intro with sound instead of skipping', async () => {
+  it('plays muted when the browser blocks sound, with no click-to-start screen', async () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
       .mockRejectedValueOnce(new DOMException('needs a gesture', 'NotAllowedError'))
       .mockResolvedValue(undefined);
     render(<App />);
-    await waitFor(() => expect(screen.getByText('press any key to start')).toBeTruthy());
-    await act(async () => { await new Promise(r => setTimeout(r, 200)); });
-    await press('x');
-    await waitFor(() => expect(screen.getByText('press any key to skip')).toBeTruthy());
+    const video = document.querySelector('video')!;
+    fireEvent.canPlay(video);
+    await wait(LOADER_MS + 100);
     expect(play).toHaveBeenCalledTimes(2);
-    expect(document.querySelector('video')!.muted).toBe(false);
+    expect(video.muted).toBe(true);
     await press('x');
     await waitFor(() => expect(title()).toBe('main menu'));
     play.mockRestore();

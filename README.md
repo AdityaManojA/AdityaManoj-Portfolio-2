@@ -85,7 +85,7 @@ Mouse and touch work too: every icon, chevron, list row and key prompt is clicka
 
 | Game screen | Portfolio content | Code |
 | --- | --- | --- |
-| Intro video | Boot loader, "press any key to skip" | `screens/Intro.tsx` |
+| Intro video | Police-lamp loader for 1.5 s, then the intro video on a loop; any key skips | `screens/Intro.tsx` |
 | Main Menu | Hub: Career, Challenge Series, Quick Race, Online, My Cars, Options; [1] Game Stats | `screens/Menus.tsx` |
 | Career → Safe House | Blacklist, Rap Sheet, Car Lot | `screens/Menus.tsx` |
 | Blacklist #15 → #1 | 15 projects as rivals, with live-site and source actions | `screens/Blacklist.tsx` |
@@ -168,7 +168,7 @@ What gets it there, without touching image or video quality:
   preloaded images are kept alive, so later `<img>` tags are served from memory whatever the host's
   cache headers say (`src/game/preload.ts`).
 - **No waits between screens.** All screens ship in one bundle, so opening one never waits on the
-  network. The only loader is the game's own lamps while the intro video buffers. The Rap Sheet's
+  network. The only loader is the game's own lamps, shown for 1.5 s (longer only if the intro is still buffering). The Rap Sheet's
   scripted boot is shorter (0.9 s per step) and Enter skips it.
 - **Cheap effects.** The ink splatter is pre-rendered once (`public/nfsmw/ink.webp`, 23 KB) instead of
   an SVG turbulence filter rasterised on every screen. The film-grain layer is a sixth of its old
