@@ -41,9 +41,11 @@ npm run build
 firebase deploy --only hosting:xo-aditya-mostwanted
 ```
 
-The page and media are served with `Cache-Control: no-cache`, so browsers check for a new version on
-every visit (an unchanged file is a quick "not modified" reply, not a re-download). Only the
-hashed bundles in `assets/` are cached for good, since a new build gives them new names.
+Browsers check for a new version of the page and media on every visit (`max-age=0`; an unchanged
+file is a quick "not modified" reply, not a re-download), so there is no stale cache to clear.
+Firebase's CDN does cache the media (`s-maxage`) and clears it on every deploy. That caching matters:
+served uncached, Firebase streams files without byte-range support, and iPhones then refuse to play
+the intro. The hashed bundles in `assets/` are cached for good, since each build renames them.
 
 ## Tests
 
