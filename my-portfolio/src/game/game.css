@@ -59,12 +59,14 @@ h1, h2, p, figure, ol { margin: 0; }
   position: absolute;
   right: var(--pad);
   bottom: calc(var(--pad) + env(safe-area-inset-bottom));
-  font-family: var(--marker);
-  font-weight: 700;
-  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
-  letter-spacing: 0.06em;
+  /* Same face as "Click to begin": the blackletter k read as an f, so the prompt uses the UI font. */
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(0.95rem, 2vw, 1.35rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #e9e6dc;
-  text-shadow: 2px 2px 0 #000;
+  text-shadow: 0 0 6px #000, 2px 2px 0 #000;
   animation: blink 1.6s ease-in-out infinite;
 }
 
