@@ -39,15 +39,18 @@ export default function Intro({ onDone }: { onDone: () => void }) {
         setStage('gate');
       });
     };
+    // 'click', not 'pointerdown': on a phone the browser only grants sound once the tap ends, so a
+    // pointerdown handler would be refused and the tap would do nothing. (iOS also only sends
+    // clicks to elements that look clickable; .intro has cursor: pointer for that.)
     // Defer by a tick so the key press that reloaded the page can't start the intro instantly.
     const arm = setTimeout(() => {
       window.addEventListener('keydown', onInput);
-      window.addEventListener('pointerdown', onInput);
+      window.addEventListener('click', onInput);
     }, 150);
     return () => {
       clearTimeout(arm);
       window.removeEventListener('keydown', onInput);
-      window.removeEventListener('pointerdown', onInput);
+      window.removeEventListener('click', onInput);
     };
   }, [onDone]);
 
