@@ -5,7 +5,7 @@ import { PROJECTS } from '../content';
 import type { Project } from '../content';
 import { Icon } from '../icons';
 import type { IconName } from '../icons';
-import { useKeys } from '../input';
+import { useKeys, useSwipe, useTouchScreen } from '../input';
 import { useNav } from '../nav';
 import { Backdrop, Chevron, Corners, InkSplatter, KeyHints, ScreenTitle } from '../ui';
 import { BLACKLIST_SIZE, openLink, selection } from '../util';
@@ -20,7 +20,9 @@ import { BLACKLIST_SIZE, openLink, selection } from '../util';
 // Bio page ([2]): "Ride:" and "Strength:" with blackletter labels, a bracketed "bio:" block with
 // the full write-up, portrait on the right.
 //
-// Each rival is a project; #1 is the flagship.
+// Each rival is a project; #1 is the flagship. Labels are plain (Live Site, Source, Details) and a
+// help line says how to move, so visitors who don't know the game can find their way. Clicking or
+// tapping the portrait opens the details, as [2] does.
 
 const RIVALS = PROJECTS.slice(0, BLACKLIST_SIZE);
 
@@ -28,8 +30,8 @@ interface Action { key: string; label: string; icon: IconName; run: () => void }
 
 const actionsFor = (p: Project): Action[] => {
   const out: Action[] = [];
-  if (p.link) out.push({ key: 'race', label: 'Race Events', icon: 'raceevents', run: () => openLink(p.link!) });
-  if (p.github) out.push({ key: 'source', label: 'View Source', icon: 'milestones', run: () => openLink(p.github!) });
+  if (p.link) out.push({ key: 'race', label: 'Live Site', icon: 'raceevents', run: () => openLink(p.link!) });
+  if (p.github) out.push({ key: 'source', label: 'Source Code', icon: 'milestones', run: () => openLink(p.github!) });
   return out;
 };
 
@@ -39,6 +41,7 @@ const firstSentence = (text: string) => (text.match(/^.*?[.!?](\s|$)/)?.[0] ?? t
 
 export default function Blacklist() {
   const nav = useNav();
+  const touch = useTouchScreen();
   const [rival, setRivalState] = useState(() => selection.get('blacklist') ?? 0);
   const [action, setAction] = useState(0);
   const [bio, setBio] = useState(false);
@@ -91,15 +94,17 @@ export default function Blacklist() {
     back,
     '2': toggleBio,
   });
+  // Phones and trackpads: swipe up / scroll down for the next project, the other way for the last.
+  const swipe = useSwipe(dir => changeRival(dir));
 
   const title = (
     <div className="bl-title">
       <div className="bl-updown">
-        <button type="button" className="bl-ud is-up" onClick={() => changeRival(-1)} aria-label="Previous rival" tabIndex={-1} disabled={rival === 0} />
-        <button type="button" className="bl-ud is-down" onClick={() => changeRival(1)} aria-label="Next rival" tabIndex={-1} disabled={rival === RIVALS.length - 1} />
+        <button type="button" className="bl-ud is-up" onClick={() => changeRival(-1)} aria-label="Previous project" tabIndex={-1} disabled={rival === 0} />
+        <button type="button" className="bl-ud is-down" onClick={() => changeRival(1)} aria-label="Next project" tabIndex={-1} disabled={rival === RIVALS.length - 1} />
       </div>
       <div>
-        <ScreenTitle>blacklist {rank}</ScreenTitle>
+        <ScreenTitle>project {rank}</ScreenTitle>
         <div className="bl-name">
           {shortName(p.title)}
           {bio && subtitle(p.title) && <em>{subtitle(p.title)}</em>}
@@ -115,11 +120,11 @@ export default function Blacklist() {
         <header className="bl-head">{title}</header>
         <div className="bl-bio" key={`bio-${p.title}`}>
           <div className="bl-bio-text">
-            <div className="bl-fact"><span>Ride:</span>{p.tags.slice(0, 3).join(', ')}</div>
-            <div className="bl-fact"><span>Strength:</span>{p.category}, {p.year}</div>
+            <div className="bl-fact"><span>Stack:</span>{p.tags.slice(0, 3).join(', ')}</div>
+            <div className="bl-fact"><span>Type:</span>{p.category}, {p.year}</div>
             <section className="bl-bio-block">
               <Corners className="is-white" />
-              <h2>bio:</h2>
+              <h2>details:</h2>
               <p>{p.description}</p>
             </section>
           </div>
@@ -131,7 +136,7 @@ export default function Blacklist() {
           className="bl-keys"
           hints={[
             { k: 'Esc', label: 'Back', onClick: back },
-            ...(p.link ? [{ k: '↵', label: 'Race Events', onClick: () => { audio.play('accept'); openLink(p.link!); } }] : []),
+            ...(p.link ? [{ k: '↵', label: 'Live Site', onClick: () => { audio.play('accept'); openLink(p.link!); } }] : []),
           ]}
         />
       </div>
@@ -139,7 +144,7 @@ export default function Blacklist() {
   }
 
   return (
-    <div className="fe-screen bl-screen">
+    <div className="fe-screen bl-screen is-swipe" {...swipe}>
       <Backdrop dim />
       <header className="bl-head">
         {title}
@@ -149,8 +154,10 @@ export default function Blacklist() {
       <div className="bl-body" key={p.title}>
         <figure className="bl-portrait">
           <InkSplatter className="bl-portrait-ink" />
-          <img src={asset(p.image)} alt={p.title} decoding="async" />
-          {p.link && <span className="bl-stamp">Defeated</span>}
+          <button type="button" className="bl-portrait-open" onClick={toggleBio} aria-label={`Details: ${shortName(p.title)}`} tabIndex={-1}>
+            <img src={asset(p.image)} alt={p.title} decoding="async" />
+          </button>
+          {p.link && <span className="bl-stamp">Live</span>}
         </figure>
 
         <div className="bl-side">
@@ -191,9 +198,14 @@ export default function Blacklist() {
         className="bl-keys"
         hints={[
           { k: 'Esc', label: 'Back', onClick: back },
-          { k: '2', label: 'Bio', onClick: toggleBio },
+          { k: '2', label: 'Details', onClick: toggleBio },
         ]}
       />
+      <p className="fe-help bl-help">
+        {touch
+          ? 'Swipe up or down for more projects · tap the image for details'
+          : '↑ ↓ or scroll for more projects · click the image for details · ← → Enter for the links'}
+      </p>
     </div>
   );
 }

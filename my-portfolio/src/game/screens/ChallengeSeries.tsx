@@ -56,7 +56,7 @@ export default function ChallengeSeries() {
   return (
     <div className="fe-screen cs-screen">
       <Backdrop dim />
-      <ScreenTitle className="cs-title">challenge series</ScreenTitle>
+      <ScreenTitle className="cs-title">skills</ScreenTitle>
 
       <section className="cs-panel" key={ev.name} aria-live="polite">
         <Corners className="is-white" />

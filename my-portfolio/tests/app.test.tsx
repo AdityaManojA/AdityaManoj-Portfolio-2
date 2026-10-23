@@ -95,21 +95,22 @@ describe('intro', () => {
 describe('main menu', () => {
   it('lists the game entries in order and wraps both ways', async () => {
     await bootToMainMenu();
-    expect(selected()).toBe('Career');
-    const order = ['Challenge Series', 'Quick Race', 'Online', 'My Cars', 'Options', 'Career'];
+    expect(selected()).toBe('Projects');
+    const order = ['About Me', 'Skills', 'Services', 'Contact', 'Gallery', 'Settings', 'Projects'];
     for (const name of order) {
       await press('ArrowRight');
       expect(selected()).toBe(name);
     }
     await press('ArrowLeft');
-    expect(selected()).toBe('Options');
+    expect(selected()).toBe('Settings');
   });
 
-  it('shows the player tag with only Quit and Game Stats prompts', async () => {
+  it('shows the player tag, Quit and Open prompts, and a plain help line', async () => {
     await bootToMainMenu();
     expect(screen.getByText('Aditya Manoj')).toBeTruthy();
     const prompts = [...document.querySelectorAll('.fe-key span')].map(s => s.textContent);
-    expect(prompts).toEqual(['Quit', 'Game Stats']);
+    expect(prompts).toEqual(['Quit', 'Open']);
+    expect(document.querySelector('.fe-help')?.textContent).toMatch(/to open/);
   });
 
   it('Back does nothing on the root menu', async () => {
@@ -119,44 +120,67 @@ describe('main menu', () => {
   });
 });
 
-describe('career', () => {
-  it('opens the Safe House and backs out to where it was', async () => {
+describe('projects', () => {
+  it('Projects opens the project list in one step and backs out to where it was', async () => {
     await bootToMainMenu();
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('safe house'));
-    expect(selected()).toBe('Blacklist');
+    await waitFor(() => expect(title()).toBe('project 1'));
+    expect(document.querySelector('.bl-help')).not.toBeNull();
     await press('Escape');
     await waitFor(() => expect(title()).toBe('main menu'));
-    expect(selected()).toBe('Career');
+    expect(selected()).toBe('Projects');
   });
 
-  it('Blacklist steps through rivals, switches actions and opens the bio', async () => {
+  it('Projects flip with a vertical swipe or the scroll wheel, one step per gesture', async () => {
     await bootToMainMenu();
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('safe house'));
+    await waitFor(() => expect(title()).toBe('project 1'));
+    const screenEl = document.querySelector('.bl-screen')!;
+    const swipe = (fromY: number, toY: number, x = 200) => act(async () => {
+      fireEvent.touchStart(screenEl, { touches: [{ clientX: x, clientY: fromY }] });
+      fireEvent.touchEnd(screenEl, { changedTouches: [{ clientX: x, clientY: toY }] });
+    });
+    await swipe(600, 300); // swipe up: next
+    expect(title()).toBe('project 2');
+    await swipe(300, 600); // swipe down: previous
+    expect(title()).toBe('project 1');
+    await swipe(300, 320); // a tap-sized drag does nothing
+    expect(title()).toBe('project 1');
+    await act(async () => { fireEvent.wheel(screenEl, { deltaY: 120 }); });
+    expect(title()).toBe('project 2');
+    await act(async () => { fireEvent.wheel(screenEl, { deltaY: 120 }); }); // same flick: ignored
+    expect(title()).toBe('project 2');
+  });
+
+  it('Projects step with the arrows, open details by key or by clicking the image', async () => {
+    await bootToMainMenu();
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('blacklist 1'));
+    await waitFor(() => expect(title()).toBe('project 1'));
     expect(document.querySelector('.bl-bounty')?.textContent).toContain(`1 / ${Math.min(15, PROJECTS.length)}`);
     await press('ArrowDown', 2);
-    expect(title()).toBe('blacklist 3');
+    expect(title()).toBe('project 3');
     await press('ArrowUp');
-    expect(title()).toBe('blacklist 2');
+    expect(title()).toBe('project 2');
     await press('ArrowUp', 5); // clamps at #1
-    expect(title()).toBe('blacklist 1');
+    expect(title()).toBe('project 1');
 
     await press('2');
-    expect(screen.getByText('bio:')).toBeTruthy();
-    expect(screen.getByText('Ride:')).toBeTruthy();
+    expect(screen.getByText('details:')).toBeTruthy();
+    expect(screen.getByText('Stack:')).toBeTruthy();
     await press('Escape');
     expect(document.querySelector('.bl-table')).not.toBeNull();
 
-    await press('Enter'); // Race Events opens the live site
+    await act(async () => { fireEvent.click(document.querySelector('.bl-portrait-open')!); });
+    expect(screen.getByText('details:')).toBeTruthy();
+    await press('Escape');
+
+    await press('Enter'); // Live Site opens the project
     expect(window.open).toHaveBeenCalledWith(PROJECTS[0].link, '_blank', 'noopener');
   });
 
   it('Rap Sheet boots, lists the profile and opens every section', async () => {
     await bootToMainMenu();
-    await press('1'); // Game Stats
+    await press('1'); // About Me
     await waitFor(() => expect(screen.getByText('Rockport Police Department')).toBeTruthy());
     expect(screen.getByText(/Sign in:/)).toBeTruthy();
     await waitFor(() => expect(screen.getByText(/MANOJ, ADITYA/)).toBeTruthy(), { timeout: 5000 });
@@ -185,9 +209,9 @@ describe('career', () => {
 describe('other screens', () => {
   it('Challenge Series moves through the event grid', async () => {
     await bootToMainMenu();
-    await press('ArrowRight');
+    await press('ArrowRight', 2);
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('challenge series'));
+    await waitFor(() => expect(title()).toBe('skills'));
     const count = () => document.querySelector('.cs-count')?.textContent;
     expect(count()).toBe(`1/${TOOLS}`);
     await press('ArrowRight');
@@ -202,7 +226,7 @@ describe('other screens', () => {
     await bootToMainMenu();
     await press('ArrowLeft', 2);
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('my cars'));
+    await waitFor(() => expect(title()).toBe('gallery'));
     const count = () => document.querySelector('.mc-maker .fe-count')?.textContent;
     expect(count()).toBe('1/6');
     await press('ArrowLeft');
@@ -217,7 +241,7 @@ describe('other screens', () => {
     await bootToMainMenu();
     await press('ArrowLeft');
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('options'));
+    await waitFor(() => expect(title()).toBe('settings'));
     const info = () => document.querySelector('.fe-info')?.textContent;
     expect(info()).toContain('On');
     await press('Enter');
@@ -229,9 +253,9 @@ describe('other screens', () => {
 
   it('Online opens contact links', async () => {
     await bootToMainMenu();
-    await press('ArrowRight', 3);
+    await press('ArrowRight', 4);
     await press('Enter');
-    await waitFor(() => expect(title()).toBe('online'));
+    await waitFor(() => expect(title()).toBe('contact'));
     await press('ArrowRight');
     await press('Enter');
     expect(window.open).toHaveBeenCalledWith(expect.stringContaining('linkedin.com'), '_blank', 'noopener');
@@ -244,7 +268,7 @@ describe('quit', () => {
     await press('q');
     expect(screen.getByText('Attention')).toBeTruthy();
     await press('ArrowRight'); // would move the menu if keys leaked through
-    expect(selected()).toBe('Career');
+    expect(selected()).toBe('Projects');
     await press('Escape');
     expect(screen.queryByText('Attention')).toBeNull();
     expect(title()).toBe('main menu');

@@ -54,10 +54,10 @@ cd my-portfolio
 npm test
 ```
 
-23 tests (Vitest + Testing Library, in `my-portfolio/tests/`):
+28 tests (Vitest + Testing Library, in `my-portfolio/tests/`):
 
 - **Flows** (`app.test.tsx`): the intro skips on any key; the main menu lists the game's entries in
-  order and wraps both ways; Safe House opens and remembers its place; the Blacklist steps through
+  order and wraps both ways; Projects opens in one step and remembers its place; projects flip by swipe and scroll wheel; the Blacklist steps through
   rivals, clamps at #1, opens the bio and launches the live site; the Rap Sheet boots, lists the
   profile and opens all six sections plus a ranking; Challenge Series moves through the grid; My
   Cars cycles and toggles Showcase; Options toggles music and sound; Online opens links; Quit asks
@@ -80,27 +80,30 @@ Production dependencies have no known vulnerabilities (`npm audit --omit=dev`). 
 | --- | --- |
 | Any key / click | Begin (starts the intro with sound), then skip the intro |
 | ← → | Browse a carousel, move in a grid |
-| ↑ ↓ | Move through lists, change Blacklist rival |
+| ↑ ↓ | Move through lists, change project |
 | Enter / Space | Accept |
 | Esc / Backspace | Back |
 | 1, 2, 3, Q | The extra prompts shown at the bottom of a screen |
 
-Mouse and touch work too: every icon, chevron, list row and key prompt is clickable.
+Mouse and touch work too: every icon, chevron, list row and key prompt is clickable. On the
+Projects screen, swipe up (or scroll down) for the next project and swipe down (or scroll up)
+for the previous one.
 
 ## Screen map
 
-| Game screen | Portfolio content | Code |
+Menu labels say what each screen holds, every menu shows an Open prompt and a one-line "how to use this" help in yellow, and the icons, layout and order are the game's. Icon slots are square and notes reserve the height of the longest one, so nothing moves as you browse.
+
+| Menu label (game screen) | Portfolio content | Code |
 | --- | --- | --- |
 | Intro video | Police lamps with "Click to begin" (browsers allow sound only after a click), then the intro on a loop; any key skips | `screens/Intro.tsx` |
-| Main Menu | Hub: Career, Challenge Series, Quick Race, Online, My Cars, Options; [1] Game Stats | `screens/Menus.tsx` |
-| Career → Safe House | Blacklist, Rap Sheet, Car Lot | `screens/Menus.tsx` |
-| Blacklist #15 → #1 | 15 projects as rivals, with live-site and source actions | `screens/Blacklist.tsx` |
-| Rap Sheet (Rockport PD terminal) | Profile summary, experience, skills, services, top projects | `screens/RapSheet.tsx` |
-| Challenge Series | Every tool in the skill arsenal as an event | `screens/ChallengeSeries.tsx` |
-| Quick Race | Services, one per race type | `screens/Menus.tsx` |
-| Online | Email, LinkedIn, GitHub, CV | `screens/Menus.tsx` |
-| My Cars | Renders and visual work, with Showcase mode | `screens/MyCars.tsx` |
-| Options | Music and sound toggles, controls, credits | `screens/Menus.tsx` |
+| Main menu | Projects, About Me, Skills, Services, Contact, Gallery, Settings, with an Open prompt and a plain help line | `screens/Menus.tsx` |
+| Projects (Career → Blacklist #1 → #15) | 15 projects, best first, opened straight from the main menu; Live Site and Source Code links; swipe or scroll to flip; tap the image (or [2]) for Details | `screens/Blacklist.tsx` |
+| About Me (Rap Sheet, Rockport PD terminal) | Profile summary, experience, skills, services, top projects | `screens/RapSheet.tsx` |
+| Skills (Challenge Series) | Every tool in the skill arsenal as an event | `screens/ChallengeSeries.tsx` |
+| Services (Quick Race) | Services, one per race type | `screens/Menus.tsx` |
+| Contact (Online) | Email, LinkedIn, GitHub, CV | `screens/Menus.tsx` |
+| Gallery (My Cars) | Renders and visual work, with Showcase mode | `screens/MyCars.tsx` |
+| Settings (Options) | Music and sound toggles, controls, credits | `screens/Menus.tsx` |
 
 Rap Sheet sections: **Summary** (profile), **Vehicle Database** (work history), **Infractions**
 (skill categories), **Cost to State** (services), **Top 5 Pursuits** (top projects) and
