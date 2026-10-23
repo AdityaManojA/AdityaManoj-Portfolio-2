@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import './tron.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -12,6 +13,7 @@ import Services from './components/Services';
 import { DetailedFooter, SimpleFooter } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { HandbookModal } from './components/HandbookModal';
+import LightCycle from './components/LightCycle';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -68,6 +70,10 @@ export default function App() {
 
   return (
     <div className="app-container">
+      <div className="tron-grid" aria-hidden="true">
+        <div className="tron-grid__floor" />
+      </div>
+      <LightCycle />
       <Header
         activeTab={activeTab}
         setActiveTab={handleNavigateTab}
