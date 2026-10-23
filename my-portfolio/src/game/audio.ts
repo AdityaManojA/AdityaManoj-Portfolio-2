@@ -6,8 +6,7 @@ import { ART, asset } from './assets';
 // skipped with a key press or tap, which counts as that interaction, so music starts there. If the
 // intro runs out on its own, music waits for the next key press or tap instead.
 
-const MUSIC_VOLUME = 0.072; // The theme sits well under the UI, as in the game's front end.
-const SFX_VOLUME = 0.55;
+const MUSIC_VOLUME = 0.054; // 45% of the original 0.12: the theme sits under the UI, as in the game's front end.
 
 export type Sfx = 'move' | 'tick' | 'accept' | 'back' | 'termMove' | 'termSelect' | 'termSearch' | 'termBoot';
 
@@ -20,6 +19,21 @@ const SFX_FILES: Record<Sfx, string> = {
   termSelect: 'nfsmw/sfx/term-select.mp3',
   termSearch: 'nfsmw/sfx/term-search.mp3',
   termBoot: 'nfsmw/sfx/term-boot.mp3',
+};
+
+// The effects were cut from recordings at very different levels (peaks from -7 to -27 dBFS), and
+// the quietest (move) was lost under the music. Each gets its own gain so every effect peaks near
+// -9 dBFS: clearly over the theme, still a subtle click rather than a blast. Gain = 10^((-9 - peak) / 20),
+// peaks measured with ffmpeg volumedetect. Applied in Web Audio, so the files are never re-encoded.
+const SFX_GAIN: Record<Sfx, number> = {
+  move: 4.5, //        peak -22.1 dB
+  tick: 1.9, //        peak -14.5 dB
+  accept: 2.0, //      peak -15.0 dB
+  back: 1.45, //       peak -12.3 dB
+  termMove: 1.5, //    peak -12.4 dB
+  termSelect: 7.9, //  peak -27.0 dB
+  termSearch: 1.15, // peak -10.1 dB
+  termBoot: 0.8, //    peak  -7.3 dB
 };
 
 const PREFS_KEY = 'nfsmw-audio';
@@ -80,7 +94,6 @@ document.addEventListener('visibilitychange', () => {
 // cheap buffer source with no start-up latency. The context can only start after an interaction,
 // so it is created lazily and resumed on the first key press or tap.
 let ctx: AudioContext | null = null;
-let sfxGain: GainNode | null = null;
 const buffers = new Map<Sfx, AudioBuffer>();
 const pending = new Map<Sfx, Promise<ArrayBuffer>>();
 
@@ -89,9 +102,6 @@ function context() {
     const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!Ctor) return null;
     ctx = new Ctor();
-    sfxGain = ctx.createGain();
-    sfxGain.gain.value = SFX_VOLUME;
-    sfxGain.connect(ctx.destination);
   }
   if (ctx.state === 'suspended') ctx.resume().catch(() => {});
   return ctx;
@@ -132,11 +142,13 @@ export const audio = {
     if (!prefs.sfx) return;
     const c = context();
     const buf = buffers.get(name);
-    if (!c || !sfxGain) return;
+    if (!c) return;
     if (!buf) { decode(name).catch(() => {}); return; }
     const src = c.createBufferSource();
+    const gain = c.createGain();
     src.buffer = buf;
-    src.connect(sfxGain);
+    gain.gain.value = SFX_GAIN[name];
+    src.connect(gain).connect(c.destination);
     src.start();
   },
   get prefs(): Readonly<Prefs> { return prefs; },
