@@ -217,7 +217,7 @@ export const PROJECTS: Project[] = [
       "AI Acceleration",
       "GitHub Actions"
     ],
-    "image": "media/projects/promptops-graphic.svg.webp",
+    "image": "media/projects/promptops-graphic.svg",
     "link": "https://github.com/AdityaManojA/prompt-ops-blueprints"
   },
   {
@@ -838,35 +838,12 @@ export const SKILLS: SkillGroup[] = [
   }
 ];
 
+// Titles describe what each render shows.
 export const GALLERY: GalleryItem[] = [
-  {
-    "title": "Neon Cyberpunk City",
-    "type": "3D Render",
-    "image": "media/gallery/g2.webp"
-  },
-  {
-    "title": "Abstract Fluid Simulation",
-    "type": "3D Render",
-    "image": "media/gallery/g3.webp"
-  },
-  {
-    "title": "Minimalist Architecture",
-    "type": "3D Render",
-    "image": "media/gallery/g4.webp"
-  },
-  {
-    "title": "Cinematic Event Reel",
-    "type": "Video Edit",
-    "image": "media/gallery/g5.webp"
-  },
-  {
-    "title": "Product Visualization",
-    "type": "3D Render",
-    "image": "media/gallery/g6.webp"
-  },
-  {
-    "title": "Gaming Assets",
-    "type": "3D Modeling",
-    "image": "media/gallery/g7.webp"
-  }
+  { title: 'Pixel Runner', type: 'Pixel Art', image: 'media/gallery/g2.webp' },
+  { title: 'Retro Vending Machine', type: 'Illustration', image: 'media/gallery/g3.webp' },
+  { title: 'Neon Portal', type: '3D Render', image: 'media/gallery/g4.webp' },
+  { title: 'Ember Katana', type: '3D Render', image: 'media/gallery/g5.webp' },
+  { title: 'Chrome Planets', type: '3D Render', image: 'media/gallery/g6.webp' },
+  { title: 'Neon Court', type: '3D Render', image: 'media/gallery/g7.webp' },
 ];

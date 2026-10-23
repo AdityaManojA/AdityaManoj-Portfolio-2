@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ART } from '../assets';
+import { Loading } from '../dialogs';
 
 // Boot intro. Plays the game's opening video full screen with "press any key to skip" in the
 // menu marker font; any key, click or tap skips it, exactly like the PC version.
@@ -10,6 +11,8 @@ import { ART } from '../assets';
 export default function Intro({ onDone }: { onDone: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const done = useRef(false);
+  // The intro is a large file; until its first frame plays, show the game's own loading screen.
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const finish = () => {
@@ -51,9 +54,11 @@ export default function Intro({ onDone }: { onDone: () => void }) {
         src={ART.intro}
         playsInline
         preload="auto"
+        onPlaying={() => setPlaying(true)}
         onEnded={() => { if (!done.current) { done.current = true; onDone(); } }}
         onError={() => { if (!done.current) { done.current = true; onDone(); } }}
       />
+      {!playing && <Loading />}
       <span className="intro-skip">press any key to skip</span>
     </div>
   );
