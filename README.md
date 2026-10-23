@@ -144,7 +144,7 @@ my-portfolio/
 
 ## Audio
 
-- **Menu theme** (`public/nfsmw/menu-theme.mp3`) loops from the main menu at 12% volume so it stays
+- **Menu theme** (`public/nfsmw/menu-theme.mp3`) loops from the main menu at about 7% volume so it stays
   under the UI. Browsers block sound until the visitor interacts; skipping the intro counts, so it
   normally starts right away. It pauses while the tab is in the background.
 - **UI sounds** (`public/nfsmw/sfx/`): `move`, `tick`, `accept` and `back` drive the carousels.

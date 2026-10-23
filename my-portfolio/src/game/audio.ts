@@ -6,7 +6,7 @@ import { ART, asset } from './assets';
 // skipped with a key press or tap, which counts as that interaction, so music starts there. If the
 // intro runs out on its own, music waits for the next key press or tap instead.
 
-const MUSIC_VOLUME = 0.12; // The theme sits well under the UI, as in the game's front end.
+const MUSIC_VOLUME = 0.072; // The theme sits well under the UI, as in the game's front end.
 const SFX_VOLUME = 0.55;
 
 export type Sfx = 'move' | 'tick' | 'accept' | 'back' | 'termMove' | 'termSelect' | 'termSearch' | 'termBoot';
