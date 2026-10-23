@@ -75,7 +75,7 @@ describe('intro', () => {
     play.mockRestore();
   });
 
-  it('when the browser blocks sound, starts muted and the first key turns the sound on', async () => {
+  it('when the browser blocks sound, still plays (muted) and the first key goes to the menu', async () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
       .mockRejectedValueOnce(new DOMException('needs a gesture', 'NotAllowedError'))
       .mockResolvedValue(undefined);
@@ -85,13 +85,8 @@ describe('intro', () => {
     expect(play).toHaveBeenCalledTimes(2);
     expect(video.muted).toBe(true);
     fireEvent.playing(video);
-    expect(screen.getByText('press any key for sound')).toBeTruthy();
-    video.currentTime = 12;
-    await press('x');
-    expect(video.muted).toBe(false);
-    expect(video.currentTime).toBe(0); // back to the top, now with sound
-    expect(document.querySelector('.intro')).not.toBeNull(); // still on the intro
     expect(screen.getByText('press any key to skip')).toBeTruthy();
+    expect(screen.queryByText(/for sound/)).toBeNull();
     await press('x');
     await waitFor(() => expect(title()).toBe('main menu'));
     play.mockRestore();
