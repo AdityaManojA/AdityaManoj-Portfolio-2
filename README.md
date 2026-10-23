@@ -41,6 +41,10 @@ npm run build
 firebase deploy --only hosting:xo-aditya-mostwanted
 ```
 
+The page and media are served with `Cache-Control: no-cache`, so browsers check for a new version on
+every visit (an unchanged file is a quick "not modified" reply, not a re-download). Only the
+hashed bundles in `assets/` are cached for good, since a new build gives them new names.
+
 ## Tests
 
 ```bash
@@ -85,7 +89,7 @@ Mouse and touch work too: every icon, chevron, list row and key prompt is clicka
 
 | Game screen | Portfolio content | Code |
 | --- | --- | --- |
-| Intro video | Police-lamp loader for 1.5 s, then the intro video on a loop; any key skips | `screens/Intro.tsx` |
+| Intro video | Plays at once and loops; any key skips (the lamp loader is parked for now) | `screens/Intro.tsx` |
 | Main Menu | Hub: Career, Challenge Series, Quick Race, Online, My Cars, Options; [1] Game Stats | `screens/Menus.tsx` |
 | Career → Safe House | Blacklist, Rap Sheet, Car Lot | `screens/Menus.tsx` |
 | Blacklist #15 → #1 | 15 projects as rivals, with live-site and source actions | `screens/Blacklist.tsx` |
@@ -161,14 +165,14 @@ fetched after a screen opened. First paint is about 130 ms.
 
 What gets it there, without touching image or video quality:
 
-- **Nothing pops in.** As the intro starts, the menu art, ink, loader lamps, avatar, first Blacklist
+- **Nothing pops in.** As the intro starts, the menu art, ink, avatar, first Blacklist
   portrait, first render and every font face are fetched and decoded; game glyphs are pulled into
   in-memory blob URLs so CSS masks never go back to the network. While the intro plays and in idle
   time after, every project portrait, gallery render and skill logo is warmed a few at a time. The
   preloaded images are kept alive, so later `<img>` tags are served from memory whatever the host's
   cache headers say (`src/game/preload.ts`).
 - **No waits between screens.** All screens ship in one bundle, so opening one never waits on the
-  network. The only loader is the game's own lamps, shown for 1.5 s (longer only if the intro is still buffering). The Rap Sheet's
+  network. There is no loader: the intro video plays as soon as the page opens. The Rap Sheet's
   scripted boot is shorter (0.9 s per step) and Enter skips it.
 - **Cheap effects.** The ink splatter is pre-rendered once (`public/nfsmw/ink.webp`, 23 KB) instead of
   an SVG turbulence filter rasterised on every screen. The film-grain layer is a sixth of its old

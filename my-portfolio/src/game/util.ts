@@ -11,6 +11,3 @@ export const BLACKLIST_SIZE = Math.min(15, PROJECTS.length);
 export const openLink = (url: string) => {
   window.open(url, url.startsWith('mailto:') ? '_self' : '_blank', 'noopener');
 };
-
-/** How long the intro's police lamps stay up before the video, even when it is ready sooner. */
-export const LOADER_MS = 1500;
