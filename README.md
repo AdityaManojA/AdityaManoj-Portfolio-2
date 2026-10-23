@@ -117,7 +117,8 @@ How each sound was cut is in [docs/REFERENCES.md](docs/REFERENCES.md#sound).
 ## Performance notes
 
 - 21.8 MB of PNG/JPEG screenshots were converted to 0.8 MB of WebP.
-- The intro is MP4 with `faststart`, so it begins playing before it finishes downloading.
+- The intro is the 1280×720 60fps source (about 26 MB), remuxed with `faststart` and never
+  re-encoded, so it plays at full clarity and starts before it finishes downloading.
 - The theme was re-encoded to 96 kbps (2.7 MB, from an 8.7 MB source), since it plays quietly.
 - Sound effects are a few KB each, downloaded during the intro and played through Web Audio
   (decoded once, no per-press start-up delay).
@@ -144,4 +145,5 @@ Everything copyrighted sits in `my-portfolio/public/nfsmw/`. Replace those files
 headings, Michroma for the Rap Sheet terminal), so they can stay.
 
 `my-portfolio/media-src/` (git-ignored) holds the full-quality originals the web copies were made
-from: `intro.mp4`, `menu-theme.mp3`, `gui-sounds.mp3`, `ui-sounds-compilation.mp3`.
+from: `intro-720p-source.mp4` (and the earlier `intro-320p.mp4`), `menu-theme.mp3`, `gui-sounds.mp3`,
+`ui-sounds-compilation.mp3`, `main-menu-source.jpg`.
