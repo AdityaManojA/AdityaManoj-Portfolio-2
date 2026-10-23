@@ -66,7 +66,7 @@ describe('intro', () => {
     expect(screen.getByText('Click to begin')).toBeTruthy();
     expect(play).not.toHaveBeenCalled(); // nothing plays before the visitor interacts
     await wait(200);
-    await act(async () => { fireEvent.pointerDown(window); });
+    await act(async () => { fireEvent.click(window); });
     expect(play).toHaveBeenCalledTimes(1);
     expect(video.muted).toBe(false);
     expect(screen.queryByText('Click to begin')).toBeNull();

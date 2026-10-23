@@ -58,14 +58,15 @@ function ensureMusic() {
 function tryPlayMusic() {
   if (!musicWanted || !prefs.music || document.hidden) return;
   ensureMusic().play().catch(() => {
-    // Autoplay blocked: start on the next interaction.
+    // Autoplay blocked: start on the next interaction ('click', which phones accept for sound;
+    // a touch's pointerdown is not).
     const resume = () => {
       window.removeEventListener('keydown', resume);
-      window.removeEventListener('pointerdown', resume);
+      window.removeEventListener('click', resume);
       tryPlayMusic();
     };
     window.addEventListener('keydown', resume, { once: true });
-    window.addEventListener('pointerdown', resume, { once: true });
+    window.addEventListener('click', resume, { once: true });
   });
 }
 
