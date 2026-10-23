@@ -146,7 +146,7 @@ Full-quality sources live in `my-portfolio/media-src/` (git-ignored).
 
 | File | Source | Cut |
 | --- | --- | --- |
-| `menu-theme.mp3` | Owner-supplied theme | Whole track, 96 kbps stereo, played at 12% volume |
+| `menu-theme.mp3` | Owner-supplied theme | Whole track, 96 kbps stereo, played at about 7% volume |
 | `sfx/move.mp3` | S2 clip 2 (1.08 s) | Shortest, brightest tick (107 ms, centroid 6.1 kHz); carousel left/right |
 | `sfx/tick.mp3` | S2 clip 1 (0.09 s) | Short tick (123 ms, 5.6 kHz); grid and rival steps |
 | `sfx/back.mp3` | S2 clip 3 (2.17 s) | Lower, short (182 ms, 2.9 kHz) |
