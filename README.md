@@ -29,6 +29,18 @@ npm run build
 The `my-portfolio/dist/` folder is self-contained. Every path is relative, so it runs from any
 static host or sub-folder (GitHub Pages, Netlify, an S3 bucket). `npm run preview` serves it locally.
 
+## Hosting
+
+This portfolio lives only on the `feat/nfs-mw-menu` branch and is hosted on its own, apart from the
+main portfolio: **https://xo-aditya-mostwanted.web.app** (Firebase site `xo-aditya-mostwanted` in
+project `adityamanojportfolio`; the main portfolio stays on `xo-aditya`). To redeploy:
+
+```bash
+cd my-portfolio
+npm run build
+firebase deploy --only hosting:xo-aditya-mostwanted
+```
+
 ## Tests
 
 ```bash
