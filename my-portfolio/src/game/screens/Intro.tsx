@@ -8,13 +8,16 @@ import { LOADER_MS } from '../util';
 // main menu, exactly like the PC version.
 //
 // It plays with sound wherever the browser allows. A browser that blocks sound before the first
-// interaction gets the video muted rather than a click-to-start screen; the skip press then lets
-// the menu music play.
+// interaction still starts the video on time, muted, with "press any key for sound": that first
+// press restarts it from the top with sound, so the opening is heard in full, and the next press
+// skips as usual.
 
 export default function Intro({ onDone }: { onDone: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const done = useRef(false);
   const [playing, setPlaying] = useState(false);
+  const [silenced, setSilencedState] = useState(false);
+  const silencedRef = useRef(false);
 
   useEffect(() => {
     const finish = () => {
@@ -24,6 +27,7 @@ export default function Intro({ onDone }: { onDone: () => void }) {
     };
     const v = videoRef.current;
     if (!v) return;
+    const setSilenced = (on: boolean) => { silencedRef.current = on; setSilencedState(on); };
 
     // Start once the lamps have had their moment and enough video is buffered to play on.
     let shown = false;
@@ -33,7 +37,7 @@ export default function Intro({ onDone }: { onDone: () => void }) {
       v.muted = false;
       v.play().catch(() => {
         v.muted = true;
-        v.play().catch(finish); // can't play at all: go straight to the menu
+        v.play().then(() => setSilenced(true), finish); // can't play at all: go straight to the menu
       });
     };
     const onReady = () => { ready = true; start(); };
@@ -43,6 +47,13 @@ export default function Intro({ onDone }: { onDone: () => void }) {
     const skip = (e: Event) => {
       if (e instanceof KeyboardEvent && (e.altKey || e.ctrlKey || e.metaKey)) return;
       e.preventDefault();
+      if (silencedRef.current) {
+        // Inside a key or tap handler the browser allows sound: play it from the top with audio.
+        v.currentTime = 0;
+        v.muted = false;
+        setSilenced(false);
+        return;
+      }
       finish();
     };
     // Defer by a tick so the key press that reloaded the page can't skip the intro instantly.
@@ -71,7 +82,7 @@ export default function Intro({ onDone }: { onDone: () => void }) {
         onError={() => { if (!done.current) { done.current = true; onDone(); } }}
       />
       {!playing && <Loading />}
-      {playing && <span className="intro-skip">press any key to skip</span>}
+      {playing && <span className="intro-skip">{silenced ? 'press any key for sound' : 'press any key to skip'}</span>}
     </div>
   );
 }
