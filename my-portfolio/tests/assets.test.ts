@@ -47,6 +47,16 @@ describe('content files exist', () => {
     expect(exists(icon!)).toBe(true);
   });
 
+  it('hosting lets the CDN cache media, so phones get byte ranges for the intro', () => {
+    // With Cache-Control: no-cache Firebase streams media from the origin without Range support,
+    // and iPhones refuse to play the video (the intro then errors straight to the menu).
+    const cfg = JSON.parse(readFileSync(join(__dirname, '..', 'firebase.json'), 'utf8'));
+    const rules: { source: string; headers: { key: string; value: string }[] }[] = cfg.hosting.headers;
+    const media = rules.find(r => r.source === '**')!.headers.find(h => h.key === 'Cache-Control')!.value;
+    expect(media).not.toMatch(/no-cache|no-store|private/);
+    expect(media).toMatch(/s-maxage=\d+/);
+  });
+
   it('no stray files are shipped from public/', () => {
     const top = readdirSync(PUBLIC);
     expect(top.filter(f => f.startsWith('__'))).toEqual([]);
