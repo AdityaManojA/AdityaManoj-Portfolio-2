@@ -46,7 +46,7 @@ export default function MyCars() {
 
       <div className="mc-ui">
         <header className="mc-head">
-          <ScreenTitle className="mc-title">my cars</ScreenTitle>
+          <ScreenTitle className="mc-title">gallery</ScreenTitle>
           <div className="mc-row">
             <Chevron dir="left" onClick={() => step(-1)} />
             <div className="mc-maker">

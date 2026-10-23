@@ -8,7 +8,7 @@ import { critical, idle } from './preload';
 import Blacklist from './screens/Blacklist';
 import ChallengeSeries from './screens/ChallengeSeries';
 import Intro from './screens/Intro';
-import { MainMenu, Online, Options, QuickRace, SafeHouse } from './screens/Menus';
+import { MainMenu, Online, Options, QuickRace } from './screens/Menus';
 import MyCars from './screens/MyCars';
 import RapSheet from './screens/RapSheet';
 
@@ -20,7 +20,6 @@ import RapSheet from './screens/RapSheet';
 
 const SCREENS: Record<ScreenId, ComponentType> = {
   main: MainMenu,
-  safehouse: SafeHouse,
   blacklist: Blacklist,
   rapsheet: RapSheet,
   challenge: ChallengeSeries,

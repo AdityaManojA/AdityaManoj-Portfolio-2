@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { audio } from '../audio';
 import { Icon } from '../icons';
 import type { IconName } from '../icons';
-import { useKeys } from '../input';
+import { useKeys, useTouchScreen } from '../input';
 import type { KeyHandlers } from '../input';
 import { useSceneArt } from '../assets';
 import { useNav } from '../nav';
@@ -11,7 +11,7 @@ import { Backdrop, Chevron, Corners, InfoPanel, InkSplatter, KeyHints, PlayerTag
 import type { Hint } from '../ui';
 import { selection } from '../util';
 
-// The game's carousel menu, used by Main Menu, Safe House, Quick Race, Online and Options.
+// The game's carousel menu, used by the main menu, Services, Contact and Settings.
 // Reference: main menu and Safe House footage (see docs/REFERENCES.md):
 //   «« [previous] [selected, orange corner brackets] [next] [next, smaller] »»
 //   label under the selected icon, marker heading above, info box beside it in the Safe House.
@@ -39,6 +39,7 @@ interface Props {
 
 export default function CarouselMenu({ id, title, items, hints = [], keys = {}, root = false }: Props) {
   const nav = useNav();
+  const touch = useTouchScreen();
   const { isScene } = useSceneArt();
   const [index, setIndexState] = useState(() => Math.min(selection.get(id) ?? 0, items.length - 1));
   const n = items.length;
@@ -71,10 +72,13 @@ export default function CarouselMenu({ id, title, items, hints = [], keys = {}, 
     ...keys,
   });
 
-  // The game's main menu prompts are only Quit and Game Stats; sub-menus show Back and Accept.
-  const baseHints: Hint[] = root
-    ? []
-    : [{ k: 'Esc', label: 'Back', onClick: back }, { k: '↵', label: 'Accept', onClick: () => accept() }];
+  // Every menu shows how to open the selected entry, so visitors who don't know the game can find
+  // their way: an Open prompt, plus a plain help line under the carousel.
+  const open: Hint = { k: '↵', label: 'Open', onClick: () => accept() };
+  const baseHints: Hint[] = root ? [open] : [{ k: 'Esc', label: 'Back', onClick: back }, open];
+  const help = touch
+    ? 'Tap an icon to choose it, tap it again to open'
+    : 'Use ← → or click an icon to choose · Enter or click again to open';
 
   const neighbour = (off: number) => {
     const i = wrap(index + off);
@@ -136,9 +140,14 @@ export default function CarouselMenu({ id, title, items, hints = [], keys = {}, 
             {n > 3 && neighbour(2)}
             <Chevron dir="right" onClick={() => step(1)} />
           </div>
-          <div className="fe-label" key={`label-${item.key}`} aria-live="polite">
-            {item.note && <span className="fe-label-note">{item.note}</span>}
+          <div className="fe-label" aria-live="polite">
+            <div className="fe-notes">
+              {items.map((it, i) => it.note && (
+                <span key={it.key} className="fe-label-note" aria-hidden={i !== index}>{it.note}</span>
+              ))}
+            </div>
           </div>
+          <p className="fe-help">{help}</p>
         </nav>
         <div className="fe-foot">
           {root && <PlayerTag />}
@@ -149,6 +158,6 @@ export default function CarouselMenu({ id, title, items, hints = [], keys = {}, 
   );
 }
 
-// Prompts read Back, Accept, then numbered extras, as in the game.
+// Prompts read Quit, Back, Open, then numbered extras, as in the game.
 const ORDER = ['Q', 'Esc', '↵', '1', '2', '3'];
 const hintOrder = (a: Hint, b: Hint) => ORDER.indexOf(a.k) - ORDER.indexOf(b.k);

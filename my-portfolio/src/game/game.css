@@ -47,6 +47,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 kbd { font-family: inherit; }
 h1, h2, p, figure, ol { margin: 0; }
 
+/* Swipe screens take vertical drags themselves (no browser scroll or pull-to-refresh). */
+.is-swipe { touch-action: pan-x pinch-zoom; overscroll-behavior: contain; }
+html, body { overscroll-behavior-y: none; }
+
 /* ---------- intro ---------- */
 .intro {
   position: fixed;
@@ -232,11 +236,15 @@ h1, h2, p, figure, ol { margin: 0; }
 .fe-carousel .fe-title { margin-bottom: 0.55rem; }
 .fe-strip { display: flex; align-items: center; gap: clamp(0.45rem, 1.1vw, 0.95rem); }
 
-.fe-icon { position: relative; flex: none; display: grid; place-items: center; color: #d6d3c9; transition: opacity 0.15s; }
-.fe-icon svg { width: 100%; height: auto; display: block; filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.85)); }
+/* Every slot is square whatever it holds: the game's glyphs are square and the drawn icons are
+   64x40, so without this the selected slot changes height between entries and the label, note and
+   prompts below it jump. */
+.fe-icon { position: relative; flex: none; display: grid; place-items: center; aspect-ratio: 1; color: #d6d3c9; transition: opacity 0.15s; }
+.fe-icon svg { width: 100%; height: auto; max-height: 100%; display: block; filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.85)); }
+.fe-icon > .fe-glyph { max-height: 100%; }
 .fe-icon.is-active {
   width: clamp(76px, 7vw, 96px);
-  padding: 0.7rem 0.6rem;
+  padding: 0.65rem; /* even, so a square glyph fits the square slot exactly */
   color: #fff;
 }
 .fe-icon.is-active svg { animation: pop 0.22s cubic-bezier(0.2, 1.5, 0.4, 1); }
@@ -263,6 +271,17 @@ h1, h2, p, figure, ol { margin: 0; }
 }
 .fe-label { display: flex; flex-direction: column; margin-top: 2.4rem; min-height: 1.2rem; max-width: 30rem; animation: fade-up 0.18s ease-out; }
 .fe-label-note { font-size: 0.78rem; line-height: 1.35; color: var(--muted); max-width: 40ch; }
+/* Every entry's note is laid out in the same cell (only the selected one visible), so the cell is as
+   tall as the longest note and nothing above or below moves when a longer one is selected. */
+.fe-notes { display: grid; }
+.fe-notes > .fe-label-note { grid-area: 1 / 1; }
+.fe-notes > .fe-label-note[aria-hidden='true'] { visibility: hidden; }
+/* Plain-language help for visitors who don't know the game: yellow so it reads as an instruction. */
+.fe-help { margin-top: 0.7rem; font-size: 0.8rem; font-weight: 700; line-height: 1.35; color: var(--yellow); text-shadow: 1px 1px 0 #000; max-width: 42ch; }
+.bl-help { position: relative; z-index: 2; margin-top: -0.4rem; text-align: center; max-width: none; }
+/* Fills the portrait area (a definite box) so the image scales inside it by max-width/max-height. */
+.bl-portrait-open { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 0; padding: 0; border: 0; background: none; cursor: pointer; }
+.bl-portrait-open:hover img, .bl-portrait-open:focus-visible img { filter: sepia(0.1) contrast(1.1) brightness(1.08); }
 
 .fe-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 0.9rem 1.2rem; }
 /* Main menu: player tag on its own line with the prompts under it, as in the game. */
@@ -308,16 +327,18 @@ h1, h2, p, figure, ol { margin: 0; }
   min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr); /* the portrait may not grow past the body into the prompts */
   gap: clamp(1rem, 3vw, 2.5rem);
   align-items: center;
   animation: fade-up 0.25s ease-out;
 }
-.bl-portrait { position: relative; display: grid; place-items: center; min-height: 0; }
-.bl-portrait-ink { inset: -12% -10%; width: 120%; height: 124%; }
-.bl-portrait img {
+/* Flex (not grid) so the image's max-height: 100% resolves against the portrait's fixed height. */
+.bl-portrait { position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; height: 100%; }
+.bl-portrait-ink { position: absolute; inset: -12% -10%; width: 120%; height: 124%; }
+.bl-portrait-open img {
   position: relative;
   max-width: 100%;
-  max-height: 56vh;
+  max-height: min(56vh, 100%);
   object-fit: contain;
   filter: sepia(0.25) contrast(1.08);
   -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 58%, transparent 100%);
@@ -343,8 +364,16 @@ h1, h2, p, figure, ol { margin: 0; }
   box-shadow: 0 0 0 2px #000, 0 4px 14px rgba(0, 0, 0, 0.7);
 }
 .bl-stamp { color: #ffb3b3; mix-blend-mode: normal; }
-.bl-side { display: flex; flex-direction: column; gap: 1.2rem; }
+.bl-side { position: relative; display: flex; flex-direction: column; gap: 1.2rem; } /* above the portrait's ink */
 .bl-quote {
+  /* A fixed three-line slot (longer text is clipped with an ellipsis; the full text is in Details),
+     so the table and links below sit at the same height on every project. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  min-height: calc(3 * 1.45em);
   text-align: right;
   font-weight: 700;
   font-size: clamp(0.9rem, 1.5vw, 1.2rem);
@@ -359,7 +388,7 @@ h1, h2, p, figure, ol { margin: 0; }
 .bl-row-head b { color: var(--target); }
 
 .bl-actions { position: relative; display: flex; justify-content: flex-end; padding-bottom: 2.2rem; } /* room for the name under the icon */
-.bl-keys { position: relative; }
+.bl-keys { position: relative; z-index: 2; }
 
 /* bio page (capture 8) */
 .bl-bio { position: relative; flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.5rem); align-items: center; animation: fade-up 0.25s ease-out; }
@@ -716,14 +745,17 @@ h1, h2, p, figure, ol { margin: 0; }
   .fe-carousel,
   .has-poster .fe-carousel { margin: 0; align-items: center; }
   .fe-label { align-items: center; text-align: center; }
+  .fe-help { align-self: center; text-align: center; }
   .fe-foot { justify-content: center; }
   .is-root .fe-foot { align-items: center; }
   .has-scene .fe-carousel .fe-title { align-self: center; margin-right: 0; }
 
   .bl-body, .bl-bio { grid-template-columns: 1fr; align-content: start; overflow-y: auto; }
-  .bl-portrait { min-height: auto; }
+  .bl-portrait { min-height: auto; height: auto; }
+  .bl-body { grid-template-rows: none; }
+  .bl-portrait-open { height: auto; }
   .bl-side { padding-top: 0.8rem; }
-  .bl-portrait img { max-height: 30vh; }
+  .bl-portrait-open img { max-height: 30vh; }
   .bl-bio-portrait { display: none; }
   .bl-actions { justify-content: center; }
   .cs-main { grid-template-columns: 1fr; }
@@ -754,6 +786,23 @@ h1, h2, p, figure, ol { margin: 0; }
   .bl-quote { text-align: left; }
   .bl-bounty { padding-left: 1.2rem; font-size: 0.85rem; }
   .bl-keys { justify-content: center; }
+  /* A project page fits the phone without scrolling: vertical drags flip projects instead. */
+  .bl-screen { gap: 0.6rem; }
+  .bl-body { overflow: hidden; gap: 0.5rem; }
+  /* A fixed slot for the image, so the details below sit at the same height on every project. */
+  .bl-portrait { height: 24dvh; }
+  /* One line each, so a long name or the rank box never pushes the page down. */
+  .bl-title { min-width: 0; }
+  .bl-title > div:last-child { min-width: 0; }
+  .bl-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bl-bounty { flex: none; white-space: nowrap; }
+  .bl-portrait-open { height: 100%; }
+  .bl-portrait-open img { max-height: 100%; }
+  .bl-side { padding-top: 0.2rem; gap: 0.6rem; }
+  .bl-quote { font-size: 0.85rem; }
+  .bl-table { padding: 0.5rem 0.8rem; font-size: 0.85rem; }
+  .bl-row { padding: 0.1rem 0; }
+  .bl-actions { padding-bottom: 1.9rem; }
   .rs-blocks { grid-template-columns: 1fr; }
   .rs-stats { grid-template-columns: 1fr; }
   .rs-rank { grid-template-columns: 1rem 1.6rem 1fr; }

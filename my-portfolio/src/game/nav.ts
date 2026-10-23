@@ -4,7 +4,6 @@ import { createContext, useContext } from 'react';
 // the same way the game's menus nest.
 export type ScreenId =
   | 'main'
-  | 'safehouse'
   | 'blacklist'
   | 'rapsheet'
   | 'challenge'

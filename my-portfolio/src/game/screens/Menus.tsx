@@ -1,25 +1,28 @@
 import { useSyncExternalStore } from 'react';
 import { audio } from '../audio';
 import { asset } from '../assets';
-import { EXPERIENCE, LINKS, SERVICES } from '../content';
+import { LINKS, SERVICES } from '../content';
 import type { IconName } from '../icons';
 import { useNav } from '../nav';
 import { BLACKLIST_SIZE, TOOL_COUNT, openLink } from '../util';
 import CarouselMenu from './CarouselMenu';
 import type { CarouselItem } from './CarouselMenu';
 
-// The carousel screens and where each entry leads. Entry names and order follow the PC version:
-// Main Menu = Career, Challenge Series, Quick Race, Online, My Cars, Options.
+// The carousel screens and where each entry leads. Icons and order follow the PC version's main
+// menu (Career, Challenge Series, Quick Race, Online, My Cars, Options), with About Me (the Rap
+// Sheet) beside Projects. Labels say what each entry holds and Projects opens the project list
+// directly, so visitors who don't know the game find the work in one step.
 
 export function MainMenu() {
   const nav = useNav();
   const items: CarouselItem[] = [
-    { key: 'career', label: 'Career', icon: 'career', note: 'Safe House · Blacklist · Rap Sheet', onAccept: () => nav.push('safehouse') },
-    { key: 'challenge', label: 'Challenge Series', icon: 'challenge', note: `${TOOL_COUNT} events · the skill arsenal`, onAccept: () => nav.push('challenge') },
-    { key: 'quickrace', label: 'Quick Race', icon: 'quickrace', note: `${SERVICES.length} race types · services`, onAccept: () => nav.push('quickrace') },
-    { key: 'online', label: 'Online', icon: 'online', note: 'Email · LinkedIn · GitHub · CV', onAccept: () => nav.push('online') },
-    { key: 'mycars', label: 'My Cars', icon: 'addcar', note: 'Renders and visual work', onAccept: () => nav.push('mycars') },
-    { key: 'options', label: 'Options', icon: 'options', note: 'Audio · Controls · Credits', onAccept: () => nav.push('options') },
+    { key: 'projects', label: 'Projects', icon: 'career', note: `${BLACKLIST_SIZE} projects with live sites and source code`, onAccept: () => nav.push('blacklist') },
+    { key: 'about', label: 'About Me', icon: 'rapsheet', note: 'Profile, experience and skills', onAccept: () => nav.push('rapsheet') },
+    { key: 'challenge', label: 'Skills', icon: 'challenge', note: `${TOOL_COUNT} tools and technologies`, onAccept: () => nav.push('challenge') },
+    { key: 'quickrace', label: 'Services', icon: 'quickrace', note: `${SERVICES.length} services I offer`, onAccept: () => nav.push('quickrace') },
+    { key: 'online', label: 'Contact', icon: 'online', note: 'Email · LinkedIn · GitHub · CV', onAccept: () => nav.push('online') },
+    { key: 'mycars', label: 'Gallery', icon: 'addcar', note: 'Renders and visual work', onAccept: () => nav.push('mycars') },
+    { key: 'options', label: 'Settings', icon: 'options', note: 'Audio · Controls · Credits', onAccept: () => nav.push('options') },
   ];
   return (
     <CarouselMenu
@@ -27,31 +30,13 @@ export function MainMenu() {
       title="main menu"
       items={items}
       root
-      hints={[
-        { k: 'Q', label: 'Quit', onClick: nav.quit },
-        { k: '1', label: 'Game Stats', onClick: () => { audio.play('accept'); nav.push('rapsheet'); } },
-      ]}
+      hints={[{ k: 'Q', label: 'Quit', onClick: nav.quit }]}
       keys={{
         q: nav.quit,
         '1': () => { audio.play('accept'); nav.push('rapsheet'); },
       }}
     />
   );
-}
-
-export function SafeHouse() {
-  const nav = useNav();
-  const info: [string, string][] = [
-    ['Blacklist', `${BLACKLIST_SIZE} rivals`],
-    ['Roles', String(EXPERIENCE.length)],
-    ['Tools', String(TOOL_COUNT)],
-  ];
-  const items: CarouselItem[] = [
-    { key: 'blacklist', label: 'Blacklist', icon: 'blacklist', info, note: 'Projects, ranked #15 to #1', onAccept: () => nav.push('blacklist') },
-    { key: 'rapsheet', label: 'Rap Sheet', icon: 'rapsheet', info, note: 'Profile, experience and records', onAccept: () => nav.push('rapsheet') },
-    { key: 'carlot', label: 'Car Lot', icon: 'mycars', info, note: 'My Cars: renders and visual work', onAccept: () => nav.push('mycars') },
-  ];
-  return <CarouselMenu id="safehouse" title="safe house" items={items} />;
 }
 
 // Quick Race lists the game's six race types; each one fronts a service.
@@ -77,7 +62,7 @@ export function QuickRace() {
       onAccept: () => nav.push('online'),
     };
   });
-  return <CarouselMenu id="quickrace" title="quick race" items={items} />;
+  return <CarouselMenu id="quickrace" title="services" items={items} />;
 }
 
 export function Online() {
@@ -88,7 +73,7 @@ export function Online() {
     { key: 'github', label: 'GitHub', icon: 'github', info: [['Profile', LINKS.github.replace(/^https:\/\//, '')]], note: 'Opens in a new tab', onAccept: () => openLink(LINKS.github) },
     { key: 'cv', label: 'Download CV', icon: 'cv', info: [['File', 'cv.pdf']], note: 'PDF résumé', onAccept: () => openLink(asset(LINKS.cv)) },
   ];
-  return <CarouselMenu id="online" title="online" items={items} />;
+  return <CarouselMenu id="online" title="contact" items={items} />;
 }
 
 const subscribe = (fn: () => void) => audio.subscribe(fn);
@@ -113,5 +98,5 @@ export function Options() {
       note: 'Art, intro, music and sounds belong to Electronic Arts', onAccept: () => {},
     },
   ];
-  return <CarouselMenu id="options" title="options" items={items} />;
+  return <CarouselMenu id="options" title="settings" items={items} />;
 }
