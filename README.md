@@ -150,11 +150,13 @@ my-portfolio/
 
 ## Audio
 
-- **Menu theme** (`public/nfsmw/menu-theme.mp3`) loops from the main menu at about 7% volume so it stays
+- **Menu theme** (`public/nfsmw/menu-theme.mp3`) loops from the main menu at about 5% volume so it stays
   under the UI. Browsers block sound until the visitor interacts; skipping the intro counts, so it
   normally starts right away. It pauses while the tab is in the background.
 - **UI sounds** (`public/nfsmw/sfx/`): `move`, `tick`, `accept` and `back` drive the carousels.
   `term-*` are the Rap Sheet terminal's beeps, cut from a recording of the game's UI sounds.
+  The recordings sit at very different levels, so each effect has its own gain (`SFX_GAIN` in
+  `audio.ts`) that brings its peak to about -9 dBFS, clearly over the theme without blasting.
 - Both can be switched off in **Options**; the choice is saved in the browser.
 
 How each sound was cut is in [docs/REFERENCES.md](docs/REFERENCES.md#sound).
