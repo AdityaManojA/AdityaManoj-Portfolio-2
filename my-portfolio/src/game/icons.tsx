@@ -194,6 +194,13 @@ const GAME_ICONS = {
   speedtrap: 'speedtrap',
   warning: 'warning',
   rpdbadge: 'rpdbadge',
+  // From live play captures (media-src/game-captures/live/).
+  quickrace: 'quickrace',
+  online: 'online',
+  addcar: 'addcar',
+  audio: 'audio',
+  player: 'player',
+  gearstick: 'gearstick',
 } as const;
 
 export type IconName = keyof typeof ICONS | keyof typeof GAME_ICONS;
