@@ -29,6 +29,33 @@ npm run build
 The `my-portfolio/dist/` folder is self-contained. Every path is relative, so it runs from any
 static host or sub-folder (GitHub Pages, Netlify, an S3 bucket). `npm run preview` serves it locally.
 
+## Tests
+
+```bash
+cd my-portfolio
+npm test
+```
+
+23 tests (Vitest + Testing Library, in `my-portfolio/tests/`):
+
+- **Flows** (`app.test.tsx`): the intro skips on any key; the main menu lists the game's entries in
+  order and wraps both ways; Safe House opens and remembers its place; the Blacklist steps through
+  rivals, clamps at #1, opens the bio and launches the live site; the Rap Sheet boots, lists the
+  profile and opens all six sections plus a ranking; Challenge Series moves through the grid; My
+  Cars cycles and toggles Showcase; Options toggles music and sound; Online opens links; Quit asks
+  through the ATTENTION dialog, keeps keys inside it, cancels and confirms; held-down Enter can't
+  chain through menus.
+- **Integrity** (`assets.test.ts`): every project, gallery and profile image, every sound, every
+  game glyph and the intro, theme and backgrounds referenced in code exist in `public/`; projects
+  have titles, years, descriptions and tags; links are absolute.
+
+Layout was also audited in the browser at 1920-class, 1280×720, 1024×768, 768×1024 and 375×812 by
+a script that walks every screen and flags off-screen text, clipped text and colliding blocks; all
+pass.
+
+Production dependencies have no known vulnerabilities (`npm audit --omit=dev`). The few advisories
+`npm audit` still lists are inside the test runner's own dependencies, which never ship.
+
 ## Controls
 
 | Key | Action |
@@ -71,7 +98,7 @@ All portfolio text lives in one file: [`my-portfolio/src/game/content.ts`](my-po
 - `EXPERIENCE`: newest first. Feeds the Rap Sheet's Vehicle Database.
 - `SKILLS`: categories and tools. Feeds Challenge Series, Infractions and Rankings.
 - `SERVICES`: Quick Race events and Cost to State.
-- `GALLERY`: My Cars.
+- `GALLERY`: My Cars. Titles describe what each render shows.
 - `PROFILE`, `LINKS`: name, title, summary, contact links.
 
 Images go in `my-portfolio/public/media/` as WebP (about 1280px wide, quality 78 keeps them small).

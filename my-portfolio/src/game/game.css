@@ -415,7 +415,8 @@ h1, h2, p, figure, ol { margin: 0; }
 /* ---------- my cars ---------- */
 .mc-car {
   position: absolute;
-  inset: clamp(8rem, 22vh, 11rem) 18% clamp(6rem, 16vh, 8rem);
+  /* Clears the header block (title, badge, counter) above and the prompt row below. */
+  inset: calc(var(--pad) + 10.5rem) 18% calc(var(--pad) + 4.5rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -488,14 +489,17 @@ h1, h2, p, figure, ol { margin: 0; }
 
 /* ---------- rap sheet terminal ---------- */
 /* The terminal floats over the game scene, dimmed and softened, as in the walkthrough footage. */
-.rs-screen { display: grid; place-items: center; padding: var(--pad); background: #000; }
+.rs-screen { display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: var(--pad); background: #000; }
 .fe-bg.is-blur img { filter: blur(4px) sepia(0.3) brightness(0.8); transform: scale(1.06); animation: none; }
 .rs-panel {
   display: flex;
   flex-direction: column;
   position: relative;
   width: min(820px, 100%);
-  height: min(620px, 100%);
+  /* A percentage height doesn't resolve inside the centring grid, so size from the viewport;
+     the lists inside then scroll instead of pushing the header and prompts off screen. */
+  height: min(620px, calc(100vh - 2 * var(--pad)));
+  height: min(620px, calc(100dvh - 2 * var(--pad)));
   padding: clamp(0.8rem, 2vw, 1.4rem);
   background: rgba(0, 0, 0, 0.9);
   box-shadow: 0 0 0 1px rgba(196, 223, 79, 0.12), 0 0 80px 20px rgba(0, 0, 0, 0.85);
@@ -749,6 +753,10 @@ h1, h2, p, figure, ol { margin: 0; }
   .rs-stats { grid-template-columns: 1fr; }
   .rs-rank { grid-template-columns: 1rem 1.6rem 1fr; }
   .rs-rank span:last-child { display: none; }
+  /* Michroma is very wide: give the case file its own right-aligned line. */
+  .rs-case { flex-basis: 100%; text-align: right; font-size: 0.85em; }
+  .rs-vehicle-head { flex-wrap: wrap; gap: 0.2rem 1rem; }
+  .rs-vehicle-head em { white-space: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {
