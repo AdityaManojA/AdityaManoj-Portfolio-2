@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { ART } from '../assets';
-import { Loading } from '../dialogs';
-import { LOADER_MS } from '../util';
 
-// Boot intro. The game's police-lamp loading screen shows for a moment, then cuts straight to the
-// opening video, which loops until the visitor presses any key, clicks or taps; that goes to the
-// main menu, exactly like the PC version.
+// Boot intro. The game's opening video plays as soon as the page opens and loops until the visitor
+// presses any key, clicks or taps; that goes to the main menu, exactly like the PC version.
+// (The police-lamp Loading screen in dialogs.tsx is kept for later but not shown here for now.)
 //
 // It plays with sound wherever the browser allows. A browser that blocks sound before the first
 // interaction still starts the video on time, muted, with "press any key for sound": that first
@@ -29,20 +27,11 @@ export default function Intro({ onDone }: { onDone: () => void }) {
     if (!v) return;
     const setSilenced = (on: boolean) => { silencedRef.current = on; setSilencedState(on); };
 
-    // Start once the lamps have had their moment and enough video is buffered to play on.
-    let shown = false;
-    let ready = v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA;
-    const start = () => {
-      if (!shown || !ready || done.current) return;
-      v.muted = false;
-      v.play().catch(() => {
-        v.muted = true;
-        v.play().then(() => setSilenced(true), finish); // can't play at all: go straight to the menu
-      });
-    };
-    const onReady = () => { ready = true; start(); };
-    v.addEventListener('canplay', onReady);
-    const loader = setTimeout(() => { shown = true; start(); }, LOADER_MS);
+    v.muted = false;
+    v.play().catch(() => {
+      v.muted = true;
+      v.play().then(() => setSilenced(true), finish); // can't play at all: go straight to the menu
+    });
 
     const skip = (e: Event) => {
       if (e instanceof KeyboardEvent && (e.altKey || e.ctrlKey || e.metaKey)) return;
@@ -62,9 +51,7 @@ export default function Intro({ onDone }: { onDone: () => void }) {
       window.addEventListener('pointerdown', skip);
     }, 150);
     return () => {
-      clearTimeout(loader);
       clearTimeout(arm);
-      v.removeEventListener('canplay', onReady);
       window.removeEventListener('keydown', skip);
       window.removeEventListener('pointerdown', skip);
     };
@@ -81,7 +68,6 @@ export default function Intro({ onDone }: { onDone: () => void }) {
         onPlaying={() => setPlaying(true)}
         onError={() => { if (!done.current) { done.current = true; onDone(); } }}
       />
-      {!playing && <Loading />}
       {playing && <span className="intro-skip">{silenced ? 'press any key for sound' : 'press any key to skip'}</span>}
     </div>
   );

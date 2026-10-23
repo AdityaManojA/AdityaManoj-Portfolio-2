@@ -26,7 +26,7 @@ vi.mock('../src/game/audio', () => {
 
 import App from '../src/game/App';
 import { EXPERIENCE, PROJECTS, SKILLS } from '../src/game/content';
-import { LOADER_MS, selection } from '../src/game/util';
+import { selection } from '../src/game/util';
 
 const TOOLS = SKILLS.reduce((n, g) => n + g.items.length, 0);
 
@@ -57,23 +57,19 @@ beforeEach(() => {
 describe('intro', () => {
   const wait = (ms: number) => act(async () => { await new Promise(r => setTimeout(r, ms)); });
 
-  it('shows the lamps first, then plays the looping video without a click', async () => {
+  it('plays the looping video straight away, with no loader and no click', async () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play');
     render(<App />);
     const video = document.querySelector('video')!;
     expect(video.loop).toBe(true);
-    expect(screen.getByRole('status', { name: 'Loading' })).toBeTruthy();
-    fireEvent.canPlay(video);
-    await wait(200);
-    expect(play).not.toHaveBeenCalled(); // the lamps stay up for their moment
-    await wait(LOADER_MS);
     expect(play).toHaveBeenCalledTimes(1);
     expect(video.muted).toBe(false);
-    fireEvent.playing(video);
     expect(screen.queryByRole('status', { name: 'Loading' })).toBeNull();
+    fireEvent.playing(video);
     expect(screen.getByText('press any key to skip')).toBeTruthy();
     fireEvent.ended(video); // looping: reaching the end never leaves the intro
     expect(document.querySelector('.intro')).not.toBeNull();
+    await wait(200);
     await press('x');
     await waitFor(() => expect(title()).toBe('main menu'));
     play.mockRestore();
@@ -85,8 +81,7 @@ describe('intro', () => {
       .mockResolvedValue(undefined);
     render(<App />);
     const video = document.querySelector('video')!;
-    fireEvent.canPlay(video);
-    await wait(LOADER_MS + 100);
+    await wait(200);
     expect(play).toHaveBeenCalledTimes(2);
     expect(video.muted).toBe(true);
     fireEvent.playing(video);

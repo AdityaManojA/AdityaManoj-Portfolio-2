@@ -3,7 +3,7 @@ import { GALLERY, PROFILE, PROJECTS, SKILLS } from './content';
 
 // Nothing in the front end should pop in. Images are fetched and decoded before the screen that
 // shows them can open, at their original quality:
-//   critical() runs as the intro starts: menu art, ink, loader lamps, every game glyph, avatar.
+//   critical() runs as the intro starts: menu art, ink, every game glyph, avatar.
 //   idle()     starts during the intro and keeps going in idle time: every project portrait, gallery render
 //              and skill logo, so the Blacklist, My Cars and Challenge Series open fully drawn.
 
@@ -25,7 +25,7 @@ function warm(src: string, priority: 'high' | 'low' = 'low') {
 }
 
 export function critical() {
-  [ART.scene, ART.poster, ART.ink, ART.lamps, asset(PROFILE.avatar), asset(PROJECTS[0].image), asset(GALLERY[0].image)]
+  [ART.scene, ART.poster, ART.ink, asset(PROFILE.avatar), asset(PROJECTS[0].image), asset(GALLERY[0].image)]
     .forEach(src => warm(src, 'high'));
   loadGlyphs();
   // Fonts download on first use; ask for every face now so no screen opens with a font swap.
