@@ -40,6 +40,13 @@ describe('content files exist', () => {
     expect(exists('nfsmw/loading-lamps.webp')).toBe(true);
   });
 
+  it('the favicon named in index.html', () => {
+    const html = readFileSync(join(__dirname, '..', 'index.html'), 'utf8');
+    const icon = html.match(/rel="icon"[^>]*href="\.\/([^"]+)"/)?.[1];
+    expect(icon).toBe('Aditya.svg');
+    expect(exists(icon!)).toBe(true);
+  });
+
   it('no stray files are shipped from public/', () => {
     const top = readdirSync(PUBLIC);
     expect(top.filter(f => f.startsWith('__'))).toEqual([]);
