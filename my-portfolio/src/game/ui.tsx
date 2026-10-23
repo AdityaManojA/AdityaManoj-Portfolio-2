@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { asset, useSceneArt } from './assets';
+import { ART, asset, useSceneArt } from './assets';
 import { PROFILE } from './content';
 
 // Building blocks shared by every front-end screen.
@@ -21,35 +21,10 @@ export function Backdrop({ dim = false, blur = false }: { dim?: boolean; blur?: 
   );
 }
 
-/** Ragged ink blot the menus sit on: fixed shapes torn by a turbulence displacement. */
+/** Ragged ink blot the menus sit on. Pre-rendered once (public/nfsmw/ink.webp) from the same torn
+    shapes the game uses, so no SVG filter has to run while screens animate. */
 export function InkSplatter({ className = '' }: { className?: string }) {
-  return (
-    <svg className={`fe-ink ${className}`} viewBox="0 0 1000 360" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <filter id="fe-ink-tear" x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" />
-          <feDisplacementMap in="SourceGraphic" scale="55" />
-        </filter>
-      </defs>
-      <g filter="url(#fe-ink-tear)" fill="#050505">
-        <ellipse cx="560" cy="300" rx="430" ry="120" />
-        <ellipse cx="380" cy="250" rx="140" ry="90" />
-        <ellipse cx="760" cy="230" rx="220" ry="110" />
-        <ellipse cx="930" cy="280" rx="120" ry="130" />
-        <circle cx="300" cy="170" r="38" />
-        <circle cx="470" cy="150" r="26" />
-        <circle cx="640" cy="120" r="18" />
-        <circle cx="230" cy="230" r="22" />
-        <circle cx="880" cy="130" r="30" />
-        <rect x="408" y="70" width="10" height="150" rx="5" />
-        <rect x="520" y="95" width="7" height="110" rx="4" />
-        <rect x="700" y="60" width="9" height="140" rx="5" />
-        <circle cx="160" cy="300" r="14" />
-        <circle cx="120" cy="250" r="7" />
-        <circle cx="560" cy="60" r="9" />
-      </g>
-    </svg>
-  );
+  return <img className={`fe-ink ${className}`} src={ART.ink} alt="" draggable={false} decoding="async" aria-hidden="true" />;
 }
 
 /** Orange (or custom) corner brackets, as around the selected carousel icon and info panels. */

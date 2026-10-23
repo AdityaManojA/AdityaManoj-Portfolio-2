@@ -143,16 +143,29 @@ How each sound was cut is in [docs/REFERENCES.md](docs/REFERENCES.md#sound).
 
 ## Performance notes
 
-- 21.8 MB of PNG/JPEG screenshots were converted to 0.8 MB of WebP.
-- The intro is the 1280×720 60fps source (about 26 MB), remuxed with `faststart` and never
-  re-encoded, so it plays at full clarity and starts before it finishes downloading.
-- The theme was re-encoded to 96 kbps (2.7 MB, from an 8.7 MB source), since it plays quietly.
-- Sound effects are a few KB each, downloaded during the intro and played through Web Audio
-  (decoded once, no per-press start-up delay).
-- Blacklist, Rap Sheet, Challenge Series and My Cars load as separate chunks, prefetched while the
-  intro plays, so the first screen ships less JavaScript and the rest is ready before it is needed.
-- No UI framework or CSS framework: React plus one stylesheet, about 80 KB of gzipped JavaScript.
-- Neighbouring Blacklist portraits and My Cars renders are prefetched, so flicking through never waits.
+Measured on the production build (`npm run build && npx vite preview`) by driving every screen by
+keyboard: a locked 60 fps with zero frames over 33 ms, zero long tasks, and no image, glyph or font
+fetched after a screen opened. First paint is about 130 ms.
+
+What gets it there, without touching image or video quality:
+
+- **Nothing pops in.** As the intro starts, the menu art, ink, loader lamps, avatar, first Blacklist
+  portrait, first render and every font face are fetched and decoded; game glyphs are pulled into
+  in-memory blob URLs so CSS masks never go back to the network. While the intro plays and in idle
+  time after, every project portrait, gallery render and skill logo is warmed a few at a time. The
+  preloaded images are kept alive, so later `<img>` tags are served from memory whatever the host's
+  cache headers say (`src/game/preload.ts`).
+- **No waits between screens.** All screens ship in one bundle, so opening one never waits on the
+  network. The only loader is the game's own lamps while the intro video buffers. The Rap Sheet's
+  scripted boot is shorter (0.9 s per step) and Enter skips it.
+- **Cheap effects.** The ink splatter is pre-rendered once (`public/nfsmw/ink.webp`, 23 KB) instead of
+  an SVG turbulence filter rasterised on every screen. The film-grain layer is a sixth of its old
+  size, and the background drift and grain each sit on their own GPU layer.
+- **Local fonts.** UnifrakturCook, Saira and Michroma ship with the bundle (latin subsets via
+  `@fontsource`), so there is no render-blocking request to Google Fonts.
+- **Media at full quality.** The intro is the 1280×720 60 fps source, stream-copied with fast-start
+  (never re-encoded); images are the original WebP conversions.
+- Sound effects are decoded once into Web Audio buffers, so every press plays instantly.
 - `prefers-reduced-motion` turns animations off.
 
 ## Menu background

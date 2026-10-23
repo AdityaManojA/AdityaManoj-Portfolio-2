@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { GLYPH_FILES } from '../src/game/assets';
 import { GALLERY, LINKS, PROFILE, PROJECTS, SERVICES, SKILLS } from '../src/game/content';
 
 // Integrity: every file the app references must ship in public/, and the content must be shaped
@@ -29,12 +30,14 @@ describe('content files exist', () => {
     expect(files.filter(f => !exists(f))).toEqual([]);
   });
 
-  it('every game glyph named in icons.tsx', () => {
-    const src = readFileSync(join(SRC, 'icons.tsx'), 'utf8');
-    const block = src.slice(src.indexOf('const GAME_ICONS'), src.indexOf('} as const;'));
-    const files = [...block.matchAll(/:\s*'([a-z]+)'/g)].map(m => m[1]);
-    expect(files.length).toBeGreaterThan(10);
-    expect(files.filter(f => !exists(`nfsmw/icons/${f}.webp`))).toEqual([]);
+  it('every game glyph', () => {
+    expect(GLYPH_FILES.length).toBeGreaterThan(10);
+    expect(GLYPH_FILES.filter(f => !exists(`nfsmw/icons/${f}.webp`))).toEqual([]);
+  });
+
+  it('pre-rendered ink and loader lamps', () => {
+    expect(exists('nfsmw/ink.webp')).toBe(true);
+    expect(exists('nfsmw/loading-lamps.webp')).toBe(true);
   });
 
   it('no stray files are shipped from public/', () => {
