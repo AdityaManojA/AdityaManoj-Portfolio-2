@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw source media (full-quality intro, theme and UI-sound compilations). Web copies live in public/nfsmw/.
+media-src
