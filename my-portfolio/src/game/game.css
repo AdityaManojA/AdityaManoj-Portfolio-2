@@ -619,6 +619,7 @@ h1, h2, p, figure, ol { margin: 0; }
   text-transform: uppercase;
   color: #9a9aa2;
 }
+.fe-loading-band span.is-prompt { color: #e9e6dc; animation: blink 1.6s ease-in-out infinite; }
 
 /* ---------- ATTENTION dialog (game capture) ---------- */
 .fe-modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: var(--pad); background: rgba(0, 0, 0, 0.55); animation: fade-in 0.15s ease-out; }

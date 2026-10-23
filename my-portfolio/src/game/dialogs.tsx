@@ -10,12 +10,13 @@ import { Corners } from './ui';
 //   Attention: orange-striped header, brown body with the warning triangle, striped footer with
 //              buttons; the highlighted button sits in orange corner brackets.
 
-export function Loading() {
+/** The lamps screen. With `prompt`, the label under the lamps asks for a click instead. */
+export function Loading({ prompt }: { prompt?: string }) {
   return (
-    <div className="fe-loading" role="status" aria-label="Loading">
+    <div className="fe-loading" role="status" aria-label={prompt ?? 'Loading'}>
       <div className="fe-loading-band">
         <img src={ART.lamps} alt="" draggable={false} />
-        <span>Loading...</span>
+        <span className={prompt ? 'is-prompt' : undefined}>{prompt ?? 'Loading...'}</span>
       </div>
     </div>
   );
