@@ -62,6 +62,22 @@ describe('intro', () => {
     await press('x');
     await waitFor(() => expect(title()).toBe('main menu'));
   });
+
+  it('when sound autoplay is blocked, the first key starts the intro with sound instead of skipping', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
+      .mockRejectedValueOnce(new DOMException('needs a gesture', 'NotAllowedError'))
+      .mockResolvedValue(undefined);
+    render(<App />);
+    await waitFor(() => expect(screen.getByText('press any key to start')).toBeTruthy());
+    await act(async () => { await new Promise(r => setTimeout(r, 200)); });
+    await press('x');
+    await waitFor(() => expect(screen.getByText('press any key to skip')).toBeTruthy());
+    expect(play).toHaveBeenCalledTimes(2);
+    expect(document.querySelector('video')!.muted).toBe(false);
+    await press('x');
+    await waitFor(() => expect(title()).toBe('main menu'));
+    play.mockRestore();
+  });
 });
 
 describe('main menu', () => {

@@ -5,45 +5,62 @@ import { Loading } from '../dialogs';
 // Boot intro. Plays the game's opening video full screen with "press any key to skip" in the
 // menu marker font; any key, click or tap skips it, exactly like the PC version.
 //
-// Browsers may refuse to autoplay with sound, so it first tries with audio and falls back to a
-// muted start. The skip key press then doubles as the interaction that lets the menu music play.
+// Browsers refuse to autoplay with sound until the visitor has interacted with the site. Rather
+// than play the intro silently, it then holds on the loading screen with "press any key to start":
+// that press is the interaction, so the intro starts from the top with its sound, and the next
+// press skips as usual (and lets the menu music play).
+
+type Stage = 'starting' | 'blocked' | 'started';
 
 export default function Intro({ onDone }: { onDone: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const done = useRef(false);
+  const [stage, setStageState] = useState<Stage>('starting');
+  const stageRef = useRef<Stage>('starting');
   // The intro is a large file; until its first frame plays, show the game's own loading screen.
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
+    const setStage = (s: Stage) => { stageRef.current = s; setStageState(s); };
     const finish = () => {
       if (done.current) return;
       done.current = true;
       onDone();
     };
-
-    const v = videoRef.current;
-    if (v) {
+    const start = () => {
+      const v = videoRef.current;
+      if (!v) return finish();
       v.muted = false;
-      v.play().catch(() => {
-        v.muted = true;
-        v.play().catch(finish); // can't play at all: go straight to the menu
-      });
-    }
+      v.play().then(
+        () => setStage('started'),
+        (err: unknown) => {
+          // Blocked for want of an interaction: wait for one. Any other failure: go to the menu.
+          if (err instanceof DOMException && err.name === 'NotAllowedError') setStage('blocked');
+          else finish();
+        },
+      );
+    };
+    start();
 
-    const skip = (e: Event) => {
+    const onInput = (e: Event) => {
       if (e instanceof KeyboardEvent && (e.altKey || e.ctrlKey || e.metaKey)) return;
       e.preventDefault();
-      finish();
+      if (stageRef.current === 'started') return finish();
+      if (stageRef.current === 'blocked') {
+        // Called inside the key or tap handler, so the browser now allows sound.
+        setStage('starting');
+        start();
+      }
     };
     // Defer by a tick so the key press that reloaded the page can't skip the intro instantly.
     const t = setTimeout(() => {
-      window.addEventListener('keydown', skip);
-      window.addEventListener('pointerdown', skip);
+      window.addEventListener('keydown', onInput);
+      window.addEventListener('pointerdown', onInput);
     }, 150);
     return () => {
       clearTimeout(t);
-      window.removeEventListener('keydown', skip);
-      window.removeEventListener('pointerdown', skip);
+      window.removeEventListener('keydown', onInput);
+      window.removeEventListener('pointerdown', onInput);
     };
   }, [onDone]);
 
@@ -59,7 +76,7 @@ export default function Intro({ onDone }: { onDone: () => void }) {
         onError={() => { if (!done.current) { done.current = true; onDone(); } }}
       />
       {!playing && <Loading />}
-      <span className="intro-skip">press any key to skip</span>
+      <span className="intro-skip">{stage === 'blocked' ? 'press any key to start' : 'press any key to skip'}</span>
     </div>
   );
 }
