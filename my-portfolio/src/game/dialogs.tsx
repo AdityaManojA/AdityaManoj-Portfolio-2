@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { asset } from './assets';
+import { ART } from './assets';
 import { audio } from './audio';
 import { Icon } from './icons';
 import { modalLock, useKeys } from './input';
@@ -14,7 +14,7 @@ export function Loading() {
   return (
     <div className="fe-loading" role="status" aria-label="Loading">
       <div className="fe-loading-band">
-        <img src={asset('nfsmw/loading-lamps.webp')} alt="" draggable={false} />
+        <img src={ART.lamps} alt="" draggable={false} />
         <span>Loading...</span>
       </div>
     </div>

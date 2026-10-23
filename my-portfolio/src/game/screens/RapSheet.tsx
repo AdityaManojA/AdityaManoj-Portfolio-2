@@ -76,12 +76,12 @@ export default function RapSheet() {
   useEffect(() => {
     if (view === 'boot') {
       audio.play('termBoot');
-      const t = setTimeout(() => go('search'), 1500);
+      const t = setTimeout(() => go('search'), 900);
       return () => clearTimeout(t);
     }
     if (view === 'search') {
       audio.play('termSearch');
-      const t = setTimeout(() => go('list'), 1400);
+      const t = setTimeout(() => go('list'), 900);
       return () => clearTimeout(t);
     }
     // go is recreated each render; the timers only care about the view they started in.

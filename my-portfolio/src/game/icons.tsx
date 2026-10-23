@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { asset } from './assets';
+import { GAME_ICONS, glyphUrl, useGlyphVersion } from './assets';
 
 // White glyphs in the style of the game's menu icons. Every glyph uses a 64x40 viewBox and draws
 // in currentColor, with #111 for cut-outs, so the carousel can tint and scale them freely.
@@ -180,35 +180,15 @@ export const ICONS = {
   ),
 } satisfies Record<string, ReactNode>;
 
-// The game's own glyphs, cut from in-game captures (media-src/game-captures/) as white masks, so
-// they can be tinted like the drawn ones. Where a glyph exists here it replaces the drawn icon.
-const GAME_ICONS = {
-  career: 'career',
-  challenge: 'challenge',
-  raceevents: 'raceevents',
-  milestones: 'milestones',
-  tradepaint: 'tradepaint',
-  stopwatch: 'stopwatch',
-  roadblock: 'roadblock',
-  spikestrip: 'spikestrip',
-  speedtrap: 'speedtrap',
-  warning: 'warning',
-  rpdbadge: 'rpdbadge',
-  // From live play captures (media-src/game-captures/live/).
-  quickrace: 'quickrace',
-  online: 'online',
-  addcar: 'addcar',
-  audio: 'audio',
-  player: 'player',
-  gearstick: 'gearstick',
-} as const;
+
 
 export type IconName = keyof typeof ICONS | keyof typeof GAME_ICONS;
 
 export function Icon({ name, className = '' }: { name: IconName; className?: string }) {
+  useGlyphVersion();
   const file = (GAME_ICONS as Record<string, string>)[name];
   if (file) {
-    const style = { '--glyph': `url(${asset(`nfsmw/icons/${file}.webp`)})` } as CSSProperties;
+    const style = { '--glyph': `url(${glyphUrl(file)})` } as CSSProperties;
     return <span className={`fe-glyph ${className}`} style={style} aria-hidden="true" />;
   }
   return (

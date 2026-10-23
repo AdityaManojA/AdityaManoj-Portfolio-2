@@ -1,25 +1,19 @@
-import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ComponentType } from 'react';
 import { audio } from './audio';
-import { ART } from './assets';
-import { Attention, Loading } from './dialogs';
+import { Attention } from './dialogs';
 import { NavContext } from './nav';
 import type { Nav, ScreenId } from './nav';
+import { critical, idle } from './preload';
+import Blacklist from './screens/Blacklist';
+import ChallengeSeries from './screens/ChallengeSeries';
 import Intro from './screens/Intro';
 import { MainMenu, Online, Options, QuickRace, SafeHouse } from './screens/Menus';
+import MyCars from './screens/MyCars';
+import RapSheet from './screens/RapSheet';
 
-// The carousel menus ship in the main bundle; the four larger screens load as separate chunks,
-// fetched while the intro plays so they are ready before anyone can reach them.
-const loaders = {
-  blacklist: () => import('./screens/Blacklist'),
-  rapsheet: () => import('./screens/RapSheet'),
-  challenge: () => import('./screens/ChallengeSeries'),
-  mycars: () => import('./screens/MyCars'),
-};
-const Blacklist = lazy(loaders.blacklist);
-const RapSheet = lazy(loaders.rapsheet);
-const ChallengeSeries = lazy(loaders.challenge);
-const MyCars = lazy(loaders.mycars);
+// Every screen ships in one bundle (about 5 KB more than splitting): opening a screen never waits
+// on the network, so the only loader a visitor ever sees is the intro's.
 
 // Top level: intro video, then the front end. The front end is a stack of screens with the main
 // menu at the bottom; only the top screen is mounted, so only it listens to the keyboard.
@@ -44,9 +38,8 @@ export default function App() {
   // While the intro plays, fetch what the menu needs first so it appears instantly.
   useEffect(() => {
     audio.preloadSfx();
-    Object.values(loaders).forEach(load => { load().catch(() => {}); });
-    new Image().src = ART.scene;
-    new Image().src = ART.poster;
+    critical();
+    idle();
   }, []);
 
   const finishIntro = useCallback(() => {
@@ -69,9 +62,7 @@ export default function App() {
     <NavContext.Provider value={nav}>
       <main className="frontend">
         <div className="fe-transition" key={`${stack.length}-${top}`}>
-          <Suspense fallback={<Loading />}>
-            <Screen />
-          </Suspense>
+          <Screen />
         </div>
         {confirmQuit && (
           <Attention
