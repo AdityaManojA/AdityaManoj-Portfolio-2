@@ -23,7 +23,8 @@ from memory. Timestamps are into the linked videos.
 ## Screens
 
 ### Intro
-- Owner-supplied intro video, full screen on black.
+- Owner-supplied intro video (EnciclopediaLusa upload, 1280×720, 60fps), full screen on black.
+  Stream-copied into `intro.mp4` with fast-start only; the video stream is bit-identical to the source.
 - "press any key to skip" in the menu heading font, bottom right. Any key, click or tap skips.
 
 ### Main Menu (V1 0:00–3:46, V4 0:03)
