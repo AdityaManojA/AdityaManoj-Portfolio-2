@@ -18,7 +18,7 @@ export function MainMenu() {
     { key: 'challenge', label: 'Challenge Series', icon: 'challenge', note: `${TOOL_COUNT} events · the skill arsenal`, onAccept: () => nav.push('challenge') },
     { key: 'quickrace', label: 'Quick Race', icon: 'quickrace', note: `${SERVICES.length} race types · services`, onAccept: () => nav.push('quickrace') },
     { key: 'online', label: 'Online', icon: 'online', note: 'Email · LinkedIn · GitHub · CV', onAccept: () => nav.push('online') },
-    { key: 'mycars', label: 'My Cars', icon: 'mycars', note: 'Renders and visual work', onAccept: () => nav.push('mycars') },
+    { key: 'mycars', label: 'My Cars', icon: 'addcar', note: 'Renders and visual work', onAccept: () => nav.push('mycars') },
     { key: 'options', label: 'Options', icon: 'options', note: 'Audio · Controls · Credits', onAccept: () => nav.push('options') },
   ];
   return (
@@ -100,15 +100,15 @@ export function Options() {
   const sfx = useSyncExternalStore(subscribe, getSfx);
   const onOff = (v: boolean) => (v ? 'On' : 'Off');
   const items: CarouselItem[] = [
-    { key: 'music', label: 'Music', icon: 'music', info: [['Menu Theme', onOff(music)]], note: 'Accept to toggle', onAccept: () => audio.setMusic(!music) },
-    { key: 'sfx', label: 'Sound FX', icon: 'sfx', info: [['UI Sounds', onOff(sfx)]], note: 'Accept to toggle', onAccept: () => audio.setSfx(!sfx) },
+    { key: 'music', label: 'Music', icon: 'audio', info: [['Menu Theme', onOff(music)]], note: 'Accept to toggle', onAccept: () => audio.setMusic(!music) },
+    { key: 'sfx', label: 'Sound FX', icon: 'audio', info: [['UI Sounds', onOff(sfx)]], note: 'Accept to toggle', onAccept: () => audio.setSfx(!sfx) },
     {
-      key: 'controls', label: 'Controls', icon: 'controls',
+      key: 'controls', label: 'Controls', icon: 'gearstick',
       info: [['← →', 'Browse'], ['↑ ↓', 'Lists and rivals'], ['Enter', 'Accept'], ['Esc', 'Back'], ['1 2 3', 'Prompts shown on screen']],
       note: 'Mouse and touch work too', onAccept: () => {},
     },
     {
-      key: 'credits', label: 'Credits', icon: 'credits',
+      key: 'credits', label: 'Credits', icon: 'player',
       info: [['Portfolio', 'Aditya Manoj'], ['Game', 'NFS Most Wanted © 2005 EA'], ['Status', 'Fan build, not affiliated']],
       note: 'Art, intro, music and sounds belong to Electronic Arts', onAccept: () => {},
     },

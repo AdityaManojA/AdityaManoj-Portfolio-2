@@ -123,9 +123,14 @@ the background), median-filtered, trimmed and saved as lossless WebP masks. `Ico
 | speedtrap, stopwatch, roadblock, spikestrip, tradepaint | G1-9 milestones board | Challenge Series events |
 | warning | G1-5 ATTENTION | Quit confirmation |
 | rpdbadge | G1-12 Rap Sheet | Rap Sheet boot badge |
+| quickrace, online | Live play capture, main menu (`live/cd3c6d`, `live/vj0qgy`) | Main menu Quick Race, Online |
+| addcar | Live play capture, my cars garage (`live/jf31gt`) | Main menu My Cars |
+| audio, player, gearstick | Live play capture, options carousel (`live/574n0n`, `live/q4mdtv`) | Options: Music and Sound FX, Credits, Controls |
 
-Entries with no capture yet (Quick Race, Online, My Cars, Options, the Safe House items, race
-types, contact links) still use the drawn icons in `icons.tsx`.
+Live play captures (taken in the browser pane while the owner played) are lower resolution than the
+G1 stills, so those glyphs are smaller sources. Entries with no labelled capture yet (main-menu
+Options, the Safe House items, Quick Race race types, contact links) still use the drawn icons in
+`icons.tsx`.
 
 ## Fonts
 
