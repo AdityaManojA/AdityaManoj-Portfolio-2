@@ -15,6 +15,7 @@ from memory. Timestamps are into the linked videos.
 | V5 | [NFS Most Wanted (2005) [UI Sounds]](https://www.youtube.com/watch?v=DMWGJCGvAPI) | UI sound effects (the downloaded MP3 of this video) |
 | S1 | Owner-supplied screenshot: title art + M3 GTR garage | Menu key art (top half), My Cars layout (bottom half) |
 | S2 | Owner-supplied `GUI sounds.mp3` | Carousel sound effects |
+| G1 | Owner's captures of the running game (web.nfsmwo.com), kept in `my-portfolio/media-src/game-captures/` | `3` main menu (now the menu background), `4` loading screen, `5` ATTENTION dialog, `8` blacklist bio, `9` milestones board, `10` blacklist rival, `11` car select, `12` Rap Sheet sign-in. Also the source of every game glyph in `public/nfsmw/icons/`. |
 | S4 | 1280×720 thumbnail of V1 (`i.ytimg.com/vi/xg-dTQUSnxE/maxresdefault.jpg`) | `main-menu.webp`: the real main-menu scene. Its baked-in bottom UI (menu, ink, player tag) is faded to ink black along the edge where that UI starts; the logo and the game's own graffiti stay. Source kept in `media-src/main-menu-source.jpg`. |
 | S3 | Owner-supplied stills: main menu (M3 GTR, "main menu" carousel), "spoilers" carousel, "IS 300 1/32" car select, save/load dialog | Main-menu layout, two-tone chevrons and dots, striped counters, My Cars layout |
 | W1 | [StrategyWiki: Game modes](https://www.strategywiki.org/wiki/Need_for_Speed:_Most_Wanted/Game_modes) | The six Quick Race types |
@@ -47,7 +48,21 @@ from memory. Timestamps are into the linked videos.
   here: Blacklist / Roles / Tools).
 - `[Esc] Back` prompt.
 
-### Blacklist (V3 0:17 "blacklist 9 / Earl", 0:25 "blacklist 1 / Razor")
+### Loading (G1-4)
+- Shown while a screen's code loads: the game's three lamps (cut from the capture), a striped band,
+  "LOADING...".
+
+### ATTENTION dialog (G1-5)
+- Quit asks first. Orange-striped header, brown body with the warning glyph, striped footer; the
+  highlighted button is filled orange inside orange corner brackets; ← → choose, Enter confirms,
+  Esc cancels. Keys go only to the dialog while it is open.
+
+### Blacklist (G1-10 rival, G1-8 bio; V3 0:17, 0:25)
+- Rival page: stacked yellow ↑↓ chevrons beside "blacklist N", name under it, striped value box
+  top-right, portrait with ink and DEFEATED stamp, tan right-aligned quote, bracketed table with an
+  orange "Target" header and orange values, carousel with the game's Race Events and Milestones
+  glyphs, `[Esc] Back [2] Bio`.
+- Bio page: "Ride:" and "Strength:" with blackletter labels, bracketed "bio:" block, portrait right.
 - Heading "blacklist N" with the rival's name and badge beneath.
 - Top-right value box (game: Bounty / Cash; here: Rival n / 15).
 - Rival portrait on the left with a red **DEFEATED** stamp.
@@ -60,7 +75,8 @@ Green-on-black Rockport Police Department terminal, lime header bars, dotted rul
 green-bordered boxes, `CASE FILE: …` bottom-right. On wide screens the game shows the terminal as a
 black 4:3 panel with the garage scene around it (V3 0:45); here the scene sits behind, dimmed and
 softened.
-- Boot: barred police badge, "ROCKPORT POLICE DEPARTMENT", `[↵ Skip] [Esc Back]` (V2 0:05).
+- Boot: the game's barred badge glyph, "ROCKPORT POLICE DEPARTMENT", the lime SIGN IN / PASSWORD
+  box (G1-12), `[↵ Skip] [Esc Back]` (V2 0:05).
 - "SEARCHING DATABASE --/ RETRIEVING LIST --/" then the name list with the highlighted row (V2 0:14).
 - RAP SHEET: striped stats block, then MAIN MENU with square bullets: Summary, Vehicle Database,
   Infractions, Cost to State, Top 5 Pursuits, Rankings (V2 0:21).
@@ -94,13 +110,30 @@ softened.
 ### Online, Options
 - No reference footage used; both reuse the main-menu carousel.
 
+## Game glyphs
+
+Cut from G1 captures by `luminance/colour → alpha` (white, yellow, orange or lime ink keyed out of
+the background), median-filtered, trimmed and saved as lossless WebP masks. `Icon` draws them as a
+`currentColor` mask, so the selected-gold and dimmed states work as in the game.
+
+| Glyph | From | Used for |
+| --- | --- | --- |
+| career, challenge | G1-3 main menu | Main menu Career, Challenge Series |
+| raceevents, milestones | G1-10 blacklist carousel | Blacklist actions (live site, source) |
+| speedtrap, stopwatch, roadblock, spikestrip, tradepaint | G1-9 milestones board | Challenge Series events |
+| warning | G1-5 ATTENTION | Quit confirmation |
+| rpdbadge | G1-12 Rap Sheet | Rap Sheet boot badge |
+
+Entries with no capture yet (Quick Race, Online, My Cars, Options, the Safe House items, race
+types, contact links) still use the drawn icons in `icons.tsx`.
+
 ## Fonts
 
 | Use | In the game | Here | Why |
 | --- | --- | --- | --- |
 | Headings ("main menu", "safe house", "press any key to skip") | Lowercase textura blackletter, bold | **UnifrakturCook Bold** (Google Fonts) | Compared side by side with a 720p frame of "challenge series" (V4 0:06) against UnifrakturMaguntia, Pirata One, Grenze Gotisch, New Rocker, Germania One, Jacquard 24 and Old English Text MT. Closest letterforms: fractured diagonals in `c`/`e`, looped two-storey `g`, heavy stems. No public source names the game's actual face; the game ships it as bitmap textures. |
 | Rap Sheet terminal | Eurostile Bold Extended (F1) | **Michroma** + 0.35px stroke | Free Eurostile Extended equivalent; the stroke adds the bold weight Michroma lacks. |
-| Labels, prompts, panels | Bold neo-grotesque | Arial Bold | Matches the plain bold sans in every frame and is present on all systems. |
+| Labels, prompts, panels, bios | Bold, tracked, squared-round sans | **Saira** 600–800 (Google Fonts) | Compared against the G1-8 bio paragraph and G1-10 "Race Wins / Milestones Completed" next to Arial, Rubik, Kanit, Heebo, Archivo, Manrope, Mulish, Nunito Sans, Exo 2 and Titillium; Saira's squared `s`, `e` and `g` match. |
 
 ## Sound
 

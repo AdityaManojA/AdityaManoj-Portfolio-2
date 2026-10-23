@@ -2,6 +2,7 @@ import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react
 import type { ComponentType } from 'react';
 import { audio } from './audio';
 import { ART } from './assets';
+import { Attention, Loading } from './dialogs';
 import { NavContext } from './nav';
 import type { Nav, ScreenId } from './nav';
 import Intro from './screens/Intro';
@@ -38,6 +39,7 @@ const SCREENS: Record<ScreenId, ComponentType> = {
 export default function App() {
   const [phase, setPhase] = useState<'intro' | 'frontend'>('intro');
   const [stack, setStack] = useState<ScreenId[]>(['main']);
+  const [confirmQuit, setConfirmQuit] = useState(false);
 
   // While the intro plays, fetch what the menu needs first so it appears instantly.
   useEffect(() => {
@@ -55,12 +57,8 @@ export default function App() {
   const nav = useMemo<Nav>(() => ({
     push: id => setStack(s => [...s, id]),
     back: () => setStack(s => (s.length > 1 ? s.slice(0, -1) : s)),
-    quit: () => {
-      audio.play('back');
-      audio.stopMusic();
-      setStack(['main']);
-      setPhase('intro');
-    },
+    // Quit asks first, through the game's ATTENTION dialog.
+    quit: () => setConfirmQuit(true),
   }), []);
 
   if (phase === 'intro') return <Intro onDone={finishIntro} />;
@@ -71,10 +69,22 @@ export default function App() {
     <NavContext.Provider value={nav}>
       <main className="frontend">
         <div className="fe-transition" key={`${stack.length}-${top}`}>
-          <Suspense fallback={null}>
+          <Suspense fallback={<Loading />}>
             <Screen />
           </Suspense>
         </div>
+        {confirmQuit && (
+          <Attention
+            message={['Are you sure you want to quit?', 'The intro will play again.']}
+            onOk={() => {
+              setConfirmQuit(false);
+              audio.stopMusic();
+              setStack(['main']);
+              setPhase('intro');
+            }}
+            onCancel={() => setConfirmQuit(false)}
+          />
+        )}
       </main>
     </NavContext.Provider>
   );

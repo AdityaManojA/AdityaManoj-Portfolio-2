@@ -23,11 +23,18 @@ const KEYMAP: Record<string, Action> = {
 
 export type KeyHandlers = Partial<Record<Action, () => void>>;
 
+// While a dialog (ATTENTION, save/load) is open, only the dialog's own handlers receive keys.
+let openModals = 0;
+export const modalLock = {
+  acquire() { openModals += 1; },
+  release() { openModals = Math.max(0, openModals - 1); },
+};
+
 /**
  * Binds keyboard actions for the mounted screen. Only one screen is mounted at a time, so the
  * handlers of whatever is on screen are the only ones listening.
  */
-export function useKeys(handlers: KeyHandlers, enabled = true) {
+export function useKeys(handlers: KeyHandlers, enabled = true, isModal = false) {
   const ref = useRef(handlers);
   useEffect(() => { ref.current = handlers; });
 
@@ -39,6 +46,7 @@ export function useKeys(handlers: KeyHandlers, enabled = true) {
     const onKey = (e: KeyboardEvent) => {
       if (e.altKey || e.ctrlKey || e.metaKey) return;
       if (e.timeStamp < mountedAt) return;
+      if (openModals > 0 && !isModal) return;
       const action = KEYMAP[e.key];
       // Holding an arrow scrolls like the game; holding Enter or Esc must not chain through menus.
       if (e.repeat && action !== 'left' && action !== 'right' && action !== 'up' && action !== 'down') return;
@@ -49,5 +57,5 @@ export function useKeys(handlers: KeyHandlers, enabled = true) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [enabled]);
+  }, [enabled, isModal]);
 }
