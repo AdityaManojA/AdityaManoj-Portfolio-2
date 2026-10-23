@@ -1,0 +1,614 @@
+/* Need for Speed: Most Wanted (2005) front end.
+   Two visual languages, both taken from the game:
+   - Menus (fe-*): sepia key art, black ink splatter, white line icons, orange corner brackets,
+     yellow chevrons, marker-font headings, striped black key prompts.
+   - Rap Sheet terminal (rs-*): Rockport PD computer, green on black with lime header bars.
+   Every screen is keyboard-first; layout tokens below keep sizes consistent. */
+
+:root {
+  --orange: #f39a1e;
+  --yellow: #f6c21c;
+  --text: #f2f0ea;
+  --muted: #a9a698;
+  --bar: rgba(14, 14, 14, 0.88);
+  --stripe: repeating-linear-gradient(-55deg, rgba(120, 120, 120, 0.55) 0 3px, transparent 3px 7px);
+  --pad: clamp(1rem, 3.5vw, 3rem);
+  /* Menu headings ("main menu", "safe house", "press any key to skip") are a heavy textura
+     blackletter in the game; UnifrakturCook Bold is the closest free match. */
+  --marker: 'UnifrakturCook', 'Old English Text MT', serif;
+  /* The Rap Sheet terminal uses Eurostile Bold Extended; Michroma is the free equivalent. */
+  --terminal: 'Michroma', 'Eurostile', 'Arial Black', sans-serif;
+  --sans: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+
+  --term: #c4df4f;
+  --term-dim: #8da32b;
+  --term-hi: #b5d334;
+  --term-sel: rgba(110, 135, 25, 0.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+kbd { font-family: inherit; }
+h1, h2, p, figure, ol { margin: 0; }
+
+/* ---------- intro ---------- */
+.intro {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  cursor: pointer;
+}
+.intro video { width: 100%; height: 100%; object-fit: contain; }
+.intro-skip {
+  position: absolute;
+  right: var(--pad);
+  bottom: calc(var(--pad) + env(safe-area-inset-bottom));
+  font-family: var(--marker);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+  letter-spacing: 0.06em;
+  color: #e9e6dc;
+  text-shadow: 2px 2px 0 #000;
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+/* ---------- screen frame ---------- */
+.frontend, .fe-transition { position: fixed; inset: 0; }
+.fe-transition { animation: screen-in 0.28s ease-out; }
+.fe-screen { position: absolute; inset: 0; overflow: hidden; }
+
+/* ---------- backdrop ---------- */
+.fe-bg { position: absolute; inset: 0; }
+.fe-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  filter: sepia(0.25) saturate(1.1) contrast(1.08);
+  animation: drift 40s ease-in-out infinite alternate;
+}
+.fe-grade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 55% 40%, transparent 40%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+.fe-grade.is-dim { background: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 0.68) 20%, rgba(0, 0, 0, 0.93) 100%); }
+.fe-grade.is-garage {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, transparent 25%, transparent 65%, rgba(0, 0, 0, 0.7) 100%),
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
+}
+.fe-grain {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.6s steps(4) infinite;
+}
+
+/* ---------- shared pieces ---------- */
+.fe-ink { position: absolute; pointer-events: none; opacity: 0.94; }
+
+.fe-title {
+  font-family: var(--marker);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: #ece9df;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.fe-corners { position: absolute; inset: 0; pointer-events: none; }
+.fe-corners i { position: absolute; width: 14px; height: 14px; border: 0 solid var(--orange); }
+.fe-corners .tl { top: 0; left: 0; border-top-width: 3px; border-left-width: 3px; }
+.fe-corners .tr { top: 0; right: 0; border-top-width: 3px; border-right-width: 3px; }
+.fe-corners .bl { bottom: 0; left: 0; border-bottom-width: 3px; border-left-width: 3px; }
+.fe-corners .br { bottom: 0; right: 0; border-bottom-width: 3px; border-right-width: 3px; }
+.fe-corners.is-white i { border-color: #ddd; width: 12px; height: 12px; }
+.fe-corners.is-grey i { border-color: #8a8a8a; width: 10px; height: 10px; }
+
+.fe-chevron { display: flex; flex: none; padding: 4px; }
+.fe-chevron i {
+  width: 13px;
+  height: 22px;
+  background: var(--yellow);
+  clip-path: polygon(0 0, 45% 0, 100% 50%, 45% 100%, 0 100%, 55% 50%);
+  filter: drop-shadow(1px 1px 0 #000);
+}
+.fe-chevron i + i { margin-left: -3px; }
+/* Two-tone, as in the game: the inner arrow muted, the outer one bright. */
+.fe-chevron i:first-child { background: #a38b3a; }
+.fe-chevron.is-left { transform: scaleX(-1); }
+.fe-chevron:hover i:last-child, .fe-chevron:active i:last-child { background: #fff3b0; }
+
+.fe-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.32rem 2.8rem 0.32rem 0.45rem;
+  background: var(--bar);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.fe-bar::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 2.3rem; background: var(--stripe); }
+.fe-key kbd {
+  min-width: 1.5rem;
+  padding: 0.05rem 0.3rem;
+  border: 1.5px solid #ddd;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  text-align: center;
+}
+.fe-key:hover kbd { border-color: var(--yellow); color: var(--yellow); }
+.fe-keys { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+
+.fe-tag { padding-left: 0; min-width: 15rem; font-size: 0.95rem; }
+.fe-avatar {
+  width: 46px;
+  height: 46px;
+  margin: -0.6rem 0.2rem -0.6rem -0.4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  box-shadow: 0 0 0 3px #111;
+}
+
+.fe-info {
+  position: relative;
+  padding: 0.75rem 1rem;
+  min-width: 15rem;
+  background: rgba(10, 10, 10, 0.78);
+  font-size: 0.85rem;
+  animation: fade-up 0.2s ease-out;
+}
+.fe-info-row { display: flex; justify-content: space-between; gap: 2rem; padding: 0.12rem 0; }
+.fe-info-row span { color: #cfccc0; }
+.fe-info-row b { color: #fff; text-align: right; }
+
+/* ---------- carousel ---------- */
+/* Game layout (reference: main menu frame): carousel and its ink bottom-right, info box and the
+   player tag / key prompts bottom-left, car in the open upper-left. */
+.fe-layout {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr auto auto;
+  grid-template-areas: ". ." "info carousel" "foot carousel";
+  align-items: end;
+  gap: 1rem 2rem;
+  padding: var(--pad);
+  padding-bottom: calc(clamp(1rem, 3.5vh, 2.25rem) + env(safe-area-inset-bottom));
+}
+.fe-layout > * { position: relative; }
+.fe-layout > .fe-ink { position: absolute; right: -6%; bottom: -10%; width: 60%; height: 62%; }
+.fe-layout > .fe-info { grid-area: info; justify-self: start; }
+.fe-layout > .fe-foot { grid-area: foot; }
+.fe-carousel { grid-area: carousel; display: flex; flex-direction: column; align-items: flex-start; margin-right: clamp(0rem, 4vw, 4rem); }
+
+/* Poster art has the car on the right, so the whole stack moves left over the promo boxes. */
+.has-poster .fe-layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "." "info" "carousel" "foot"; }
+.has-poster .fe-layout > .fe-ink { right: auto; left: -8%; transform: scaleX(-1); }
+.has-poster .fe-carousel { margin: 0 0 0 clamp(0rem, 2vw, 2rem); }
+
+.fe-carousel .fe-title { margin-bottom: 0.55rem; }
+.fe-strip { display: flex; align-items: center; gap: clamp(0.45rem, 1.1vw, 0.95rem); }
+
+.fe-icon { position: relative; flex: none; display: grid; place-items: center; color: #d6d3c9; transition: opacity 0.15s; }
+.fe-icon svg { width: 100%; height: auto; display: block; filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.85)); }
+.fe-icon.is-active {
+  width: clamp(76px, 7vw, 96px);
+  padding: 0.7rem 0.6rem;
+  color: #fff;
+}
+.fe-icon.is-active svg { animation: pop 0.22s cubic-bezier(0.2, 1.5, 0.4, 1); }
+.fe-off1 { width: clamp(44px, 4vw, 54px); opacity: 0.85; }
+.fe-off2 { width: clamp(30px, 2.8vw, 38px); opacity: 0.5; }
+.fe-icon:not(.is-active):hover { opacity: 1; }
+
+/* Earlier entries: grey dots, the nearer one larger. */
+.fe-dot { flex: none; border-radius: 50%; background: rgba(160, 160, 160, 0.6); }
+.fe-dot-1 { width: 15px; height: 15px; }
+.fe-dot-2 { width: 9px; height: 9px; opacity: 0.6; }
+
+/* The entry name sits centred under the selected icon, as in the game. */
+.fe-name {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.35rem;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  text-shadow: 1px 1px 0 #000;
+}
+.fe-label { display: flex; flex-direction: column; margin-top: 2.4rem; min-height: 1.2rem; max-width: 30rem; animation: fade-up 0.18s ease-out; }
+.fe-label-note { font-size: 0.78rem; line-height: 1.35; color: var(--muted); max-width: 40ch; }
+
+.fe-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 0.9rem 1.2rem; }
+/* Main menu: player tag on its own line with the prompts under it, as in the game. */
+.is-root .fe-foot { flex-direction: column; align-items: flex-start; }
+.has-scene .fe-carousel .fe-title { align-self: flex-end; margin-right: 2.5rem; }
+
+/* Striped counter box, as behind "3/15" and "1/32". */
+.fe-count {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 2.2rem 0.15rem 0.6rem;
+  background: var(--stripe), rgba(0, 0, 0, 0.6);
+  font-weight: 700;
+  text-shadow: 1px 1px 0 #000;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- blacklist ---------- */
+.bl-screen { display: flex; flex-direction: column; padding: var(--pad); gap: 1rem; }
+.bl-head { position: relative; display: flex; justify-content: space-between; align-items: flex-start; }
+.bl-head .fe-title { font-size: clamp(1.8rem, 3.6vw, 2.8rem); }
+.bl-name { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.3rem; font-weight: 700; font-size: 1rem; }
+.bl-name svg { width: 22px; color: var(--yellow); }
+.bl-bounty { padding: 0.35rem 0.8rem; background: var(--bar); font-weight: 700; font-size: 0.85rem; }
+.bl-bounty b { color: var(--yellow); }
+
+.bl-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center;
+  animation: fade-up 0.25s ease-out;
+}
+.bl-portrait { position: relative; display: grid; place-items: center; min-height: 0; }
+.bl-portrait img {
+  max-width: 100%;
+  max-height: 58vh;
+  object-fit: contain;
+  filter: sepia(0.2) contrast(1.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 62%, transparent 100%);
+}
+.bl-stamp {
+  position: absolute;
+  left: 8%;
+  bottom: 10%;
+  padding: 0.2rem 1rem;
+  border: 3px solid #d01f1f;
+  background: rgba(150, 10, 10, 0.75);
+  color: #ffd9d9;
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+  box-shadow: 0 0 0 2px #000;
+}
+.bl-side { display: flex; flex-direction: column; gap: 1rem; }
+.bl-quote {
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  line-height: 1.45;
+  color: #e6e3d8;
+  text-shadow: 1px 1px 0 #000;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.bl-table { position: relative; padding: 0.8rem 1rem; background: rgba(8, 8, 8, 0.8); font-size: 0.88rem; }
+.bl-row { display: grid; grid-template-columns: 20px auto 1fr; align-items: center; gap: 0.6rem; padding: 0.2rem 0; }
+.bl-row svg { width: 18px; color: var(--yellow); }
+.bl-row b { text-align: right; color: #fff; }
+.bl-row-head { grid-template-columns: 1fr auto; font-weight: 700; color: #fff; }
+
+.bl-foot { position: relative; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.bl-ink { left: 20%; right: 10%; bottom: -60%; width: 70%; height: 220%; }
+.bl-actions { position: relative; display: flex; flex-direction: column; align-items: center; margin: 0 auto; padding-bottom: 2rem; } /* room for the name under the icon */
+.bl-actions .fe-label { margin-left: 0; align-items: center; min-height: 0; }
+.bl-keys { position: relative; }
+
+/* ---------- challenge series ---------- */
+.cs-screen { display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.9rem; padding: var(--pad); }
+.cs-title { position: relative; font-size: clamp(1.6rem, 3vw, 2.4rem); }
+.cs-panel { position: relative; padding: 0.8rem 1.1rem; background: rgba(8, 8, 8, 0.82); animation: fade-up 0.18s ease-out; }
+.cs-panel-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.35rem; }
+.cs-panel-head svg { width: 40px; color: var(--yellow); }
+.cs-panel-head h2 { font-size: clamp(1rem, 1.8vw, 1.3rem); }
+.cs-panel p { font-weight: 700; font-size: 0.9rem; color: #e6e3d8; }
+
+.cs-main { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; min-height: 0; }
+.cs-board { position: relative; display: grid; grid-template-columns: 22px 1fr; grid-template-rows: 1fr auto; gap: 0.4rem 0.6rem; min-height: 0; padding: 0.6rem; background: rgba(8, 8, 8, 0.75); }
+.cs-scroll { grid-row: 1 / 3; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.cs-scroll button { color: var(--yellow); font-size: 0.75rem; line-height: 1; }
+.cs-scroll span { position: relative; flex: 1; width: 6px; background: rgba(255, 255, 255, 0.12); }
+.cs-scroll span i { position: absolute; left: -2px; width: 10px; height: 26px; margin-top: -13px; background: var(--yellow); transition: top 0.15s; }
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(52px, 8.5vh, 76px);
+  gap: 0.35rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  min-height: 0;
+  max-height: calc(3 * clamp(52px, 8.5vh, 76px) + 0.7rem);
+}
+.cs-grid::-webkit-scrollbar { display: none; }
+.cs-cell { position: relative; display: grid; place-items: center; padding: 0.4rem; color: #e8e6de; }
+.cs-cell svg { width: min(64px, 80%); }
+.cs-cell.is-sel { color: var(--yellow); background: rgba(246, 194, 28, 0.12); }
+.cs-count { grid-column: 2; justify-self: end; font-weight: 700; font-size: 1rem; }
+
+.cs-map { display: flex; flex-direction: column; min-height: 0; background: rgba(8, 8, 8, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); }
+.cs-map-head { padding: 0.45rem 0.8rem; background: var(--bar); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.cs-map-body { flex: 1; display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; padding: 0.8rem 1rem; min-height: 0; overflow: hidden; }
+.cs-logo { width: clamp(56px, 9vw, 110px); height: clamp(56px, 9vw, 110px); object-fit: contain; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.15)); animation: pop 0.25s ease-out; }
+.cs-route { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; color: #8f8c82; max-height: 100%; overflow: hidden; }
+.cs-route li::before { content: '› '; color: transparent; }
+.cs-route li.is-here { color: #fff; font-weight: 700; }
+.cs-route li.is-here::before { color: var(--yellow); }
+.cs-keys { position: relative; }
+
+/* ---------- my cars ---------- */
+.mc-car {
+  position: absolute;
+  inset: clamp(7rem, 20vh, 10rem) var(--pad) clamp(5rem, 14vh, 7rem);
+  display: grid;
+  place-items: center;
+  animation: fade-in 0.3s ease-out;
+}
+.mc-car img { max-width: 100%; max-height: 100%; object-fit: contain; filter: sepia(0.15) contrast(1.05); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.85); }
+.mc-screen.is-showcase .mc-car { inset: 0; }
+.mc-ui { position: absolute; inset: 0; padding: var(--pad); transition: opacity 0.25s; pointer-events: none; }
+.mc-ui > * { pointer-events: auto; }
+.mc-screen.is-showcase .mc-ui { opacity: 0; pointer-events: none; }
+.mc-screen.is-showcase .mc-ui > * { pointer-events: none; }
+.mc-screen.is-showcase { cursor: pointer; }
+
+.mc-head { position: absolute; top: var(--pad); left: var(--pad); display: flex; flex-direction: column; gap: 0.6rem; max-width: calc(100% - 2 * var(--pad)); }
+.mc-row { display: flex; align-items: center; gap: clamp(0.5rem, 1.5vw, 1.2rem); }
+.mc-maker { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.mc-badge { position: relative; display: grid; place-items: center; width: 72px; height: 64px; }
+.mc-badge span {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #a5a5a5 65%, #4a4a4a);
+  color: #111;
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+.mc-name {
+  font-family: var(--terminal);
+  font-weight: 400;
+  -webkit-text-stroke: 0.6px currentColor;
+  font-size: clamp(1.1rem, 2.6vw, 2.1rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #000;
+}
+.mc-bars { position: absolute; top: var(--pad); right: var(--pad); display: flex; flex-direction: column; gap: 0.45rem; width: min(240px, 28vw); }
+.mc-bar span { display: block; text-align: right; font-family: 'Arial Black', Arial, sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; text-shadow: 1px 1px 0 #000; }
+.mc-bar i { display: block; height: 3px; margin-top: 3px; background: linear-gradient(90deg, #2c8fd6, #8fd6ff); box-shadow: 0 0 5px rgba(80, 180, 255, 0.55); }
+.mc-foot { position: absolute; left: var(--pad); right: var(--pad); bottom: calc(var(--pad) + env(safe-area-inset-bottom)); display: flex; justify-content: center; }
+.mc-ink { left: -10%; right: -10%; bottom: -80%; width: 120%; height: 300%; }
+.mc-foot .fe-keys { position: relative; justify-content: center; }
+
+@media (max-width: 900px) {
+  .mc-bars { top: auto; bottom: calc(var(--pad) + 3.6rem); left: 50%; right: auto; transform: translateX(-50%); width: min(260px, 70vw); }
+  .mc-bar span { text-align: left; }
+  .mc-car { inset: clamp(9rem, 24vh, 11rem) var(--pad) clamp(10rem, 26vh, 12rem); }
+  .mc-name { font-size: clamp(0.95rem, 4.2vw, 1.4rem); }
+}
+@media (max-width: 560px) {
+  /* Key prompts wrap to two rows here, so the bars and the render move up to clear them. */
+  .mc-bars { bottom: calc(var(--pad) + 6.4rem); }
+  .mc-car { inset: 10rem var(--pad) 15rem; }
+  .mc-badge { width: 58px; height: 52px; }
+  .mc-badge span { width: 38px; height: 38px; font-size: 0.72rem; }
+  .mc-row { gap: 0.45rem; }
+  .mc-head { gap: 0.35rem; }
+}
+
+/* ---------- rap sheet terminal ---------- */
+/* The terminal floats over the game scene, dimmed and softened, as in the walkthrough footage. */
+.rs-screen { display: grid; place-items: center; padding: var(--pad); background: #000; }
+.fe-bg.is-blur img { filter: blur(4px) sepia(0.3) brightness(0.8); transform: scale(1.06); animation: none; }
+.rs-panel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: min(820px, 100%);
+  height: min(620px, 100%);
+  padding: clamp(0.8rem, 2vw, 1.4rem);
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 0 1px rgba(196, 223, 79, 0.12), 0 0 80px 20px rgba(0, 0, 0, 0.85);
+  color: var(--term);
+  font-family: var(--terminal);
+  font-weight: 400;
+  -webkit-text-stroke: 0.35px currentColor; /* Michroma ships one weight; this gives Eurostile's bold */
+  font-size: clamp(0.7rem, 1.3vw, 0.92rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  animation: fade-in 0.15s ease-out;
+}
+.rs-content { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+.rs-header { display: flex; justify-content: space-between; padding: 0.45rem 0.8rem; background: var(--term-hi); color: #0b0d02; font-size: 1.05em; }
+.rs-rule { flex: none; height: 4px; margin: 0.35rem 0; background: radial-gradient(circle, var(--term) 1.4px, transparent 1.6px) 0 50% / 8px 4px repeat-x; }
+.rs-striped { background: repeating-linear-gradient(-45deg, rgba(140, 170, 40, 0.16) 0 6px, rgba(140, 170, 40, 0.05) 6px 12px); }
+.rs-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1.5rem; padding: 0.5rem 0.8rem; color: #fff; }
+.rs-stats.one { grid-template-columns: 1fr; }
+.rs-stats.two-col { grid-template-columns: 1fr auto; }
+.rs-stat span { color: inherit; }
+.rs-stat b { color: var(--term); }
+.rs-stats .rs-stat span { color: #fff; }
+.rs-lime { color: var(--term); }
+.rs-sub { color: #fff; padding: 0 0.3rem; }
+
+.rs-list { display: flex; flex-direction: column; gap: 2px; min-height: 0; }
+.rs-scroll { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--term-dim) transparent; padding-right: 4px; }
+.rs-list > div { cursor: pointer; }
+.rs-item { padding: 0.35rem 0.5rem; }
+.rs-item.is-sel, .rs-trow.is-sel, .rs-rank.is-sel, .rs-pursuit.is-sel { background: var(--term-sel); }
+.rs-bullet { display: flex; align-items: center; gap: 0.55rem; }
+.rs-box { width: 0.8em; height: 0.8em; background: var(--term); }
+.rs-item.is-sel .rs-box { box-shadow: 0 0 0 2px #000 inset, 0 0 0 2px var(--term); background: #fff; }
+
+.rs-boot { flex: 1; display: grid; place-items: center; align-content: center; gap: 1.6rem; }
+.rs-badge { width: clamp(70px, 12vw, 110px); color: var(--term); }
+.rs-dept { font-size: 1.3em; letter-spacing: 0.32em; text-align: center; }
+.rs-search { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem 0.4rem 0.2rem; color: #fff; }
+.rs-late { animation: appear 0.6s steps(1) both; }
+.rs-spin { margin-left: 0.4rem; }
+
+.rs-warning { padding: 0.8rem; color: var(--term); line-height: 1.45; }
+.rs-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1.5rem; padding: 0 0.6rem; }
+.rs-block-title { color: #fff; margin-bottom: 0.15rem; }
+
+.rs-vehicle { border-bottom: 1px solid rgba(196, 223, 79, 0.15); padding-bottom: 0.3rem; }
+.rs-vehicle-head { display: flex; justify-content: space-between; gap: 1rem; padding: 0.35rem 0.6rem; background: rgba(140, 170, 40, 0.18); color: #fff; }
+.rs-vehicle-head em { font-style: normal; color: var(--term); white-space: nowrap; }
+.rs-vehicle.is-sel .rs-vehicle-head { background: var(--term-sel); }
+.rs-vehicle-body { padding: 0.3rem 0.6rem; }
+.rs-desc { margin-top: 0.3rem; font-family: var(--sans); font-weight: 700; text-transform: none; letter-spacing: 0; color: #dfe9b6; line-height: 1.4; font-size: 0.95em; }
+
+.rs-table-head, .rs-trow { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 0.3rem 0.6rem; }
+.rs-table-head { color: #fff; }
+.rs-table-head.three, .rs-trow.three { grid-template-columns: 3rem 1fr; }
+.rs-trow.three .rs-desc { grid-column: 2; }
+.rs-trow b { color: #fff; }
+.rs-total { text-align: right; color: #fff; padding: 0 0.6rem; }
+
+.rs-pursuit { display: grid; grid-template-columns: 2rem 1fr auto; gap: 0.8rem; align-items: center; padding: 0.45rem 0.6rem; border-bottom: 1px solid rgba(196, 223, 79, 0.15); color: #fff; }
+.rs-num { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; background: var(--term-hi); color: #000; }
+.rs-right { text-align: right; }
+
+.rs-rank { display: grid; grid-template-columns: 1rem 2rem 1fr 1fr; gap: 0.6rem; padding: 0.3rem 0.6rem; color: #fff; }
+.rs-arrow { font-style: normal; color: var(--yellow); }
+
+.rs-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.rs-keys { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.rs-key {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 7rem;
+  padding: 0.3rem 0.6rem;
+  border: 2px solid var(--term);
+  background: rgba(110, 135, 25, 0.35);
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.85em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.rs-key kbd { padding: 0 0.3rem; border: 1px solid #fff; border-radius: 2px; font-size: 0.8em; }
+.rs-key:hover { background: rgba(140, 170, 40, 0.55); }
+.rs-case { color: #fff; }
+
+/* ---------- animation ---------- */
+@keyframes screen-in { from { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(6px); } }
+@keyframes pop { from { transform: scale(0.8); opacity: 0.4; } }
+@keyframes blink { 50% { opacity: 0.3; } }
+@keyframes appear { from { opacity: 0; } 50% { opacity: 1; } }
+@keyframes drift { from { transform: scale(1.04); } to { transform: scale(1.1) translateX(-1%); } }
+@keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-5%, 3%); } 50% { transform: translate(4%, -4%); } 75% { transform: translate(-3%, -2%); } }
+
+/* ---------- squarer screens and phones ----------
+   Cropping the art to fill a tall screen would lose the car or the logo, so the scene sits at the
+   top (framed on the car), fades to black, and the menu stacks centred underneath. */
+@media (max-aspect-ratio: 5/4) {
+  .fe-carousel-screen .fe-bg {
+    inset: 0 0 auto 0;
+    height: min(62vh, 92vw);
+    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
+    mask-image: linear-gradient(180deg, #000 70%, transparent);
+  }
+  .fe-carousel-screen .fe-bg.is-scene img { object-position: 30% 50%; }
+  .fe-carousel-screen .fe-bg.is-poster img { object-position: 50% 30%; }
+  .fe-carousel-screen .fe-grade { background: radial-gradient(ellipse at 50% 25%, transparent 45%, rgba(0, 0, 0, 0.6) 100%); }
+
+  .fe-layout,
+  .has-poster .fe-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto auto;
+    grid-template-areas: "." "info" "carousel" "foot";
+    justify-items: center;
+    gap: 1.1rem;
+  }
+  .fe-layout > .fe-ink,
+  .has-poster .fe-layout > .fe-ink { left: -15%; right: auto; width: 130%; height: 52%; bottom: -4%; transform: none; }
+  .fe-layout > .fe-info { justify-self: center; }
+  .fe-carousel,
+  .has-poster .fe-carousel { margin: 0; align-items: center; }
+  .fe-label { align-items: center; text-align: center; }
+  .fe-foot { justify-content: center; }
+  .is-root .fe-foot { align-items: center; }
+  .has-scene .fe-carousel .fe-title { align-self: center; margin-right: 0; }
+
+  .bl-body { grid-template-columns: 1fr; align-content: start; overflow-y: auto; }
+  .bl-portrait img { max-height: 30vh; }
+  .cs-main { grid-template-columns: 1fr; }
+  .cs-map { max-height: 22vh; }
+}
+
+/* Phones: there is room for a much taller scene; frame it on the M3 GTR so it reaches the menu. */
+@media (max-aspect-ratio: 3/4) {
+  /* At 110vw tall the frame is scaled so the whole car (about half its width) spans the screen. */
+  .fe-carousel-screen .fe-bg { height: min(60vh, 110vw); }
+  .fe-carousel-screen .fe-bg.is-scene img { object-position: 27% 0%; }
+  /* Centre the menu in the space under the visible part of the scene. */
+  .fe-layout,
+  .has-poster .fe-layout {
+    padding-top: calc(min(60vh, 110vw) * 0.62);
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "info" "carousel" "foot";
+    align-content: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .fe-tag { min-width: 0; }
+  .fe-keys { justify-content: center; }
+  .fe-strip { gap: 0.5rem; }
+  .fe-off2 { display: none; }
+  .bl-head .fe-title { font-size: 1.6rem; }
+  .bl-foot { justify-content: center; }
+  .bl-quote { -webkit-line-clamp: 4; }
+  .rs-blocks { grid-template-columns: 1fr; }
+  .rs-stats { grid-template-columns: 1fr; }
+  .rs-rank { grid-template-columns: 1rem 1.6rem 1fr; }
+  .rs-rank span:last-child { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition: none !important; }
+}
