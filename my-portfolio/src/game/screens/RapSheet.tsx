@@ -4,6 +4,7 @@ import { audio } from '../audio';
 import { EXPERIENCE, PROFILE, PROJECTS, SERVICES, SKILLS } from '../content';
 import { useKeys } from '../input';
 import { useNav } from '../nav';
+import { Icon } from '../icons';
 import { Backdrop } from '../ui';
 import { openLink } from '../util';
 
@@ -143,11 +144,12 @@ export default function RapSheet() {
       case 'boot':
         return (
           <div className="rs-boot">
-            <svg className="rs-badge" viewBox="0 0 60 66" aria-hidden="true">
-              <defs><pattern id="rs-bars" width="4" height="66" patternUnits="userSpaceOnUse"><rect width="2.2" height="66" fill="currentColor" /></pattern></defs>
-              <path d="M30 2 L36 7 L44 4 L48 10 L56 10 L56 30 Q56 52 30 64 Q4 52 4 30 L4 10 L12 10 L16 4 L24 7 Z" fill="url(#rs-bars)" />
-            </svg>
+            <Icon name="rpdbadge" className="rs-badge" />
             <div className="rs-dept">Rockport Police Department</div>
+            <div className="rs-signin">
+              <p>Sign in: <b>{PROFILE.name.split(' ').pop()!.toUpperCase()}</b></p>
+              <p>Password: <b>XXXXXXX</b></p>
+            </div>
           </div>
         );
       case 'search':

@@ -14,7 +14,8 @@ import { selection } from '../util';
 //   the left, and the event's map box on the right. Each event is one tool from the arsenal; the
 //   map box shows that tool's logo and the rest of its series.
 
-const GLYPHS: IconName[] = ['tollbooth', 'stopwatch', 'speedtrap', 'badge', 'moneybag', 'roadblock'];
+// Event glyphs as the game draws them on the milestones and challenge boards.
+const GLYPHS: IconName[] = ['speedtrap', 'stopwatch', 'roadblock', 'spikestrip', 'tradepaint'];
 const COLS = 4;
 
 const EVENTS = SKILLS.flatMap((g, gi) =>
@@ -68,6 +69,7 @@ export default function ChallengeSeries() {
 
       <div className="cs-main">
         <div className="cs-board">
+          <div className="cs-count">{sel + 1}/{EVENTS.length}</div>
           <div className="cs-scroll" aria-hidden="true">
             <button type="button" tabIndex={-1} onClick={() => move(-COLS)}>▲</button>
             <span><i style={{ top: `${(sel / Math.max(1, EVENTS.length - 1)) * 100}%` }} /></span>
@@ -90,7 +92,6 @@ export default function ChallengeSeries() {
               </button>
             ))}
           </div>
-          <div className="cs-count">{sel + 1}/{EVENTS.length}</div>
         </div>
 
         <aside className="cs-map">

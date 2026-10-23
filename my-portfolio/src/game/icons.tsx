@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { asset } from './assets';
 
 // White glyphs in the style of the game's menu icons. Every glyph uses a 64x40 viewBox and draws
 // in currentColor, with #111 for cut-outs, so the carousel can tint and scale them freely.
@@ -157,6 +158,14 @@ export const ICONS = {
     </>
   ),
   // ui
+  /** Downward warning triangle with "!", as on the ATTENTION and save/load dialogs. */
+  warning: (
+    <>
+      <path d="M12 3 H52 L32 38 Z" fill="none" stroke="currentColor" strokeWidth="4" strokeLinejoin="round" />
+      <path d="M32 9 V24" stroke="currentColor" strokeWidth="5" />
+      <rect x="29.5" y="27" width="5" height="5" fill="currentColor" />
+    </>
+  ),
   check: (
     <>
       <circle cx="32" cy="20" r="17" fill="currentColor" />
@@ -171,12 +180,33 @@ export const ICONS = {
   ),
 } satisfies Record<string, ReactNode>;
 
-export type IconName = keyof typeof ICONS;
+// The game's own glyphs, cut from in-game captures (media-src/game-captures/) as white masks, so
+// they can be tinted like the drawn ones. Where a glyph exists here it replaces the drawn icon.
+const GAME_ICONS = {
+  career: 'career',
+  challenge: 'challenge',
+  raceevents: 'raceevents',
+  milestones: 'milestones',
+  tradepaint: 'tradepaint',
+  stopwatch: 'stopwatch',
+  roadblock: 'roadblock',
+  spikestrip: 'spikestrip',
+  speedtrap: 'speedtrap',
+  warning: 'warning',
+  rpdbadge: 'rpdbadge',
+} as const;
 
-export function Icon({ name, className }: { name: IconName; className?: string }) {
+export type IconName = keyof typeof ICONS | keyof typeof GAME_ICONS;
+
+export function Icon({ name, className = '' }: { name: IconName; className?: string }) {
+  const file = (GAME_ICONS as Record<string, string>)[name];
+  if (file) {
+    const style = { '--glyph': `url(${asset(`nfsmw/icons/${file}.webp`)})` } as CSSProperties;
+    return <span className={`fe-glyph ${className}`} style={style} aria-hidden="true" />;
+  }
   return (
     <svg viewBox="0 0 64 40" className={className} aria-hidden="true" focusable="false">
-      {ICONS[name]}
+      {ICONS[name as keyof typeof ICONS]}
     </svg>
   );
 }

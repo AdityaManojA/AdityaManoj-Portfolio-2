@@ -13,7 +13,7 @@ import { selection } from '../util';
 //   bottom: ink splatter carrying [Esc] Back, [↵] Accept, [3] Showcase. The garage scene sits
 //   behind, and each "car" is a render from the gallery. Showcase hides the interface.
 
-const initials = (type: string) => type.split(/\s+/).map(w => w[0]).join('').slice(0, 3).toUpperCase();
+const initials = (type: string) => type.split(/\s+/).map(w => w[0]).join('').slice(0, 2);
 
 export default function MyCars() {
   const nav = useNav();

@@ -142,7 +142,8 @@ terminal, the Blacklist, Challenge Series and My Cars.
 
 Everything copyrighted sits in `my-portfolio/public/nfsmw/`. Replace those files with your own
 (same names) and the site keeps working. The fonts are free Google Fonts (UnifrakturCook for
-headings, Michroma for the Rap Sheet terminal), so they can stay.
+headings, Saira for UI text, Michroma for the Rap Sheet terminal), so they can stay. The glyphs in
+`public/nfsmw/icons/` were cut from game captures and should be replaced too.
 
 `my-portfolio/media-src/` (git-ignored) holds the full-quality originals the web copies were made
 from: `intro-720p-source.mp4` (and the earlier `intro-320p.mp4`), `menu-theme.mp3`, `gui-sounds.mp3`,
