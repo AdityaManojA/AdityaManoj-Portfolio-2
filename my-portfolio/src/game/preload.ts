@@ -25,7 +25,8 @@ function warm(src: string, priority: 'high' | 'low' = 'low') {
 }
 
 export function critical() {
-  [ART.scene, ART.poster, ART.ink, ART.lamps, asset(PROFILE.avatar), asset(PROJECTS[0].image), asset(GALLERY[0].image)]
+  // The poster is only a fallback for a missing scene frame; useSceneArt() asks for it if needed.
+  [ART.scene, ART.ink, ART.lamps, asset(PROFILE.avatar), asset(PROJECTS[0].image), asset(GALLERY[0].image)]
     .forEach(src => warm(src, 'high'));
   loadGlyphs();
   // Fonts download on first use; ask for every face now so no screen opens with a font swap.

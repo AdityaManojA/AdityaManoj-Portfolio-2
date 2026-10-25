@@ -88,8 +88,11 @@ probe.src = ART.scene;
 const subscribe = (fn: () => void) => { listeners.add(fn); return () => { listeners.delete(fn); }; };
 const snapshot = () => sceneReady;
 
-/** The menu background in use: the game scene when present, otherwise the poster. */
+/** The menu background in use: the game scene, or the poster if the scene failed to load. */
 export function useSceneArt() {
   const ready = useSyncExternalStore(subscribe, snapshot);
-  return { src: ready ? ART.scene : ART.poster, isScene: ready === true };
+  // The scene ships with the site, so a probe still in flight counts as present; the poster is
+  // only fetched once the scene has actually failed.
+  const isScene = ready !== false;
+  return { src: isScene ? ART.scene : ART.poster, isScene };
 }

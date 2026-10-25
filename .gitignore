@@ -1,1 +1,4 @@
 node_modules
+# Local tooling, not part of the site
+.claude/
+graphify-out/
