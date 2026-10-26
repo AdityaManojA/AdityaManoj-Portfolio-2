@@ -287,6 +287,29 @@ body {
   color: white;
 }
 
+/* Sound on/off: sits with the header icons on desktop and next to the menu on phones */
+.sound-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin: -0.75rem -0.6rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sound-toggle-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.sound-toggle-btn[aria-pressed="false"] {
+  opacity: 0.6;
+}
+
 .menu-toggle-btn {
   display: flex;
   flex-direction: column;
@@ -5433,8 +5456,10 @@ html {
     min-width: 0;
   }
 
+  /* The screenshot gives up height on short screens so the whole card (wrapped tags included) stays on screen */
   .flagship-panel .browser-viewport-link {
-    max-height: 168px;
+    max-height: clamp(100px, calc(100vh - 530px), 168px);
+    max-height: clamp(100px, calc(100svh - 530px), 168px);
   }
 
   .flagship-panel .browser-header-bar {
@@ -5468,17 +5493,22 @@ html {
     display: none;
   }
 
-  /* One row of tags, fading out at the edge instead of wrapping */
+  /* Tags wrap so every one stays readable; tighter pills keep it to two rows */
   .flagship-panel .flagship-tags {
-    flex-wrap: nowrap;
-    overflow: hidden;
+    gap: 0.35rem;
     margin-bottom: 0;
-    -webkit-mask-image: linear-gradient(90deg, #000 78%, transparent);
-    mask-image: linear-gradient(90deg, #000 78%, transparent);
   }
 
   .flagship-panel .flagship-tags .tag {
-    flex: none;
+    padding: 0.22rem 0.65rem;
+  }
+
+  /* The corner buttons would sit on top of the pinned card; tuck them away while it is pinned */
+  .flagship-pinned .scroll-to-top-btn,
+  .flagship-pinned .garage-launcher:not(.is-open) {
+    opacity: 0;
+    transform: translateY(2.5rem);
+    pointer-events: none;
   }
 }
 

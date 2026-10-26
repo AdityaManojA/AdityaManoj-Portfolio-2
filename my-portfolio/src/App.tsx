@@ -14,8 +14,10 @@ import { DetailedFooter, SimpleFooter } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { HandbookModal } from './components/HandbookModal';
 import DriftGarage from './components/DriftGarage';
+import useUiSounds from './hooks/useUiSounds';
 
 export default function App() {
+  useUiSounds();
   const [activeTab, setActiveTab] = useState('Home');
   const [isHandbookOpen, setIsHandbookOpen] = useState(false);
   const [handbookTab, setHandbookTab] = useState<'foundations' | 'deepdives'>('foundations');

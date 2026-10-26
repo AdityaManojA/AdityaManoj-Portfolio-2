@@ -104,13 +104,18 @@ export default function FlagshipShowcase() {
   useEffect(() => {
     const update = () => {
       const gallery = galleryRef.current;
+      const root = document.documentElement;
       const geo = getPinGeometry();
       if (!geo) {
         if (gallery) gallery.style.transform = '';
+        root.classList.remove('flagship-pinned');
         return;
       }
       const { track, scrollable, pinTop } = geo;
-      const p = Math.max(0, Math.min(1, (pinTop - track.getBoundingClientRect().top) / scrollable));
+      const raw = (pinTop - track.getBoundingClientRect().top) / scrollable;
+      const p = Math.max(0, Math.min(1, raw));
+      // Phones: while the stage is stuck on screen, hide the corner buttons (see CSS).
+      root.classList.toggle('flagship-pinned', window.matchMedia(MOBILE_PIN).matches && raw > -0.02 && raw < 1);
       const steps = p * FLAGSHIP_ITEMS.length;
       FLAGSHIP_ITEMS.forEach((_, i) => {
         track.style.setProperty(`--fill-${i}`, String(Math.max(0, Math.min(1, steps - i))));
@@ -163,6 +168,7 @@ export default function FlagshipShowcase() {
     return () => {
       window.removeEventListener('scroll', update);
       window.removeEventListener('resize', placeSnaps);
+      document.documentElement.classList.remove('flagship-pinned');
     };
   }, []);
 
