@@ -447,7 +447,7 @@ const truck: Vehicle = {
 };
 
 export const VEHICLES: Vehicle[] = [coupe, formula, bike, truck];
-export const DEFAULT_VEHICLE = coupe.id;
+export const DEFAULT_VEHICLE = formula.id;
 
 export function getVehicle(id: string): Vehicle {
   return VEHICLES.find((v) => v.id === id) ?? coupe;
