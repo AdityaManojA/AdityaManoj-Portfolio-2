@@ -63,7 +63,18 @@ npm run dev
 - **Tags**: `React`, `Tailwind CSS`, `AWS`, `CloudFront`, `Framer Motion`, `TypeScript`
 - **Portfolio Summary**: Full-featured e-commerce platform and inventory tracking system for a sustainable streetwear brand based in Canada. Built with dynamic coordinate layouts, responsive catalog filtering, Framer Motion transitions, and edge delivery via AWS Cloud Functions and Amazon CloudFront for low-latency global distribution.
 
-### 2. Pixel Spaces — 3D Visualisation & Interior Design Studio
+### 2. TerraCove — Independent Work Studio
+> **All-in-One Freelance Operations Workspace (PWA)** | **Full-Stack & Product Design:** **ADITYA MANOJ**
+
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://terracove.web.app/](https://terracove.web.app/)
+- **Image Filename**: `TerraCove.png` (16:10 capture of the demo workspace, so the flagship frame shows it uncropped)
+- **Tags**: `PWA`, `JavaScript`, `Firebase`, `Google OAuth`, `HTML5`, `CSS3`
+- **Portfolio Summary**: A calm, all-in-one workspace for freelancers and independent studios, from the first brief to the final invoice. Brings clients, projects, tasks, notes and a calendar together with approvals, reports & invoicing, data connections, Google sign-in, an installable PWA shell and a sandboxed local demo workspace with sample data.
+- **Notes**: Replaces the earlier SoloDesk project on the portfolio.
+
+### 3. Pixel Spaces — 3D Visualisation & Interior Design Studio
 > **Bespoke Editorial Architecture & 3D Visualisation Web Platform** | **Full-Stack Frontend & UI/UX:** **ADITYA MANOJ**
 
 - **Category**: `Projects`
@@ -81,7 +92,26 @@ npm run dev
   - Implemented interactive HTML5 canvas pixel-dissolve effect resolving architectural renders smoothly across carousel slides.
   - Engineered CSS sticky stacking card decks for architectural disciplines, sticky milestone metrics sidebar, and full-screen modal project viewer lightbox.
 
-### 3. IndZita Biotech
+### 4. The Whisky Business
+- **Category**: `Projects`
+- **Year**: `2025`
+- **Live URL**: [https://thewhiskeybusiness-3e639.web.app/](https://thewhiskeybusiness-3e639.web.app/)
+- **Image Filename**: `Whisky.png`
+- **Tags**: `React`, `Tailwind CSS`, `AWS`, `GCP`, `Framer`
+- **Description**: Artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.
+
+### 5. Levern — Gamified Quest & Habit Tracker
+> **Mobile-First Gamified To-Do PWA** | **Full-Stack & Product Design:** **ADITYA MANOJ**
+
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://getlevern.web.app/](https://getlevern.web.app/)
+- **Image Filename**: `Levern.png` (two phone screens, Home and Calendar, side by side on a plain background, since the app is built for mobile)
+- **Tags**: `PWA`, `JavaScript`, `Firebase`, `HTML5`, `CSS3`
+- **Portfolio Summary**: A mobile-first to-do list that feels like a game. Quests are ranked across six priority tiers and earn EXP, streaks and seasonal ranks, with daily targets, a Pomodoro focus timer, a month/week quest calendar, smart reminders, a leaderboard, Google sync across devices and Mochi, an animated companion.
+- **Notes**: The successor to TaskFlow, which is no longer listed on the portfolio.
+
+### 6. IndZita Biotech
 - **Category**: `Projects`
 - **Year**: `2026`
 - **Live URL**: [https://indzita-biotech-007.web.app/#overview](https://indzita-biotech-007.web.app/#overview)
@@ -95,7 +125,29 @@ npm run dev
   - Engineered an interactive Virtual Diagnostics Lab simulator modeling real-time thermal PCR amplifications ($C_t$ threshold kinetics), integrating dynamic multi-parameter telemetry pipelines with client-side blob generation for automated clinical assay synthesis.
   - Orchestrated enterprise deployment pipelines and edge delivery using Vite and Firebase Hosting, provisioning aggressive multi-tier immutable caching headers and SPA rewrite rules to ensure instantaneous sub-second global content delivery.
 
-### 5. ALFRED — MARK-VIII (Wayne Protocol Edition)
+### 7. SBAFA Financial Enclave
+- **Category**: `Projects`
+- **Year**: `2026`
+- **Live URL**: [https://sbafa-ft.web.app/landing](https://sbafa-ft.web.app/landing)
+- **Image Filename**: `SBAFA.png`
+- **Tags**: `PWA`, `IndexedDB`, `Firebase`, `TypeScript`, `HTML5`
+- **Portfolio Summary**: Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (`pdfjs-dist` & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.
+- **Deep Technical Specifications (LaTeX Resume)**:
+  - Architected a zero-knowledge, offline-first Progressive Web Application (PWA) utilizing vanilla ES modules, IndexedDB (Dexie.js), and Firebase Firestore, orchestrating bi-directional reactive synchronization and conflict-free cross-device data reconciliation for 1,000+ ledger records.
+  - Engineered an entirely on-device, sandboxed PDF statement ingestion engine leveraging `pdfjs-dist` and deterministic cryptographic passkey decryption, executing high-throughput multi-bank OCR parsing (HDFC, Federal, SBI) with zero third-party telemetry.
+  - Implemented an automated weekly OAuth2 Gmail pipeline to ingest and decrypt scheduled banking e-statements, deploying contextual regex heuristics for zero-latency transaction deduplication and automated budget categorization.
+  - Developed an adaptive mobile-first design system featuring native-grade iOS segmented bank toggles, dynamic CSS Grid micro-layouts, and hardware-accelerated glassmorphism dashboards optimized for touch viewports ($\le$375px).
+  - Hardened client security and session durability via WebAuthn biometric passkeys, SHA-256 PIN hashing, and multi-tier Service Worker caching strategies (`Stale-While-Revalidate`) to sustain uninterrupted offline financial tracking.
+
+### 8. Travel Animator (Lascade)
+- **Category**: `Projects`
+- **Year**: `2025`
+- **Live URL**: [https://travelanimator.com/](https://travelanimator.com/)
+- **Image Filename**: `Travel.png`
+- **Tags**: `Android`, `iOS`, `React Native`, `Google Maps API`
+- **Description**: Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.
+
+### 9. ALFRED — MARK-VIII (Wayne Protocol Edition)
 > **Autonomous Multimodal AI Desktop Assistant & Tactical Terminal** | **Architect & Lead Creator:** **ADITYA MANOJ**
 
 [![Version 8 (Stable Build · Windows)](https://img.shields.io/badge/Build-Version%208%20(Stable%20Build%20%7C%20Windows)-00f0ff.svg?logo=windows&logoColor=white)](#)
@@ -113,7 +165,7 @@ npm run dev
 - **Tags**: `Python`, `PyQt6`, `Gemini Live`, `Local LLMs`, `PyTorch`
 - **Portfolio Summary**: Autonomous, real-time multimodal voice, vision, and system-control executive desktop assistant built for complete digital sovereignty and tactical computing. Native bidirectional audio streaming (Google Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time visual grounding (RapidOCR + ONNX <150ms), 30+ auto-discovered OS automation tools, high-performance long-term memory ($O(N \log N)$ pruning), Sentry Mode v2 dual-mode surveillance with structural privacy ledger, and AES-256 encrypted mobile remote telemetry on a high-framerate hardware-accelerated PyQt6 tactical HUD.
 
-### 6. GLIA — High-Throughput Event OS & PWA (IAN-2025)
+### 10. GLIA — High-Throughput Event OS & PWA (IAN-2025)
 - **Category**: `Projects`
 - **Year**: `2025`
 - **Live URL**: [https://ian2025.in/](https://ian2025.in/)
@@ -127,47 +179,7 @@ npm run dev
   - Engineered an interactive Virtual Diagnostics Lab simulator modeling real-time thermal PCR amplifications ($C_t$ threshold kinetics), integrating dynamic multi-parameter telemetry pipelines with client-side blob generation for automated clinical assay synthesis.
   - Orchestrated enterprise deployment pipelines and edge delivery using Vite and Firebase Hosting, provisioning aggressive multi-tier immutable caching headers and SPA rewrite rules to ensure instantaneous sub-second global content delivery.
 
-### 5. SBAFA Financial Enclave
-- **Category**: `Projects`
-- **Year**: `2026`
-- **Live URL**: [https://sbafa-ft.web.app/landing](https://sbafa-ft.web.app/landing)
-- **Image Filename**: `SBAFA.png`
-- **Tags**: `PWA`, `IndexedDB`, `Firebase`, `TypeScript`, `HTML5`
-- **Portfolio Summary**: Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (`pdfjs-dist` & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.
-- **Deep Technical Specifications (LaTeX Resume)**:
-  - Architected a zero-knowledge, offline-first Progressive Web Application (PWA) utilizing vanilla ES modules, IndexedDB (Dexie.js), and Firebase Firestore, orchestrating bi-directional reactive synchronization and conflict-free cross-device data reconciliation for 1,000+ ledger records.
-  - Engineered an entirely on-device, sandboxed PDF statement ingestion engine leveraging `pdfjs-dist` and deterministic cryptographic passkey decryption, executing high-throughput multi-bank OCR parsing (HDFC, Federal, SBI) with zero third-party telemetry.
-  - Implemented an automated weekly OAuth2 Gmail pipeline to ingest and decrypt scheduled banking e-statements, deploying contextual regex heuristics for zero-latency transaction deduplication and automated budget categorization.
-  - Developed an adaptive mobile-first design system featuring native-grade iOS segmented bank toggles, dynamic CSS Grid micro-layouts, and hardware-accelerated glassmorphism dashboards optimized for touch viewports ($\le$375px).
-  - Hardened client security and session durability via WebAuthn biometric passkeys, SHA-256 PIN hashing, and multi-tier Service Worker caching strategies (`Stale-While-Revalidate`) to sustain uninterrupted offline financial tracking.
-
-### 6. SoloDesk — Freelancer Business Operations Suite
-- **Category**: `Projects`
-- **Year**: `2026`
-- **Live URL**: [https://taskflow-solodesk.web.app/](https://taskflow-solodesk.web.app/)
-- **GitHub**: [https://github.com/AdityaManojA/SoloDesk](https://github.com/AdityaManojA/SoloDesk)
-- **Image Filename**: `SoloDesk.png`
-- **Tags**: `React`, `Vite`, `Firebase`, `TypeScript`, `Tailwind CSS`
-- **Portfolio Summary**: Full-scale business operations suite for independent contractors and freelancers. Engineered with real-time client & project management, automated milestone invoice generation, conflict-aware daily scheduling, interactive focus tracking, client activity audit timelines, and calendar ecosystem sync.
-
-### 7. TaskFlow — Gamified Habit & Quest Tracker PWA
-- **Category**: `Projects`
-- **Year**: `2026`
-- **Live URL**: [https://taskflow-dailytracker.web.app/](https://taskflow-dailytracker.web.app/)
-- **GitHub**: [https://github.com/AdityaManojA/TaskFlow](https://github.com/AdityaManojA/TaskFlow)
-- **Image Filename**: `Taskflow.png`
-- **Tags**: `PWA`, `JavaScript`, `Firebase`, `HTML5`, `CSS3`
-- **Portfolio Summary**: A calm, gamified task and daily habit management Progressive Web Application (PWA) built with zero runtime dependencies. Features natural language quick-entry, 6-tier quest priority workflows, streak & EXP mechanics, integrated focus timers, Google Calendar & ICS synchronization, and an interactive companion (Mochi).
-
-### 8. The Whisky Business
-- **Category**: `Projects`
-- **Year**: `2025`
-- **Live URL**: [https://thewhiskeybusiness-3e639.web.app/](https://thewhiskeybusiness-3e639.web.app/)
-- **Image Filename**: `Whisky.png`
-- **Tags**: `React`, `Tailwind CSS`, `AWS`, `GCP`, `Framer`
-- **Description**: Artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.
-
-### 7. Rochas Cafe
+### 11. Rochas Cafe
 - **Category**: `Website Designs`
 - **Year**: `2025`
 - **Live URL**: [https://rochascafe.netlify.app/#](https://rochascafe.netlify.app/#)
@@ -175,7 +187,7 @@ npm run dev
 - **Tags**: `React`, `JavaScript`, `CSS3`, `HTML5`
 - **Description**: Artisanal specialty coffee & patisserie web showcase. Engineered with responsive layout architecture, dynamic product carousels, smooth interactive navigation, fluid aesthetic styling, and high-performance CDN deployment.
 
-### 8. The DevOps, SRE & Cloud Infrastructure Handbook
+### 12. The DevOps, SRE & Cloud Infrastructure Handbook
 - **Category**: `Projects` (Interactive Handbook)
 - **Year**: `2026`
 - **Live URL**: `#handbook` (Interactive Modal with 20 Deep-Dives)
@@ -183,15 +195,7 @@ npm run dev
 - **Tags**: `Kubernetes`, `SRE`, `Linux Kernel`, `Terraform`, `Prometheus`, `Cisco`
 - **Description**: An exhaustive technical engineering reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS/C-states), Cisco networking (VLANs, LACP), and Linux kernel internals (clone, namespaces, cgroups, OverlayFS) with Kubernetes control plane orchestration, Prometheus-Loki-Grafana observability, and 20 low-level interview deep-dives.
 
-### 9. Travel Animator (Lascade)
-- **Category**: `Projects`
-- **Year**: `2025`
-- **Live URL**: [https://travelanimator.com/](https://travelanimator.com/)
-- **Image Filename**: `Travel.png`
-- **Tags**: `Android`, `iOS`, `React Native`, `Google Maps API`
-- **Description**: Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.
-
-### 10. Prompt-Ops Blueprints & AI Dataset Engine
+### 13. Prompt-Ops Blueprints & AI Dataset Engine
 - **Category**: `CS Projects`
 - **Year**: `2026`
 - **Live URL**: [https://github.com/AdityaManojA/prompt-ops-blueprints](https://github.com/AdityaManojA/prompt-ops-blueprints)
@@ -199,7 +203,7 @@ npm run dev
 - **Tags**: `Python`, `PyTorch`, `AI Acceleration`, `GitHub Actions`
 - **Description**: Comprehensive repository of daily-trained AI datasets, fine-tuning blueprints, and token-optimized pipelines ready for immediate zero-shot, few-shot, and fine-tuning workloads across open-source and proprietary foundation models.
 
-### 11. Retro QR Crafter
+### 14. Retro QR Crafter
 - **Category**: `CS Projects`
 - **Year**: `2025`
 - **Live URL**: [https://text-based-qr.netlify.app/](https://text-based-qr.netlify.app/)
@@ -207,7 +211,7 @@ npm run dev
 - **Tags**: `JavaScript`, `Tailwind CSS`, `HTML5`, `Netlify`
 - **Description**: A fun, 8-bit themed web utility for bulk generating and scanning QR codes. Features Excel file processing and dual-mode camera/file scanning.
 
-### 12. CSV to JSON Converter
+### 15. CSV to JSON Converter
 - **Category**: `CS Projects`
 - **Year**: `2025`
 - **Live URL**: [https://csv-to-jsonconv.netlify.app/](https://csv-to-jsonconv.netlify.app/)
@@ -215,7 +219,7 @@ npm run dev
 - **Tags**: `JavaScript`, `HTML`, `Tailwind CSS`, `Netlify`
 - **Description**: A serverless web utility designed for developers to seamlessly parse structured CSV data into formatted JSON. Features custom delimiters, regex parsing logic, and dark mode UI.
 
-### 13. Meat Spoilage Detection
+### 16. Meat Spoilage Detection
 - **Category**: `CS Projects`
 - **Year**: `2024`
 - **Live URL**: [https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT](https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT)
@@ -223,7 +227,7 @@ npm run dev
 - **Tags**: `IoT`, `Hardware`, `C++`, `Sensors`
 - **Description**: A hardware-based, no-contact meat spoilage detection system that uses IoT sensors to assess whether meat has spoiled.
 
-### 14. Flashcard Learning Pal
+### 17. Flashcard Learning Pal
 - **Category**: `Website Designs`
 - **Year**: `2023`
 - **Live URL**: [https://github.com/AdityaManojA/Flashcard-Learning-Pal](https://github.com/AdityaManojA/Flashcard-Learning-Pal)
@@ -231,7 +235,7 @@ npm run dev
 - **Tags**: `JavaScript`, `HTML`, `CSS`
 - **Description**: A web-based interactive learning tool designed to help students memorize concepts effectively.
 
-### 15. 8-Bit-O-Matic
+### 18. 8-Bit-O-Matic
 - **Category**: `CS Projects`
 - **Year**: `2024`
 - **Live URL**: [https://eight-bit-o-matic.onrender.com/](https://eight-bit-o-matic.onrender.com/)
@@ -365,48 +369,6 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: 20,
-    title: "SoloDesk — Freelancer Business Operations Suite",
-    category: "Projects",
-    year: "2026",
-    description: "Full-scale business operations suite for independent contractors and freelancers. Engineered with real-time client & project management, automated milestone invoice generation, conflict-aware daily scheduling, interactive focus tracking, client activity audit timelines, and calendar ecosystem sync.",
-    tags: ["React", "Vite", "Firebase", "TypeScript", "Tailwind CSS"],
-    image: "./ProjectImages/SoloDesk.png",
-    link: "https://taskflow-solodesk.web.app/",
-    github: "https://github.com/AdityaManojA/SoloDesk"
-  },
-  {
-    id: 19,
-    title: "TaskFlow — Gamified Habit & Quest Tracker PWA",
-    category: "Projects",
-    year: "2026",
-    description: "A calm, gamified task and daily habit management Progressive Web Application (PWA) built with zero runtime dependencies. Features natural language quick-entry, 6-tier quest priority workflows, streak & EXP mechanics, integrated focus timers, Google Calendar & ICS synchronization, and an interactive companion (Mochi).",
-    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
-    image: "./ProjectImages/Taskflow.png",
-    link: "https://taskflow-dailytracker.web.app/",
-    github: "https://github.com/AdityaManojA/TaskFlow"
-  },
-  {
-    id: 16,
-    title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
-    category: "Projects",
-    year: "2026",
-    description: "Autonomous multimodal AI desktop assistant & tactical terminal built for complete digital sovereignty. Features native bidirectional audio streaming (Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time RapidOCR visual grounding (<150ms), 30+ auto-discovered OS automation tools, encrypted AES-256 mobile remote telemetry, and tactical PyQt6 HUD.",
-    tags: ["Python", "PyQt6", "Gemini Live", "Local LLMs", "PyTorch"],
-    image: "./ProjectImages/Alfred.png",
-    link: "https://github.com/AdityaManojA/ALFRED-MK"
-  },
-  {
-    id: 1,
-    title: "GLIA — High-Throughput Event OS & PWA",
-    category: "Projects",
-    year: "2025",
-    description: "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
-    tags: ["React", "Firebase", "PWA", "Google Maps API"],
-    image: "./ProjectImages/GLIA.png",
-    link: "https://ian2025.in/"
-  },
-  {
     id: 8,
     title: "ThreadPath Collective",
     category: "Projects",
@@ -415,6 +377,46 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
     image: "./ProjectImages/Threadpath.png",
     link: "https://threadpathcollective.ca/"
+  },
+  {
+    id: 21,
+    title: "TerraCove — Independent Work Studio",
+    category: "Projects",
+    year: "2026",
+    description: "A calm, all-in-one workspace for freelancers and independent studios, from the first brief to the final invoice. Brings clients, projects, tasks, notes and a calendar together with approvals, reports & invoicing, data connections, Google sign-in, an installable PWA shell and a sandboxed local demo workspace.",
+    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
+    image: "./ProjectImages/TerraCove.png",
+    link: "https://terracove.web.app/"
+  },
+  {
+    id: 18,
+    title: "Pixel Spaces — 3D Visualisation Studio",
+    category: "Projects",
+    year: "2026",
+    description: "Bespoke high-performance web platform for an architectural visualisation and interior design studio operating across Kerala and Muscat. Engineered with an interactive HTML5 canvas pixel-resolve hero stage, CSS sticky stacking service decks, Sharp automated image optimization pipelines, and Firebase Firestore/Auth review moderation.",
+    tags: ["React", "Vite", "Tailwind CSS", "Firebase", "Canvas"],
+    image: "./ProjectImages/Pixel Spaces.png",
+    link: "https://pixelspaces.web.app/"
+  },
+  {
+    id: 11,
+    title: "The Whisky Business",
+    category: "Projects",
+    year: "2025",
+    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Whisky.png",
+    link: "https://thewhiskeybusiness-3e639.web.app/"
+  },
+  {
+    id: 22,
+    title: "Levern — Gamified Quest & Habit Tracker",
+    category: "Projects",
+    year: "2026",
+    description: "A mobile-first to-do list that feels like a game. Quests are ranked across six priority tiers and earn EXP, streaks and seasonal ranks, with daily targets, a Pomodoro focus timer, a month/week quest calendar, smart reminders, a leaderboard, Google sync across devices and Mochi, an animated companion.",
+    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
+    image: "./ProjectImages/Levern.png",
+    link: "https://getlevern.web.app/"
   },
   {
     id: 13,
@@ -437,14 +439,34 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://sbafa-ft.web.app/landing"
   },
   {
-    id: 11,
-    title: "The Whisky Business",
+    id: 9,
+    title: "Travel Animator",
     category: "Projects",
     year: "2025",
-    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Whisky.png",
-    link: "https://thewhiskeybusiness-3e639.web.app/"
+    description: "Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.",
+    tags: ["Android", "iOS", "React Native", "Google Maps API"],
+    image: "./ProjectImages/Travel.png",
+    link: "https://travelanimator.com/"
+  },
+  {
+    id: 16,
+    title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
+    category: "Projects",
+    year: "2026",
+    description: "Autonomous multimodal AI desktop assistant & tactical terminal built for complete digital sovereignty. Features native bidirectional audio streaming (Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time RapidOCR visual grounding (<150ms), 30+ auto-discovered OS automation tools, encrypted AES-256 mobile remote telemetry, and tactical PyQt6 HUD.",
+    tags: ["Python", "PyQt6", "Gemini Live", "Local LLMs", "PyTorch"],
+    image: "./ProjectImages/Alfred.png",
+    link: "https://github.com/AdityaManojA/ALFRED-MK"
+  },
+  {
+    id: 1,
+    title: "GLIA — High-Throughput Event OS & PWA",
+    category: "Projects",
+    year: "2025",
+    description: "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
+    tags: ["React", "Firebase", "PWA", "Google Maps API"],
+    image: "./ProjectImages/GLIA.png",
+    link: "https://ian2025.in/"
   },
   {
     id: 15,
@@ -463,19 +485,9 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     description: "An exhaustive technical engineering reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS/C-states), Cisco networking (VLANs, LACP), and Linux kernel internals (clone, namespaces, cgroups, OverlayFS) with Kubernetes control plane orchestration, Prometheus-Loki-Grafana observability, and 20 low-level interview deep-dives.",
     tags: ["Kubernetes", "SRE", "Linux Kernel", "Terraform", "Prometheus", "Cisco"],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    image: "./ProjectImages/handbook-graphic.svg",
     link: "#handbook",
     isHandbook: true
-  },
-  {
-    id: 9,
-    title: "Travel Animator",
-    category: "Projects",
-    year: "2025",
-    description: "Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.",
-    tags: ["Android", "iOS", "React Native", "Google Maps API"],
-    image: "./ProjectImages/Travel.png",
-    link: "https://travelanimator.com/"
   },
   {
     id: 12,
@@ -484,7 +496,7 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     description: "Comprehensive repository of daily-trained AI datasets, fine-tuning blueprints, and token-optimized pipelines ready for immediate zero-shot, few-shot, and fine-tuning workloads across open-source and proprietary foundation models.",
     tags: ["Python", "PyTorch", "AI Acceleration", "GitHub Actions"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    image: "./ProjectImages/promptops-graphic.svg",
     link: "https://github.com/AdityaManojA/prompt-ops-blueprints"
   },
   {
@@ -573,6 +585,16 @@ Home tab (`src/components/Hero.tsx`), changed in this pass:
 
 **Assets:** no new assets. Project screenshots are existing files in `public/ProjectImages/`.
 
+### Portfolio updates (27 October 2026)
+
+- **Home page six:** ThreadPath Collective, TerraCove and Pixel Spaces in the flagship showcase; The Whisky Business, Levern and IndZita in the case-file drawer (`Hero.tsx` → `selectedSystems = [11, 22, 13]`). The Projects tab follows the order of `PROJECTS_DATA`, with SBAFA and Travel Animator next.
+- **New projects:** TerraCove (`id: 21`) and Levern (`id: 22`). SoloDesk and TaskFlow, which they replace, are removed along with their screenshots. TerraCove's screenshot is a 16:10 capture of its demo workspace (sample data), so the 16:10 flagship frame shows it whole. Levern is mobile-first, so its image puts two phone screens side by side on a plain background.
+- **Dark mode by default:** visitors see dark unless they have switched to light (`DarkModeToggle.tsx`; the page loader in `index.html` follows the same rule).
+- **Interface sounds:** `src/hooks/useUiSounds.ts` plays the eight NFS: Most Wanted front-end effects in `public/sfx/` at 30% volume, spread across kinds of action: terminal sounds on the nav and project filters, "tick" over cards, "boot" when a panel opens, "back" when one closes, "accept" for other clicks. Hover sounds are mouse-only and throttled. There is no background music. The speaker button in the header (`SoundToggle.tsx`) turns sound off.
+- **Cursor garage defaults:** the Coupe, with tyre smoke and skid marks off. The settings key is `drift-garage-v3`; it was bumped because every visit saves the settings, so a new key is the only way new defaults reach returning visitors.
+- **Mobile fixes:** flagship screenshots are pinned to their frame's edges so iOS Safari fills the frame, the ↗ arrows carry U+FE0E so iOS draws them as text rather than emoji, and on phones the flagship tags wrap and the corner buttons hide while the pinned card is on screen.
+- **Deploying:** `npm run build`, then `firebase deploy --only hosting`, with a Firebase account that has access to project `adityamanojportfolio`.
+
 ### Verification evidence
 
 - Checked in the in-app browser at 1440×900 and 375×812: hero, flagship showcase, capability section. No horizontal overflow at 375px (`scrollWidth` = viewport width). No console errors.
@@ -622,7 +644,7 @@ Home tab (`src/components/Hero.tsx`), changed in this pass:
 - [ ] PENDING (owner) — Confirm the jurisdictions and audience (India-based; visitors worldwide).
 - [x] DONE — Data practices reviewed in code: no analytics, ads, forms or third-party trackers. Google Fonts (Montserrat) is loaded from `fonts.googleapis.com`, which sends visitor IPs to Google, and Unsplash images are hotlinked.
 - [ ] PENDING (owner) — No privacy notice. Decide whether one is needed given the Google Fonts / Unsplash requests, or self-host the font and images to avoid them.
-- [x] DONE — Cookies and storage: no cookies set by the site. `localStorage` key `theme` stores the light/dark preference (functional).
+- [x] DONE — Cookies and storage: no cookies set by the site. `localStorage` holds functional preferences only: `theme-preference` (light/dark, saved only after a toggle), `ui-sounds` (sound on/off, saved only after a toggle) and `drift-garage-v3` (cursor vehicle settings).
 - [x] N/A — Consent banner: no non-essential tracking exists to gate.
 - [x] N/A — Consent interface: none present.
 - [x] N/A — Forms: the site has no forms (contact is via `mailto:` and external links).
