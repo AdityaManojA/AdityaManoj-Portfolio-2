@@ -28,6 +28,66 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 8,
+    title: "ThreadPath Collective",
+    category: "Projects",
+    year: "2025",
+    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Threadpath.png",
+    link: "https://threadpathcollective.ca/"
+  },
+  {
+    id: 21,
+    title: "TerraCove — Independent Work Studio",
+    category: "Projects",
+    year: "2026",
+    description: "A calm, all-in-one workspace for freelancers and independent studios, from the first brief to the final invoice. Brings clients, projects, tasks, notes and a calendar together with approvals, reports & invoicing, data connections, Google sign-in, an installable PWA shell and a sandboxed local demo workspace.",
+    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
+    image: "./ProjectImages/TerraCove.png",
+    link: "https://terracove.web.app/"
+  },
+  {
+    id: 18,
+    title: "Pixel Spaces — 3D Visualisation Studio",
+    category: "Projects",
+    year: "2026",
+    description: "Bespoke high-performance web platform for an architectural visualisation and interior design studio operating across Kerala and Muscat. Engineered with an interactive HTML5 canvas pixel-resolve hero stage, CSS sticky stacking service decks, Sharp automated image optimization pipelines, and Firebase Firestore/Auth review moderation.",
+    tags: ["React", "Vite", "Tailwind CSS", "Firebase", "Canvas"],
+    image: "./ProjectImages/Pixel Spaces.png",
+    link: "https://pixelspaces.web.app/"
+  },
+  {
+    id: 11,
+    title: "The Whisky Business",
+    category: "Projects",
+    year: "2025",
+    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
+    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
+    image: "./ProjectImages/Whisky.png",
+    link: "https://thewhiskeybusiness-3e639.web.app/"
+  },
+  {
+    id: 22,
+    title: "Levern — Gamified Quest & Habit Tracker",
+    category: "Projects",
+    year: "2026",
+    description: "A mobile-first to-do list that feels like a game. Quests are ranked across six priority tiers and earn EXP, streaks and seasonal ranks, with daily targets, a Pomodoro focus timer, a month/week quest calendar, smart reminders, a leaderboard, Google sync across devices and Mochi, an animated companion.",
+    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
+    image: "./ProjectImages/Levern.png",
+    link: "https://getlevern.web.app/"
+  },
+  {
+    id: 13,
+    title: "IndZita Biotech",
+    category: "Projects",
+    year: "2026",
+    description: "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
+    tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
+    image: "./ProjectImages/Indzita.png",
+    link: "https://indzita-biotech-007.web.app/#overview"
+  },
+  {
     id: 20,
     title: "SoloDesk — Freelancer Business Operations Suite",
     category: "Projects",
@@ -50,36 +110,6 @@ export const PROJECTS_DATA: Project[] = [
     github: "https://github.com/AdityaManojA/TaskFlow"
   },
   {
-    id: 8,
-    title: "ThreadPath Collective",
-    category: "Projects",
-    year: "2025",
-    description: "A full-featured e-commerce storefront for a sustainable cultural streetwear brand based in Canada. Integrates product catalogs, category filtering, and a modern UI that blends heritage textile aesthetics with contemporary web design.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Threadpath.png",
-    link: "https://threadpathcollective.ca/"
-  },
-  {
-    id: 18,
-    title: "Pixel Spaces — 3D Visualisation Studio",
-    category: "Projects",
-    year: "2026",
-    description: "Bespoke high-performance web platform for an architectural visualisation and interior design studio operating across Kerala and Muscat. Engineered with an interactive HTML5 canvas pixel-resolve hero stage, CSS sticky stacking service decks, Sharp automated image optimization pipelines, and Firebase Firestore/Auth review moderation.",
-    tags: ["React", "Vite", "Tailwind CSS", "Firebase", "Canvas"],
-    image: "./ProjectImages/Pixel Spaces.png",
-    link: "https://pixelspaces.web.app/"
-  },
-  {
-    id: 13,
-    title: "IndZita Biotech",
-    category: "Projects",
-    year: "2026",
-    description: "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
-    tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
-    image: "./ProjectImages/Indzita.png",
-    link: "https://indzita-biotech-007.web.app/#overview"
-  },
-  {
     id: 16,
     title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
     category: "Projects",
@@ -98,16 +128,6 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "Firebase", "PWA", "Google Maps API"],
     image: "./ProjectImages/GLIA.png",
     link: "https://ian2025.in/"
-  },
-  {
-    id: 11,
-    title: "The Whisky Business",
-    category: "Projects",
-    year: "2025",
-    description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
-    tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
-    image: "./ProjectImages/Whisky.png",
-    link: "https://thewhiskeybusiness-3e639.web.app/"
   },
   {
     id: 15,

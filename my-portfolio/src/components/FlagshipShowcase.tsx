@@ -29,8 +29,22 @@ const FLAGSHIP_ITEMS: FlagshipProject[] = [
     tags: ['React', 'Tailwind CSS', 'AWS', 'CloudFront', 'Framer Motion', 'TypeScript']
   },
   {
+    id: 21,
+    caseTag: 'CASE 02 · FREELANCE OPERATIONS & PWA',
+    title: 'TerraCove',
+    link: 'https://terracove.web.app/',
+    domain: 'terracove.web.app',
+    image: './ProjectImages/TerraCove.png',
+    desc: 'A calm, all-in-one workspace for independent professionals, from the first brief to the final invoice. Unifies clients, projects, tasks, notes and a calendar with approvals, reports & invoicing and data connections, behind Google sign-in, an installable PWA shell and a sandboxed local demo workspace.',
+    metrics: [
+      { label: 'Workspace', val: 'Clients · Projects · Invoices' },
+      { label: 'Try It', val: 'Sandboxed Local Demo Mode' }
+    ],
+    tags: ['PWA', 'JavaScript', 'Firebase', 'Google OAuth', 'HTML5', 'CSS3']
+  },
+  {
     id: 18,
-    caseTag: 'CASE 02 · CANVAS 2D & EDITORIAL SSG',
+    caseTag: 'CASE 03 · CANVAS 2D & EDITORIAL SSG',
     title: 'Pixel Spaces',
     link: 'https://pixelspaces.web.app/',
     domain: 'pixelspaces.web.app',
@@ -41,20 +55,6 @@ const FLAGSHIP_ITEMS: FlagshipProject[] = [
       { label: 'Asset Pipeline', val: 'Node.js + Sharp WebP' }
     ],
     tags: ['React', 'Vite', 'Tailwind CSS', 'Firebase', 'Canvas', 'TypeScript', 'Node.js']
-  },
-  {
-    id: 13,
-    caseTag: 'CASE 03 · COMPUTATIONAL BIOLOGY & 3D SPLINES',
-    title: 'IndZita Biotech',
-    link: 'https://indzita-biotech-007.web.app/#overview',
-    domain: 'indzita-biotech-007.web.app',
-    image: './ProjectImages/Indzita.png',
-    desc: 'Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke\'s-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.',
-    metrics: [
-      { label: 'Kinematics Engine', val: 'Catmull-Rom & Euler 60FPS' },
-      { label: 'Virtual Simulation', val: 'Interactive PCR Lab' }
-    ],
-    tags: ['Canvas', 'React', 'TypeScript', 'Vite', 'Firebase', 'Spline 3D']
   }
 ];
 

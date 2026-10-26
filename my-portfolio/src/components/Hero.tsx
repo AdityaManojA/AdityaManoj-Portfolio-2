@@ -52,8 +52,8 @@ interface HeroProps {
 const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
   const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
 
-  // Curated systems for the Uniform Folder Drawer (ALFRED, The Whisky Business, TaskFlow)
-  const selectedSystems = [16, 11, 19]
+  // Curated systems for the Uniform Folder Drawer (The Whisky Business, Levern, IndZita)
+  const selectedSystems = [11, 22, 13]
     .map(id => PROJECTS_DATA.find(p => p.id === id))
     .filter(Boolean) as typeof PROJECTS_DATA;
 
@@ -205,7 +205,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
               <span className="section-index-tag">02 · SELECTED SYSTEMS DRAWER</span>
               <h2 className="editorial-section-title">Specialized Engineering Case Files</h2>
               <p className="editorial-section-subtitle">
-                Sovereign multimodal desktop agents, computational biology suites, and mission-critical event PWAs.
+                Brand platforms, gamified mobile-first PWAs, and computational biology suites.
               </p>
             </div>
             {onNavigateTab && (
