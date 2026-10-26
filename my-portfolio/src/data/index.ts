@@ -88,6 +88,26 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://indzita-biotech-007.web.app/#overview"
   },
   {
+    id: 14,
+    title: "SBAFA Financial Enclave",
+    category: "Projects",
+    year: "2026",
+    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
+    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
+    image: "./ProjectImages/SBAFA.png",
+    link: "https://sbafa-ft.web.app/landing"
+  },
+  {
+    id: 9,
+    title: "Travel Animator",
+    category: "Projects",
+    year: "2025",
+    description: "Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.",
+    tags: ["Android", "iOS", "React Native", "Google Maps API"],
+    image: "./ProjectImages/Travel.png",
+    link: "https://travelanimator.com/"
+  },
+  {
     id: 16,
     title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
     category: "Projects",
@@ -118,16 +138,6 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://rochascafe.netlify.app/#"
   },
   {
-    id: 14,
-    title: "SBAFA Financial Enclave",
-    category: "Projects",
-    year: "2026",
-    description: "Zero-knowledge, offline-first personal financial enclave PWA. Features Dexie.js (IndexedDB) local persistence with reactive Firebase Firestore bi-directional sync for 1,000+ ledger records, an on-device sandboxed PDF statement ingestion engine (pdfjs-dist & regex OCR for HDFC/Federal/SBI), automated OAuth2 Gmail pipeline, WebAuthn biometric passkeys, and native iOS segmented glassmorphic design.",
-    tags: ["PWA", "IndexedDB", "Firebase", "TypeScript", "HTML5"],
-    image: "./ProjectImages/SBAFA.png",
-    link: "https://sbafa-ft.web.app/landing"
-  },
-  {
     id: 100,
     title: "The DevOps, SRE & Cloud Infrastructure Handbook",
     category: "Projects",
@@ -137,16 +147,6 @@ export const PROJECTS_DATA: Project[] = [
     image: "./ProjectImages/handbook-graphic.svg",
     link: "#handbook",
     isHandbook: true
-  },
-  {
-    id: 9,
-    title: "Travel Animator",
-    category: "Projects",
-    year: "2025",
-    description: "Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.",
-    tags: ["Android", "iOS", "React Native", "Google Maps API"],
-    image: "./ProjectImages/Travel.png",
-    link: "https://travelanimator.com/"
   },
   {
     id: 12,
