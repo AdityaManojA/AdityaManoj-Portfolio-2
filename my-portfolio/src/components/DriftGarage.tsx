@@ -18,9 +18,10 @@ function readAvailability(): Availability {
   return 'desktop';
 }
 
-// v2: earlier visits saved the old defaults (Coupe, smoke on), so a fresh key lets the new ones apply.
-const STORAGE_KEY = 'drift-garage-v2';
-const DEFAULTS: GarageSettings = { vehicle: DEFAULT_VEHICLE, smoke: false, marks: true, visible: true };
+// v3: earlier visits saved older defaults (every visit stores the settings), so a fresh key lets the
+// current ones apply.
+const STORAGE_KEY = 'drift-garage-v3';
+const DEFAULTS: GarageSettings = { vehicle: DEFAULT_VEHICLE, smoke: false, marks: false, visible: true };
 
 function loadSettings(): GarageSettings {
   try {
