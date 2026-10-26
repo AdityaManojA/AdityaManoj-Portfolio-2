@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { IMAGES } from '../data';
 
 const DarkModeToggle = () => {
-  // Light is the default. Only an explicit toggle is remembered, under a new key, so values the
+  // Dark is the default. Only an explicit toggle is remembered, under a new key, so values the
   // old version auto-saved on every visit ('theme') don't override the default.
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
-      return localStorage.getItem('theme-preference') === 'dark';
+      return localStorage.getItem('theme-preference') !== 'light';
     } catch {
-      return false;
+      return true;
     }
   });
 

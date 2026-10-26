@@ -71,9 +71,11 @@
       html.loader-active body { overflow: hidden; }
     </style>
     <script>
+      var loaderDark = true;
       try {
-        if (localStorage.getItem('theme-preference') === 'dark') document.documentElement.classList.add('loader-dark');
+        loaderDark = localStorage.getItem('theme-preference') !== 'light';
       } catch (e) {}
+      if (loaderDark) document.documentElement.classList.add('loader-dark');
       document.documentElement.classList.add('loader-active');
     </script>
   </head>
