@@ -4131,7 +4131,11 @@ html {
   cursor: default;
 }
 
+/* Pinned to the frame's edges: iOS Safari can't resolve height: 100% against an aspect-ratio box
+   with a max-height, and falls back to the image's own ratio, leaving a dark strip at the side. */
 .browser-screen-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
