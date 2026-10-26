@@ -264,7 +264,7 @@ export default function FlagshipShowcase() {
                         tabIndex={isActive ? 0 : -1}
                       >
                         {item.title}
-                        <span className="flagship-title-arrow">↗</span>
+                        <span className="flagship-title-arrow">{'↗︎'}</span>
                       </a>
                     ) : (
                       <span className="flagship-title-static">

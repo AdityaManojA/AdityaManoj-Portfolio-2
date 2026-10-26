@@ -304,7 +304,7 @@ const Hero = ({ onOpenHandbook, onNavigateTab }: HeroProps) => {
                     aria-label="View all selected works"
                   >
                     <span>View All {PROJECTS_DATA.length}+ Projects</span>
-                    <span className="btn-arrow">↗</span>
+                    <span className="btn-arrow">{'↗︎'}</span>
                   </button>
                 )}
                 <button
