@@ -88,28 +88,6 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://indzita-biotech-007.web.app/#overview"
   },
   {
-    id: 20,
-    title: "SoloDesk — Freelancer Business Operations Suite",
-    category: "Projects",
-    year: "2026",
-    description: "Full-scale business operations suite for independent contractors and freelancers. Engineered with real-time client & project management, automated milestone invoice generation, conflict-aware daily scheduling, interactive focus tracking, client activity audit timelines, and calendar ecosystem sync.",
-    tags: ["React", "Vite", "Firebase", "TypeScript", "Tailwind CSS"],
-    image: "./ProjectImages/SoloDesk.png",
-    link: "https://taskflow-solodesk.web.app/",
-    github: "https://github.com/AdityaManojA/SoloDesk"
-  },
-  {
-    id: 19,
-    title: "TaskFlow — Gamified Habit & Quest Tracker PWA",
-    category: "Projects",
-    year: "2026",
-    description: "A calm, gamified task and daily habit management Progressive Web Application (PWA) built with zero runtime dependencies. Features natural language quick-entry, 6-tier quest priority workflows, streak & EXP mechanics, integrated focus timers, Google Calendar & ICS synchronization, and an interactive companion (Mochi).",
-    tags: ["PWA", "JavaScript", "Firebase", "HTML5", "CSS3"],
-    image: "./ProjectImages/Taskflow.png",
-    link: "https://taskflow-dailytracker.web.app/",
-    github: "https://github.com/AdityaManojA/TaskFlow"
-  },
-  {
     id: 16,
     title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
     category: "Projects",
