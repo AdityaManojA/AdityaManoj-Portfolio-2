@@ -43,38 +43,6 @@ export const LINKS = {
 // Ordered by the old site's ranking; the Blacklist counts down from the end, so PROJECTS[0] is #1.
 export const PROJECTS: Project[] = [
   {
-    "title": "SoloDesk — Freelancer Business Operations Suite",
-    "category": "Projects",
-    "year": "2026",
-    "description": "Full-scale business operations suite for independent contractors and freelancers. Engineered with real-time client & project management, automated milestone invoice generation, conflict-aware daily scheduling, interactive focus tracking, client activity audit timelines, and calendar ecosystem sync.",
-    "tags": [
-      "React",
-      "Vite",
-      "Firebase",
-      "TypeScript",
-      "Tailwind CSS"
-    ],
-    "image": "media/projects/solodesk.webp",
-    "link": "https://taskflow-solodesk.web.app/",
-    "github": "https://github.com/AdityaManojA/SoloDesk"
-  },
-  {
-    "title": "TaskFlow — Gamified Habit & Quest Tracker PWA",
-    "category": "Projects",
-    "year": "2026",
-    "description": "A calm, gamified task and daily habit management Progressive Web Application (PWA) built with zero runtime dependencies. Features natural language quick-entry, 6-tier quest priority workflows, streak & EXP mechanics, integrated focus timers, Google Calendar & ICS synchronization, and an interactive companion (Mochi).",
-    "tags": [
-      "PWA",
-      "JavaScript",
-      "Firebase",
-      "HTML5",
-      "CSS3"
-    ],
-    "image": "media/projects/taskflow.webp",
-    "link": "https://taskflow-dailytracker.web.app/",
-    "github": "https://github.com/AdityaManojA/TaskFlow"
-  },
-  {
     "title": "ThreadPath Collective",
     "category": "Projects",
     "year": "2025",
@@ -90,7 +58,22 @@ export const PROJECTS: Project[] = [
     "link": "https://threadpathcollective.ca/"
   },
   {
-    "title": "Pixel Spaces — 3D Visualisation Studio",
+    "title": "TerraCove ? Independent Work Studio",
+    "category": "Projects",
+    "year": "2026",
+    "description": "A calm, all-in-one workspace for freelancers and independent studios, from the first brief to the final invoice. Brings clients, projects, tasks, notes and a calendar together with approvals, reports & invoicing, data connections, Google sign-in, an installable PWA shell and a sandboxed local demo workspace.",
+    "tags": [
+      "PWA",
+      "JavaScript",
+      "Firebase",
+      "HTML5",
+      "CSS3"
+    ],
+    "image": "media/projects/terracove.webp",
+    "link": "https://terracove.web.app/"
+  },
+  {
+    "title": "Pixel Spaces ? 3D Visualisation Studio",
     "category": "Projects",
     "year": "2026",
     "description": "Bespoke high-performance web platform for an architectural visualisation and interior design studio operating across Kerala and Muscat. Engineered with an interactive HTML5 canvas pixel-resolve hero stage, CSS sticky stacking service decks, Sharp automated image optimization pipelines, and Firebase Firestore/Auth review moderation.",
@@ -103,50 +86,6 @@ export const PROJECTS: Project[] = [
     ],
     "image": "media/projects/pixel-spaces.webp",
     "link": "https://pixelspaces.web.app/"
-  },
-  {
-    "title": "IndZita Biotech",
-    "category": "Projects",
-    "year": "2026",
-    "description": "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
-    "tags": [
-      "Canvas",
-      "React",
-      "TypeScript",
-      "Vite",
-      "Firebase"
-    ],
-    "image": "media/projects/indzita.webp",
-    "link": "https://indzita-biotech-007.web.app/#overview"
-  },
-  {
-    "title": "ALFRED — MARK-VIII (Wayne Protocol Edition)",
-    "category": "Projects",
-    "year": "2026",
-    "description": "Autonomous multimodal AI desktop assistant & tactical terminal built for complete digital sovereignty. Features native bidirectional audio streaming (Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time RapidOCR visual grounding (<150ms), 30+ auto-discovered OS automation tools, encrypted AES-256 mobile remote telemetry, and tactical PyQt6 HUD.",
-    "tags": [
-      "Python",
-      "PyQt6",
-      "Gemini Live",
-      "Local LLMs",
-      "PyTorch"
-    ],
-    "image": "media/projects/alfred.webp",
-    "link": "https://github.com/AdityaManojA/ALFRED-MK"
-  },
-  {
-    "title": "GLIA — High-Throughput Event OS & PWA",
-    "category": "Projects",
-    "year": "2025",
-    "description": "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
-    "tags": [
-      "React",
-      "Firebase",
-      "PWA",
-      "Google Maps API"
-    ],
-    "image": "media/projects/glia.webp",
-    "link": "https://ian2025.in/"
   },
   {
     "title": "The Whisky Business",
@@ -164,18 +103,34 @@ export const PROJECTS: Project[] = [
     "link": "https://thewhiskeybusiness-3e639.web.app/"
   },
   {
-    "title": "Rochas Cafe",
-    "category": "Website Designs",
-    "year": "2025",
-    "description": "Artisanal specialty coffee & patisserie web showcase. Engineered with responsive layout architecture, dynamic product carousels, smooth interactive navigation, fluid aesthetic styling, and high-performance CDN deployment.",
+    "title": "Levern ? Gamified Quest & Habit Tracker",
+    "category": "Projects",
+    "year": "2026",
+    "description": "A mobile-first to-do list that feels like a game. Quests are ranked across six priority tiers and earn EXP, streaks and seasonal ranks, with daily targets, a Pomodoro focus timer, a month/week quest calendar, smart reminders, a leaderboard, Google sync across devices and Mochi, an animated companion.",
     "tags": [
-      "React",
+      "PWA",
       "JavaScript",
-      "CSS3",
-      "HTML5"
+      "Firebase",
+      "HTML5",
+      "CSS3"
     ],
-    "image": "media/projects/rochas.webp",
-    "link": "https://rochascafe.netlify.app/#"
+    "image": "media/projects/levern.webp",
+    "link": "https://getlevern.web.app/"
+  },
+  {
+    "title": "IndZita Biotech",
+    "category": "Projects",
+    "year": "2026",
+    "description": "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
+    "tags": [
+      "Canvas",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Firebase"
+    ],
+    "image": "media/projects/indzita.webp",
+    "link": "https://indzita-biotech-007.web.app/#overview"
   },
   {
     "title": "SBAFA Financial Enclave",
@@ -207,6 +162,66 @@ export const PROJECTS: Project[] = [
     "link": "https://travelanimator.com/"
   },
   {
+    "title": "ALFRED ? MARK-VIII (Wayne Protocol Edition)",
+    "category": "Projects",
+    "year": "2026",
+    "description": "Autonomous multimodal AI desktop assistant & tactical terminal built for complete digital sovereignty. Features native bidirectional audio streaming (Gemini 3.1 Flash Live & local Ollama/LM Studio), real-time RapidOCR visual grounding (<150ms), 30+ auto-discovered OS automation tools, encrypted AES-256 mobile remote telemetry, and tactical PyQt6 HUD.",
+    "tags": [
+      "Python",
+      "PyQt6",
+      "Gemini Live",
+      "Local LLMs",
+      "PyTorch"
+    ],
+    "image": "media/projects/alfred.webp",
+    "link": "https://github.com/AdityaManojA/ALFRED-MK",
+    "github": "https://github.com/AdityaManojA/ALFRED-MK"
+  },
+  {
+    "title": "GLIA ? High-Throughput Event OS & PWA",
+    "category": "Projects",
+    "year": "2025",
+    "description": "Production-grade event operating system PWA deployed for an international neuroscience symposium. Engineered with dynamic QR access control, biometric identity badging, real-time Firestore database layer (1.2M+ reads), and zero downtime.",
+    "tags": [
+      "React",
+      "Firebase",
+      "PWA",
+      "Google Maps API"
+    ],
+    "image": "media/projects/glia.webp",
+    "link": "https://ian2025.in/"
+  },
+  {
+    "title": "Rochas Cafe",
+    "category": "Website Designs",
+    "year": "2025",
+    "description": "Artisanal specialty coffee & patisserie web showcase. Engineered with responsive layout architecture, dynamic product carousels, smooth interactive navigation, fluid aesthetic styling, and high-performance CDN deployment.",
+    "tags": [
+      "React",
+      "JavaScript",
+      "CSS3",
+      "HTML5"
+    ],
+    "image": "media/projects/rochas.webp",
+    "link": "https://rochascafe.netlify.app/#"
+  },
+  {
+    "title": "The DevOps, SRE & Cloud Infrastructure Handbook",
+    "category": "Projects",
+    "year": "2026",
+    "description": "An exhaustive technical engineering reference authored by Aditya Manoj. Bridges bare-metal silicon (IPMI, RAID, BIOS/C-states), Cisco networking (VLANs, LACP), and Linux kernel internals (clone, namespaces, cgroups, OverlayFS) with Kubernetes control plane orchestration, Prometheus-Loki-Grafana observability, and 20 low-level interview deep-dives.",
+    "tags": [
+      "Kubernetes",
+      "SRE",
+      "Linux Kernel",
+      "Terraform",
+      "Prometheus",
+      "Cisco"
+    ],
+    "image": "media/projects/handbook-graphic.svg",
+    "link": "https://github.com/AdityaManojA"
+  },
+  {
     "title": "Prompt-Ops Blueprints & AI Dataset Engine",
     "category": "CS Projects",
     "year": "2026",
@@ -218,7 +233,8 @@ export const PROJECTS: Project[] = [
       "GitHub Actions"
     ],
     "image": "media/projects/promptops-graphic.svg",
-    "link": "https://github.com/AdityaManojA/prompt-ops-blueprints"
+    "link": "https://github.com/AdityaManojA/prompt-ops-blueprints",
+    "github": "https://github.com/AdityaManojA/prompt-ops-blueprints"
   },
   {
     "title": "Retro QR Crafter",
@@ -260,7 +276,8 @@ export const PROJECTS: Project[] = [
       "Sensors"
     ],
     "image": "media/projects/meat.webp",
-    "link": "https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT"
+    "link": "https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT",
+    "github": "https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT"
   },
   {
     "title": "Flashcard Learning Pal",
@@ -273,7 +290,8 @@ export const PROJECTS: Project[] = [
       "CSS"
     ],
     "image": "media/projects/flashcard.webp",
-    "link": "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
+    "link": "https://github.com/AdityaManojA/Flashcard-Learning-Pal",
+    "github": "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
   },
   {
     "title": "8-Bit-O-Matic",

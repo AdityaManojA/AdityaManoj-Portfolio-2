@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070A12" />
+      <stop offset="50%" stop-color="#0B1120" />
+      <stop offset="100%" stop-color="#080D1A" />
+    </linearGradient>
+
+    <!-- Cyan Glow Gradient -->
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#4FACFE" />
+    </linearGradient>
+
+    <!-- Badge Gradient -->
+    <linearGradient id="pillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.05" />
+    </linearGradient>
+
+    <!-- Radial Glows -->
+    <radialGradient id="glowTopRight" cx="85%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#00F2FE" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="glowBottomLeft" cx="15%" cy="85%" r="60%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Tech Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="0.8" stroke-opacity="0.5" />
+      <circle cx="40" cy="40" r="1" fill="#38BDF8" fill-opacity="0.4" />
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="960" height="600" fill="url(#bgGrad)" />
+  <rect width="960" height="600" fill="url(#glowTopRight)" />
+  <rect width="960" height="600" fill="url(#glowBottomLeft)" />
+  <rect width="960" height="600" fill="url(#grid)" />
+
+  <!-- Outer Frame -->
+  <rect x="24" y="24" width="912" height="552" rx="16" fill="none" stroke="#1E293B" stroke-width="1.5" />
+  <rect x="24" y="24" width="912" height="552" rx="16" fill="none" stroke="#38BDF8" stroke-width="1" stroke-opacity="0.2" />
+
+  <!-- Corner Tech Markers -->
+  <path d="M 24 50 L 50 24" stroke="#00F2FE" stroke-width="2" stroke-opacity="0.7" />
+  <path d="M 936 50 L 910 24" stroke="#00F2FE" stroke-width="2" stroke-opacity="0.7" />
+  <path d="M 24 550 L 50 576" stroke="#00F2FE" stroke-width="2" stroke-opacity="0.7" />
+  <path d="M 936 550 L 910 576" stroke="#00F2FE" stroke-width="2" stroke-opacity="0.7" />
+
+  <!-- Top Metadata Bar -->
+  <g transform="translate(56, 68)">
+    <!-- Terminal pill -->
+    <rect x="0" y="0" width="310" height="34" rx="17" fill="url(#pillGrad)" stroke="#38BDF8" stroke-width="1" stroke-opacity="0.4" />
+    <circle cx="20" cy="17" r="4" fill="#10B981" />
+    <text x="34" y="22" font-family="'JetBrains Mono', 'Fira Code', 'Courier New', monospace" font-size="12" font-weight="700" fill="#38BDF8" letter-spacing="1.5">TECHNICAL REFERENCE // 2026</text>
+
+    <!-- Deep-dives badge -->
+    <rect x="620" y="0" width="228" height="34" rx="17" fill="#0F172A" stroke="#334155" stroke-width="1" />
+    <text x="734" y="22" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="1">20 LOW-LEVEL DEEP-DIVES</text>
+  </g>
+
+  <!-- Central Graphic Text Section -->
+  <g transform="translate(56, 140)">
+    <!-- Category Overline -->
+    <text x="2" y="32" font-family="'Inter', -apple-system, sans-serif" font-size="15" font-weight="800" fill="#38BDF8" letter-spacing="4">SYSTEMS &amp; INFRASTRUCTURE ENGINEERING</text>
+
+    <!-- Main Title Line 1 -->
+    <text x="0" y="100" font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" font-size="52" font-weight="900" fill="#FFFFFF" letter-spacing="-1">THE DEVOPS, SRE &amp;</text>
+
+    <!-- Main Title Line 2 (Glowing Cyan) -->
+    <text x="0" y="166" font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" font-size="56" font-weight="900" fill="url(#cyanGrad)" letter-spacing="-1">CLOUD INFRASTRUCTURE</text>
+
+    <!-- Main Title Line 3 (Handbook) -->
+    <text x="2" y="228" font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" font-size="42" font-weight="900" fill="#F8FAFC" letter-spacing="8">HANDBOOK</text>
+
+    <!-- Subtitle description -->
+    <text x="2" y="270" font-family="'Inter', -apple-system, sans-serif" font-size="15" font-weight="500" fill="#94A3B8" letter-spacing="0.5">Bare-Metal Silicon · Linux Kernel Internals · Kubernetes · Observability · Cisco</text>
+  </g>
+
+  <!-- Architectural Vector Pipeline Diagram -->
+  <g transform="translate(56, 442)">
+    <rect x="0" y="0" width="848" height="42" rx="10" fill="#0B132B" stroke="#1E293B" stroke-width="1" />
+    
+    <!-- Flow Node 1 -->
+    <text x="24" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">01 BARE-METAL &amp; IPMI</text>
+    <text x="175" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#475569">→</text>
+
+    <!-- Flow Node 2 -->
+    <text x="205" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">02 LINUX KERNEL &amp; CGROUPS</text>
+    <text x="408" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#475569">→</text>
+
+    <!-- Flow Node 3 -->
+    <text x="438" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38BDF8">03 K8S CONTROL PLANE</text>
+    <text x="618" y="26" font-family="'JetBrains Mono', monospace" font-size="12" fill="#475569">→</text>
+
+    <!-- Flow Node 4 -->
+    <text x="648" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#10B981">04 SRE &amp; OBSERVABILITY</text>
+  </g>
+
+  <!-- Bottom Metadata & Author Bar -->
+  <g transform="translate(56, 524)">
+    <!-- Author tag -->
+    <text x="0" y="16" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#64748B" letter-spacing="1">AUTHORED BY </text>
+    <text x="100" y="16" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">ADITYA MANOJ</text>
+    <text x="220" y="16" font-family="'JetBrains Mono', monospace" font-size="12" fill="#475569">// SRE &amp; SYSTEMS ENGINEER</text>
+
+    <!-- Interactive Pill -->
+    <rect x="688" y="-4" width="160" height="28" rx="14" fill="#38BDF8" fill-opacity="0.1" stroke="#38BDF8" stroke-width="1" />
+    <text x="768" y="14" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#38BDF8" letter-spacing="1">READ HANDBOOK →</text>
+  </g>
+</svg>

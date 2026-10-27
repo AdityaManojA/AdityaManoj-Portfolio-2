@@ -35,8 +35,8 @@ const actionsFor = (p: Project): Action[] => {
   return out;
 };
 
-const shortName = (title: string) => title.split(/\s+[—-]\s+/)[0];
-const subtitle = (title: string) => title.split(/\s+[—-]\s+/)[1] ?? '';
+const shortName = (title: string) => title.split(/\s+[—–-]\s+/)[0];
+const subtitle = (title: string) => title.split(/\s+[—–-]\s+/)[1] ?? '';
 const firstSentence = (text: string) => (text.match(/^.*?[.!?](\s|$)/)?.[0] ?? text).trim();
 
 export default function Blacklist() {
