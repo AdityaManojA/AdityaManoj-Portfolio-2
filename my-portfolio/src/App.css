@@ -3636,8 +3636,11 @@ body {
 
 /* Proximity snapping: the page scrolls freely and only settles onto a project when the
    scroll comes to rest near one. The anchors are the only snap points on the page. */
-html {
-  scroll-snap-type: y proximity;
+/* Proximity snapping on large screens: disabled on mobile/touch to prevent Safari momentum stutter */
+@media (min-width: 992px) and (min-height: 761px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
 }
 
 .flagship-snap {
@@ -4047,6 +4050,8 @@ html {
 .browser-mockup-frame {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
   border-radius: 1.25rem;
   overflow: hidden;
   background: #14161d;
@@ -4121,6 +4126,9 @@ html {
 .browser-viewport-link {
   position: relative;
   display: block;
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   max-height: 290px;
@@ -4135,9 +4143,12 @@ html {
    with a max-height, and falls back to the image's own ratio, leaving a dark strip at the side. */
 .browser-screen-img {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
@@ -5414,21 +5425,9 @@ html {
    scroll pans the cards sideways (FlagshipShowcase sets the transform), resting on each card,
    then the page continues. Cards are compacted so a whole card fits on screen. Shorter phones
    keep the swipe carousel; tablets and desktop are unchanged. */
-@media (max-width: 767px) and (min-height: 640px) {
-  .flagship-track {
-    height: 330vh;
-  }
-
-  .flagship-showcase {
-    position: sticky;
-    top: 4.75rem;
-  }
-
-  .flagship-snap {
-    display: block;
-    scroll-margin-top: 4.75rem; /* = .flagship-showcase top */
-  }
-
+/* Flagship on mobile phones: compact typography and proportions so each project card
+   fits cleanly in the native swipe carousel without scroll-jacking or sticky fighting. */
+@media (max-width: 767px) {
   .flagship-header-row {
     margin-bottom: 0.9rem;
   }
@@ -5441,13 +5440,6 @@ html {
     font-size: 1.5rem;
   }
 
-  /* Panned by transform, not scrolled: the page-level clip hides cards off to the side */
-  .flagship-gallery.swipe-track {
-    overflow: visible;
-    scroll-snap-type: none;
-    will-change: transform;
-  }
-
   /* minmax(0, 1fr): the one-line tag row must not widen the column past the card */
   .swipe-track > .flagship-panel .flagship-panel-body {
     grid-template-columns: minmax(0, 1fr);
@@ -5458,12 +5450,18 @@ html {
   .flagship-panel .flagship-stage-content,
   .flagship-panel .flagship-stage-visual {
     min-width: 0;
+    width: 100%;
   }
 
-  /* The screenshot gives up height on short screens so the whole card (wrapped tags included) stays on screen */
+  /* Browser viewport on mobile: explicitly full width with a clean responsive height.
+     Disarming aspect-ratio on mobile prevents Safari from collapsing the width via max-height math. */
   .flagship-panel .browser-viewport-link {
-    max-height: clamp(100px, calc(100vh - 530px), 168px);
-    max-height: clamp(100px, calc(100svh - 530px), 168px);
+    width: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
+    aspect-ratio: unset;
+    height: clamp(140px, 42vw, 175px);
+    max-height: 175px;
   }
 
   .flagship-panel .browser-header-bar {
@@ -5505,14 +5503,6 @@ html {
 
   .flagship-panel .flagship-tags .tag {
     padding: 0.22rem 0.65rem;
-  }
-
-  /* The corner buttons would sit on top of the pinned card; tuck them away while it is pinned */
-  .flagship-pinned .scroll-to-top-btn,
-  .flagship-pinned .garage-launcher:not(.is-open) {
-    opacity: 0;
-    transform: translateY(2.5rem);
-    pointer-events: none;
   }
 }
 

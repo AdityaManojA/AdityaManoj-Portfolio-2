@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type TouchEvent } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SwipeDots from './SwipeDots';
 
 interface FlagshipProject {
@@ -58,20 +58,6 @@ const FLAGSHIP_ITEMS: FlagshipProject[] = [
   }
 ];
 
-// Phones tall enough to fit a pinned card: the stage pins and vertical scroll pans the cards
-// sideways (see CSS). Shorter phones keep the plain swipe carousel.
-const MOBILE_PIN = '(max-width: 767px) and (min-height: 640px)';
-
-// Maps scroll progress to a card position that rests on each card and eases between them:
-// card i is centred over the middle of its scroll segment, matching the snap anchors.
-const panPosition = (p: number, count: number) => {
-  const q = Math.max(0, Math.min(count - 1, p * count - 0.5));
-  const i = Math.floor(q);
-  const t = Math.max(0, Math.min(1, (q - i - 0.2) / 0.6));
-  const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-  return Math.min(count - 1, i + eased);
-};
-
 export default function FlagshipShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -79,17 +65,9 @@ export default function FlagshipShowcase() {
   const snapRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const galleryRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
-  const [pinnedMobile, setPinnedMobile] = useState(() => window.matchMedia(MOBILE_PIN).matches);
 
-  useEffect(() => {
-    const mq = window.matchMedia(MOBILE_PIN);
-    const onChange = () => setPinnedMobile(mq.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-
-  // Scroll position inside the pinned track drives which panel is open.
-  // The stage is only sticky on large screens (see CSS); elsewhere every card is stacked open.
+  // Scroll position inside the pinned track drives which panel is open on large screens (see CSS).
+  // On mobile / tablet, cards are rendered in a native smooth swipe track.
   const getPinGeometry = () => {
     const track = trackRef.current;
     const stage = stageRef.current;
@@ -114,26 +92,11 @@ export default function FlagshipShowcase() {
       const { track, scrollable, pinTop } = geo;
       const raw = (pinTop - track.getBoundingClientRect().top) / scrollable;
       const p = Math.max(0, Math.min(1, raw));
-      // Phones: while the stage is stuck on screen, hide the corner buttons (see CSS).
-      root.classList.toggle('flagship-pinned', window.matchMedia(MOBILE_PIN).matches && raw > -0.02 && raw < 1);
       const steps = p * FLAGSHIP_ITEMS.length;
       FLAGSHIP_ITEMS.forEach((_, i) => {
         track.style.setProperty(`--fill-${i}`, String(Math.max(0, Math.min(1, steps - i))));
       });
 
-      // Phones: pan the cards sideways with the vertical scroll instead of opening panels.
-      if (gallery && window.matchMedia(MOBILE_PIN).matches) {
-        const cards = gallery.children as HTMLCollectionOf<HTMLElement>;
-        const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 0;
-        const pos = panPosition(p, FLAGSHIP_ITEMS.length);
-        gallery.style.transform = `translate3d(${-pos * step}px, 0, 0)`;
-        const next = Math.round(pos);
-        if (next !== activeRef.current) {
-          activeRef.current = next;
-          setActiveIndex(next);
-        }
-        return;
-      }
       if (gallery) gallery.style.transform = '';
 
       // Hysteresis: only switch once the scroll is clearly past a boundary, so small
@@ -172,25 +135,18 @@ export default function FlagshipShowcase() {
     };
   }, []);
 
-  // Phones: a sideways swipe on the pinned cards jumps to the next / previous card.
-  const swipeStart = useRef<{ x: number; y: number } | null>(null);
-  const onGalleryTouchStart = (e: TouchEvent) => {
-    swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  };
-  const onGalleryTouchEnd = (e: TouchEvent) => {
-    const start = swipeStart.current;
-    swipeStart.current = null;
-    if (!start || !pinnedMobile) return;
-    const dx = e.changedTouches[0].clientX - start.x;
-    const dy = e.changedTouches[0].clientY - start.y;
-    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    const next = Math.max(0, Math.min(FLAGSHIP_ITEMS.length - 1, activeRef.current + (dx < 0 ? 1 : -1)));
-    if (next !== activeRef.current) goTo(next);
-  };
-
   const goTo = (idx: number) => {
     const geo = getPinGeometry();
     if (!geo) {
+      // Mobile / tablet swipe track: scroll horizontally directly to the selected card
+      const track = galleryRef.current;
+      const child = track?.children[idx] as HTMLElement | undefined;
+      if (track && child) {
+        track.scrollTo({
+          left: child.offsetLeft - (track.clientWidth - child.offsetWidth) / 2,
+          behavior: 'smooth',
+        });
+      }
       activeRef.current = idx;
       setActiveIndex(idx);
       return;
@@ -228,8 +184,6 @@ export default function FlagshipShowcase() {
       <div
         className="flagship-gallery swipe-track"
         ref={galleryRef}
-        onTouchStart={onGalleryTouchStart}
-        onTouchEnd={onGalleryTouchEnd}
       >
         {FLAGSHIP_ITEMS.map((item, idx) => {
           const isActive = idx === activeIndex;
@@ -324,12 +278,24 @@ export default function FlagshipShowcase() {
                         className="browser-viewport-link"
                         tabIndex={isActive ? 0 : -1}
                       >
-                        <img src={item.image} alt={item.title} className="browser-screen-img" />
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="browser-screen-img"
+                          loading="eager"
+                          decoding="async"
+                        />
                         <div className="browser-screen-glare" />
                       </a>
                     ) : (
                       <div className="browser-viewport-link browser-viewport-static">
-                        <img src={item.image} alt={item.title} className="browser-screen-img" />
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="browser-screen-img"
+                          loading="eager"
+                          decoding="async"
+                        />
                         <div className="browser-screen-glare" />
                       </div>
                     )}
@@ -345,8 +311,7 @@ export default function FlagshipShowcase() {
         targetRef={galleryRef}
         count={FLAGSHIP_ITEMS.length}
         label="flagship project"
-        active={pinnedMobile ? activeIndex : undefined}
-        onSelect={pinnedMobile ? goTo : undefined}
+        onChange={setActiveIndex}
       />
 
       <div className="flagship-progress" aria-hidden="true">
