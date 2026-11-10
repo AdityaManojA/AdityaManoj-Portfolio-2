@@ -118,7 +118,7 @@ npm run dev
 ### 6. IndZita Biotech
 - **Category**: `Projects`
 - **Year**: `2026`
-- **Live URL**: [https://indzita-biotech-007.web.app/#overview](https://indzita-biotech-007.web.app/#overview)
+- **Live URL**: [https://indzitabio.web.app/](https://indzitabio.web.app/)
 - **Domain**: `indzitabiotech.com`
 - **Image Filename**: `Indzita.png`
 - **Tags**: `Canvas`, `React`, `TypeScript`, `Vite`, `Firebase`
@@ -439,7 +439,7 @@ export const PROJECTS_DATA: Project[] = [
     description: "Dual-engine 3D molecular visualization suite and interactive computational biology platform. Features Catmull-Rom spline interpolation and Euler kinematics on HTML5 Canvas alongside Spline 3D runtimes, a Hooke's-law spring-damped ASCII genomic canvas locked at 60 FPS, interactive real-time thermal PCR Virtual Lab simulation, and sub-second edge delivery via Vite + Firebase.",
     tags: ["Canvas", "React", "TypeScript", "Vite", "Firebase"],
     image: "./ProjectImages/Indzita.png",
-    link: "https://indzita-biotech-007.web.app/#overview"
+    link: "https://indzitabio.web.app/"
   },
   {
     id: 14,
