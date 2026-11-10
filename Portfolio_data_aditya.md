@@ -172,7 +172,7 @@ npm run dev
 ### 10. GLIA — High-Throughput Event OS & PWA (IAN-2025)
 - **Category**: `Projects`
 - **Year**: `2025`
-- **Live URL**: [https://ian2025.in/](https://ian2025.in/)
+- **Live URL**: [https://glia-app-a6d84.web.app/](https://glia-app-a6d84.web.app/)
 - **Image Filename**: `GLIA.png`
 - **Tags**: `React`, `Firebase`, `PWA`, `Google Maps API`, `Service Workers`
 - **Description**: Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.
@@ -479,7 +479,7 @@ export const PROJECTS_DATA: Project[] = [
     description: "Mission-critical, offline-first Progressive Web Application (PWA) engineered to withstand high-concurrency event operations with zero downtime. Orchestrated 1.2M+ real-time Firebase Firestore reads, 2,275+ cryptographic QR food coupon validations, bi-directional reactive synchronization, and live multi-track venue logistics for international delegates from MIT, Cambridge, and RIKEN.",
     tags: ["React", "Firebase", "PWA", "Google Maps API"],
     image: "./ProjectImages/GLIA.png",
-    link: "https://ian2025.in/"
+    link: "https://glia-app-a6d84.web.app/"
   },
   {
     id: 15,
