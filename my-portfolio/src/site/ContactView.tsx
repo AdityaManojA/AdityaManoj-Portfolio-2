@@ -12,6 +12,7 @@ function CopyButton({ value }: { value: string }) {
     try {
       await navigator.clipboard.writeText(value);
       setLabel('Copied');
+      navigator.vibrate?.(8);
     } catch {
       setLabel('Press Ctrl+C');
     }

@@ -9,7 +9,7 @@
   color-scheme: dark;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 html, body {
   margin: 0;
@@ -41,8 +41,9 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .nav button:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
 
 /* Projects: screenshot cloud */
+/* Tall enough that only the intro line and a sliver of the first project row show below it. */
 .hero {
-  height: 78vh; min-height: 440px; position: relative; overflow: hidden;
+  height: calc(100vh - 124px); height: calc(100svh - 124px); min-height: 440px; position: relative; overflow: hidden;
   cursor: grab; touch-action: pan-y; user-select: none;
 }
 .hero:active { cursor: grabbing; }
@@ -54,13 +55,33 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .cd:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
 .hero-cap { position: absolute; left: 20px; bottom: 18px; font-size: 22px; pointer-events: none; }
 .hero-hint { position: absolute; right: 20px; bottom: 22px; font-size: 12px; pointer-events: none; }
+.for-touch { display: none; }
+@media (hover: none) {
+  .for-mouse { display: none; }
+  .for-touch { display: inline; }
+}
 .lead { text-align: center; padding: 26px 16px 30px; }
 .lead .sf { font-size: 17px; }
 
 /* Projects: grid */
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 8px; padding: 0 8px 90px; }
-.tile { display: block; }
-.tile .im { aspect-ratio: 16 / 10; background: #161618; overflow: hidden; }
+/* Tiles rise in when scrolled to (ProjectsView adds "in"). */
+.tile { display: block; opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.tile.in { opacity: 1; transform: none; }
+.tile .im { aspect-ratio: 16 / 10; background: #161618; overflow: hidden; position: relative; }
+/* The recorded scroll-through sits over the screenshot and fades in once it is playing. */
+.tile .im video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  opacity: 0; transition: opacity 0.35s ease; pointer-events: none;
+}
+.tile.playing .im video { opacity: 1; }
+/* One pulse on the tile a cloud card jumped to: the image swells and a ring flashes. */
+.tile.pulse .im { animation: tile-pulse 0.75s cubic-bezier(0.3, 0.7, 0.3, 1) 1; }
+@keyframes tile-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242, 241, 238, 0); }
+  35% { transform: scale(1.035); box-shadow: 0 0 0 1px rgba(242, 241, 238, 0.7), 0 0 44px 0 rgba(242, 241, 238, 0.14); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242, 241, 238, 0); }
+}
 .tile .im img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.5s ease; }
 .tile:hover .im img { transform: scale(1.025); }
 .tile-cap { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 9px 2px 0; }
@@ -71,7 +92,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .stage [data-b] { opacity: 0; }
 .stage.static [data-b] { opacity: 1; }
 .sec {
-  min-height: 100vh; position: relative; padding: 84px 20px 96px;
+  min-height: 100vh; min-height: 100svh; position: relative; padding: 84px 20px 96px;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 h1 { font-size: clamp(30px, 5.4vw, 68px); line-height: 1.04; text-align: center; }
@@ -138,7 +159,7 @@ h2 { font-size: clamp(40px, 8vw, 112px); line-height: 1; text-align: center; }
   padding: 3px 6px; border-radius: 3px 8px 8px 8px; white-space: nowrap;
 }
 .swarm-bar {
-  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 60;
+  position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 60;
   display: flex; align-items: center; gap: 9px; white-space: nowrap; font-size: 11px;
   background: rgba(26, 26, 28, 0.92); border: 1px solid var(--ln); border-radius: 999px;
   padding: 6px 8px 6px 12px; max-width: calc(100vw - 16px);
@@ -151,22 +172,61 @@ h2 { font-size: clamp(40px, 8vw, 112px); line-height: 1; text-align: center; }
 .swarm-bar button { all: unset; cursor: pointer; background: var(--ch-hi); border-radius: 999px; padding: 3px 9px; }
 .swarm-bar button:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
 
+/* Phones */
 @media (max-width: 720px) {
-  .grid { grid-template-columns: 1fr; }
-  .hero-hint { display: none; }
-  .cd { width: 120px; height: 75px; margin: -37px 0 0 -60px; }
-}
-@media (max-width: 640px) {
-  .ring { grid-template-columns: 1fr; text-align: center; }
-  .ring .l { text-align: center; }
-  .portrait { margin: 0 auto; grid-row: 1; }
-  .row { grid-template-columns: 1fr; gap: 2px; }
-  .nums { gap: 36px 20px; }
-  .crow { grid-template-columns: minmax(0, 1fr) auto; }
-  .crow > .mu { grid-column: 1 / -1; }
+  html, body { font-size: 14px; }
+  .nav { top: calc(10px + env(safe-area-inset-top, 0px)); gap: 5px; }
+  .nav button { padding: 6px 11px; font-size: 13px; border-radius: 7px; }
+
+  /* Landing: a tall cloud, the caption centred under it. */
+  .hero { height: calc(100svh - 150px); min-height: 420px; }
+  .cd { width: 124px; height: 78px; margin: -39px 0 0 -62px; }
+  .hero-cap { left: 0; right: 0; bottom: 34px; text-align: center; font-size: 21px; }
+  .hero-hint { left: 0; right: 0; bottom: 12px; text-align: center; }
+
+  /* One project per row, edge to edge. The tile in the middle of the screen is lit and
+     the rest sit back, so scrolling reads as moving a spotlight down the list. */
+  .grid { grid-template-columns: 1fr; gap: 30px; padding: 0 0 120px; }
+  .tile .im img { filter: brightness(0.5) saturate(0.7); transition: filter 0.45s ease, transform 0.5s ease; }
+  .tile.focus .im img { filter: none; }
+  .tile-cap { padding: 11px 14px 0; opacity: 0.55; transition: opacity 0.45s ease; }
+  .tile.focus .tile-cap { opacity: 1; }
+  .tile-cap .sf { font-size: 17px; }
+  .tile:hover .im img { transform: none; }
+
+  /* About: portrait on top, the four skill groups as a two-by-two around a centre line. */
+  .sec { padding: 78px 18px 104px; }
+  h1 { font-size: clamp(33px, 9.4vw, 44px); }
+  .ring { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 22px; margin-top: 34px; align-items: start; }
+  .portrait { grid-column: 1 / -1; grid-row: 1; margin: 0 auto; }
+  .ring .sf { font-size: 16px; }
+  .row { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 14px 0; }
+  .row > :first-child { grid-column: 1 / -1; color: var(--mu); font-size: 12px; }
+  .row .sf { font-size: 22px; line-height: 1.15; }
+  .nums { gap: 40px 18px; }
+  .nums .sf { font-size: clamp(40px, 12vw, 64px); }
+  .cta { padding: 12px 24px; font-size: 14px; }
+
+  /* Contact: label above a large tappable value. */
+  .crows { margin-top: 40px; }
+  .crow { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 18px 0; }
+  .crow > .mu { grid-column: 1 / -1; font-size: 12px; }
+  .crow a.sf { font-size: clamp(21px, 6.2vw, 30px); }
+  .crow button, .crow .open { padding: 8px 15px; font-size: 13px; }
+  .crow:hover a.sf { transform: none; }
+
+  .swarm-bar { font-size: 12px; padding: 7px 8px 7px 14px; }
   .swarm-bar .tr, .swarm-bar .dots { display: none; }
+  .swarm-bar button { padding: 5px 11px; }
+  .cu span { font-size: 9px; padding: 2px 5px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .swarm { display: none; }
-  .tile .im img, .crow a.sf { transition: none; }
+  .tile { opacity: 1; transform: none; transition: none; }
+  .tile .im img, .tile .im video, .tile-cap, .crow a.sf { transition: none; }
+  .tile.pulse .im { animation-name: tile-pulse-still; }
+  @keyframes tile-pulse-still {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(242, 241, 238, 0); }
+    35% { box-shadow: 0 0 0 1px rgba(242, 241, 238, 0.7); }
+  }
 }

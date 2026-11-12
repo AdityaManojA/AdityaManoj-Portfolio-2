@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  Cover image for the Prompt-Ops Blueprints project tile. It is a designed graphic, not a
+  screenshot, drawn in the portfolio's own language (near-black, Instrument Serif, the blue
+  selection frame, the coloured cursors).
+
+  Render it to public/ProjectImages/Promptops.png with:  bash scripts/render-covers.sh
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1600px; height: 1000px; overflow: hidden; background: #0a0a0b; color: #f2f1ee; font-family: Inter, system-ui, sans-serif; }
+  .sf { font-family: 'Instrument Serif', Georgia, serif; }
+  .mono { font-family: 'JetBrains Mono', Consolas, monospace; }
+
+  /* Drafting-paper grid: fine lines, a heavier one every fifth. */
+  .grid {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(242,241,238,.055) 1px, transparent 1px) 0 0 / 200px 200px,
+      linear-gradient(90deg, rgba(242,241,238,.055) 1px, transparent 1px) 0 0 / 200px 200px,
+      linear-gradient(rgba(242,241,238,.022) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(90deg, rgba(242,241,238,.022) 1px, transparent 1px) 0 0 / 40px 40px;
+  }
+
+  .title { position: absolute; left: 96px; top: 300px; }
+  .kicker { font-size: 21px; color: #8d8c88; margin-bottom: 30px; }
+  h1 { font-weight: 400; font-size: 128px; line-height: .96; letter-spacing: -.01em; }
+  h1 i { color: #8d8c88; }
+  .sub { margin-top: 38px; font-size: 23px; line-height: 1.5; color: #8d8c88; max-width: 520px; }
+
+  /* Three stacked sheets, the front one selected. */
+  .sheet {
+    position: absolute; width: 520px; height: 600px; background: #0f0f11;
+    border: 1px solid #2a2a2e; padding: 34px 36px;
+  }
+  .s1 { left: 1010px; top: 150px; opacity: .45; }
+  .s2 { left: 960px; top: 200px; opacity: .75; }
+  .s3 { left: 910px; top: 250px; }
+  .sheet .name { font-size: 19px; color: #8d8c88; display: flex; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid #232326; }
+  .sheet h2 { font-weight: 400; font-size: 46px; line-height: 1.05; margin: 30px 0 28px; }
+  .row { display: flex; align-items: center; gap: 16px; padding: 15px 0; border-bottom: 1px solid #1c1c1f; font-size: 19px; }
+  .row .mono { color: #f2f1ee; font-size: 18px; }
+  .row span:last-child { margin-left: auto; color: #8d8c88; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .flow { display: flex; align-items: center; gap: 12px; margin-top: 32px; font-size: 17px; color: #8d8c88; }
+  .flow b { font-weight: 400; color: #f2f1ee; border: 1px solid #2a2a2e; border-radius: 999px; padding: 7px 16px; }
+
+  .sel { position: absolute; left: 910px; top: 250px; width: 520px; height: 600px; border: 2px solid #4c9bf0; background: rgba(76,155,240,.05); }
+  .sel i { position: absolute; width: 11px; height: 11px; margin: -6px; background: #fff; border: 2px solid #4c9bf0; }
+  .badge { position: absolute; left: 50%; top: 100%; transform: translate(-50%, 10px); background: #4c9bf0; color: #fff; font-size: 17px; line-height: 1; padding: 5px 9px; border-radius: 5px; white-space: nowrap; }
+  .mk { position: absolute; font-size: 28px; line-height: 1; }
+  .cu { position: absolute; }
+  .cu span { position: absolute; left: 24px; top: 24px; font-size: 17px; line-height: 1; color: #0a0a0b; padding: 6px 11px; border-radius: 5px 14px 14px 14px; white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <div class="title">
+    <p class="kicker">Prompt-Ops Blueprints</p>
+    <h1 class="sf">Datasets,<br>drawn up <i>before</i><br>they're trained.</h1>
+    <p class="sub">Prompt templates, datasets, and fine-tuning recipes, kept as plans you can run.</p>
+  </div>
+
+  <div class="sheet s1"></div>
+  <div class="sheet s2"></div>
+  <div class="sheet s3">
+    <div class="name"><span>Blueprint</span><span class="mono">blueprint.yaml</span></div>
+    <h2 class="sf">From a prompt<br>to a trained model</h2>
+    <div class="row"><span class="dot" style="background:#5eead4"></span><span class="mono">prompt.md</span><span>Template</span></div>
+    <div class="row"><span class="dot" style="background:#ffb86b"></span><span class="mono">dataset.jsonl</span><span>Examples</span></div>
+    <div class="row"><span class="dot" style="background:#9b8cff"></span><span class="mono">finetune.yaml</span><span>Recipe</span></div>
+    <div class="row"><span class="dot" style="background:#f5e16b"></span><span class="mono">eval.md</span><span>Checks</span></div>
+    <div class="flow"><b>Draft</b>→<b>Build</b>→<b>Train</b>→<b>Review</b></div>
+  </div>
+
+  <div class="sel">
+    <i style="left:0;top:0"></i><i style="left:100%;top:0"></i><i style="left:0;top:100%"></i><i style="left:100%;top:100%"></i>
+    <span class="badge">520 × 600</span>
+  </div>
+
+  <span class="mk" style="left:880px;top:118px;color:#ff8fb1">+</span>
+  <span class="mk" style="left:1490px;top:196px;color:#7cc4ff">×</span>
+  <span class="mk" style="left:800px;top:880px;color:#f5e16b">×</span>
+
+  <div class="cu" style="left:1430px;top:850px">
+    <svg width="30" height="30" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#9b8cff" stroke="#0a0a0b" stroke-width="1"/></svg>
+    <span style="background:#9b8cff">Layout</span>
+  </div>
+  <div class="cu" style="left:1262px;top:388px">
+    <svg width="30" height="30" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#5eead4" stroke="#0a0a0b" stroke-width="1"/></svg>
+    <span style="background:#5eead4">Type</span>
+  </div>
+  <div class="cu" style="left:640px;top:820px">
+    <svg width="30" height="30" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#f5e16b" stroke="#0a0a0b" stroke-width="1"/></svg>
+    <span style="background:#f5e16b">Review</span>
+  </div>
+</body>
+</html>

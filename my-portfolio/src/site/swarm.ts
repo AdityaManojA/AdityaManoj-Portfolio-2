@@ -96,7 +96,6 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
 
   const layers: Layer[] = [];
   const sections: Section[] = [];
-  const sectionOf = new Map<Element, Section>();
   let index = 0;
 
   for (const sectionEl of sectionEls) {
@@ -148,10 +147,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
       layers.push(layer);
       index++;
     }
-    if (section.layers.length) {
-      sections.push(section);
-      sectionOf.set(section.layers[0].el, section);
-    }
+    if (section.layers.length) sections.push(section);
   }
 
   const cursors: Cursor[] = AGENTS.map(([name, color], j) => {
@@ -191,21 +187,13 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
         // Hold the box open so the page does not reflow while the text is typed in.
         layer.el.style.minHeight = `${layer.h}px`;
         setTyped(layer, 0);
-        layer.el.style.opacity = '1';
       }
     });
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        const section = sectionOf.get(entry.target);
-        if (entry.isIntersecting && section) startSection(section);
-      }
-    },
-    { rootMargin: '0px 0px -22% 0px' },
-  );
-
+  // Sections are started from the frame loop (see below) rather than an IntersectionObserver:
+  // with only a handful of sections the check is cheap, and it cannot miss a callback.
+  let armed = false;
   let armTimer = 0;
   function arm() {
     // Wait for the page loader to clear, or the first section would build unseen behind it.
@@ -213,7 +201,16 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
       armTimer = window.setTimeout(arm, 120);
       return;
     }
-    for (const section of sections) observer.observe(section.layers[0].el);
+    armed = true;
+  }
+
+  function startVisibleSections() {
+    const line = window.innerHeight * 0.78;
+    for (const section of sections) {
+      if (section.started) continue;
+      const r = section.layers[0].el.getBoundingClientRect();
+      if (r.top < line && r.bottom > 0) startSection(section);
+    }
   }
 
   function restore(layer: Layer) {
@@ -229,7 +226,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
 
   function replay() {
     window.clearTimeout(armTimer);
-    observer.disconnect();
+    armed = false;
     for (const section of sections) section.started = false;
     layers.forEach(restore);
     window.scrollTo(0, 0);
@@ -240,6 +237,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
   let raf = 0;
 
   function frame() {
+    if (armed) startVisibleSections();
     const now = performance.now() / 1000;
     const base = root.getBoundingClientRect();
     const targets: ([number, number] | null)[] = cursors.map(() => null);
@@ -287,6 +285,9 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
       layer.mark.style.opacity = u < 0 && now > layer.markAt ? '1' : '0';
 
       if (layer.typed) {
+        // Stay hidden until this layer's own frame starts, so borders and buttons inside it
+        // do not appear ahead of the cursor that builds them.
+        layer.el.style.opacity = u >= 0 ? '1' : '0';
         const count = Math.round(progress * layer.total);
         if (count !== layer.shown) setTyped(layer, count);
       } else {
@@ -341,7 +342,11 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
 
     const total = layers.length;
     const state = done < started ? 'Building' : done < total ? 'Scroll to keep building' : 'Built';
-    ui.status.textContent = `${AGENTS.length} agents · ${done} of ${total} layers · ${state}`;
+    // A phone has no room for the long form.
+    ui.status.textContent =
+      window.innerWidth < 720
+        ? `${done}/${total} · ${done < started ? 'Building' : done < total ? 'Scroll for more' : 'Built'}`
+        : `${AGENTS.length} agents · ${done} of ${total} layers · ${state}`;
     ui.progress.style.width = `${total ? Math.round((done / total) * 100) : 100}%`;
 
     raf = requestAnimationFrame(frame);
@@ -355,7 +360,6 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
     destroy() {
       cancelAnimationFrame(raf);
       window.clearTimeout(armTimer);
-      observer.disconnect();
       for (const layer of layers) {
         restore(layer);
         layer.frame.remove();

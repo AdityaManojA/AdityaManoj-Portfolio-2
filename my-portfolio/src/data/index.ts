@@ -65,7 +65,7 @@ export const PROJECTS_DATA: Project[] = [
     description: "An artisanal coffee and cookie brand web platform featuring an extensive digital customer loyalty program, interactive menu showcases, and seamless reward redemption for visitors at Sobha City Mall, Thrissur.",
     tags: ["React", "Tailwind CSS", "AWS", "GCP", "Framer"],
     image: "./ProjectImages/Whisky.png",
-    link: "https://thewhiskeybusiness-3e639.web.app/"
+    link: "https://thewhiskybusiness.in/"
   },
   {
     id: 22,
@@ -98,16 +98,6 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://sbafa-ft.web.app/landing"
   },
   {
-    id: 9,
-    title: "Travel Animator",
-    category: "Projects",
-    year: "2025",
-    description: "Developed at Lascade for over 1,000,000+ creators and travelers. Built intuitive 3D route animation pipelines, interactive map plotting, custom 3D vehicle assets, and HD/4K video export across iOS and Android.",
-    tags: ["Android", "iOS", "React Native", "Google Maps API"],
-    image: "./ProjectImages/Travel.png",
-    link: "https://travelanimator.com/"
-  },
-  {
     id: 16,
     title: "ALFRED — MARK-VIII (Wayne Protocol Edition)",
     category: "Projects",
@@ -128,16 +118,6 @@ export const PROJECTS_DATA: Project[] = [
     link: "https://glia-app-a6d84.web.app/"
   },
   {
-    id: 15,
-    title: "Rochas Cafe",
-    category: "Website Designs",
-    year: "2025",
-    description: "Artisanal specialty coffee & patisserie web showcase. Engineered with responsive layout architecture, dynamic product carousels, smooth interactive navigation, fluid aesthetic styling, and high-performance CDN deployment.",
-    tags: ["React", "JavaScript", "CSS3", "HTML5"],
-    image: "./ProjectImages/Rochas.png",
-    link: "https://rochascafe.netlify.app/#"
-  },
-  {
     id: 100,
     title: "The DevOps, SRE & Cloud Infrastructure Handbook",
     category: "Projects",
@@ -155,7 +135,7 @@ export const PROJECTS_DATA: Project[] = [
     year: "2026",
     description: "Comprehensive repository of daily-trained AI datasets, fine-tuning blueprints, and token-optimized pipelines ready for immediate zero-shot, few-shot, and fine-tuning workloads across open-source and proprietary foundation models.",
     tags: ["Python", "PyTorch", "AI Acceleration", "GitHub Actions"],
-    image: "./ProjectImages/promptops-graphic.svg",
+    image: "./ProjectImages/Promptops.png",
     link: "https://github.com/AdityaManojA/prompt-ops-blueprints"
   },
   {
@@ -177,36 +157,6 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["JavaScript", "HTML", "Tailwind CSS", "Netlify"],
     image: "./ProjectImages/CsvtoJson.png",
     link: "https://csv-to-jsonconv.netlify.app/"
-  },
-  {
-    id: 3,
-    title: "Meat Spoilage Detection",
-    category: "CS Projects",
-    year: "2024",
-    description: "A hardware-based, no-contact meat spoilage detection system that uses IoT sensors to assess whether meat has spoiled.",
-    tags: ["IoT", "Hardware", "C++", "Sensors"],
-    image: "./ProjectImages/Meat.jpeg",
-    link: "https://github.com/AdityaManojA/Meat-Spoilage-detection-IOT"
-  },
-  {
-    id: 4,
-    title: "Flashcard Learning Pal",
-    category: "Website Designs",
-    year: "2023",
-    description: "A web-based interactive learning tool designed to help students memorize concepts effectively.",
-    tags: ["JavaScript", "HTML", "CSS"],
-    image: "./ProjectImages/Flashcard.png",
-    link: "https://github.com/AdityaManojA/Flashcard-Learning-Pal"
-  },
-  {
-    id: 6,
-    title: "8-Bit-O-Matic",
-    category: "CS Projects",
-    year: "2024",
-    description: "A pixel art creator that transforms uploaded images into retro 8-bit style masterpieces. Supports both 16-color and black & white pixelation modes.",
-    tags: ["Python", "Flask", "HTML5", "CSS"],
-    image: "./ProjectImages/8bit.png",
-    link: "https://eight-bit-o-matic.onrender.com/"
   }
 ];
 
