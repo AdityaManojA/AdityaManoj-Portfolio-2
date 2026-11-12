@@ -4,107 +4,66 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/Aditya.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0b" />
     <title>Aditya Manoj — Full-Stack Developer & Systems Engineer</title>
     <meta name="description" content="Portfolio of Aditya Manoj — Full-Stack Developer & Systems Engineer specializing in modern web applications, high-throughput PWAs, interactive 3D UI, and cloud-native systems." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <style>
-      /* Percentage loader. Self-contained so it paints before the app bundle; colours mirror
-         the site's paper/vermilion and graphite/amber themes. */
+      /* Page loader. Self-contained so it paints before the app bundle arrives. */
+      html { background: #0a0a0b; }
       #page-loader {
-        --bg: #F3EEE4;
-        --fg: #1A1916;
-        --muted: #5F5B53;
-        --accent: #C2410C;
-        --track: #DDD5C7;
         position: fixed;
         inset: 0;
         z-index: 2000;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 1.25rem;
-        background: var(--bg);
-        color: var(--fg);
-        font-family: "Montserrat", "Segoe UI", system-ui, sans-serif;
-        transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
-      }
-      html.loader-dark #page-loader {
-        --bg: #0E0E10;
-        --fg: #FAFAF9;
-        --muted: #A1A1AA;
-        --accent: #F5B544;
-        --track: #27272A;
+        background: #0a0a0b;
+        color: #f2f1ee;
+        font: 500 13px Inter, system-ui, sans-serif;
+        transition: opacity 0.45s ease;
       }
       .pl-count {
-        font-size: clamp(4rem, 14vw, 9rem);
-        font-weight: 700;
-        letter-spacing: -0.05em;
-        line-height: 1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 22px;
+        text-align: center;
+        font: 400 16px 'Instrument Serif', Georgia, serif;
         font-variant-numeric: tabular-nums;
       }
-      .pl-count span { color: var(--accent); }
-      .pl-label {
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .pl-track {
-        position: relative;
-        width: min(320px, 70vw);
-        height: 2px;
-        background: var(--track);
-      }
-      .pl-fill {
-        position: absolute;
-        inset: 0;
-        background: var(--accent);
-        transform-origin: left;
-        transform: scaleX(0);
-      }
-      #page-loader.pl-done {
-        opacity: 0;
-        transform: translateY(-2%);
-        pointer-events: none;
-      }
+      #page-loader.pl-done { opacity: 0; pointer-events: none; }
       html.loader-active body { overflow: hidden; }
     </style>
     <script>
-      var loaderDark = true;
-      try {
-        loaderDark = localStorage.getItem('theme-preference') !== 'light';
-      } catch (e) {}
-      if (loaderDark) document.documentElement.classList.add('loader-dark');
       document.documentElement.classList.add('loader-active');
     </script>
   </head>
   <body>
     <div id="page-loader" role="progressbar" aria-label="Loading portfolio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-      <div class="pl-count"><b id="pl-num">0</b><span>%</span></div>
-      <div class="pl-track"><div class="pl-fill" id="pl-fill"></div></div>
-      <div class="pl-label">Loading portfolio</div>
+      <span>AM .Dev</span>
+      <div class="pl-count" id="pl-num">000</div>
     </div>
     <script>
-      // Counts 0 → 100 over 3.5 s from navigation start, then reveals the landing page as soon
-      // as the app has rendered into #root.
+      // Counts 000 → 100 from navigation start, then reveals the page once the app has
+      // rendered into #root.
       (function () {
-        var DURATION = 3500;
+        var DURATION = 1400;
         var loader = document.getElementById('page-loader');
         var num = document.getElementById('pl-num');
-        var fill = document.getElementById('pl-fill');
         function finish() {
           var root = document.getElementById('root'); // declared after this script
           if (!root || !root.firstChild) return setTimeout(finish, 50);
           loader.classList.add('pl-done');
-          document.documentElement.classList.remove('loader-active', 'loader-dark');
-          setTimeout(function () { loader.remove(); }, 650);
+          document.documentElement.classList.remove('loader-active');
+          setTimeout(function () { loader.remove(); }, 500);
         }
         function tick() {
           var p = Math.min(1, performance.now() / DURATION);
           var pct = Math.round(p * 100);
-          num.textContent = pct;
-          fill.style.transform = 'scaleX(' + p + ')';
+          num.textContent = ('00' + pct).slice(-3);
           loader.setAttribute('aria-valuenow', pct);
           // A timer, not requestAnimationFrame: rAF stops in background tabs and would hold the
           // loader until the tab is shown.

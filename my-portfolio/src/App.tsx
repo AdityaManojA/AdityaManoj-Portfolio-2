@@ -1,98 +1,69 @@
-import { useState, useEffect } from 'react';
-import './App.css';
-import './drift-car.css';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import About from './components/About';
-import Contact from './components/Contact';
-import Gallery from './components/Gallery';
-import Timeline from './components/Timeline';
-import Services from './components/Services';
-import { DetailedFooter, SimpleFooter } from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
-import { HandbookModal } from './components/HandbookModal';
-import DriftGarage from './components/DriftGarage';
-import useUiSounds from './hooks/useUiSounds';
+import { useCallback, useEffect, useState } from 'react';
+import ProjectsView from './site/ProjectsView';
+import AboutView from './site/AboutView';
+import ContactView from './site/ContactView';
+
+type View = 'projects' | 'about' | 'contact';
+
+const VIEWS: { id: View; label: string }[] = [
+  { id: 'projects', label: 'Projects' },
+  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' },
+];
+
+// The view lives in the URL hash so each page can be linked to and Back works.
+function viewFromHash(): View {
+  const hash = window.location.hash.slice(1);
+  return hash === 'about' || hash === 'contact' ? hash : 'projects';
+}
 
 export default function App() {
-  useUiSounds();
-  const [activeTab, setActiveTab] = useState('Home');
-  const [isHandbookOpen, setIsHandbookOpen] = useState(false);
-  const [handbookTab, setHandbookTab] = useState<'foundations' | 'deepdives'>('foundations');
-  const [handbookQId, setHandbookQId] = useState<number | undefined>(undefined);
+  const [view, setView] = useState<View>(viewFromHash);
 
-  // Reset scroll to top on every tab navigation
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, [activeTab]);
+    // Pages build from the top, so a reload should start there rather than mid-page.
+    window.history.scrollRestoration = 'manual';
+    const sync = () => setView(viewFromHash());
+    window.addEventListener('popstate', sync);
+    window.addEventListener('hashchange', sync);
+    return () => {
+      window.removeEventListener('popstate', sync);
+      window.removeEventListener('hashchange', sync);
+    };
+  }, []);
 
-  const handleOpenHandbook = (tab: 'foundations' | 'deepdives' = 'foundations', qId?: number) => {
-    setHandbookTab(tab);
-    setHandbookQId(qId);
-    setIsHandbookOpen(true);
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
 
-  const handleNavigateTab = (tab: string) => {
-    setActiveTab(tab);
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  };
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'Projects':
-        return <Projects onOpenHandbook={() => handleOpenHandbook('foundations')} />;
-      case 'Gallery':
-        return <Gallery />;
-      case 'Timeline':
-        return <Timeline />;
-      case 'Services':
-        return <Services />;
-      case 'Skills':
-        return <Skills />;
-      case 'About':
-        return <About />;
-      case 'Contact':
-        return <Contact />;
-      case 'Home':
-      default:
-        return (
-          <Hero 
-            onOpenHandbook={() => handleOpenHandbook('foundations')} 
-            onNavigateTab={handleNavigateTab}
-          />
-        );
-    }
-  };
+  const go = useCallback((next: View) => {
+    const url = next === 'projects' ? window.location.pathname : `#${next}`;
+    window.history.pushState(null, '', url);
+    setView(next);
+  }, []);
 
   return (
-    <div className="app-container">
-      <DriftGarage />
-      <Header
-        activeTab={activeTab}
-        setActiveTab={handleNavigateTab}
-        onOpenHandbook={() => handleOpenHandbook('foundations')}
-      />
+    <>
+      <nav className="nav" aria-label="Main">
+        <button type="button" className="brand" onClick={() => go('projects')}>
+          AM .Dev
+        </button>
+        {VIEWS.map((v, i) => (
+          <button
+            key={v.id}
+            type="button"
+            className={view === v.id ? 'on' : undefined}
+            aria-current={view === v.id ? 'page' : undefined}
+            onClick={() => go(v.id)}
+          >
+            {v.label} <sup>{i + 1}</sup>
+          </button>
+        ))}
+      </nav>
 
-      <main className="main-content">
-        {renderContent()}
-      </main>
-
-      {activeTab === 'Home' ? <DetailedFooter /> : <SimpleFooter />}
-      
-      <ScrollToTop />
-
-      <HandbookModal
-        isOpen={isHandbookOpen}
-        onClose={() => setIsHandbookOpen(false)}
-        initialTab={handbookTab}
-        initialQuestionId={handbookQId}
-      />
-    </div>
+      {view === 'projects' && <ProjectsView />}
+      {view === 'about' && <AboutView onContact={() => go('contact')} />}
+      {view === 'contact' && <ContactView />}
+    </>
   );
 }
