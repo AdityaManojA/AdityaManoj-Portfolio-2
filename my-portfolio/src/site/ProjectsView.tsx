@@ -274,11 +274,14 @@ export default function ProjectsView() {
   return (
     <main>
       <div className="hero" ref={hero}>
-        <div ref={cloud}>
+        {/* The cloud repeats the project list below it, so it is hidden from assistive tech
+            and skipped by the Tab key: keyboard users go straight from the nav to the list. */}
+        <div ref={cloud} aria-hidden="true">
           {CLOUD.map((p) => (
             <button
               key={p.id}
               type="button"
+              tabIndex={-1}
               className="cd"
               aria-label={`Jump to ${shortName(p)}`}
               style={{ backgroundImage: `url("${webImage(p.image, 'sm')}")` }}

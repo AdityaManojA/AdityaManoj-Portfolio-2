@@ -145,6 +145,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .crow button:hover, .crow .open:hover { background: var(--ch-hi); }
 .crow button:focus-visible, .crow .open:focus-visible, .cta:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
 .where { margin-top: 30px; font-size: 12px; }
+.where a { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Swarm chrome: selection frames, markers, cursors, status pill */
 .sel { position: absolute; border: 1px solid var(--sel); background: rgba(76, 155, 240, 0.08); pointer-events: none; opacity: 0; z-index: 30; }
@@ -192,8 +193,8 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   .grid { grid-template-columns: 1fr; gap: 30px; padding: 0 0 120px; }
   .tile .im img { filter: brightness(0.5) saturate(0.7); transition: filter 0.45s ease, transform 0.5s ease; }
   .tile.focus .im img { filter: none; }
-  /* The caption only dims a little: at 0.85 its grey year text still passes AA contrast. */
-  .tile-cap { padding: 11px 14px 0; opacity: 0.85; transition: opacity 0.45s ease; }
+  /* The caption only dims a little: at 0.9 its grey year text still passes AA contrast (5:1). */
+  .tile-cap { padding: 11px 14px 0; opacity: 0.9; transition: opacity 0.45s ease; }
   .tile.focus .tile-cap { opacity: 1; }
   .tile-cap .sf { font-size: 17px; }
   .tile:hover .im img { transform: none; }

@@ -65,7 +65,7 @@ export default function ContactView() {
             </div>
           </div>
           <p className="where mu" data-b="fade">
-            Based in Bengaluru, India
+            Based in Bengaluru, India · <a href="/privacy.html">Privacy</a>
           </p>
         </section>
       </SwarmStage>
