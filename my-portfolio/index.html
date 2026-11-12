@@ -5,50 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/Aditya.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0a0a0b" />
-    <title>Aditya Manoj | Full-Stack Developer and Systems Engineer</title>
-    <meta name="description" content="Aditya Manoj is a full-stack developer and systems engineer in Bengaluru building offline-first web apps, 3D interfaces, and on-device AI agents." />
-    <meta name="author" content="Aditya Manoj" />
-    <link rel="canonical" href="https://adityaaa.web.app/" />
-
-    <!-- Link previews (WhatsApp, LinkedIn, X, Slack). The image is rendered by scripts/render-covers.sh. -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Aditya Manoj" />
-    <meta property="og:url" content="https://adityaaa.web.app/" />
-    <meta property="og:title" content="Aditya Manoj | Full-Stack Developer and Systems Engineer" />
-    <meta property="og:description" content="Offline-first web apps, 3D interfaces, and on-device AI agents, built from first idea to production." />
-    <meta property="og:image" content="https://adityaaa.web.app/og.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Aditya Manoj, full-stack developer and systems engineer" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Aditya Manoj | Full-Stack Developer and Systems Engineer" />
-    <meta name="twitter:description" content="Offline-first web apps, 3D interfaces, and on-device AI agents, built from first idea to production." />
-    <meta name="twitter:image" content="https://adityaaa.web.app/og.png" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "dateModified": "2026-11-13",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Aditya Manoj",
-          "jobTitle": "Full-Stack Developer and Systems Engineer",
-          "description": "Full-stack developer and systems engineer building offline-first web apps, 3D interfaces, and on-device AI agents.",
-          "url": "https://adityaaa.web.app/",
-          "image": "https://adityaaa.web.app/og.png",
-          "email": "mailto:aditya.dev.org@gmail.com",
-          "telephone": "+919947527296",
-          "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
-          "knowsAbout": ["React", "Next.js", "TypeScript", "Progressive web apps", "Firebase", "FastAPI", "Kubernetes", "AI agents"],
-          "sameAs": ["https://github.com/AdityaManojA", "https://www.linkedin.com/in/aditya-manoj-a-0a930b256/"]
-        }
-      }
-    </script>
+    <!-- Title, description, canonical URL, share tags and JSON-LD are written here per page
+         at build time by the search-pages plugin in vite.config.ts. -->
+    <!--seo:head-->
 
     <!-- Fonts are served from this site (public/fonts), not a font service, so no visitor
-         data goes to a third party. The serif is preloaded because the loader uses it. -->
-    <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin />
+         data goes to a third party. Inter 500 is preloaded because the loader uses it. -->
+    <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-400.woff2') format('woff2'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/inter-400.woff2') format('woff2'); }
@@ -71,7 +34,9 @@
       }
       .pl-name {
         position: relative;
-        font: 400 clamp(44px, 12vw, 104px) / 1 'Instrument Serif', Georgia, serif;
+        /* The nav's typeface, so the name reads as the same voice as "AM .Dev". */
+        font: 500 clamp(30px, 8.6vw, 76px) / 1 Inter, system-ui, sans-serif;
+        letter-spacing: -0.035em;
         white-space: nowrap;
         min-height: 1em;
         transition: transform 0.6s cubic-bezier(0.6, 0, 0.2, 1), opacity 0.5s ease 0.1s;

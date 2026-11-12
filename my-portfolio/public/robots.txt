@@ -1,5 +1,42 @@
-# Everything on this site is public and may be crawled, including by AI search crawlers.
+# Everything on this site is public. Search engines and AI assistants are welcome to read,
+# index and cite it. The AI crawlers are named so their access is explicit, not implied.
+
 User-agent: *
+Allow: /
+
+# AI search and answer engines
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# AI training crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://adityaaa.web.app/sitemap.xml

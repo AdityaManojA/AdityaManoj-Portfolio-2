@@ -1,8 +1,12 @@
-// Records a short scrolling preview video of each live project site.
+// Records a short scrolling preview video of each live project site, and the screenshot
+// that the video plays over.
 //
-// For every entry in SITES it opens the page in headless Edge/Chrome, scrolls it slowly
-// from the top, saves one screenshot per frame, and encodes the frames with ffmpeg to
-// public/ProjectImages/previews/<name>.mp4 (960px wide, silent, a few hundred KB).
+// For every entry in SITES it opens the page in headless Edge/Chrome and:
+//   1. saves the page as it first appears to public/ProjectImages/<name>.png (2560 × 1600);
+//   2. scrolls slowly from the top, saving one frame per step, and encodes the frames with
+//      ffmpeg to public/ProjectImages/previews/<name>.mp4 (960px wide, silent).
+// The screenshot and the video's first frame are the same capture, so when a tile starts
+// playing nothing jumps or rescales. Run scripts/optimize-images.sh afterwards.
 //
 //   node scripts/capture-previews.mjs            record every site
 //   node scripts/capture-previews.mjs GLIA Levern  record only these
@@ -41,7 +45,8 @@ const MAX_SCROLL = 2600; // px; long pages are not scrolled to the very end
 const PORT = 9333;
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const outDir = join(root, 'public', 'ProjectImages', 'previews');
+const imageDir = join(root, 'public', 'ProjectImages');
+const outDir = join(imageDir, 'previews');
 const work = join(tmpdir(), 'portfolio-previews');
 
 const browser =
@@ -128,6 +133,12 @@ async function record(page, name, url, options = {}) {
   })()`);
   const distance = Math.max(0, Math.min(scrollable, MAX_SCROLL));
 
+  // The tile's screenshot: the exact state the video starts from.
+  await evaluate('window.__previewScroller.scrollTop = 0');
+  await sleep(300);
+  const poster = await page.send('Page.captureScreenshot', { format: 'png' });
+  writeFileSync(join(imageDir, `${name}.png`), Buffer.from(poster.data, 'base64'));
+
   const total = HOLD_START + SCROLL + HOLD_END;
   for (let i = 0; i < total; i++) {
     const t = Math.min(1, Math.max(0, (i - HOLD_START) / SCROLL));
@@ -146,7 +157,7 @@ async function record(page, name, url, options = {}) {
     { stdio: 'inherit' },
   );
   if (ff.status !== 0) throw new Error(`ffmpeg failed for ${name}`);
-  console.log(`${name}: scrolled ${distance}px -> ${out}`);
+  console.log(`${name}: screenshot + ${distance}px scroll -> ${name}.png, previews/${name}.mp4`);
 }
 
 const only = process.argv.slice(2);
@@ -176,7 +187,8 @@ try {
   const page = await connect(target.webSocketDebuggerUrl);
   await page.send('Page.enable');
   await page.send('Emulation.setDeviceMetricsOverride', {
-    width: WIDTH, height: HEIGHT, deviceScaleFactor: 1, mobile: false,
+    // 2x: sharp enough for the screenshot. ffmpeg scales the frames down for the video.
+    width: WIDTH, height: HEIGHT, deviceScaleFactor: 2, mobile: false,
   });
   for (const [name, url, options] of sites) {
     try {

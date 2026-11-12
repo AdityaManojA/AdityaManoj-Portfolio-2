@@ -29,7 +29,7 @@ const baseName = (path: string) => path.slice(path.lastIndexOf('/') + 1).replace
 
 function webImage(path: string, size: 'sm' | 'full') {
   if (path.endsWith('.svg')) return path;
-  return `./ProjectImages/web/${encodeURIComponent(baseName(path))}${size === 'sm' ? '-sm' : ''}.webp`;
+  return `/ProjectImages/web/${encodeURIComponent(baseName(path))}${size === 'sm' ? '-sm' : ''}.webp`;
 }
 
 // Sites with a recorded scroll-through (scripts/capture-previews.mjs), keyed by the
@@ -37,7 +37,7 @@ function webImage(path: string, size: 'sm' | 'full') {
 // while the tile is the one in focus.
 const PREVIEWS = new Set(['Threadpath', 'Whisky', 'Pixel Spaces', 'Indzita', 'SBAFA', 'CsvtoJson']);
 const previewVideo = (path: string) =>
-  PREVIEWS.has(baseName(path)) ? `./ProjectImages/previews/${encodeURIComponent(baseName(path))}.mp4` : null;
+  PREVIEWS.has(baseName(path)) ? `/ProjectImages/previews/${encodeURIComponent(baseName(path))}.mp4` : null;
 
 function playPreview(tile: Element) {
   const video = tile.querySelector('video');

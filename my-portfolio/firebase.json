@@ -8,6 +8,8 @@
         "**/.*",
         "**/node_modules/**"
       ],
+      "cleanUrls": true,
+      "trailingSlash": false,
       "headers": [
         {
           "source": "**",
@@ -45,6 +47,15 @@
         },
         {
           "source": "**/*.html",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        },
+        {
+          "source": "/@(about|contact|privacy)",
           "headers": [
             {
               "key": "Cache-Control",
@@ -95,6 +106,8 @@
         "**/.*",
         "**/node_modules/**"
       ],
+      "cleanUrls": true,
+      "trailingSlash": false,
       "headers": [
         {
           "source": "**",
@@ -132,6 +145,15 @@
         },
         {
           "source": "**/*.html",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        },
+        {
+          "source": "/@(about|contact|privacy)",
           "headers": [
             {
               "key": "Cache-Control",

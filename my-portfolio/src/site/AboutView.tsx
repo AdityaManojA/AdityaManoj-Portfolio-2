@@ -53,7 +53,7 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
               <Skill title="Backend" lines={['FastAPI and Node.js', 'Firestore, PostgreSQL', 'Offline sync']} />
             </div>
             {/* The portrait is tall; the 1:1 box with top alignment keeps only its upper half. */}
-            <img className="portrait" src="./ProjectImages/pfp.jpg" alt="Portrait of Aditya" data-b="fade" />
+            <img className="portrait" src="/ProjectImages/web/pfp.webp" width="440" height="778" alt="Portrait of Aditya Manoj" data-b="fade" />
             <div className="col">
               <Skill title="AI agents" lines={['Live voice and vision', 'Local models', 'On-device OCR']} />
               <Skill title="Infrastructure" lines={['Linux internals', 'Kubernetes', 'Observability']} />

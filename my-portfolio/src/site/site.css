@@ -35,13 +35,13 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   display: flex; justify-content: center; align-items: center; gap: 6px;
   pointer-events: none;
 }
-/* The bar itself lets clicks through to the page; "all: unset" would make the buttons
+/* The bar itself lets clicks through to the page; "all: unset" would make the links
    inherit that, so they opt back in explicitly. */
-.nav button { all: unset; pointer-events: auto; cursor: pointer; background: var(--ch); border-radius: 5px; padding: 3px 9px; font-size: 12px; }
-.nav button.on { background: var(--ch-hi); }
+.nav a { all: unset; pointer-events: auto; cursor: pointer; background: var(--ch); border-radius: 5px; padding: 3px 9px; font-size: 12px; }
+.nav a.on { background: var(--ch-hi); }
 /* The brand keeps a chip too, so it stays readable when it scrolls over a screenshot. */
-.nav button.brand { font-weight: 500; margin-right: 4px; }
-.nav button:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+.nav a.brand { font-weight: 500; margin-right: 4px; }
+.nav a:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
 
 /* Projects: screenshot cloud */
 /* Tall enough that only the intro line and a sliver of the first project row show below it. */
@@ -110,8 +110,9 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .ring h4 { font-size: 13px; font-weight: 500; margin-bottom: 7px; }
 .ring .sf { font-size: 17px; line-height: 1.3; }
 .portrait {
-  /* pfp.jpg is 440 × 778; at this width its upper half is 150px tall. */
-  width: 170px; height: 150px; object-fit: cover; object-position: top;
+  /* pfp.jpg is 440 × 778, so at this width it is 300px tall and the box shows half of it.
+     17% starts the crop just above the hair, trading empty space for shoulders. */
+  width: 170px; height: 150px; object-fit: cover; object-position: center 17%;
   display: block; filter: grayscale(1) contrast(1.05);
 }
 .more { margin-top: 40px; font-size: 12px; }
@@ -180,7 +181,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 @media (max-width: 720px) {
   html, body { font-size: 14px; }
   .nav { top: calc(10px + env(safe-area-inset-top, 0px)); gap: 5px; }
-  .nav button { padding: 6px 11px; font-size: 13px; border-radius: 7px; }
+  .nav a { padding: 6px 11px; font-size: 13px; border-radius: 7px; }
 
   /* Landing: a tall cloud, the caption centred under it. */
   .hero { height: calc(100svh - 150px); min-height: 420px; }
