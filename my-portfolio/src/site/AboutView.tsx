@@ -36,10 +36,11 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
     <main>
       <SwarmStage>
         <section className="sec">
-          <h1 className="sf" data-b="type">
-            Turning rough ideas into
+          {/* The spaces before each <br /> keep the words apart for screen readers and crawlers. */}
+          <h1 className="sf headline" data-b="type">
+            Turning rough ideas into{' '}
             <br />
-            fast, stubborn systems
+            fast, stubborn systems{' '}
             <br />
             that hold under load.
           </h1>
@@ -64,9 +65,9 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
         </section>
 
         <section className="sec">
-          <p className="k mu" data-b="type">
+          <h2 className="k mu" data-b="type">
             Experience
-          </p>
+          </h2>
           <div className="rows">
             {EXPERIENCE.map(([role, company, year]) => (
               <div className="row" data-b="type" key={company}>
@@ -79,9 +80,9 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
         </section>
 
         <section className="sec">
-          <p className="k mu" data-b="type">
+          <h2 className="k mu" data-b="type">
             In numbers
-          </p>
+          </h2>
           <div className="nums">
             {NUMBERS.map(([value, label]) => (
               <div data-b="type" key={label}>

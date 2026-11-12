@@ -1,0 +1,5 @@
+# Everything on this site is public and may be crawled, including by AI search crawlers.
+User-agent: *
+Allow: /
+
+Sitemap: https://adityaaa.web.app/sitemap.xml

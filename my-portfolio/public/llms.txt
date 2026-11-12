@@ -1,0 +1,24 @@
+# Aditya Manoj
+
+> Portfolio of Aditya Manoj, a full-stack developer and systems engineer based in Bengaluru, India. He builds offline-first progressive web apps, canvas and 3D interfaces, and on-device AI agents.
+
+The site is a single page with three views: Projects (the landing page), About, and Contact.
+
+## Selected work
+
+- [ThreadPath Collective](https://threadpathcollective.ca/): e-commerce storefront for a Canadian streetwear brand.
+- [The Whisky Business](https://thewhiskybusiness.in/): website and loyalty programme for a cookies and coffee café in Thrissur.
+- [Pixel Spaces](https://pixelspaces.web.app/): site for an architectural visualisation and interior design studio.
+- [IndZita Biotech](https://indzitabio.web.app/): 3D molecular visualisation and an interactive PCR lab simulation.
+- [Levern](https://getlevern.web.app/): a to-do list that works like a game, built mobile-first as a PWA.
+- [TerraCove](https://terracove.web.app/): an all-in-one workspace for freelancers and small studios.
+- [GLIA](https://glia-app-a6d84.web.app/): offline-first event app for an international neuroscience conference; handled more than 1.2 million Firestore reads.
+- [ALFRED](https://github.com/AdityaManojA/ALFRED-MK): a desktop AI assistant with live voice, vision, and system control.
+- [SBAFA Financial Enclave](https://sbafa-ft.web.app/landing): an offline-first personal finance PWA.
+- [Prompt-Ops Blueprints](https://github.com/AdityaManojA/prompt-ops-blueprints): datasets and fine-tuning recipes.
+
+## Contact
+
+- Email: aditya.dev.org@gmail.com
+- Phone: +91 99475 27296
+- GitHub: https://github.com/AdityaManojA

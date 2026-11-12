@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local check artefacts (screenshots, saved pages, reports)
+proof

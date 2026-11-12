@@ -114,6 +114,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
 
       const frame = document.createElement('div');
       frame.className = 'sel';
+      frame.setAttribute('aria-hidden', 'true'); // decoration: the content is the layer itself
       frame.innerHTML =
         '<i style="left:0;top:0"></i><i style="left:100%;top:0"></i>' +
         '<i style="left:0;top:100%"></i><i style="left:100%;top:100%"></i><span class="bd"></span>';
@@ -121,6 +122,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
 
       const mark = document.createElement('span');
       mark.className = 'mk';
+      mark.setAttribute('aria-hidden', 'true');
       mark.textContent = index % 2 ? '×' : '+';
       mark.style.color = AGENTS[agent][1];
       root.appendChild(mark);
@@ -348,6 +350,9 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
         ? `${done}/${total} · ${done < started ? 'Building' : done < total ? 'Scroll for more' : 'Built'}`
         : `${AGENTS.length} agents · ${done} of ${total} layers · ${state}`;
     ui.progress.style.width = `${total ? Math.round((done / total) * 100) : 100}%`;
+    // Tell assistive tech when text on the page is still being typed in.
+    const busy = done < started ? 'true' : 'false';
+    if (root.getAttribute('aria-busy') !== busy) root.setAttribute('aria-busy', busy);
 
     raf = requestAnimationFrame(frame);
   }
@@ -366,6 +371,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
         layer.mark.remove();
       }
       for (const cursor of cursors) cursor.el.remove();
+      root.removeAttribute('aria-busy');
     },
   };
 }

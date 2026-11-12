@@ -5,12 +5,55 @@
     <link rel="icon" type="image/svg+xml" href="/Aditya.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0a0a0b" />
-    <title>Aditya Manoj — Full-Stack Developer & Systems Engineer</title>
-    <meta name="description" content="Portfolio of Aditya Manoj — Full-Stack Developer & Systems Engineer specializing in modern web applications, high-throughput PWAs, interactive 3D UI, and cloud-native systems." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <title>Aditya Manoj | Full-Stack Developer and Systems Engineer</title>
+    <meta name="description" content="Aditya Manoj is a full-stack developer and systems engineer in Bengaluru building offline-first web apps, 3D interfaces, and on-device AI agents." />
+    <meta name="author" content="Aditya Manoj" />
+    <link rel="canonical" href="https://adityaaa.web.app/" />
+
+    <!-- Link previews (WhatsApp, LinkedIn, X, Slack). The image is rendered by scripts/render-covers.sh. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aditya Manoj" />
+    <meta property="og:url" content="https://adityaaa.web.app/" />
+    <meta property="og:title" content="Aditya Manoj | Full-Stack Developer and Systems Engineer" />
+    <meta property="og:description" content="Offline-first web apps, 3D interfaces, and on-device AI agents, built from first idea to production." />
+    <meta property="og:image" content="https://adityaaa.web.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aditya Manoj, full-stack developer and systems engineer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aditya Manoj | Full-Stack Developer and Systems Engineer" />
+    <meta name="twitter:description" content="Offline-first web apps, 3D interfaces, and on-device AI agents, built from first idea to production." />
+    <meta name="twitter:image" content="https://adityaaa.web.app/og.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "dateModified": "2026-11-13",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Aditya Manoj",
+          "jobTitle": "Full-Stack Developer and Systems Engineer",
+          "description": "Full-stack developer and systems engineer building offline-first web apps, 3D interfaces, and on-device AI agents.",
+          "url": "https://adityaaa.web.app/",
+          "image": "https://adityaaa.web.app/og.png",
+          "email": "mailto:aditya.dev.org@gmail.com",
+          "telephone": "+919947527296",
+          "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+          "knowsAbout": ["React", "Next.js", "TypeScript", "Progressive web apps", "Firebase", "FastAPI", "Kubernetes", "AI agents"],
+          "sameAs": ["https://github.com/AdityaManojA", "https://www.linkedin.com/in/aditya-manoj-a-0a930b256/"]
+        }
+      }
+    </script>
+
+    <!-- Fonts are served from this site (public/fonts), not a font service, so no visitor
+         data goes to a third party. The serif is preloaded because the loader uses it. -->
+    <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin />
     <style>
+      @font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-400.woff2') format('woff2'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/inter-400.woff2') format('woff2'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/inter-500.woff2') format('woff2'); }
+
       /* Page loader: the "Type" cursor signs the page, the name holds for a beat, then it
          lifts toward the nav while the project cards fly in behind it (ProjectsView runs
          that second half). Self-contained so it paints before the app bundle arrives. */
@@ -69,7 +112,22 @@
         .pl-name { transition: opacity 0.3s ease; }
         #page-loader.pl-done .pl-name { transform: none; }
       }
+
+      /* The plain version of the site that sits in #root until the app starts
+         (see staticFallback in vite.config.ts). Only seen without JavaScript. */
+      .fallback { max-width: 720px; margin: 0 auto; padding: 72px 20px; color: #f2f1ee; font: 16px/1.6 Inter, system-ui, sans-serif; }
+      .fallback h1, .fallback h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; line-height: 1.1; }
+      .fallback h1 { font-size: 40px; }
+      .fallback h2 { font-size: 30px; margin-top: 48px; }
+      .fallback h3 { font-size: 17px; font-weight: 500; margin: 28px 0 4px; }
+      .fallback p { margin: 0 0 12px; color: #c9c8c4; }
+      .fallback a { color: #f2f1ee; text-decoration: underline; }
     </style>
+    <noscript>
+      <style>
+        #page-loader { display: none; }
+      </style>
+    </noscript>
     <script>
       document.documentElement.classList.add('loader-active');
     </script>
@@ -86,7 +144,7 @@
     </div>
     <script>
       // Types the name from navigation start, holds it fully typed for half a second, then
-      // hands over to the page as soon as the app has rendered into #root.
+      // hands over to the page as soon as the app has rendered.
       (function () {
         var NAME = 'Aditya Manoj';
         var START = 150; // ms before the first letter
@@ -95,8 +153,9 @@
         var loader = document.getElementById('page-loader');
         var text = document.getElementById('pl-text');
         function finish() {
-          var root = document.getElementById('root'); // declared after this script
-          if (!root || !root.firstChild) return setTimeout(finish, 50);
+          // .nav is rendered by the app. #root alone is no signal: it already holds the
+          // static fallback before the app starts.
+          if (!document.querySelector('.nav')) return setTimeout(finish, 50);
           loader.classList.add('pl-done');
           document.documentElement.classList.remove('loader-active');
           setTimeout(function () { loader.remove(); }, 750);

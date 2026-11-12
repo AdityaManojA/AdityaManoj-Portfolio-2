@@ -11,6 +11,8 @@ const VIEWS: { id: View; label: string }[] = [
   { id: 'contact', label: 'Contact' },
 ];
 
+const SITE_TITLE = 'Aditya Manoj | Full-Stack Developer and Systems Engineer';
+
 // The view lives in the URL hash so each page can be linked to and Back works.
 function viewFromHash(): View {
   const hash = window.location.hash.slice(1);
@@ -34,6 +36,9 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Each view gets its own tab title, for history, bookmarks and screen readers.
+    const label = VIEWS.find((v) => v.id === view)?.label;
+    document.title = view === 'projects' ? SITE_TITLE : `${label} | Aditya Manoj`;
   }, [view]);
 
   const go = useCallback((next: View) => {

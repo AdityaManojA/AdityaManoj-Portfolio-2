@@ -34,11 +34,11 @@ export default function ContactView() {
           <p className="k mu" data-b="type">
             Contact
           </p>
-          <h2 className="sf" data-b="type">
-            Have a system
+          <h1 className="sf display" data-b="type">
+            Have a system{' '}
             <br />
             to build?
-          </h2>
+          </h1>
           <div className="crows">
             <div className="crow" data-b="type">
               <span className="mu">Email</span>

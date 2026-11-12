@@ -299,9 +299,9 @@ export default function ProjectsView() {
         </p>
       </div>
 
-      <p className="lead">
+      <h1 className="lead">
         A curated selection of <span className="sf">systems and web projects</span>
-      </p>
+      </h1>
 
       <div className="grid" ref={grid}>
         {PROJECTS.map((p) => {
@@ -314,7 +314,7 @@ export default function ProjectsView() {
               </div>
               <div className="tile-cap">
                 <div>
-                  <p>{shortName(p)}</p>
+                  <h2>{shortName(p)}</h2>
                   <p className="sf">{subtitle(p)}</p>
                 </div>
                 <span className="mu">{p.year}</span>
