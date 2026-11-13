@@ -10,9 +10,9 @@ const EXPERIENCE = [
 
 const NUMBERS = [
   ['1.2M+', 'Firestore reads handled by GLIA'],
-  ['1M+', 'People using Travel Animator'],
+  ['#1', 'Google ranking for ThreadPath'],
   ['<150 ms', 'On-device OCR in ALFRED'],
-  ['60 FPS', 'Canvas rendering at IndZita'],
+  ['2,275+', 'QR coupons validated at GLIA'],
 ];
 
 function Skill({ title, lines }: { title: string; lines: string[] }) {

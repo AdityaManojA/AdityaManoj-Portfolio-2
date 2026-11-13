@@ -15,8 +15,16 @@
     <!-- Fonts are served from this site (public/fonts), not a font service, so no visitor
          data goes to a third party. Inter 500 is preloaded because the loader uses it. -->
     <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-400.woff2') format('woff2'); }
+      /* Stand-ins for Instrument Serif while it loads, or where web fonts are blocked (iOS
+         Lockdown Mode, some data savers). Instrument Serif is narrow: the system serifs are
+         20 to 35% wider, which made long lines wrap. size-adjust shrinks each stand-in to the
+         same width, so the layout is the same with or without the real font. */
+      @font-face { font-family: 'Serif Stand-in G'; src: local('Georgia'); size-adjust: 75.3%; }
+      @font-face { font-family: 'Serif Stand-in T'; src: local('Times New Roman'), local('Times'); size-adjust: 82.2%; }
+      @font-face { font-family: 'Serif Stand-in N'; src: local('Noto Serif'); size-adjust: 74%; }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/inter-400.woff2') format('woff2'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/inter-500.woff2') format('woff2'); }
 
@@ -84,7 +92,7 @@
       /* The plain version of the site that sits in #root until the app starts
          (see staticFallback in vite.config.ts). Only seen without JavaScript. */
       .fallback { max-width: 720px; margin: 0 auto; padding: 72px 20px; color: #f2f1ee; font: 16px/1.6 Inter, system-ui, sans-serif; }
-      .fallback h1, .fallback h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; line-height: 1.1; }
+      .fallback h1, .fallback h2 { font-family: 'Instrument Serif', 'Serif Stand-in G', 'Serif Stand-in T', 'Serif Stand-in N', serif; font-weight: 400; line-height: 1.1; }
       .fallback h1 { font-size: 40px; }
       .fallback h2 { font-size: 30px; margin-top: 48px; }
       .fallback h3 { font-size: 17px; font-weight: 500; margin: 28px 0 4px; }

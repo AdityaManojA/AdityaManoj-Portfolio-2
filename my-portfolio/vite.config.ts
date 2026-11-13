@@ -276,7 +276,7 @@ function body(route: Route, projects: ProjectEntry[]) {
         ${QUOTES.map(({ text, client }) => `<li>${esc(client)}: "${esc(text)}"</li>`).join('\n        ')}
       </ul>
       <h2>What results has ${NAME}'s work produced?</h2>
-      <p>GLIA, the offline-first event app ${NAME} built for an international neuroscience conference, handled more than 1.2 million Firestore reads. Travel Animator, the route animation app he worked on at Lascade, is used by more than 1 million people. ALFRED, his desktop AI assistant, performs on-device OCR in under 150 ms. The canvas visualisations he built for IndZita Biotech render at 60 frames per second.</p>
+      <p>GLIA, the offline-first event app ${NAME} built for an international neuroscience conference, handled more than 1.2 million Firestore reads. ThreadPath Collective, the storefront he built for a Canadian streetwear brand, holds the number one organic Google ranking. ALFRED, his desktop AI assistant, performs on-device OCR in under 150 ms. GLIA also validated more than 2,275 QR food coupons across the event.</p>
       <h2>How can I work with ${NAME}?</h2>
       <p>${contactLine} See <a href="/">the projects ${NAME} has shipped</a> or <a href="/contact">all contact details</a>.</p>
       ${updated}
@@ -359,9 +359,9 @@ ${jobs}
 ## Results
 
 - GLIA handled more than 1.2 million Firestore reads at an international neuroscience conference
-- Travel Animator, which he worked on at Lascade, is used by more than 1 million people
+- ThreadPath Collective holds the number one organic Google ranking
 - ALFRED performs on-device OCR in under 150 ms
-- IndZita Biotech's canvas visualisations render at 60 frames per second
+- GLIA validated more than 2,275 QR food coupons across the event
 
 ## Contact
 
