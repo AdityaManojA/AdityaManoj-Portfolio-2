@@ -1,16 +1,1 @@
-{
-  "0": "package.json",
-  "1": "App.tsx",
-  "2": "Hero.tsx",
-  "3": "compilerOptions",
-  "4": "compilerOptions",
-  "5": "devDependencies",
-  "6": "HandbookModal.tsx",
-  "7": "Aditya Manoj — Master Portfolio Data Package",
-  "8": "tsconfig.json",
-  "9": "tailwind.config.js",
-  "10": "postcss.config.js",
-  "11": "3. Projects Catalog (Ordered for Showcase)",
-  "12": "rules/graphify.md",
-  "13": "workflows/graphify.md"
-}
+{"0": "Legacy Page Components", "1": "App Shell, Loader and SEO Build", "2": "App Entry and Routing", "3": "About, Quotes and Results Data", "4": "Drift Cursor and Garage", "5": "Package Manifest", "6": "Projects View and Cloud", "7": "Preview Capture Scripts", "8": "App TypeScript Config", "9": "README Projects Catalog", "10": "Node TypeScript Config", "11": "CV: Education and Experience", "12": "Interface Sounds", "13": "Dev Dependencies", "14": "README Profile Sections", "15": "Explore and Handbook Modals", "16": "ALFRED and Utility Projects", "17": "PWA and Firebase Projects", "18": "Landing Redesign Decisions", "19": "Preferences and Project Data", "20": "Graphify Workflow", "21": "Client Storefronts and TerraCove", "22": "Root TypeScript Config", "23": "Graphify Rule", "24": "Image Optimisation Script", "25": "Tailwind Config", "26": "PostCSS Config", "27": "Source Index"}
