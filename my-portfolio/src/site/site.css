@@ -148,6 +148,31 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .where { margin-top: 30px; font-size: 12px; }
 .where a { text-decoration: underline; text-underline-offset: 3px; }
 
+/* Contact entrance. Deliberately not the swarm: the headline rises out of a mask line by
+   line, then a rule is drawn and each row is wiped in from the left. It waits for the loader. */
+.contact .k { animation: c-fade 0.7s ease both; }
+.contact .ln { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.contact .ln > span {
+  display: block; animation: c-rise 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 130ms + 120ms);
+}
+.contact .crows { border-top: 0; position: relative; }
+.contact .crows::before {
+  content: ''; position: absolute; inset: 0 0 auto; height: 1px; background: var(--ln);
+  transform-origin: left; animation: c-draw 0.8s cubic-bezier(0.65, 0, 0.2, 1) 0.5s both;
+}
+.contact .crow {
+  animation: c-wipe 0.85s cubic-bezier(0.65, 0, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 140ms + 620ms);
+}
+.contact .where { animation: c-fade 0.7s ease 1.5s both; }
+html.loader-active .contact, html.loader-active .contact * , html.loader-active .contact .crows::before { animation-play-state: paused; }
+@keyframes c-fade { from { opacity: 0; } }
+@keyframes c-rise { from { transform: translateY(108%); } }
+@keyframes c-draw { from { transform: scaleX(0); } }
+/* The negative insets leave room for the buttons' focus rings once the wipe is done. */
+@keyframes c-wipe { from { clip-path: inset(-8px 100% -8px -8px); } to { clip-path: inset(-8px); } }
+
 /* Swarm chrome: selection frames, markers, cursors, status pill */
 .sel { position: absolute; border: 1px solid var(--sel); background: rgba(76, 155, 240, 0.08); pointer-events: none; opacity: 0; z-index: 30; }
 .sel i { position: absolute; width: 6px; height: 6px; margin: -3px; background: #fff; border: 1px solid var(--sel); }
@@ -228,6 +253,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 }
 @media (prefers-reduced-motion: reduce) {
   .swarm { display: none; }
+  .contact .k, .contact .ln > span, .contact .crows::before, .contact .crow, .contact .where { animation: none; }
   .tile { opacity: 1; transform: none; transition: none; }
   .tile .im img, .tile .im video, .tile-cap, .crow a.sf { transition: none; }
   .tile.pulse .im { animation-name: tile-pulse-still; }

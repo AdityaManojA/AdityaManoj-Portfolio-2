@@ -59,10 +59,11 @@ interface Cursor {
   working: boolean;
 }
 
-const GROW = 0.6; // seconds a selection frame takes to drag out
-const FILL = 1.1; // seconds to type or fade the content in
-const FADE = 0.4; // seconds for the frame to dissolve afterwards
-const STAGGER = 0.42; // delay between consecutive layers in a section
+const GROW = 0.32; // seconds a selection frame takes to drag out
+const FILL = 0.55; // seconds to type or fade the content in
+const FADE = 0.25; // seconds for the frame to dissolve afterwards
+const STAGGER = 0.2; // delay between consecutive layers in a section
+const LEAD_IN = 0.3; // pause before the first layer of a section, while the markers appear
 
 const rnd = (a: number, b: number) => a + Math.random() * (b - a);
 const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
@@ -183,8 +184,8 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
       layer.h = r.height;
       layer.frame.style.left = layer.mark.style.left = `${layer.x}px`;
       layer.frame.style.top = layer.mark.style.top = `${layer.y}px`;
-      layer.markAt = now + 0.06 * k;
-      layer.start = now + 0.55 + k * STAGGER;
+      layer.markAt = now + 0.03 * k;
+      layer.start = now + LEAD_IN + k * STAGGER;
       if (layer.typed) {
         // Hold the box open so the page does not reflow while the text is typed in.
         layer.el.style.minHeight = `${layer.h}px`;
@@ -296,7 +297,7 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
         layer.el.style.opacity = filling ? Math.min(1, progress * 2).toFixed(2) : '0';
       }
 
-      if (u > -0.6) {
+      if (u > -0.35) {
         targets[layer.agent] =
           u < 0
             ? [base.left + layer.x, base.top + layer.y]
@@ -321,8 +322,8 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
       if (target) {
         if (cursor.working) cursor.y -= scrolled;
         cursor.working = true;
-        cursor.x += (target[0] - cursor.x) * 0.14;
-        cursor.y += (target[1] - cursor.y) * 0.14;
+        cursor.x += (target[0] - cursor.x) * 0.22;
+        cursor.y += (target[1] - cursor.y) * 0.22;
       } else {
         if (cursor.working) {
           cursor.working = false;

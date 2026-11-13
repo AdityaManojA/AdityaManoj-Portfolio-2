@@ -14,15 +14,15 @@ const VIEWS: { id: View; label: string; path: string; title: string; description
     path: '/',
     title: 'Aditya Manoj | Full-Stack Developer and Systems Engineer',
     description:
-      'Aditya Manoj is a full-stack developer and systems engineer in Bengaluru building offline-first web apps, 3D interfaces, and on-device AI agents.',
+      'Aditya Manoj is a full-stack developer and systems engineer in Kerala building offline-first web apps, 3D interfaces, and on-device AI agents.',
   },
   {
     id: 'about',
     label: 'About',
     path: '/about',
-    title: 'About Aditya Manoj | Full-Stack Developer in Bengaluru',
+    title: 'About Aditya Manoj | Full-Stack Developer in Kerala',
     description:
-      'Who Aditya Manoj is: a full-stack developer and systems engineer in Bengaluru, with experience at Flipkart, Lascade, IndZita Biotech and SBAFA.',
+      'Who Aditya Manoj is: a full-stack developer and systems engineer in Kerala, with experience at the Rajiv Gandhi Centre for Biotechnology, Lascade and ICT Academy of Kerala.',
   },
   {
     id: 'contact',

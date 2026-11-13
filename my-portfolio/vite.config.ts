@@ -28,11 +28,10 @@ const TODAY = new Date().toISOString().slice(0, 10)
 const LEAD = [8, 11, 18, 13, 22, 21, 1, 16]
 
 const EXPERIENCE = [
-  ['Full-stack PWA and security engineer', 'SBAFA Financial Enclave', '2026'],
-  ['Lead frontend and graphics engineer', 'IndZita Biotech', '2026'],
+  ['Lead systems engineer, GLIA Event OS', 'Rajiv Gandhi Centre for Biotechnology', '2025'],
   ['Product development engineer', 'Lascade', '2025'],
-  ['Lead developer', 'Rajiv Gandhi Centre for Biotechnology', '2024'],
-  ['Software engineering intern', 'Flipkart', '2024'],
+  ['Full-stack development intern', 'ICT Academy of Kerala', '2024'],
+  ['AI/ML engineering intern', 'ICT Academy of Kerala', '2024'],
 ]
 
 type Route = 'home' | 'about' | 'contact'
@@ -42,13 +41,13 @@ const PAGES: Record<Route, { path: string; file: string; title: string; descript
     path: '/',
     file: 'index.html',
     title: `${NAME} | Full-Stack Developer and Systems Engineer`,
-    description: `${NAME} is a full-stack developer and systems engineer in Bengaluru building offline-first web apps, 3D interfaces, and on-device AI agents.`,
+    description: `${NAME} is a full-stack developer and systems engineer in Kerala building offline-first web apps, 3D interfaces, and on-device AI agents.`,
   },
   about: {
     path: '/about',
     file: 'about.html',
-    title: `About ${NAME} | Full-Stack Developer in Bengaluru`,
-    description: `Who ${NAME} is: a full-stack developer and systems engineer in Bengaluru, with experience at Flipkart, Lascade, IndZita Biotech and SBAFA.`,
+    title: `About ${NAME} | Full-Stack Developer in Kerala`,
+    description: `Who ${NAME} is: a full-stack developer and systems engineer in Kerala, with experience at the Rajiv Gandhi Centre for Biotechnology, Lascade and ICT Academy of Kerala.`,
   },
   contact: {
     path: '/contact',
@@ -112,7 +111,7 @@ function jsonLd(route: Route, projects: ProjectEntry[]) {
     image: `${SITE}/ProjectImages/web/pfp.webp`,
     email: `mailto:${EMAIL}`,
     telephone: PHONE,
-    address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressRegion: 'Karnataka', addressCountry: 'IN' },
+    address: { '@type': 'PostalAddress', addressRegion: 'Kerala', addressCountry: 'IN' },
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Jyothi Engineering College' },
     knowsAbout: [
       'React', 'Next.js', 'TypeScript', 'Progressive web apps', 'Offline-first applications', 'HTML5 Canvas',
@@ -238,13 +237,13 @@ function body(route: Route, projects: ProjectEntry[]) {
       .join('\n        ')
     return `<main class="fallback">
       <h1>${NAME}, full-stack developer and systems engineer</h1>
-      <p class="summary">${NAME} is a full-stack developer and systems engineer based in Bengaluru, India. ${NAME} builds offline-first progressive web apps, canvas and 3D interfaces, and on-device AI agents, and takes each project from the first idea to a production system. This portfolio lists ${projects.length} projects shipped between ${span}.</p>
+      <p class="summary">${NAME} is a full-stack developer and systems engineer based in Kerala, India. ${NAME} builds offline-first progressive web apps, canvas and 3D interfaces, and on-device AI agents, and takes each project from the first idea to a production system. This portfolio lists ${projects.length} projects shipped between ${span}.</p>
       ${sectionsNav}
       <h2>What has ${NAME} built?</h2>
       <p>${NAME} has shipped ${projects.length} projects between ${span}: client websites such as ThreadPath Collective, The Whisky Business and Pixel Spaces, installable progressive web apps such as Levern, TerraCove, GLIA and SBAFA Financial Enclave, and ALFRED, a desktop AI assistant. Each project below links to the live site or its source code.</p>
         ${items}
       <h2>Who is ${NAME}?</h2>
-      <p>${NAME} is an engineer who works across frontend, backend, AI agents and infrastructure. He has worked at Flipkart, Lascade, the Rajiv Gandhi Centre for Biotechnology, IndZita Biotech and SBAFA Financial Enclave. <a href="/about">Read more about ${NAME}</a>.</p>
+      <p>${NAME} is an engineer who works across frontend, backend, AI agents and infrastructure. He has worked at the Rajiv Gandhi Centre for Biotechnology, Lascade and ICT Academy of Kerala. <a href="/about">Read more about ${NAME}</a>.</p>
       <h2>How can I contact ${NAME}?</h2>
       <p>${contactLine} <a href="/contact">All contact details</a>.</p>
       ${updated}
@@ -255,12 +254,12 @@ function body(route: Route, projects: ProjectEntry[]) {
     const jobs = EXPERIENCE.map(([role, company, year]) => `<li>${esc(role)} at ${esc(company)}, ${year}.</li>`).join('\n        ')
     return `<main class="fallback">
       <h1>About ${NAME}</h1>
-      <p class="summary">${NAME} is a full-stack developer and systems engineer based in Bengaluru, India, who turns rough ideas into fast systems that hold under load. ${NAME} holds a B.Tech in Computer Science and Engineering from Jyothi Engineering College.</p>
+      <p class="summary">${NAME} is a full-stack developer and systems engineer based in Kerala, India, who turns rough ideas into fast systems that hold under load. ${NAME} holds a B.Tech in Computer Science and Engineering from Jyothi Engineering College.</p>
       ${sectionsNav}
       <h2>What does ${NAME} work on?</h2>
       <p>${NAME} works across four areas. In frontend, he builds with React and Next.js, HTML5 canvas and 3D, and progressive web apps. In backend, he builds with FastAPI and Node.js, Firestore and PostgreSQL, and offline sync. In AI agents, he builds live voice and vision assistants, runs local models, and does on-device OCR. In infrastructure, he works with Linux internals, Kubernetes and observability tooling. He is currently building ALFRED Mark VIII, a desktop AI assistant.</p>
       <h2>Where has ${NAME} worked?</h2>
-      <p>${NAME} has held five engineering roles between 2024 and 2026. He joined Flipkart as a software engineering intern in 2024 and led development at the Rajiv Gandhi Centre for Biotechnology the same year. He was a product development engineer at Lascade in 2025, and in 2026 became lead frontend and graphics engineer at IndZita Biotech and full-stack PWA and security engineer at SBAFA Financial Enclave.</p>
+      <p>${NAME} has held four engineering roles between 2024 and 2025. He interned twice at ICT Academy of Kerala in 2024, first in AI/ML engineering from January to June and then in full-stack development from July to October. He was a product development engineer at Lascade in Kochi from January to August 2025, working on Travel Animator. From June to November 2025 he was lead systems engineer at the Rajiv Gandhi Centre for Biotechnology in Thiruvananthapuram, where he built GLIA, the event system for the IAN-2025 neuroscience symposium.</p>
       <ol>
         ${jobs}
       </ol>
@@ -274,7 +273,7 @@ function body(route: Route, projects: ProjectEntry[]) {
 
   return `<main class="fallback">
       <h1>Contact ${NAME}</h1>
-      <p class="summary">${NAME} is a full-stack developer and systems engineer based in Bengaluru, India, who takes on web app, progressive web app, 3D interface and AI agent projects. The fastest ways to reach ${NAME} are email at ${EMAIL} and phone at ${PHONE_SHOWN}.</p>
+      <p class="summary">${NAME} is a full-stack developer and systems engineer based in Kerala, India, who takes on web app, progressive web app, 3D interface and AI agent projects. The fastest ways to reach ${NAME} are email at ${EMAIL} and phone at ${PHONE_SHOWN}.</p>
       ${sectionsNav}
       <h2>How do I reach ${NAME}?</h2>
       <ul>
@@ -292,7 +291,7 @@ function body(route: Route, projects: ProjectEntry[]) {
       <h2>What should I include when I get in touch with ${NAME}?</h2>
       <p>A short message is enough to start. It helps to say what the project is, who will use it, whether a website or design already exists, and when it needs to be live. ${NAME} replies by email or phone.</p>
       <h2>Where is ${NAME} based?</h2>
-      <p>${NAME} is based in Bengaluru, Karnataka, India, and works with clients remotely. Past clients include ThreadPath Collective in Canada, The Whisky Business in Thrissur, and Pixel Spaces in Kerala and Muscat.</p>
+      <p>${NAME} is based in Kerala, India, and works with clients remotely. Past clients include ThreadPath Collective in Canada, The Whisky Business in Thrissur, and Pixel Spaces in Kerala and Muscat.</p>
       ${updated}
     </main>`
 }
@@ -314,7 +313,7 @@ function llmsTxt(projects: ProjectEntry[], full: boolean) {
   const jobs = EXPERIENCE.map(([role, company, year]) => `- ${role} at ${company}, ${year}`).join('\n')
   return `# ${NAME}
 
-> ${NAME} is a full-stack developer and systems engineer based in Bengaluru, India. He builds offline-first progressive web apps, canvas and 3D interfaces, and on-device AI agents, and takes projects from the first idea to a production system.
+> ${NAME} is a full-stack developer and systems engineer based in Kerala, India. He builds offline-first progressive web apps, canvas and 3D interfaces, and on-device AI agents, and takes projects from the first idea to a production system.
 
 This is his portfolio. It has three pages, each readable without JavaScript. Last updated ${TODAY}.
 

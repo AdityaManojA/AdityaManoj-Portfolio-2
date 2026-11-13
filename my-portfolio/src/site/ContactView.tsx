@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import SwarmStage from './SwarmStage';
+import { useState, type CSSProperties } from 'react';
 
 const EMAIL = 'aditya.dev.org@gmail.com';
 const PHONE = '+919947527296';
 const GITHUB = 'https://github.com/AdityaManojA';
+
+/** Position in the entrance sequence, read by the CSS as --i. */
+const order = (i: number) => ({ '--i': i }) as CSSProperties;
 
 function CopyButton({ value }: { value: string }) {
   const [label, setLabel] = useState('Copy');
@@ -29,46 +31,47 @@ function CopyButton({ value }: { value: string }) {
 export default function ContactView() {
   return (
     <main>
-      <SwarmStage>
-        <section className="sec">
-          <p className="k mu" data-b="type">
-            Contact
-          </p>
-          <h1 className="sf display" data-b="type">
-            Have a system{' '}
-            <br />
-            to build?
-          </h1>
-          <div className="crows">
-            <div className="crow" data-b="type">
-              <span className="mu">Email</span>
-              <a className="sf" href={`mailto:${EMAIL}`}>
-                {EMAIL}
-              </a>
-              <CopyButton value={EMAIL} />
-            </div>
-            <div className="crow" data-b="type">
-              <span className="mu">Phone</span>
-              <a className="sf" href={`tel:${PHONE}`}>
-                +91 99475 27296
-              </a>
-              <CopyButton value={PHONE} />
-            </div>
-            <div className="crow" data-b="type">
-              <span className="mu">GitHub</span>
-              <a className="sf" href={GITHUB} target="_blank" rel="noopener noreferrer">
-                github.com/AdityaManojA
-              </a>
-              <a className="open" href={GITHUB} target="_blank" rel="noopener noreferrer">
-                Open
-              </a>
-            </div>
+      {/* No swarm here. The headline rises out of a mask line by line, then each row is
+          drawn in from the left. --i sets the order. */}
+      <section className="sec contact">
+        <p className="k mu">Contact</p>
+        <h1 className="sf display">
+          <span className="ln" style={order(0)}>
+            <span>Have a project </span>
+          </span>
+          <span className="ln" style={order(1)}>
+            <span>to build?</span>
+          </span>
+        </h1>
+        <div className="crows">
+          <div className="crow" style={order(0)}>
+            <span className="mu">Email</span>
+            <a className="sf" href={`mailto:${EMAIL}`}>
+              {EMAIL}
+            </a>
+            <CopyButton value={EMAIL} />
           </div>
-          <p className="where mu" data-b="fade">
-            Based in Bengaluru, India · <a href="/privacy.html">Privacy</a>
-          </p>
-        </section>
-      </SwarmStage>
+          <div className="crow" style={order(1)}>
+            <span className="mu">Phone</span>
+            <a className="sf" href={`tel:${PHONE}`}>
+              +91 99475 27296
+            </a>
+            <CopyButton value={PHONE} />
+          </div>
+          <div className="crow" style={order(2)}>
+            <span className="mu">GitHub</span>
+            <a className="sf" href={GITHUB} target="_blank" rel="noopener noreferrer">
+              github.com/AdityaManojA
+            </a>
+            <a className="open" href={GITHUB} target="_blank" rel="noopener noreferrer">
+              Open
+            </a>
+          </div>
+        </div>
+        <p className="where mu">
+          Based in Kerala, India · <a href="/privacy.html">Privacy</a>
+        </p>
+      </section>
     </main>
   );
 }

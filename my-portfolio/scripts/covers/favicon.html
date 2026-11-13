@@ -1,0 +1,29 @@
+<!doctype html>
+<!--
+  The browser-tab icon: the loader's name, shortened to the initials so it stays readable
+  at 16px, in the nav's typeface with the loader's caret.
+
+  Open with ?full for a square with no rounded corners (the iPhone home-screen icon, which
+  iOS rounds itself).
+
+  Render it to public/favicon-*.png and public/apple-touch-icon.png with:
+    bash scripts/render-covers.sh
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Inter'; font-weight: 500; src: url('../../public/fonts/inter-500.woff2') format('woff2'); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 512px; height: 512px; overflow: hidden; background: transparent; }
+  .tile { width: 512px; height: 512px; border-radius: 112px; background: #0a0a0b; color: #f2f1ee; display: flex; align-items: center; justify-content: center; }
+  .full .tile { border-radius: 0; }
+  .name { font: 500 248px/1 Inter, system-ui, sans-serif; letter-spacing: -0.035em; white-space: nowrap; }
+  .caret { display: inline-block; width: 20px; height: 0.82em; margin-left: 0.07em; vertical-align: -0.08em; background: #5eead4; }
+</style>
+</head>
+<body>
+  <div class="tile"><div class="name">AM<span class="caret"></span></div></div>
+  <script>if (location.search === '?full') document.documentElement.className = 'full';</script>
+</body>
+</html>

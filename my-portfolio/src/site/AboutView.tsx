@@ -1,11 +1,10 @@
 import SwarmStage from './SwarmStage';
 
 const EXPERIENCE = [
-  ['Full-stack PWA and security engineer', 'SBAFA Financial Enclave', '2026'],
-  ['Lead frontend and graphics engineer', 'IndZita Biotech', '2026'],
+  ['Lead systems engineer, GLIA Event OS', 'Rajiv Gandhi Centre for Biotechnology', '2025'],
   ['Product development engineer', 'Lascade', '2025'],
-  ['Lead developer', 'Rajiv Gandhi Centre for Biotechnology', '2024'],
-  ['Software engineering intern', 'Flipkart', '2024'],
+  ['Full-stack development intern', 'ICT Academy of Kerala', '2024'],
+  ['AI/ML engineering intern', 'ICT Academy of Kerala', '2024'],
 ];
 
 const NUMBERS = [
@@ -45,7 +44,7 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
             that hold under load.
           </h1>
           <p className="status mu" data-b="type">
-            Currently building ALFRED Mark VIII, from Bengaluru
+            Currently building ALFRED Mark VIII, from Kerala
           </p>
           <div className="ring">
             <div className="col l">
@@ -70,7 +69,7 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
           </h2>
           <div className="rows">
             {EXPERIENCE.map(([role, company, year]) => (
-              <div className="row" data-b="type" key={company}>
+              <div className="row" data-b="type" key={role}>
                 <span>{role}</span>
                 <span className="sf">{company}</span>
                 <span className="mu">{year}</span>

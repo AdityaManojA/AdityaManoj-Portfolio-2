@@ -1,7 +1,11 @@
 <!doctype html>
 <!--
   The link-preview image (og:image) shown when the site is shared on WhatsApp, LinkedIn,
-  X or Slack. 1200 × 630, in the portfolio's own style.
+  X or Slack. 1200 × 630. It is the loader's finished frame: the name typed out in the
+  nav's typeface, with the caret and the "Type" cursor.
+
+  WhatsApp's small preview crops this to the middle square (630 × 630), so the name and
+  the cursor together stay inside the middle 560px.
 
   Render it to public/og.png with:  bash scripts/render-covers.sh
 -->
@@ -9,45 +13,28 @@
 <head>
 <meta charset="utf-8">
 <style>
-  @font-face { font-family: 'Instrument Serif'; src: url('../../public/fonts/instrument-serif-400.woff2') format('woff2'); }
   @font-face { font-family: 'Inter'; font-weight: 400; src: url('../../public/fonts/inter-400.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 500; src: url('../../public/fonts/inter-500.woff2') format('woff2'); }
   * { box-sizing: border-box; margin: 0; }
-  html, body { width: 1200px; height: 630px; overflow: hidden; background: #0a0a0b; color: #f2f1ee; font-family: Inter, system-ui, sans-serif; }
-  .name { position: absolute; left: 90px; top: 178px; font: 400 150px/1 'Instrument Serif', Georgia, serif; white-space: nowrap; }
-  .role { position: absolute; left: 96px; top: 372px; font-size: 31px; color: #8d8c88; }
-  .site { position: absolute; left: 96px; bottom: 64px; font-size: 24px; color: #8d8c88; }
-  .sel { position: absolute; left: 70px; top: 160px; width: 842px; height: 186px; border: 2px solid #4c9bf0; background: rgba(76,155,240,.05); }
-  .sel i { position: absolute; width: 12px; height: 12px; margin: -7px; background: #fff; border: 2px solid #4c9bf0; }
-  .badge { position: absolute; right: 0; top: 100%; transform: translateY(10px); background: #4c9bf0; color: #0a0a0b; font-size: 18px; line-height: 1; padding: 5px 9px; border-radius: 5px; }
-  .mk { position: absolute; font-size: 30px; line-height: 1; }
-  .cu { position: absolute; }
-  .cu span { position: absolute; left: 26px; top: 26px; font-size: 19px; line-height: 1; color: #0a0a0b; padding: 7px 12px; border-radius: 5px 15px 15px 15px; white-space: nowrap; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #0a0a0b; color: #f2f1ee; }
+  body { display: flex; align-items: center; justify-content: center; }
+  /* The padding makes room for the cursor, so the pair is centred, not the name alone. */
+  .group { padding-right: 84px; }
+  .name { position: relative; font: 500 84px/1 Inter, system-ui, sans-serif; letter-spacing: -0.035em; white-space: nowrap; }
+  .caret { display: inline-block; width: 3px; height: 0.82em; margin-left: 0.04em; vertical-align: -0.08em; background: #f2f1ee; }
+  .cursor { position: absolute; left: 100%; top: 62%; margin-left: 8px; line-height: 0; }
+  .cursor svg { display: block; }
+  .cursor span { position: absolute; left: 21px; top: 21px; font: 400 15px/1 Inter, system-ui, sans-serif; letter-spacing: 0; color: #0a0a0b; background: #5eead4; padding: 6px 10px; border-radius: 4px 12px 12px 12px; }
 </style>
 </head>
 <body>
-  <div class="sel">
-    <i style="left:0;top:0"></i><i style="left:100%;top:0"></i><i style="left:0;top:100%"></i><i style="left:100%;top:100%"></i>
-    <span class="badge">Aditya Manoj</span>
-  </div>
-  <p class="name">Aditya Manoj</p>
-  <p class="role">Full-stack developer and systems engineer</p>
-  <p class="site">adityaaa.web.app</p>
-
-  <span class="mk" style="left:1010px;top:96px;color:#ff8fb1">+</span>
-  <span class="mk" style="left:1096px;top:470px;color:#f5e16b">×</span>
-  <span class="mk" style="left:760px;top:520px;color:#7cc4ff">+</span>
-
-  <div class="cu" style="left:914px;top:348px">
-    <svg width="32" height="32" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#5eead4" stroke="#0a0a0b" stroke-width="1"/></svg>
-    <span style="background:#5eead4">Type</span>
-  </div>
-  <div class="cu" style="left:1030px;top:200px">
-    <svg width="32" height="32" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#9b8cff" stroke="#0a0a0b" stroke-width="1"/></svg>
-    <span style="background:#9b8cff">Layout</span>
-  </div>
-  <div class="cu" style="left:600px;top:468px">
-    <svg width="32" height="32" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#ffb86b" stroke="#0a0a0b" stroke-width="1"/></svg>
-    <span style="background:#ffb86b">Copy</span>
+  <div class="group">
+    <div class="name">Aditya Manoj<span class="caret"></span>
+      <div class="cursor">
+        <svg width="25" height="25" viewBox="0 0 15 15"><path d="M1.5 1.5v11l3.4-3 2.4 4.4 2-1-2.3-4.3 4.5-.3z" fill="#5eead4" stroke="#0a0a0b" stroke-width="1"/></svg>
+        <span>Type</span>
+      </div>
+    </div>
   </div>
 </body>
 </html>
