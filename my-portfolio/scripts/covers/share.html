@@ -7,7 +7,10 @@
   WhatsApp's small preview crops this to the middle square (630 × 630), so the name and
   the cursor together stay inside the middle 560px.
 
-  Render it to public/og.png with:  bash scripts/render-covers.sh
+  Chat apps cache this image by its URL, so a redesign needs a new file name (change it
+  in vite.config.ts and render-covers.sh too).
+
+  Render it to public/share-card.png with:  bash scripts/render-covers.sh
 -->
 <html lang="en">
 <head>

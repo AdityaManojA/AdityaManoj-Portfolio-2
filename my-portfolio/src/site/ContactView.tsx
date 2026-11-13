@@ -2,7 +2,12 @@ import { useState, type CSSProperties } from 'react';
 
 const EMAIL = 'aditya.dev.org@gmail.com';
 const PHONE = '+919947527296';
-const GITHUB = 'https://github.com/AdityaManojA';
+// Label, what is shown, where it goes.
+const SOCIAL = [
+  ['GitHub', 'github.com/AdityaManojA', 'https://github.com/AdityaManojA'],
+  ['Instagram', '@xo.adityaaa.dev', 'https://www.instagram.com/xo.adityaaa.dev/'],
+  ['X', '@Adityathedev', 'https://x.com/Adityathedev'],
+];
 
 /** Position in the entrance sequence, read by the CSS as --i. */
 const order = (i: number) => ({ '--i': i }) as CSSProperties;
@@ -43,6 +48,7 @@ export default function ContactView() {
             <span>to build?</span>
           </span>
         </h1>
+        <p className="avail">Taking projects from December</p>
         <div className="crows">
           <div className="crow" style={order(0)}>
             <span className="mu">Email</span>
@@ -58,15 +64,17 @@ export default function ContactView() {
             </a>
             <CopyButton value={PHONE} />
           </div>
-          <div className="crow" style={order(2)}>
-            <span className="mu">GitHub</span>
-            <a className="sf" href={GITHUB} target="_blank" rel="noopener noreferrer">
-              github.com/AdityaManojA
-            </a>
-            <a className="open" href={GITHUB} target="_blank" rel="noopener noreferrer">
-              Open
-            </a>
-          </div>
+          {SOCIAL.map(([label, shown, url], i) => (
+            <div className="crow" style={order(i + 2)} key={label}>
+              <span className="mu">{label}</span>
+              <a className="sf" href={url} target="_blank" rel="noopener noreferrer">
+                {shown}
+              </a>
+              <a className="open" href={url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${label}`}>
+                Open
+              </a>
+            </div>
+          ))}
         </div>
         <p className="where mu">
           Based in Kerala, India · <a href="/privacy.html">Privacy</a>

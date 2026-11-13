@@ -22,6 +22,14 @@ const PHONE = '+919947527296'
 const PHONE_SHOWN = '+91 99475 27296'
 const GITHUB = 'https://github.com/AdityaManojA'
 const LINKEDIN = 'https://www.linkedin.com/in/aditya-manoj-a-0a930b256/'
+const INSTAGRAM = 'https://www.instagram.com/xo.adityaaa.dev/'
+const X = 'https://x.com/Adityathedev'
+const AVAILABILITY = 'Taking projects from December'
+const QUOTES = [
+  ['Excellent payment portal and shopping pages, and an easy to edit CMS!', 'ThreadPath Collective'],
+  ['A great amount of stress reduction for the staff because of the new admin dashboard.', 'The Whisky Business'],
+  ['The best landing page to outpace my competitors!', 'Pixel Spaces'],
+]
 const TODAY = new Date().toISOString().slice(0, 10)
 
 // The same lead order the page uses (see LEAD in src/site/ProjectsView.tsx).
@@ -117,7 +125,7 @@ function jsonLd(route: Route, projects: ProjectEntry[]) {
       'React', 'Next.js', 'TypeScript', 'Progressive web apps', 'Offline-first applications', 'HTML5 Canvas',
       '3D web interfaces', 'Firebase', 'FastAPI', 'Node.js', 'PostgreSQL', 'Kubernetes', 'Linux', 'AI agents',
     ],
-    sameAs: [GITHUB, LINKEDIN],
+    sameAs: [GITHUB, LINKEDIN, INSTAGRAM, X],
   }
   const website = {
     '@type': 'WebSite',
@@ -147,7 +155,7 @@ function jsonLd(route: Route, projects: ProjectEntry[]) {
     datePublished: '2026-11-13',
     dateModified: TODAY,
     breadcrumb: { '@id': breadcrumb['@id'] },
-    primaryImageOfPage: `${SITE}/og.png`,
+    primaryImageOfPage: `${SITE}/share-card.png`,
     speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.summary'] },
   }
   const graph: unknown[] = [website, person, webPage, breadcrumb]
@@ -194,20 +202,23 @@ function head(route: Route, projects: ProjectEntry[]) {
     <link rel="canonical" href="${url}" />
     <link rel="me" href="${GITHUB}" />
     <link rel="me" href="${LINKEDIN}" />
+    <link rel="me" href="${INSTAGRAM}" />
+    <link rel="me" href="${X}" />
     <meta property="og:type" content="${route === 'home' ? 'website' : 'profile'}" />
     <meta property="og:site_name" content="${NAME}" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:url" content="${url}" />
     <meta property="og:title" content="${esc(page.title)}" />
     <meta property="og:description" content="${esc(share)}" />
-    <meta property="og:image" content="${SITE}/og.png" />
+    <meta property="og:image" content="${SITE}/share-card.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="${NAME}, full-stack developer and systems engineer" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${esc(page.title)}" />
     <meta name="twitter:description" content="${esc(share)}" />
-    <meta name="twitter:image" content="${SITE}/og.png" />
+    <meta name="twitter:image" content="${SITE}/share-card.png" />
     <script type="application/ld+json">${jsonLd(route, projects)}</script>`
 }
 
@@ -263,6 +274,10 @@ function body(route: Route, projects: ProjectEntry[]) {
       <ol>
         ${jobs}
       </ol>
+      <h2>What do clients say about ${NAME}?</h2>
+      <ul>
+        ${QUOTES.map(([text, client]) => `<li>${esc(client)}: "${esc(text)}"</li>`).join('\n        ')}
+      </ul>
       <h2>What results has ${NAME}'s work produced?</h2>
       <p>GLIA, the offline-first event app ${NAME} built for an international neuroscience conference, handled more than 1.2 million Firestore reads. Travel Animator, the route animation app he worked on at Lascade, is used by more than 1 million people. ALFRED, his desktop AI assistant, performs on-device OCR in under 150 ms. The canvas visualisations he built for IndZita Biotech render at 60 frames per second.</p>
       <h2>How can I work with ${NAME}?</h2>
@@ -281,7 +296,11 @@ function body(route: Route, projects: ProjectEntry[]) {
         <li>Phone: <a href="tel:${PHONE}">${PHONE_SHOWN}</a></li>
         <li>GitHub: <a href="${GITHUB}">github.com/AdityaManojA</a></li>
         <li>LinkedIn: <a href="${LINKEDIN}">${NAME} on LinkedIn</a></li>
+        <li>Instagram: <a href="${INSTAGRAM}">@xo.adityaaa.dev</a></li>
+        <li>X: <a href="${X}">@Adityathedev</a></li>
       </ul>
+      <h2>Is ${NAME} available for new work?</h2>
+      <p>Yes. ${NAME} is taking on new projects from December.</p>
       <h2>What kind of projects does ${NAME} take on?</h2>
       <p>${NAME} takes projects from the first idea to a production system. ${NAME} builds four kinds of software: client websites, offline-first progressive web apps, canvas and 3D interfaces, and on-device AI agents. See <a href="/">all ${projects.length} projects</a> or <a href="/about">read about his experience</a>.</p>
       <h2>What has ${NAME} built for clients recently?</h2>
@@ -351,6 +370,9 @@ ${jobs}
 - Phone: ${PHONE_SHOWN}
 - GitHub: ${GITHUB}
 - LinkedIn: ${LINKEDIN}
+- Instagram: ${INSTAGRAM}
+- X: ${X}
+- Availability: ${AVAILABILITY}
 `
 }
 

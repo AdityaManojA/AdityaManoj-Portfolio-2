@@ -80,7 +80,7 @@ function pulseWhenVisible(tile: HTMLElement) {
   window.setTimeout(fire, 1600);
 }
 
-export default function ProjectsView() {
+export default function ProjectsView({ onContact }: { onContact: () => void }) {
   const hero = useRef<HTMLDivElement>(null);
   const cloud = useRef<HTMLDivElement>(null);
   const grid = useRef<HTMLDivElement>(null);
@@ -320,7 +320,10 @@ export default function ProjectsView() {
                   <h2>{shortName(p)}</h2>
                   <p className="sf">{subtitle(p)}</p>
                 </div>
-                <span className="mu">{p.year}</span>
+                <span className="mu yr">
+                  {p.year}
+                  {p.link && <span className="go" aria-hidden="true"> ↗</span>}
+                </span>
               </div>
             </>
           );
@@ -335,6 +338,23 @@ export default function ProjectsView() {
             </div>
           );
         })}
+      </div>
+
+      {/* The list ends under the thumb on a phone, so the next step is right there. */}
+      <div className="end">
+        <p className="avail">Taking projects from December</p>
+        <p className="sf">Have a project to build?</p>
+        <a
+          className="cta"
+          href="/contact"
+          onClick={(e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+            e.preventDefault();
+            onContact();
+          }}
+        >
+          Get in touch
+        </a>
       </div>
     </main>
   );

@@ -1,0 +1,13 @@
+{
+  "name": "Aditya Manoj",
+  "short_name": "AM .Dev",
+  "description": "Portfolio of Aditya Manoj, full-stack developer and systems engineer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

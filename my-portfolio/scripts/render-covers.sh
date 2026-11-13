@@ -2,8 +2,8 @@
 # Renders the designed images in scripts/covers/*.html to PNGs, using headless Edge or
 # Chrome:
 #   promptops.html -> public/ProjectImages/Promptops.png  (project tile, 1600 × 1000 at 2x)
-#   share.html     -> public/og.png                       (link-preview image, 1200 × 630)
-#   favicon.html   -> public/favicon-32.png, favicon-192.png and apple-touch-icon.png
+#   share.html     -> public/share-card.png                       (link-preview image, 1200 × 630)
+#   favicon.html   -> public/favicon-32/192/512.png and apple-touch-icon.png
 #                     (needs ffmpeg, to scale the 512px render down)
 # Run scripts/optimize-images.sh afterwards so the tile's WebP copies are rebuilt.
 #
@@ -29,15 +29,19 @@ trap 'rm -rf "$profile"' EXIT
 here() { (cd "$1" && (pwd -W 2>/dev/null || pwd)); }
 
 render() { # <cover name, with any ?query> <output file, relative to the project> <width> <height> <scale>
+  rm -f "$2"
   "$BROWSER" --headless=new --disable-gpu --hide-scrollbars --no-first-run \
     --user-data-dir="$profile" --window-size="$3,$4" --force-device-scale-factor="$5" \
     --virtual-time-budget=6000 --default-background-color=00000000 --screenshot="$(here "$(dirname "$2")")/$(basename "$2")" \
     "file:///$(here scripts/covers)/${1%%.html*}.html${1#"${1%%\?*}"}" >/dev/null 2>&1
+  # The browser can return before the file is on disk; wait for it.
+  for _ in $(seq 1 40); do [ -s "$2" ] && break; sleep 0.25; done
+  [ -s "$2" ] || { echo "failed to render $2" >&2; exit 1; }
   echo "rendered $2"
 }
 
 render promptops public/ProjectImages/Promptops.png 1600 1000 2
-render share public/og.png 1200 630 1
+render share public/share-card.png 1200 630 1
 
 scale() { # <source png> <output file> <size>
   ffmpeg -loglevel error -y -i "$1" -vf "scale=$3:$3:flags=lanczos" "$2"
@@ -49,4 +53,4 @@ render "favicon.html?full" public/favicon-full.png 512 512 1
 scale public/favicon-512.png public/favicon-32.png 32
 scale public/favicon-512.png public/favicon-192.png 192
 scale public/favicon-full.png public/apple-touch-icon.png 180
-rm -f public/favicon-512.png public/favicon-full.png
+rm -f public/favicon-full.png

@@ -104,7 +104,7 @@ export default function App() {
         ))}
       </nav>
 
-      {view === 'projects' && <ProjectsView />}
+      {view === 'projects' && <ProjectsView onContact={() => go('contact')} />}
       {view === 'about' && <AboutView onContact={() => go('contact')} />}
       {view === 'contact' && <ContactView />}
     </>

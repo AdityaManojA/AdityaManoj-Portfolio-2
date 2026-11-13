@@ -17,7 +17,11 @@ html, body {
   color: var(--fg);
   font: 13px/1.45 Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
 }
+/* Each page fades in when the nav switches to it. */
+main { animation: view-in 0.4s ease both; }
+@keyframes view-in { from { opacity: 0; } }
 
 p, h1, h2, h3, h4, figure { margin: 0; font-weight: 400; }
 /* Headings carry structure only; their size comes from a class (.headline, .display, ...). */
@@ -37,8 +41,17 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 }
 /* The bar itself lets clicks through to the page; "all: unset" would make the links
    inherit that, so they opt back in explicitly. */
-.nav a { all: unset; pointer-events: auto; cursor: pointer; background: var(--ch); border-radius: 5px; padding: 3px 9px; font-size: 12px; }
-.nav a.on { background: var(--ch-hi); }
+.nav a {
+  all: unset; pointer-events: auto; cursor: pointer; border-radius: 5px; padding: 3px 9px; font-size: 12px;
+  /* Slightly see-through with a blur, so the chips stay readable over a screenshot. */
+  background: rgba(26, 26, 28, 0.78); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+.nav a.on { background: rgba(58, 58, 63, 0.9); }
+/* Keeps the raised numbers from making their chips taller than the brand chip. */
+.nav sup { line-height: 0; }
+/* Everything tappable gives a little under the finger. */
+.nav a:active, .cta:active, .crow button:active, .crow .open:active, .swarm-bar button:active { transform: scale(0.95); }
 /* The brand keeps a chip too, so it stays readable when it scrolls over a screenshot. */
 .nav a.brand { font-weight: 500; margin-right: 4px; }
 .nav a:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
@@ -56,8 +69,8 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   border-radius: 2px; will-change: transform; cursor: pointer;
 }
 .cd:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
-.hero-cap { position: absolute; left: 20px; bottom: 18px; font-size: 22px; pointer-events: none; }
-.hero-hint { position: absolute; right: 20px; bottom: 22px; font-size: 12px; pointer-events: none; }
+.hero-cap { position: absolute; left: 20px; bottom: 18px; font-size: 22px; pointer-events: none; z-index: 45; text-shadow: 0 0 14px var(--bg), 0 0 4px var(--bg); }
+.hero-hint { position: absolute; right: 20px; bottom: 22px; font-size: 12px; pointer-events: none; z-index: 45; text-shadow: 0 0 10px var(--bg), 0 0 3px var(--bg); }
 .for-touch { display: none; }
 @media (hover: none) {
   .for-mouse { display: none; }
@@ -89,6 +102,12 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .tile:hover .im img { transform: scale(1.025); }
 .tile-cap { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 9px 2px 0; }
 .tile-cap .sf { font-size: 15px; }
+.tile-cap .yr { white-space: nowrap; }
+.tile-cap .go { color: var(--fg); }
+/* End of the list: one line and the way to get in touch. */
+.end { display: flex; flex-direction: column; align-items: center; padding: 30px 20px calc(110px + env(safe-area-inset-bottom, 0px)); text-align: center; }
+.end .sf { font-size: clamp(34px, 6vw, 64px); line-height: 1.05; }
+.end .cta { margin-top: 26px; }
 
 /* Swarm-built pages */
 .stage { position: relative; overflow: hidden; }
@@ -123,11 +142,22 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   padding: 16px 0; border-bottom: 1px solid var(--ln);
 }
 .row .sf { font-size: 21px; }
+.quotes { display: grid; gap: 52px; width: min(820px, 100%); text-align: center; }
+.quotes blockquote { margin: 0; font-size: clamp(26px, 4vw, 44px); line-height: 1.12; }
+.quotes figcaption { margin-top: 14px; font-size: 12px; }
+/* Availability: a live dot and one line. */
+.avail { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; color: var(--mu); }
+.avail::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%; background: #5eead4;
+  animation: avail 2.4s ease-out infinite;
+}
+@keyframes avail { from { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.55); } to { box-shadow: 0 0 0 9px rgba(94, 234, 212, 0); } }
+.end .avail { margin-bottom: 18px; }
 .nums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 54px 40px; width: min(760px, 100%); }
 .nums .sf { font-size: clamp(44px, 8vw, 92px); line-height: 1; }
 .cta {
   all: unset; cursor: pointer; margin-top: 64px; background: var(--fg); color: var(--bg);
-  border-radius: 999px; padding: 9px 20px; font-size: 13px;
+  border-radius: 999px; padding: 9px 20px; font-size: 13px; transition: transform 0.15s ease;
 }
 
 /* Contact */
@@ -142,6 +172,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .crow button, .crow .open {
   all: unset; cursor: pointer; background: var(--ch); border-radius: 999px;
   padding: 5px 13px; font-size: 12px; min-width: 44px; text-align: center;
+  transition: transform 0.15s ease, background-color 0.2s ease;
 }
 .crow button:hover, .crow .open:hover { background: var(--ch-hi); }
 .crow button:focus-visible, .crow .open:focus-visible, .cta:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
@@ -165,7 +196,8 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   animation: c-wipe 0.85s cubic-bezier(0.65, 0, 0.2, 1) both;
   animation-delay: calc(var(--i) * 140ms + 620ms);
 }
-.contact .where { animation: c-fade 0.7s ease 1.5s both; }
+.contact .avail { margin-top: 22px; animation: c-fade 0.7s ease 0.55s both; }
+.contact .where { animation: c-fade 0.7s ease 1.8s both; }
 html.loader-active .contact, html.loader-active .contact * , html.loader-active .contact .crows::before { animation-play-state: paused; }
 @keyframes c-fade { from { opacity: 0; } }
 @keyframes c-rise { from { transform: translateY(108%); } }
@@ -199,24 +231,31 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
 .swarm-bar .dots span:first-child { margin-left: 0; }
 .swarm-bar .tr { width: 60px; height: 3px; background: #333; border-radius: 2px; overflow: hidden; }
 .swarm-bar .tr span { display: block; height: 100%; width: 0; background: var(--sel); }
-.swarm-bar button { all: unset; cursor: pointer; background: var(--ch-hi); border-radius: 999px; padding: 3px 9px; }
+.swarm-bar button { all: unset; cursor: pointer; background: var(--ch-hi); border-radius: 999px; padding: 3px 9px; transition: transform 0.15s ease; }
 .swarm-bar button:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
 
 /* Phones */
 @media (max-width: 720px) {
   html, body { font-size: 14px; }
   .nav { top: calc(10px + env(safe-area-inset-top, 0px)); gap: 5px; }
-  .nav a { padding: 6px 11px; font-size: 13px; border-radius: 7px; }
+  /* 41px tall: a comfortable thumb target. */
+  .nav a { padding: 11px 10px; font-size: 13px; border-radius: 9px; }
 
   /* Landing: a tall cloud, the caption centred under it. */
   .hero { height: calc(100svh - 150px); min-height: 420px; }
-  .cd { width: 124px; height: 78px; margin: -39px 0 0 -62px; }
+  /* Sits a little above centre, so on a short phone the cloud clears the caption. */
+  .cd { width: 124px; height: 78px; margin: -39px 0 0 -62px; top: 45%; }
   .hero-cap { left: 0; right: 0; bottom: 34px; text-align: center; font-size: 21px; }
   .hero-hint { left: 0; right: 0; bottom: 12px; text-align: center; }
 
   /* One project per row, edge to edge. The tile in the middle of the screen is lit and
      the rest sit back, so scrolling reads as moving a spotlight down the list. */
-  .grid { grid-template-columns: 1fr; gap: 30px; padding: 0 0 120px; }
+  .grid { grid-template-columns: 1fr; gap: 30px; padding: 0 0 70px; }
+  /* A tile gives under the finger, and its arrow lights up when it is the one in focus. */
+  .tile .im { transition: transform 0.2s ease; }
+  .tile:active .im { transform: scale(0.985); }
+  .tile-cap .go { opacity: 0.45; transition: opacity 0.45s ease; }
+  .tile.focus .tile-cap .go { opacity: 1; }
   .tile .im img { filter: brightness(0.5) saturate(0.7); transition: filter 0.45s ease, transform 0.5s ease; }
   .tile.focus .im img { filter: none; }
   /* The caption only dims a little: at 0.9 its grey year text still passes AA contrast (5:1). */
@@ -226,7 +265,7 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
   .tile:hover .im img { transform: none; }
 
   /* About: portrait on top, the four skill groups as a two-by-two around a centre line. */
-  .sec { padding: 78px 18px 104px; }
+  .sec { padding: 78px 18px calc(104px + env(safe-area-inset-bottom, 0px)); }
   .headline { font-size: clamp(33px, 9.4vw, 44px); }
   .ring { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 22px; margin-top: 34px; align-items: start; }
   .portrait { grid-column: 1 / -1; grid-row: 1; margin: 0 auto; }
@@ -234,25 +273,36 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
   .row { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 14px 0; }
   .row > :first-child { grid-column: 1 / -1; color: var(--mu); font-size: 12px; }
   .row .sf { font-size: 22px; line-height: 1.15; }
+  .quotes { gap: 44px; }
+  .quotes blockquote { font-size: clamp(26px, 7.6vw, 34px); }
+  .avail { font-size: 13px; }
   .nums { gap: 40px 18px; }
   .nums .sf { font-size: clamp(40px, 12vw, 64px); }
-  .cta { padding: 12px 24px; font-size: 14px; }
+  .cta { padding: 14px 28px; font-size: 15px; }
 
   /* Contact: label above a large tappable value. */
   .crows { margin-top: 40px; }
   .crow { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 18px 0; }
   .crow > .mu { grid-column: 1 / -1; font-size: 12px; }
   .crow a.sf { font-size: clamp(21px, 6.2vw, 30px); }
-  .crow button, .crow .open { padding: 8px 15px; font-size: 13px; }
+  .crow button, .crow .open { padding: 12px 18px; font-size: 13px; }
   .crow:hover a.sf { transform: none; }
 
   .swarm-bar { font-size: 12px; padding: 7px 8px 7px 14px; }
   .swarm-bar .tr, .swarm-bar .dots { display: none; }
-  .swarm-bar button { padding: 5px 11px; }
+  .swarm-bar button { padding: 8px 14px; }
   .cu span { font-size: 9px; padding: 2px 5px; }
+}
+/* The narrowest phones: keep all four nav chips on one line. */
+@media (max-width: 350px) {
+  .nav { gap: 4px; }
+  .nav a { padding: 11px 7px; font-size: 12px; }
+  .nav a.brand { margin-right: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .swarm { display: none; }
+  main { animation: none; }
+  .avail::before, .contact .avail { animation: none; }
   .contact .k, .contact .ln > span, .contact .crows::before, .contact .crow, .contact .where { animation: none; }
   .tile { opacity: 1; transform: none; transition: none; }
   .tile .im img, .tile .im video, .tile-cap, .crow a.sf { transition: none; }

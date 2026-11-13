@@ -7,6 +7,13 @@ const EXPERIENCE = [
   ['AI/ML engineering intern', 'ICT Academy of Kerala', '2024'],
 ];
 
+// One line from each client, in their words.
+const QUOTES = [
+  ['Excellent payment portal and shopping pages, and an easy to edit CMS!', 'ThreadPath Collective'],
+  ['A great amount of stress reduction for the staff because of the new admin dashboard.', 'The Whisky Business'],
+  ['The best landing page to outpace my competitors!', 'Pixel Spaces'],
+];
+
 const NUMBERS = [
   ['1.2M+', 'Firestore reads handled by GLIA'],
   ['1M+', 'People using Travel Animator'],
@@ -74,6 +81,20 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
                 <span className="sf">{company}</span>
                 <span className="mu">{year}</span>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="sec">
+          <h2 className="k mu" data-b="type">
+            What clients say
+          </h2>
+          <div className="quotes">
+            {QUOTES.map(([text, client]) => (
+              <figure data-b="type" key={client}>
+                <blockquote className="sf">“{text}”</blockquote>
+                <figcaption className="mu">{client}</figcaption>
+              </figure>
             ))}
           </div>
         </section>
