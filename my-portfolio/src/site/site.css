@@ -196,26 +196,10 @@ html:has(.pop[open]) { overflow: hidden; }
 .ring .col > div + div { margin-top: 30px; }
 .ring h4 { font-size: 13px; font-weight: 500; margin-bottom: 7px; }
 .ring .sf { font-size: 17px; line-height: 1.3; }
-/* The centre of the About ring: the initials in a selection frame that stays selected. It
-   uses the swarm's own frame colours, handles and size badge (.sel and .bd further down). */
-.portrait {
-  position: relative; width: 170px; height: 150px; display: grid; place-items: center;
-  border: 1px solid var(--sel); background: rgba(76, 155, 240, 0.08);
-  /* Room for the size badge, which hangs under the frame. */
-  margin-bottom: 22px;
-}
-/* .ring is in the selector so this outranks the ring's own serif size. */
-.ring .portrait span { font-size: 84px; line-height: 1; letter-spacing: -0.01em; }
-.portrait i { position: absolute; width: 6px; height: 6px; margin: -3px; background: #fff; border: 1px solid var(--sel); }
-.portrait i:nth-of-type(1) { left: 0; top: 0; }
-.portrait i:nth-of-type(2) { left: 100%; top: 0; }
-.portrait i:nth-of-type(3) { left: 0; top: 100%; }
-.portrait i:nth-of-type(4) { left: 100%; top: 100%; }
-.portrait b {
-  position: absolute; left: 50%; top: 100%; transform: translate(-50%, 6px); font-weight: 400;
-  background: var(--sel); color: #0a0a0b; font-size: 10px; line-height: 1; padding: 2px 5px;
-  border-radius: 3px; white-space: nowrap;
-}
+/* The centre of the About ring: the pixel-art portrait, with no frame or background. The
+   picture is 382 × 720 and is scaled down smoothly; forcing hard pixels at this size drops
+   thin lines such as the glasses. */
+.portrait { display: block; height: 216px; width: auto; }
 .more { margin-top: 40px; font-size: 12px; }
 .k { font-size: 12px; margin-bottom: 26px; }
 .rows { width: min(900px, 100%); }
@@ -407,7 +391,7 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
   .sec { padding: 78px 18px calc(104px + env(safe-area-inset-bottom, 0px)); }
   .headline { font-size: clamp(33px, 9.4vw, 44px); }
   .ring { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 22px; margin-top: 34px; align-items: start; }
-  .portrait { grid-column: 1 / -1; grid-row: 1; margin: 0 auto 22px; }
+  .portrait { grid-column: 1 / -1; grid-row: 1; margin: 0 auto; height: 200px; }
   .ring .sf { font-size: 16px; }
   .row { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 14px 0; }
   .row > :first-child { grid-column: 1 / -1; color: var(--mu); font-size: 12px; }

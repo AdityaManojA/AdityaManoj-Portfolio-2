@@ -55,18 +55,16 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
               <Skill title="Frontend" lines={['React and Next.js', 'Canvas and 3D', 'Progressive web apps']} />
               <Skill title="Backend" lines={['FastAPI and Node.js', 'Firestore, PostgreSQL', 'Offline sync']} />
             </div>
-            {/* No picture: the initials, left selected the way a layer is in a design file,
-                with the corner handles and the size badge the swarm draws everywhere else. */}
-            <div className="portrait" data-b="fade" role="img" aria-label="AM, the initials of Aditya Manoj">
-              <span className="sf" aria-hidden="true">
-                AM
-              </span>
-              <i />
-              <i />
-              <i />
-              <i />
-              <b aria-hidden="true">170 × 150</b>
-            </div>
+            {/* The pixel-art self-portrait, cut out of its white background by
+                scripts/cut-out.mjs so it stands straight on the page. */}
+            <img
+              className="portrait"
+              src="/ProjectImages/web/avatar.webp"
+              width="382"
+              height="720"
+              alt="Pixel-art portrait of Aditya Manoj, wearing headphones and round glasses"
+              data-b="fade"
+            />
             <div className="col">
               <Skill title="AI agents" lines={['Live voice and vision', 'Local models', 'On-device OCR']} />
               <Skill title="Infrastructure" lines={['Linux internals', 'Kubernetes', 'Observability']} />

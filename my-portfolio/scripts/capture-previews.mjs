@@ -164,7 +164,7 @@ async function record(page, name, url, options = {}) {
   const ff = spawnSync(
     'ffmpeg',
     ['-loglevel', 'error', '-y', '-framerate', String(FPS), '-i', join(frames, '%04d.jpg'),
-      '-vf', `scale=${VIDEO_WIDTH}:-2:flags=lanczos`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '25',
+      '-vf', `scale=${VIDEO_WIDTH}:-2:flags=lanczos`, '-c:v', 'libx264', '-preset', 'slow', '-crf', PHONE ? '25' : '21',
       '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', out],
     { stdio: 'inherit' },
   );

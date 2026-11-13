@@ -37,15 +37,18 @@ function webImage(path: string, size: 'sm' | 'full') {
 // screenshot's file name. The video plays over the screenshot on hover, or on a phone
 // while the tile is the one in focus.
 const PREVIEWS = new Set(['Threadpath', 'Whisky', 'Pixel Spaces', 'Indzita', 'SBAFA', 'CsvtoJson']);
+// Browsers keep these files for a week under the same name. Raise this number whenever the
+// previews are re-recorded or re-encoded, so every visitor fetches the new ones.
+const PREVIEW_VERSION = 3;
 const previewVideo = (path: string) =>
-  PREVIEWS.has(baseName(path)) ? `/ProjectImages/previews/${encodeURIComponent(baseName(path))}.mp4` : null;
+  PREVIEWS.has(baseName(path)) ? `/ProjectImages/previews/${encodeURIComponent(baseName(path))}.mp4?v=${PREVIEW_VERSION}` : null;
 
 // The same sites recorded as a phone sees them (capture-previews.mjs --phone). Phones get
 // these, in a taller tile, so the project's own mobile layout is what is shown.
 const PHONE_CAPTURES = new Set(['Threadpath', 'Whisky', 'Pixel Spaces', 'Indzita', 'SBAFA', 'CsvtoJson']);
 const hasPhoneCapture = (p: Project) => PHONE_CAPTURES.has(baseName(p.image));
 const phoneImage = (path: string) => `/ProjectImages/web/${encodeURIComponent(baseName(path))}-m.webp`;
-const phoneVideo = (path: string) => `/ProjectImages/previews/${encodeURIComponent(baseName(path))}-m.mp4`;
+const phoneVideo = (path: string) => `/ProjectImages/previews/${encodeURIComponent(baseName(path))}-m.mp4?v=${PREVIEW_VERSION}`;
 const PHONE_WIDTH = '(max-width: 720px)';
 const onPhone = () => window.matchMedia(PHONE_WIDTH).matches;
 

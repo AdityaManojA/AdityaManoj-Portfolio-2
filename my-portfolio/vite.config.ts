@@ -113,7 +113,7 @@ function jsonLd(route: Route, projects: ProjectEntry[]) {
     jobTitle: 'Full-Stack Developer and Systems Engineer',
     description: `${NAME} is a full-stack developer and systems engineer who builds offline-first web apps, 3D interfaces, and on-device AI agents.`,
     url: SITE + '/',
-    image: `${SITE}/ProjectImages/web/pfp.webp`,
+    image: `${SITE}/ProjectImages/web/avatar.webp`,
     email: `mailto:${EMAIL}`,
     telephone: PHONE,
     address: { '@type': 'PostalAddress', addressRegion: 'Kerala', addressCountry: 'IN' },
