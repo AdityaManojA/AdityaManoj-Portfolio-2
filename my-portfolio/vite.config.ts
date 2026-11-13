@@ -409,8 +409,25 @@ function searchPages(): Plugin {
     closeBundle() {
       if (!shell) return
       const projects = readProjects()
+      // The shell was captured before Vite swapped its placeholders for public files (the
+      // font URLs in the inline <style>) for their real paths. The finished index.html has
+      // the real paths, so each placeholder is looked up there by the text in front of it.
+      const finished = readFileSync(join(outDir, 'index.html'), 'utf-8')
+      let ready = shell
+      for (let at = ready.indexOf('__VITE_PUBLIC_ASSET__'); at !== -1; at = ready.indexOf('__VITE_PUBLIC_ASSET__')) {
+        const placeholder = ready.slice(at).match(/^__VITE_PUBLIC_ASSET__[0-9a-f]+__/)?.[0]
+        // Everything before this point is already resolved, so it matches the finished file.
+        const before = ready.slice(Math.max(0, at - 240), at)
+        const found = finished.indexOf(before)
+        const url = found === -1 ? null : finished.slice(found + before.length).match(/^[^'")\s]+/)?.[0]
+        if (!placeholder || !url) throw new Error('search-pages: could not resolve a public file placeholder')
+        ready = ready.split(placeholder).join(url)
+      }
       for (const route of ['about', 'contact'] as const) {
-        writeFileSync(join(outDir, PAGES[route].file), render(shell, route, projects))
+        const html = render(ready, route, projects)
+        // A page that ships a placeholder loads no fonts at all, so fail the build instead.
+        if (html.includes('__VITE_')) throw new Error(`search-pages: ${PAGES[route].file} still contains a Vite placeholder`)
+        writeFileSync(join(outDir, PAGES[route].file), html)
       }
     },
   }
