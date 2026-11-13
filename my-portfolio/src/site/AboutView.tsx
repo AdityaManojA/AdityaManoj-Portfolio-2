@@ -59,9 +59,9 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
                 scripts/cut-out.mjs so it stands straight on the page. */}
             <img
               className="portrait"
-              src="/ProjectImages/web/avatar.webp"
-              width="382"
-              height="720"
+              src="/ProjectImages/web/avatar.webp?v=2"
+              width="688"
+              height="1297"
               alt="Pixel-art portrait of Aditya Manoj, wearing headphones and round glasses"
               data-b="fade"
             />
