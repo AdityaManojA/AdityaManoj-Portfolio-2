@@ -4,7 +4,7 @@
 // For every entry in SITES it opens the page in headless Edge/Chrome and:
 //   1. saves the page as it first appears to public/ProjectImages/<name>.png (2560 × 1600);
 //   2. scrolls slowly from the top, saving one frame per step, and encodes the frames with
-//      ffmpeg to public/ProjectImages/previews/<name>.mp4 (960px wide, silent).
+//      ffmpeg to public/ProjectImages/previews/<name>.mp4 (1920px wide, silent).
 // The screenshot and the video's first frame are the same capture, so when a tile starts
 // playing nothing jumps or rescales. Run scripts/optimize-images.sh afterwards.
 //
@@ -44,7 +44,9 @@ const PHONE = process.argv.includes('--phone');
 const WIDTH = PHONE ? 390 : 1280;
 const HEIGHT = PHONE ? 844 : 800;
 const SUFFIX = PHONE ? '-m' : '';
-const VIDEO_WIDTH = PHONE ? 540 : 960;
+// Wide enough for the largest tile on a sharp screen: the frames are captured at 2x or 3x,
+// so these are scaled down from more pixels, not up.
+const VIDEO_WIDTH = PHONE ? 1080 : 1920;
 const PHONE_AGENT =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const FPS = 24;
@@ -162,7 +164,7 @@ async function record(page, name, url, options = {}) {
   const ff = spawnSync(
     'ffmpeg',
     ['-loglevel', 'error', '-y', '-framerate', String(FPS), '-i', join(frames, '%04d.jpg'),
-      '-vf', `scale=${VIDEO_WIDTH}:-2:flags=lanczos`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
+      '-vf', `scale=${VIDEO_WIDTH}:-2:flags=lanczos`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '25',
       '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', out],
     { stdio: 'inherit' },
   );
