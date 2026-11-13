@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react';
 import { PROJECTS_DATA, type Project } from '../data';
+import ProjectPopup from './ProjectPopup';
 
 
 // The projects that lead the page, by id, in this order: ThreadPath, The Whisky Business,
@@ -39,11 +40,28 @@ const PREVIEWS = new Set(['Threadpath', 'Whisky', 'Pixel Spaces', 'Indzita', 'SB
 const previewVideo = (path: string) =>
   PREVIEWS.has(baseName(path)) ? `/ProjectImages/previews/${encodeURIComponent(baseName(path))}.mp4` : null;
 
+// The same sites recorded as a phone sees them (capture-previews.mjs --phone). Phones get
+// these, in a taller tile, so the project's own mobile layout is what is shown.
+const PHONE_CAPTURES = new Set(['Threadpath', 'Whisky', 'Pixel Spaces', 'Indzita', 'SBAFA', 'CsvtoJson']);
+const hasPhoneCapture = (p: Project) => PHONE_CAPTURES.has(baseName(p.image));
+const phoneImage = (path: string) => `/ProjectImages/web/${encodeURIComponent(baseName(path))}-m.webp`;
+const phoneVideo = (path: string) => `/ProjectImages/previews/${encodeURIComponent(baseName(path))}-m.mp4`;
+const PHONE_WIDTH = '(max-width: 720px)';
+const onPhone = () => window.matchMedia(PHONE_WIDTH).matches;
+
+// The list has a rhythm: client work is shown large, the small utilities share a row.
+const CLIENT_WORK = new Set([8, 11, 18]); // ThreadPath, The Whisky Business, Pixel Spaces
+const UTILITIES = new Set([12, 2, 5]); // Prompt-Ops, Retro QR Crafter, CSV to JSON
+const tileClass = (p: Project) =>
+  ['tile', CLIENT_WORK.has(p.id) && 'big', UTILITIES.has(p.id) && 'small', hasPhoneCapture(p) && 'tall'].filter(Boolean).join(' ');
+
 function playPreview(tile: Element) {
   const video = tile.querySelector('video');
   if (!video) return;
-  // The file is only fetched the first time its tile is played.
-  if (!video.getAttribute('src') && video.dataset.src) video.src = video.dataset.src;
+  // The file is only fetched the first time its tile is played: the phone recording on a
+  // phone, the desktop one elsewhere.
+  const source = (onPhone() && video.dataset.srcPhone) || video.dataset.src;
+  if (!video.getAttribute('src') && source) video.src = source;
   video.play().catch(() => {
     // Autoplay was refused (for example in a low-power mode); the screenshot stays.
   });
@@ -86,6 +104,43 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
   const grid = useRef<HTMLDivElement>(null);
   const caption = useRef<HTMLParagraphElement>(null);
   const dragged = useRef(0);
+  const [open, setOpen] = useState<Project | null>(null);
+  // The last project opened stays rendered while the popup closes, so it does not go blank.
+  const [shown, setShown] = useState<Project | null>(null);
+
+  // The popup takes a history entry, so the phone's back button closes it instead of
+  // leaving the page.
+  const openPopup = (p: Project) => {
+    setShown(p);
+    setOpen(p);
+    window.history.pushState({ popup: p.id }, '');
+  };
+  // Next or previous project without leaving the popup; the list wraps around.
+  const stepPopup = useCallback((direction: 1 | -1) => {
+    setOpen((current) => {
+      if (!current) return current;
+      const next = PROJECTS[(PROJECTS.indexOf(current) + direction + PROJECTS.length) % PROJECTS.length];
+      setShown(next);
+      window.history.replaceState({ popup: next.id }, '');
+      return next;
+    });
+  }, []);
+  const closePopup = useCallback(() => {
+    if (window.history.state?.popup) window.history.back();
+    else setOpen(null);
+  }, []);
+  useEffect(() => {
+    const onPop = () => setOpen(null);
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  // A plain click or tap opens the popup; a modified click still opens the site in a new tab.
+  const onTile = (e: MouseEvent, p: Project) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    openPopup(p);
+  };
 
   // The spinning cloud.
   useEffect(() => {
@@ -109,6 +164,7 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
     let tilt = 0.3;
     let dragging = false;
     let lastX = 0;
+    let lastY = 0;
     let lastScroll = window.scrollY;
     let gatherStart = 0; // time the cards started flying in; 0 = still waiting on the loader
     let raf = 0;
@@ -116,6 +172,7 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
     const onDown = (e: PointerEvent) => {
       dragging = true;
       lastX = e.clientX;
+      lastY = e.clientY;
       dragged.current = 0;
     };
     const onUp = () => {
@@ -124,9 +181,11 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
     const onMove = (e: PointerEvent) => {
       if (dragging) {
         const dx = e.clientX - lastX;
-        dragged.current += Math.abs(dx);
+        // Movement in either direction makes this a drag, so it does not end as a tap.
+        dragged.current += Math.abs(dx) + Math.abs(e.clientY - lastY);
         velocity = dx * 0.004;
         lastX = e.clientX;
+        lastY = e.clientY;
       }
       const r = heroEl.getBoundingClientRect();
       tilt = 0.3 + ((e.clientY - r.top) / r.height - 0.5) * 0.4;
@@ -147,10 +206,22 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
       rotation += velocity;
       if (!dragging) velocity += (drift - velocity) * 0.03;
       const width = heroEl.clientWidth;
+      const height = heroEl.clientHeight;
       const narrow = width < 720;
-      // On a phone the cloud is taller than it is wide, to use the portrait screen.
-      const radiusX = narrow ? width * 0.36 : Math.min(width * 0.34, 360);
-      const radiusY = Math.min(heroEl.clientHeight * (narrow ? 0.33 : 0.3), 220);
+      const cardW = cards[0]?.offsetWidth ?? 160;
+      const cardH = cards[0]?.offsetHeight ?? 100;
+      // The cloud's centre (see .cd in site.css) and the space kept clear around it: the
+      // nav above, the caption below, and a small margin at each side.
+      const centreY = height * (narrow ? 0.45 : 0.5);
+      const clearTop = narrow ? 66 : 52;
+      const clearBottom = narrow ? 88 : 62;
+      // On a phone the cloud is taller than it is wide, to use the portrait screen. Both
+      // radii are capped so that no card leaves the screen or slides under the nav.
+      const radiusX = Math.max(40, Math.min(narrow ? width * 0.36 : Math.min(width * 0.34, 360), width / 2 - cardW / 2 - 8));
+      const radiusY = Math.max(
+        40,
+        Math.min(height * (narrow ? 0.33 : 0.3), 220, centreY - clearTop - cardH / 2, height - clearBottom - centreY - cardH / 2),
+      );
       const ct = Math.cos(tilt);
       const st = Math.sin(tilt);
       const cr = Math.cos(rotation);
@@ -160,7 +231,7 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
       // to their places one after another. It is the second half of the loader.
       const now = performance.now();
       if (gatherStart === 0 && !document.documentElement.classList.contains('loader-active')) gatherStart = now;
-      const reach = Math.max(width, heroEl.clientHeight) * 0.95;
+      const reach = Math.max(width, height) * 0.95;
 
       cards.forEach((card, i) => {
         const p = points[i];
@@ -260,20 +331,31 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
     if (caption.current) caption.current.textContent = text;
   };
 
-  const jumpTo = (p: Project) => {
+  const jumpTo = (p: Project, card: HTMLElement) => {
     // A drag that ends on a card is a spin, not a selection.
     if (dragged.current > 5) return;
     const tile = document.getElementById(`project-${p.id}`);
     if (!tile) return;
-    tile.classList.add('in');
-    tile.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    pulseWhenVisible(tile);
+    // The card lights up first, so the tap is seen to land before the page moves.
+    card.classList.add('hit');
+    window.setTimeout(() => card.classList.remove('hit'), 650);
     navigator.vibrate?.(8);
+    tile.classList.add('in');
+    window.setTimeout(() => {
+      tile.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      pulseWhenVisible(tile);
+    }, 180);
   };
+
+  // On a phone the popup shows the phone capture too, where there is one.
+  const popupPhone = !!shown && hasPhoneCapture(shown) && onPhone();
 
   return (
     <main>
       <div className="hero" ref={hero}>
+        {/* On a touch screen a drag that starts here, or on a card, spins the cloud and never
+            scrolls the page. The strip under it (the caption) still scrolls as usual. */}
+        <div className="hero-pad" />
         {/* The cloud repeats the project list below it, so it is hidden from assistive tech
             and skipped by the Tab key: keyboard users go straight from the nav to the list. */}
         <div ref={cloud} aria-hidden="true">
@@ -289,7 +371,7 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
               onPointerLeave={() => setCaption(CAPTION)}
               onFocus={() => setCaption(`${shortName(p)}, ${p.year}`)}
               onBlur={() => setCaption(CAPTION)}
-              onClick={() => jumpTo(p)}
+              onClick={(e) => jumpTo(p, e.currentTarget)}
             />
           ))}
         </div>
@@ -302,9 +384,7 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
         </p>
       </div>
 
-      <h1 className="lead">
-        A curated selection of <span className="sf">systems and web projects</span>
-      </h1>
+      <h1 className="lead sf">I build websites and apps that work as hard as the business behind them.</h1>
 
       <div className="grid" ref={grid}>
         {PROJECTS.map((p) => {
@@ -312,8 +392,21 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
           const body = (
             <>
               <div className="im">
-                <img src={webImage(p.image, 'full')} alt={`${shortName(p)} screenshot`} loading="lazy" decoding="async" />
-                {video && <video data-src={video} muted loop playsInline preload="none" aria-hidden="true" />}
+                <picture>
+                  {hasPhoneCapture(p) && <source media={PHONE_WIDTH} srcSet={phoneImage(p.image)} />}
+                  <img src={webImage(p.image, 'full')} alt={`${shortName(p)} screenshot`} loading="lazy" decoding="async" />
+                </picture>
+                {video && (
+                  <video
+                    data-src={video}
+                    data-src-phone={hasPhoneCapture(p) ? phoneVideo(p.image) : undefined}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    aria-hidden="true"
+                  />
+                )}
               </div>
               <div className="tile-cap">
                 <div>
@@ -322,20 +415,30 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
                 </div>
                 <span className="mu yr">
                   {p.year}
-                  {p.link && <span className="go" aria-hidden="true"> ↗</span>}
+                  <span className="go" aria-hidden="true"> +</span>
                 </span>
               </div>
             </>
           );
-          // A project whose site is no longer online is shown, but not as a link.
+          // Every tile opens the popup. One with a live site stays a real link underneath,
+          // for crawlers and for opening in a new tab.
           return p.link ? (
-            <a key={p.id} id={`project-${p.id}`} className="tile" href={p.link} target="_blank" rel="noopener noreferrer">
+            <a
+              key={p.id}
+              id={`project-${p.id}`}
+              className={tileClass(p)}
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-haspopup="dialog"
+              onClick={(e) => onTile(e, p)}
+            >
               {body}
             </a>
           ) : (
-            <div key={p.id} id={`project-${p.id}`} className="tile">
+            <button key={p.id} id={`project-${p.id}`} type="button" className={tileClass(p)} aria-haspopup="dialog" onClick={(e) => onTile(e, p)}>
               {body}
-            </div>
+            </button>
           );
         })}
       </div>
@@ -356,6 +459,18 @@ export default function ProjectsView({ onContact }: { onContact: () => void }) {
           Get in touch
         </a>
       </div>
+
+      <ProjectPopup
+        project={open}
+        name={shown ? shortName(shown) : ''}
+        subtitle={shown ? subtitle(shown) : ''}
+        image={shown ? (popupPhone ? phoneImage(shown.image) : webImage(shown.image, 'full')) : ''}
+        video={open ? (popupPhone ? phoneVideo(open.image) : previewVideo(open.image)) : null}
+        tall={popupPhone}
+        position={shown ? `${PROJECTS.indexOf(shown) + 1} / ${PROJECTS.length}` : ''}
+        onClose={closePopup}
+        onStep={stepPopup}
+      />
     </main>
   );
 }

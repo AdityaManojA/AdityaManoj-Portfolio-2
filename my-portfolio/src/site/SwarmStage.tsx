@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-import { AGENTS, createSwarm, type Swarm } from './swarm';
+import { createSwarm, type Swarm } from './swarm';
 
 /** Wraps a page whose sections are built on screen by the cursor swarm. */
 export default function SwarmStage({ children }: { children: ReactNode }) {
@@ -29,16 +29,14 @@ export default function SwarmStage({ children }: { children: ReactNode }) {
         {children}
       </div>
       <div className="swarm" ref={overlay} aria-hidden="true" />
-      <div className="swarm-bar">
-        <span className="dots" aria-hidden="true">
-          {AGENTS.map(([name, color]) => (
-            <span key={name} style={{ background: color }} />
-          ))}
-        </span>
-        <span ref={status} />
+      {/* While the page builds this is only a thin line along the bottom edge. Replay shows
+          once everything is built. The swarm sets data-state on this element. */}
+      <div className="swarm-bar" data-state="building">
         <span className="tr" aria-hidden="true">
           <span ref={progress} />
         </span>
+        {/* The written status is kept for screen readers. */}
+        <span className="sr-only" ref={status} />
         <button type="button" onClick={() => swarm.current?.replay()}>
           Replay
         </button>

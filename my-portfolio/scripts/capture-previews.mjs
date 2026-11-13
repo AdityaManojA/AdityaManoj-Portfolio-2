@@ -10,6 +10,11 @@
 //
 //   node scripts/capture-previews.mjs            record every site
 //   node scripts/capture-previews.mjs GLIA Levern  record only these
+//   node scripts/capture-previews.mjs --phone    record every site as a phone sees it
+//
+// With --phone the browser is a 390 × 844 touch device, and the files are saved with "-m"
+// after the name (Threadpath-m.png, previews/Threadpath-m.mp4). The site shows those on
+// phones, so a tile there is the project's own mobile layout and not a shrunken desktop.
 //
 // Needs Node 22+ (built-in WebSocket), ffmpeg, and Edge or Chrome. Set BROWSER to the
 // executable path if it is not found. Talks to the browser over the DevTools protocol
@@ -35,19 +40,24 @@ const SITES = [
   // third item to press buttons before recording.
 ];
 
-const WIDTH = 1280;
-const HEIGHT = 800;
+const PHONE = process.argv.includes('--phone');
+const WIDTH = PHONE ? 390 : 1280;
+const HEIGHT = PHONE ? 844 : 800;
+const SUFFIX = PHONE ? '-m' : '';
+const VIDEO_WIDTH = PHONE ? 540 : 960;
+const PHONE_AGENT =
+  'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const FPS = 24;
 const HOLD_START = 14; // frames held at the top before scrolling
 const SCROLL = 84; // frames spent scrolling
 const HOLD_END = 12; // frames held at the bottom
-const MAX_SCROLL = 2600; // px; long pages are not scrolled to the very end
+const MAX_SCROLL = PHONE ? 3400 : 2600; // px; long pages are not scrolled to the very end
 const PORT = 9333;
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const imageDir = join(root, 'public', 'ProjectImages');
 const outDir = join(imageDir, 'previews');
-const work = join(tmpdir(), 'portfolio-previews');
+const work = join(tmpdir(), PHONE ? 'portfolio-previews-phone' : 'portfolio-previews');
 
 const browser =
   process.env.BROWSER ??
@@ -137,7 +147,7 @@ async function record(page, name, url, options = {}) {
   await evaluate('window.__previewScroller.scrollTop = 0');
   await sleep(300);
   const poster = await page.send('Page.captureScreenshot', { format: 'png' });
-  writeFileSync(join(imageDir, `${name}.png`), Buffer.from(poster.data, 'base64'));
+  writeFileSync(join(imageDir, `${name}${SUFFIX}.png`), Buffer.from(poster.data, 'base64'));
 
   const total = HOLD_START + SCROLL + HOLD_END;
   for (let i = 0; i < total; i++) {
@@ -148,19 +158,19 @@ async function record(page, name, url, options = {}) {
     writeFileSync(join(frames, `${String(i).padStart(4, '0')}.jpg`), Buffer.from(shot.data, 'base64'));
   }
 
-  const out = join(outDir, `${name}.mp4`);
+  const out = join(outDir, `${name}${SUFFIX}.mp4`);
   const ff = spawnSync(
     'ffmpeg',
     ['-loglevel', 'error', '-y', '-framerate', String(FPS), '-i', join(frames, '%04d.jpg'),
-      '-vf', 'scale=960:-2:flags=lanczos', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
+      '-vf', `scale=${VIDEO_WIDTH}:-2:flags=lanczos`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
       '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', out],
     { stdio: 'inherit' },
   );
   if (ff.status !== 0) throw new Error(`ffmpeg failed for ${name}`);
-  console.log(`${name}: screenshot + ${distance}px scroll -> ${name}.png, previews/${name}.mp4`);
+  console.log(`${name}: screenshot + ${distance}px scroll -> ${name}${SUFFIX}.png, previews/${name}${SUFFIX}.mp4`);
 }
 
-const only = process.argv.slice(2);
+const only = process.argv.slice(2).filter((arg) => !arg.startsWith('--'));
 const sites = only.length ? SITES.filter(([name]) => only.includes(name)) : SITES;
 mkdirSync(outDir, { recursive: true });
 mkdirSync(work, { recursive: true });
@@ -188,8 +198,12 @@ try {
   await page.send('Page.enable');
   await page.send('Emulation.setDeviceMetricsOverride', {
     // 2x: sharp enough for the screenshot. ffmpeg scales the frames down for the video.
-    width: WIDTH, height: HEIGHT, deviceScaleFactor: 2, mobile: false,
+    width: WIDTH, height: HEIGHT, deviceScaleFactor: PHONE ? 3 : 2, mobile: PHONE,
   });
+  if (PHONE) {
+    await page.send('Emulation.setTouchEmulationEnabled', { enabled: true });
+    await page.send('Emulation.setUserAgentOverride', { userAgent: PHONE_AGENT });
+  }
   for (const [name, url, options] of sites) {
     try {
       await record(page, name, url, options);

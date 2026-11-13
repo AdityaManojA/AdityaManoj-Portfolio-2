@@ -1,3 +1,4 @@
+import { QUOTES } from '../data/quotes';
 import SwarmStage from './SwarmStage';
 
 const EXPERIENCE = [
@@ -5,13 +6,6 @@ const EXPERIENCE = [
   ['Product development engineer', 'Lascade', '2025'],
   ['Full-stack development intern', 'ICT Academy of Kerala', '2024'],
   ['AI/ML engineering intern', 'ICT Academy of Kerala', '2024'],
-];
-
-// One line from each client, in their words.
-const QUOTES = [
-  ['Excellent payment portal and shopping pages, and an easy to edit CMS!', 'ThreadPath Collective'],
-  ['A great amount of stress reduction for the staff because of the new admin dashboard.', 'The Whisky Business'],
-  ['The best landing page to outpace my competitors!', 'Pixel Spaces'],
 ];
 
 const NUMBERS = [
@@ -51,6 +45,9 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
             that hold under load.
           </h1>
           <p className="status mu" data-b="type">
+            I build websites and apps for businesses, from the first idea to launch.
+          </p>
+          <p className="status now mu" data-b="type">
             Currently building ALFRED Mark VIII, from Kerala
           </p>
           <div className="ring">
@@ -58,8 +55,18 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
               <Skill title="Frontend" lines={['React and Next.js', 'Canvas and 3D', 'Progressive web apps']} />
               <Skill title="Backend" lines={['FastAPI and Node.js', 'Firestore, PostgreSQL', 'Offline sync']} />
             </div>
-            {/* The portrait is tall; the 1:1 box with top alignment keeps only its upper half. */}
-            <img className="portrait" src="/ProjectImages/web/pfp.webp" width="440" height="778" alt="Portrait of Aditya Manoj" data-b="fade" />
+            {/* No picture: the initials, left selected the way a layer is in a design file,
+                with the corner handles and the size badge the swarm draws everywhere else. */}
+            <div className="portrait" data-b="fade" role="img" aria-label="AM, the initials of Aditya Manoj">
+              <span className="sf" aria-hidden="true">
+                AM
+              </span>
+              <i />
+              <i />
+              <i />
+              <i />
+              <b aria-hidden="true">170 × 150</b>
+            </div>
             <div className="col">
               <Skill title="AI agents" lines={['Live voice and vision', 'Local models', 'On-device OCR']} />
               <Skill title="Infrastructure" lines={['Linux internals', 'Kubernetes', 'Observability']} />
@@ -90,7 +97,7 @@ export default function AboutView({ onContact }: { onContact: () => void }) {
             What clients say
           </h2>
           <div className="quotes">
-            {QUOTES.map(([text, client]) => (
+            {QUOTES.map(({ text, client }) => (
               <figure data-b="type" key={client}>
                 <blockquote className="sf">“{text}”</blockquote>
                 <figcaption className="mu">{client}</figcaption>

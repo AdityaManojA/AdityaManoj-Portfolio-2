@@ -51,7 +51,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 /* Keeps the raised numbers from making their chips taller than the brand chip. */
 .nav sup { line-height: 0; }
 /* Everything tappable gives a little under the finger. */
-.nav a:active, .cta:active, .crow button:active, .crow .open:active, .swarm-bar button:active { transform: scale(0.95); }
+.nav a:active, .cta:active, .crow button:active, .crow .open:active { transform: scale(0.95); }
 /* The brand keeps a chip too, so it stays readable when it scrolls over a screenshot. */
 .nav a.brand { font-weight: 500; margin-right: 4px; }
 .nav a:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
@@ -63,12 +63,18 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   cursor: grab; touch-action: pan-y; user-select: none;
 }
 .hero:active { cursor: grabbing; }
+/* Touches on the cloud belong to the cloud: the page does not scroll while it is being spun.
+   The strip below the pad, where the caption sits, keeps the hero's own pan-y and scrolls. */
+.hero-pad { position: absolute; inset: 0 0 96px; touch-action: none; }
 .cd {
   all: unset; position: absolute; left: 50%; top: 50%; width: 160px; height: 100px;
   margin: -50px 0 0 -80px; background: #161618 top center / cover no-repeat;
   border-radius: 2px; will-change: transform; cursor: pointer;
 }
 .cd:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+/* A tapped card lights up before the page scrolls to its project. */
+.cd { transition: box-shadow 0.25s ease; touch-action: none; }
+.cd:active, .cd.hit { box-shadow: 0 0 0 1.5px rgba(242, 241, 238, 0.95), 0 0 36px 2px rgba(242, 241, 238, 0.28); }
 .hero-cap { position: absolute; left: 20px; bottom: 18px; font-size: 22px; pointer-events: none; z-index: 45; text-shadow: 0 0 14px var(--bg), 0 0 4px var(--bg); }
 .hero-hint { position: absolute; right: 20px; bottom: 22px; font-size: 12px; pointer-events: none; z-index: 45; text-shadow: 0 0 10px var(--bg), 0 0 3px var(--bg); }
 .for-touch { display: none; }
@@ -76,12 +82,22 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   .for-mouse { display: none; }
   .for-touch { display: inline; }
 }
-.lead { text-align: center; padding: 26px 16px 30px; }
-.lead .sf { font-size: 17px; }
+.lead { text-align: center; padding: 26px 20px 34px; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.15; max-width: 22em; margin: 0 auto; text-wrap: balance; }
 
 /* Projects: grid */
-.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 8px; padding: 0 8px 90px; }
+/* Six columns: a tile takes three, the first client project takes the whole row, and the
+   small utilities take two each so three of them share a row. */
+.grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 34px 8px; padding: 0 8px 90px; }
+.tile { grid-column: span 3; }
+.tile.big:first-child { grid-column: span 6; }
+.tile.big:first-child .im { aspect-ratio: 21 / 9; }
+.tile.big .tile-cap .sf { font-size: 19px; }
+.tile.small { grid-column: span 2; }
+.tile.small .tile-cap .sf { font-size: 13px; }
+.tile picture { display: contents; }
 /* Tiles rise in when scrolled to (ProjectsView adds "in"). */
+/* :where keeps this reset weaker than every .tile rule below. */
+:where(button.tile) { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; }
 .tile { display: block; opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .tile.in { opacity: 1; transform: none; }
 .tile .im { aspect-ratio: 16 / 10; background: #161618; overflow: hidden; position: relative; }
@@ -104,6 +120,57 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .tile-cap .sf { font-size: 15px; }
 .tile-cap .yr { white-space: nowrap; }
 .tile-cap .go { color: var(--fg); }
+/* Project popup: the preview on a loop, what the project achieved, and the way to the site. */
+html:has(.pop[open]) { overflow: hidden; }
+.pop {
+  padding: 0; border: 1px solid var(--ln); border-radius: 14px; background: #101012; color: var(--fg);
+  width: min(720px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); overflow: auto;
+  overscroll-behavior: contain; font: inherit;
+}
+.pop::backdrop { background: rgba(5, 5, 6, 0.74); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.pop[open] { animation: pop-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.pop[open]::backdrop { animation: c-fade 0.3s ease; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(14px) scale(0.985); } }
+.pop { touch-action: pan-y; }
+.pop-in { position: relative; animation: c-fade 0.28s ease; }
+.pop-grab { display: none; }
+.pop-im video { opacity: 0; transition: opacity 0.35s ease; }
+.pop-im video.on { opacity: 1; }
+/* Shown until the preview is playing (or, with no preview, until the screenshot has loaded). */
+.pop-load { position: absolute; left: 0; top: 0; z-index: 1; height: 2px; width: 38%; background: var(--sel); animation: pop-load 1.1s ease-in-out infinite; }
+@keyframes pop-load { from { transform: translateX(-100%); } to { transform: translateX(264%); } }
+.pop-f { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
+.pop-n { display: flex; align-items: center; gap: 4px; margin-left: auto; font-size: 12px; }
+.pop-n span { min-width: 46px; text-align: center; font-variant-numeric: tabular-nums; }
+.pop-n button {
+  all: unset; cursor: pointer; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--ch); font-size: 18px; line-height: 1; transition: transform 0.15s ease, background-color 0.2s ease;
+}
+.pop-n button:hover { background: var(--ch-hi); }
+.pop-n button:active { transform: scale(0.92); }
+.pop-im { display: block; position: relative; aspect-ratio: 16 / 10; background: #161618; overflow: hidden; }
+.pop-im img, .pop-im video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.pop-x {
+  all: unset; position: absolute; top: 10px; right: 10px; z-index: 2; width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; font-size: 20px; line-height: 1;
+  background: rgba(26, 26, 28, 0.78); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  transition: transform 0.15s ease;
+}
+.pop-x:active { transform: scale(0.92); }
+.pop-b { padding: 18px 20px 22px; }
+.pop-h { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.pop-h h2 { font-size: 14px; }
+.pop-h .sf { font-size: 22px; line-height: 1.15; margin-top: 2px; }
+.pop-r { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 22px 0 0; padding: 18px 0; border-top: 1px solid var(--ln); border-bottom: 1px solid var(--ln); }
+.pop-r dt { font-size: clamp(22px, 3.4vw, 30px); line-height: 1.05; }
+.pop-r dd { margin: 6px 0 0; font-size: 12px; line-height: 1.35; }
+.pop-q { margin: 18px 0 0; }
+.pop-q blockquote { margin: 0; font-size: 20px; line-height: 1.2; }
+.pop-q figcaption { margin-top: 6px; font-size: 12px; }
+.pop-d { margin-top: 16px; font-size: 13px; line-height: 1.55; }
+.pop .cta { display: inline-block; margin-top: 0; }
+.pop :focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+
 /* End of the list: one line and the way to get in touch. */
 .end { display: flex; flex-direction: column; align-items: center; padding: 30px 20px calc(110px + env(safe-area-inset-bottom, 0px)); text-align: center; }
 .end .sf { font-size: clamp(34px, 6vw, 64px); line-height: 1.05; }
@@ -120,6 +187,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .headline { font-size: clamp(30px, 5.4vw, 68px); line-height: 1.04; text-align: center; }
 .display { font-size: clamp(40px, 8vw, 112px); line-height: 1; text-align: center; }
 .status { margin-top: 18px; font-size: 12px; text-align: center; }
+.status.now { margin-top: 4px; }
 .ring {
   display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 34px;
   align-items: center; margin-top: 44px; width: min(760px, 100%);
@@ -128,11 +196,25 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .ring .col > div + div { margin-top: 30px; }
 .ring h4 { font-size: 13px; font-weight: 500; margin-bottom: 7px; }
 .ring .sf { font-size: 17px; line-height: 1.3; }
+/* The centre of the About ring: the initials in a selection frame that stays selected. It
+   uses the swarm's own frame colours, handles and size badge (.sel and .bd further down). */
 .portrait {
-  /* pfp.jpg is 440 × 778, so at this width it is 300px tall and the box shows half of it.
-     17% starts the crop just above the hair, trading empty space for shoulders. */
-  width: 170px; height: 150px; object-fit: cover; object-position: center 17%;
-  display: block; filter: grayscale(1) contrast(1.05);
+  position: relative; width: 170px; height: 150px; display: grid; place-items: center;
+  border: 1px solid var(--sel); background: rgba(76, 155, 240, 0.08);
+  /* Room for the size badge, which hangs under the frame. */
+  margin-bottom: 22px;
+}
+/* .ring is in the selector so this outranks the ring's own serif size. */
+.ring .portrait span { font-size: 84px; line-height: 1; letter-spacing: -0.01em; }
+.portrait i { position: absolute; width: 6px; height: 6px; margin: -3px; background: #fff; border: 1px solid var(--sel); }
+.portrait i:nth-of-type(1) { left: 0; top: 0; }
+.portrait i:nth-of-type(2) { left: 100%; top: 0; }
+.portrait i:nth-of-type(3) { left: 0; top: 100%; }
+.portrait i:nth-of-type(4) { left: 100%; top: 100%; }
+.portrait b {
+  position: absolute; left: 50%; top: 100%; transform: translate(-50%, 6px); font-weight: 400;
+  background: var(--sel); color: #0a0a0b; font-size: 10px; line-height: 1; padding: 2px 5px;
+  border-radius: 3px; white-space: nowrap;
 }
 .more { margin-top: 40px; font-size: 12px; }
 .k { font-size: 12px; margin-bottom: 26px; }
@@ -145,13 +227,8 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 .quotes { display: grid; gap: 52px; width: min(820px, 100%); text-align: center; }
 .quotes blockquote { margin: 0; font-size: clamp(26px, 4vw, 44px); line-height: 1.12; }
 .quotes figcaption { margin-top: 14px; font-size: 12px; }
-/* Availability: a live dot and one line. */
-.avail { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; color: var(--mu); }
-.avail::before {
-  content: ''; width: 7px; height: 7px; border-radius: 50%; background: #5eead4;
-  animation: avail 2.4s ease-out infinite;
-}
-@keyframes avail { from { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.55); } to { box-shadow: 0 0 0 9px rgba(94, 234, 212, 0); } }
+/* Availability: one quiet line. */
+.avail { font-size: 12px; color: var(--mu); }
 .end .avail { margin-bottom: 18px; }
 .nums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 54px 40px; width: min(760px, 100%); }
 .nums .sf { font-size: clamp(44px, 8vw, 92px); line-height: 1; }
@@ -176,6 +253,24 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
 }
 .crow button:hover, .crow .open:hover { background: var(--ch-hi); }
 .crow button:focus-visible, .crow .open:focus-visible, .cta:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+/* FAQ: a quiet button that opens the questions underneath it. */
+.faq { width: min(820px, 100%); margin-top: 26px; text-align: center; }
+.faq-b {
+  all: unset; cursor: pointer; background: var(--ch); border-radius: 999px; padding: 6px 15px; font-size: 12px;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+.faq-b:hover { background: var(--ch-hi); }
+.faq-b:active { transform: scale(0.95); }
+.faq-b:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+.faq-b span { display: inline-block; width: 0.8em; color: var(--mu); }
+.faq-l { margin-top: 18px; text-align: left; border-top: 1px solid var(--ln); animation: c-fade 0.35s ease; }
+.faq-l details { border-bottom: 1px solid var(--ln); }
+.faq-l summary { cursor: pointer; list-style: none; padding: 15px 28px 15px 0; position: relative; font-family: 'Instrument Serif', Georgia, serif; font-size: 21px; line-height: 1.2; }
+.faq-l summary::-webkit-details-marker { display: none; }
+.faq-l summary::after { content: '+'; position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font-family: Inter, system-ui, sans-serif; font-size: 15px; color: var(--mu); }
+.faq-l details[open] summary::after { content: '–'; }
+.faq-l summary:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+.faq-l p { padding: 0 28px 16px 0; font-size: 13px; line-height: 1.55; max-width: 60ch; }
 .where { margin-top: 30px; font-size: 12px; }
 .where a { text-decoration: underline; text-underline-offset: 3px; }
 
@@ -197,7 +292,8 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--sel); outline-o
   animation-delay: calc(var(--i) * 140ms + 620ms);
 }
 .contact .avail { margin-top: 22px; animation: c-fade 0.7s ease 0.55s both; }
-.contact .where { animation: c-fade 0.7s ease 1.8s both; }
+.contact .faq { animation: c-fade 0.7s ease 1.7s both; }
+.contact .where { animation: c-fade 0.7s ease 1.9s both; }
 html.loader-active .contact, html.loader-active .contact * , html.loader-active .contact .crows::before { animation-play-state: paused; }
 @keyframes c-fade { from { opacity: 0; } }
 @keyframes c-rise { from { transform: translateY(108%); } }
@@ -220,19 +316,28 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
   position: absolute; left: 13px; top: 13px; font-size: 10px; line-height: 1; color: #0a0a0b;
   padding: 3px 6px; border-radius: 3px 8px 8px 8px; white-space: nowrap;
 }
-.swarm-bar {
-  position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 60;
-  display: flex; align-items: center; gap: 9px; white-space: nowrap; font-size: 11px;
-  background: rgba(26, 26, 28, 0.92); border: 1px solid var(--ln); border-radius: 999px;
-  padding: 6px 8px 6px 12px; max-width: calc(100vw - 16px);
+/* While a page builds, the bar is only a 2px line along the bottom edge. Once it is built
+   the line fades and a small Replay button appears. */
+.swarm-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; pointer-events: none; }
+.swarm-bar .tr { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; transition: opacity 0.6s ease 0.3s; }
+.swarm-bar .tr span { display: block; height: 100%; width: 0; background: var(--sel); transition: width 0.3s ease; }
+.swarm-bar[data-state='built'] .tr { opacity: 0; }
+.swarm-bar button {
+  all: unset; position: absolute; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  cursor: pointer; font-size: 11px; padding: 5px 12px; border-radius: 999px; white-space: nowrap;
+  background: rgba(26, 26, 28, 0.78); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border: 1px solid var(--ln); color: var(--mu);
+  opacity: 0; visibility: hidden; transform: translate(-50%, 8px);
+  transition: opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s, visibility 0s linear 0.9s;
 }
-.swarm-bar .dots { display: flex; }
-.swarm-bar .dots span { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--ch); margin-left: -4px; }
-.swarm-bar .dots span:first-child { margin-left: 0; }
-.swarm-bar .tr { width: 60px; height: 3px; background: #333; border-radius: 2px; overflow: hidden; }
-.swarm-bar .tr span { display: block; height: 100%; width: 0; background: var(--sel); }
-.swarm-bar button { all: unset; cursor: pointer; background: var(--ch-hi); border-radius: 999px; padding: 3px 9px; transition: transform 0.15s ease; }
+.swarm-bar[data-state='built'] button {
+  opacity: 1; visibility: visible; transform: translate(-50%, 0); pointer-events: auto;
+  transition: opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s;
+}
+.swarm-bar button:active { transform: translate(-50%, 0) scale(0.95); }
 .swarm-bar button:focus-visible { outline: 1px solid var(--sel); outline-offset: 2px; }
+/* With motion turned off nothing builds, so there is nothing to show or replay. */
+.stage.static ~ .swarm-bar { display: none; }
 
 /* Phones */
 @media (max-width: 720px) {
@@ -250,7 +355,41 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
 
   /* One project per row, edge to edge. The tile in the middle of the screen is lit and
      the rest sit back, so scrolling reads as moving a spotlight down the list. */
-  .grid { grid-template-columns: 1fr; gap: 30px; padding: 0 0 70px; }
+  .lead { font-size: clamp(24px, 7vw, 30px); padding: 24px 22px 34px; }
+  /* Two columns: a tile takes both, and the last two utilities sit side by side. */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 8px; padding: 0 0 70px; }
+  .tile, .tile.big:first-child, .tile.small { grid-column: span 2; }
+  .tile.big:first-child .im { aspect-ratio: 16 / 10; }
+  .tile.small ~ .tile.small { grid-column: span 1; }
+  /* The pair is square, whatever each one's capture is shaped like, so the row lines up. */
+  .tile.small ~ .tile.small .im { aspect-ratio: 1 / 1; }
+  .tile.small ~ .tile.small .tile-cap { padding: 9px 10px 0; }
+  .tile.small ~ .tile.small .tile-cap .sf { font-size: 14px; }
+  .tile.small ~ .tile.small .yr { display: none; }
+  /* A phone capture is shown tall, so the project's own mobile layout is readable. */
+  .tile.tall .im, .tile.big.tall:first-child .im { aspect-ratio: 4 / 5; }
+  .pop-im.tall { aspect-ratio: 1 / 1; }
+  .pop-q blockquote { font-size: 21px; }
+  .faq-l summary { font-size: 20px; }
+  .faq-l p { font-size: 14px; }
+  .faq-b { padding: 11px 20px; font-size: 13px; }
+  /* The popup is a sheet from the bottom edge, with the button full width under the thumb. */
+  .pop {
+    width: 100vw; max-height: calc(100dvh - 44px); margin: auto 0 0; border-radius: 18px 18px 0 0;
+    border-width: 1px 0 0;
+  }
+  .pop[open] { animation-name: pop-up; }
+  @keyframes pop-up { from { transform: translateY(100%); } }
+  .pop-b { padding: 16px 18px calc(20px + env(safe-area-inset-bottom, 0px)); }
+  .pop-r { gap: 12px; }
+  .pop-r dt { font-size: 22px; }
+  .pop-d { font-size: 14px; }
+  .pop-f { flex-direction: column; align-items: stretch; gap: 14px; margin-top: 18px; }
+  .pop .cta { display: block; text-align: center; }
+  .pop-n { margin: 0 auto; gap: 10px; }
+  .pop-n button { width: 42px; height: 42px; }
+  /* The handle says the sheet can be pulled down. */
+  .pop-grab { display: block; position: absolute; z-index: 2; top: 7px; left: 50%; width: 38px; height: 4px; margin-left: -19px; border-radius: 2px; background: rgba(242, 241, 238, 0.55); }
   /* A tile gives under the finger, and its arrow lights up when it is the one in focus. */
   .tile .im { transition: transform 0.2s ease; }
   .tile:active .im { transform: scale(0.985); }
@@ -268,7 +407,7 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
   .sec { padding: 78px 18px calc(104px + env(safe-area-inset-bottom, 0px)); }
   .headline { font-size: clamp(33px, 9.4vw, 44px); }
   .ring { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 22px; margin-top: 34px; align-items: start; }
-  .portrait { grid-column: 1 / -1; grid-row: 1; margin: 0 auto; }
+  .portrait { grid-column: 1 / -1; grid-row: 1; margin: 0 auto 22px; }
   .ring .sf { font-size: 16px; }
   .row { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 14px 0; }
   .row > :first-child { grid-column: 1 / -1; color: var(--mu); font-size: 12px; }
@@ -288,9 +427,7 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
   .crow button, .crow .open { padding: 12px 18px; font-size: 13px; }
   .crow:hover a.sf { transform: none; }
 
-  .swarm-bar { font-size: 12px; padding: 7px 8px 7px 14px; }
-  .swarm-bar .tr, .swarm-bar .dots { display: none; }
-  .swarm-bar button { padding: 8px 14px; }
+  .swarm-bar button { font-size: 12px; padding: 9px 16px; }
   .cu span { font-size: 9px; padding: 2px 5px; }
 }
 /* The narrowest phones: keep all four nav chips on one line. */
@@ -302,8 +439,10 @@ html.loader-active .contact, html.loader-active .contact * , html.loader-active 
 @media (prefers-reduced-motion: reduce) {
   .swarm { display: none; }
   main { animation: none; }
-  .avail::before, .contact .avail { animation: none; }
-  .contact .k, .contact .ln > span, .contact .crows::before, .contact .crow, .contact .where { animation: none; }
+  .pop[open], .pop[open]::backdrop, .pop-in { animation: none; }
+  .pop-load { animation: none; width: 100%; opacity: 0.5; }
+  .contact .avail { animation: none; }
+  .contact .k, .contact .ln > span, .contact .crows::before, .contact .crow, .contact .where, .contact .faq, .faq-l { animation: none; }
   .tile { opacity: 1; transform: none; transition: none; }
   .tile .im img, .tile .im video, .tile-cap, .crow a.sf { transition: none; }
   .tile.pulse .im { animation-name: tile-pulse-still; }

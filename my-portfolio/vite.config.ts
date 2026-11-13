@@ -1,5 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { FAQ } from './src/data/faq'
+import { QUOTES } from './src/data/quotes'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -25,11 +27,6 @@ const LINKEDIN = 'https://www.linkedin.com/in/aditya-manoj-a-0a930b256/'
 const INSTAGRAM = 'https://www.instagram.com/xo.adityaaa.dev/'
 const X = 'https://x.com/Adityathedev'
 const AVAILABILITY = 'Taking projects from December'
-const QUOTES = [
-  ['Excellent payment portal and shopping pages, and an easy to edit CMS!', 'ThreadPath Collective'],
-  ['A great amount of stress reduction for the staff because of the new admin dashboard.', 'The Whisky Business'],
-  ['The best landing page to outpace my competitors!', 'Pixel Spaces'],
-]
 const TODAY = new Date().toISOString().slice(0, 10)
 
 // The same lead order the page uses (see LEAD in src/site/ProjectsView.tsx).
@@ -276,7 +273,7 @@ function body(route: Route, projects: ProjectEntry[]) {
       </ol>
       <h2>What do clients say about ${NAME}?</h2>
       <ul>
-        ${QUOTES.map(([text, client]) => `<li>${esc(client)}: "${esc(text)}"</li>`).join('\n        ')}
+        ${QUOTES.map(({ text, client }) => `<li>${esc(client)}: "${esc(text)}"</li>`).join('\n        ')}
       </ul>
       <h2>What results has ${NAME}'s work produced?</h2>
       <p>GLIA, the offline-first event app ${NAME} built for an international neuroscience conference, handled more than 1.2 million Firestore reads. Travel Animator, the route animation app he worked on at Lascade, is used by more than 1 million people. ALFRED, his desktop AI assistant, performs on-device OCR in under 150 ms. The canvas visualisations he built for IndZita Biotech render at 60 frames per second.</p>
@@ -294,11 +291,13 @@ function body(route: Route, projects: ProjectEntry[]) {
       <ul>
         <li>Email: <a href="mailto:${EMAIL}">${EMAIL}</a></li>
         <li>Phone: <a href="tel:${PHONE}">${PHONE_SHOWN}</a></li>
+        <li>WhatsApp: <a href="https://wa.me/${PHONE.slice(1)}">message ${PHONE_SHOWN}</a></li>
         <li>GitHub: <a href="${GITHUB}">github.com/AdityaManojA</a></li>
         <li>LinkedIn: <a href="${LINKEDIN}">${NAME} on LinkedIn</a></li>
         <li>Instagram: <a href="${INSTAGRAM}">@xo.adityaaa.dev</a></li>
         <li>X: <a href="${X}">@Adityathedev</a></li>
       </ul>
+      ${FAQ.map(({ q, a }) => `<h2>${esc(q)}</h2>\n      <p>${esc(a)}</p>`).join('\n      ')}
       <h2>Is ${NAME} available for new work?</h2>
       <p>Yes. ${NAME} is taking on new projects from December.</p>
       <h2>What kind of projects does ${NAME} take on?</h2>

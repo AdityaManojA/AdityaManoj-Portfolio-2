@@ -351,6 +351,10 @@ export function createSwarm(root: HTMLElement, ui: SwarmUi): Swarm {
         ? `${done}/${total} · ${done < started ? 'Building' : done < total ? 'Scroll for more' : 'Built'}`
         : `${AGENTS.length} agents · ${done} of ${total} layers · ${state}`;
     ui.progress.style.width = `${total ? Math.round((done / total) * 100) : 100}%`;
+    // The bar is a thin line while building and offers Replay once everything is built.
+    const bar = ui.status.parentElement;
+    const barState = done < total ? 'building' : 'built';
+    if (bar && bar.dataset.state !== barState) bar.dataset.state = barState;
     // Tell assistive tech when text on the page is still being typed in.
     const busy = done < started ? 'true' : 'false';
     if (root.getAttribute('aria-busy') !== busy) root.setAttribute('aria-busy', busy);

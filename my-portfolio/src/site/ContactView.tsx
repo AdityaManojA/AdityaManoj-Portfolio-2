@@ -1,7 +1,10 @@
 import { useState, type CSSProperties } from 'react';
+import { FAQ } from '../data/faq';
 
 const EMAIL = 'aditya.dev.org@gmail.com';
 const PHONE = '+919947527296';
+// Opens a chat with this number in WhatsApp (the number without the plus sign).
+const WHATSAPP = `https://wa.me/${PHONE.slice(1)}`;
 // Label, what is shown, where it goes.
 const SOCIAL = [
   ['GitHub', 'github.com/AdityaManojA', 'https://github.com/AdityaManojA'],
@@ -30,6 +33,26 @@ function CopyButton({ value }: { value: string }) {
     <button type="button" onClick={copy}>
       {label}
     </button>
+  );
+}
+
+/** A quiet button that opens the common questions underneath it. */
+function Faq() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="faq">
+      <button type="button" className="faq-b" aria-expanded={open} aria-controls="faq-list" onClick={() => setOpen(!open)}>
+        FAQ <span aria-hidden="true">{open ? '–' : '+'}</span>
+      </button>
+      <div id="faq-list" className="faq-l" hidden={!open}>
+        {FAQ.map(({ q, a }) => (
+          <details key={q}>
+            <summary>{q}</summary>
+            <p className="mu">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -62,7 +85,9 @@ export default function ContactView() {
             <a className="sf" href={`tel:${PHONE}`}>
               +91 99475 27296
             </a>
-            <CopyButton value={PHONE} />
+            <a className="open" href={WHATSAPP} target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
           </div>
           {SOCIAL.map(([label, shown, url], i) => (
             <div className="crow" style={order(i + 2)} key={label}>
@@ -76,6 +101,7 @@ export default function ContactView() {
             </div>
           ))}
         </div>
+        <Faq />
         <p className="where mu">
           Based in Kerala, India · <a href="/privacy.html">Privacy</a>
         </p>
